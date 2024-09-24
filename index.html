@@ -5,34 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athanor Studio</title>
     <style>
-        /* Center the content vertically and horizontally */
+        /* Full height and black background */
         body, html {
             height: 100%;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #f8eac1; /* Light creamy text color */
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            justify-items: center;
+            align-items: center;
+        }
+
+        header {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #000; /* Black background */
-            color: #f8eac1; /* Light creamy text color */
+            text-align: center;
+            margin-top: 20px;
         }
 
         h1 {
-            margin-bottom: 10px;
-            font-size: 2em;
+            margin: 0;
+            font-size: 2.5em;
         }
 
         h2 {
-            margin-bottom: 20px;
             font-size: 1em;
             font-style: italic;
+            margin-top: 5px;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         img {
             max-width: 100%;
             height: auto;
-            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 20px;
         }
 
         a {
@@ -48,15 +66,21 @@
 </head>
 <body>
 
-    <h1>Athanor Studio</h1>
-    <!-- Subtitle in italic -->
-    <h2><em>app publishing</em></h2>
-    
-    <!-- Replace the src URL with the actual image URL -->
-    <img src="https://raw.githubusercontent.com/AthanorStudio/website/refs/heads/main/athanorstudio_logo.png" alt="Athanor Studio Image" width="300">
-    
-    <!-- Email address as a mailto link -->
-    <a href="mailto:guillaume@athanor-studio.io">guillaume@athanor-studio.io</a>
+    <!-- Header section for titles at the top -->
+    <header>
+        <h1>Athanor Studio</h1>
+        <h2><em>App Publishing</em></h2>
+    </header>
+
+    <!-- Main section for image in the center -->
+    <main>
+        <img src="https://raw.githubusercontent.com/AthanorStudio/website/refs/heads/main/athanorstudio_logo.png" alt="Athanor Studio Image" width="300">
+    </main>
+
+    <!-- Footer section for email at the bottom -->
+    <footer>
+        <a href="mailto:guillaume@athanor-studio.io">guillaume@athanor-studio.io</a>
+    </footer>
 
 </body>
 </html>
