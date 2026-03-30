@@ -4,94 +4,230 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athanor Studio</title>
-    <style>
-        /* Full height and black background */
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000; /* Black background */
-            color: #f8eac1; /* Light creamy text color */
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            justify-items: center;
-            align-items: center;
-        }
-
-        header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        h2 {
-            font-size: 1em;
-            font-style: italic;
-            margin-top: 5px;
-        }
-
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        footer {
-            font-size: 1em;
-            margin-top: 20px;
-        }
-
-        a {
-            font-size: 1.2em;
-            color: #f8eac1; /* Same text color for the email link */
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #0073e6; /* Change color on hover */
-        }
-
-        .privacy-link {
-            font-size: 1em;
-            color: #f8eac1; /* Light creamy text color */
-        }
-
-        .privacy-link:hover {
-            color: #0073e6; /* Change color on hover */
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Header section for titles at the top -->
-    <header>
-        <h1>Athanor Studio</h1>
-        <h2><em>App Publishing</em></h2>
-    </header>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="navbar-logo">
+                <img src="athanorstudio_logo.png" alt="Athanor Studio" class="navbar-logo-img">
+                <span class="navbar-logo-text">Athanor Studio</span>
+            </a>
+            <button class="hamburger" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <div class="navbar-nav">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#apps" class="nav-link">Apps</a>
+                <a href="#company" class="nav-link">Company</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Main section for image in the center -->
-    <main>
-        <img src="https://raw.githubusercontent.com/AthanorStudio/website/refs/heads/main/athanorstudio_logo.png" alt="Athanor Studio Image" width="300">
-    </main>
+    <!-- Hero -->
+    <section class="hero-section">
+        <div class="hero-content fade-up">
+            <img src="athanorstudio_logo.png" alt="Athanor Studio" class="hero-logo">
+            <h1 class="hero-title">We build and scale <span class="text-accent">apps</span>.</h1>
+            <p class="hero-subtitle">Athanor Studio turns ideas into apps, and apps into growth — handling everything from product vision and development to user acquisition and long-term scaling.</p>
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        </div>
+    </section>
 
-    <!-- Footer section for email at the bottom -->
-    <footer>
-        <a href="mailto:guillaume@athanor-studio.io">guillaume@athanor-studio.io</a>
-        <a href="/privacy.html" class="privacy-link">- Privacy</a>
+    <!-- Services -->
+    <section id="services" class="section section-alt">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-label">Scale</span>
+                <h2 class="section-title">What We <span class="text-accent">Do</span></h2>
+                <p class="section-description">We built our own tools and methodology to scale apps.</p>
+            </div>
+            <div class="values-grid fade-up">
+                <div class="value-card">
+                    <span class="value-number">01</span>
+                    <h3 class="value-title">Transformation</h3>
+                    <p class="value-description">We take raw ideas and forge them into polished products through data, strategy, and relentless optimization.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-number">02</span>
+                    <h3 class="value-title">Ownership</h3>
+                    <p class="value-description">We build, publish, and grow our own apps — fully invested in every product from concept to scale.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-number">03</span>
+                    <h3 class="value-title">Data-Driven</h3>
+                    <p class="value-description">Every decision is backed by analytics. We combine deep industry expertise with rigorous data analysis to maximize results.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-number">04</span>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">The mobile landscape evolves constantly. We stay ahead of trends in UA, monetization, and creative to keep our apps at the forefront.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps -->
+    <section id="apps" class="section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-label">Portfolio</span>
+                <h2 class="section-title">Our <span class="text-accent">Apps</span></h2>            </div>
+            <div class="apps-grid">
+                <div class="app-card fade-up">
+                    <div class="app-icon-placeholder">
+                        <img src="healthyguru_icon.png" alt="Healthy Guru" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="app-info">
+                        <h3 class="app-name">Healthy Guru</h3>
+                        <span class="app-category">Health & Fitness</span>
+                        <p class="app-description">AI-powered nutrition coach. Photograph your meals, get instant calorie tracking and personalized nutrition plans tailored to your goals.</p>
+                        <div class="app-metrics">
+                            <div class="metric">
+                                <span class="metric-value">4.6</span>
+                                <span class="metric-label">Rating</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">500+</span>
+                                <span class="metric-label">Reviews</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">150k+</span>
+                                <span class="metric-label">Installs</span>
+                            </div>
+                        </div>
+                        <div class="app-links">
+                            <a href="https://apps.apple.com/fr/app/healthy-guru/id6575388387" target="_blank" class="store-badge">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                App Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company -->
+    <section id="company" class="section section-alt">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-label">Company</span>
+                <h2 class="section-title"><span class="text-accent">Athanor Studio</span></h2>
+                <p class="section-description">Founded in 2024 and named after the alchemist's furnace — built to sustain relentless heat until base metals become gold — Athanor Studio applies that philosophy to apps. Patient strategy, constant refinement, and one core belief: any idea, with the right process, can become extraordinary.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-label">Contact</span>
+                <h2 class="section-title">Get in <span class="text-accent">Touch</span></h2>
+                <p class="section-description">Ready to publish your app? Let's talk.</p>
+            </div>
+            <div class="contact-layout fade-up">
+                <div>
+                    <div class="contact-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <div>
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:guillaume@athanor-studio.io" class="contact-value">guillaume@athanor-studio.io</a>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" action="mailto:guillaume@athanor-studio.io" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell us about your app..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="athanorstudio_logo.png" alt="Athanor Studio" class="footer-logo">
+                    <p class="footer-tagline">Turning great apps into successful products.</p>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Navigation</h4>
+                    <div class="footer-links-group">
+                        <a href="#services" class="footer-link">Services</a>
+                        <a href="#apps" class="footer-link">Apps</a>
+                        <a href="#company" class="footer-link">Company</a>
+                        <a href="#contact" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Legal</h4>
+                    <div class="footer-links-group">
+                        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Athanor Studio. All rights reserved.
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // Hamburger menu
+        const hamburger = document.querySelector('.hamburger');
+        const navbarNav = document.querySelector('.navbar-nav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navbarNav.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navbarNav.classList.remove('open');
+            });
+        });
+
+        // Fade-up animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
