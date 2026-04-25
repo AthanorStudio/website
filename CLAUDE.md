@@ -12,7 +12,7 @@ Site vitrine d'Athanor Studio (app publishing company). Source de vérité du co
 - `index.html` — landing page (navbar, hero, services, apps, company, contact, footer)
 - `styles.css` — design system (tokens, composants, responsive)
 - `privacy.html` — politique de confidentialité
-- `athanorstudio_logo.png`, `healthyguru_icon.png` — assets
+- `athanorstudio_logo.png`, `healthyguru_icon.png`, `clashlist_icon.png` — assets
 - `CNAME` — domaine GitHub Pages
 - `memory.md` — contexte détaillé du projet (à lire en premier)
 
@@ -26,14 +26,18 @@ Site vitrine d'Athanor Studio (app publishing company). Source de vérité du co
 1. Navbar (logo + Services / Apps / Company / Contact + hamburger mobile)
 2. Hero — "We build and scale apps."
 3. Services — 4 value cards (Transformation, Ownership, Data-Driven, Innovation)
-4. Apps — carte Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs, lien App Store)
+4. Apps — grille `auto-fit minmax(340px, 1fr)` avec deux cartes :
+   - Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs, lien App Store)
+   - Clash List (Quiz Game, badge "Coming Soon" — pas encore de métriques ni de lien store)
 5. Company — storytelling Athanor (fondé en 2024, fourneau alchimique)
-6. Contact — formulaire `mailto:` (pas de backend) → guillaume@athanor-studio.io
+6. Contact — titre seul (sous-titre retiré) + formulaire `mailto:` (pas de backend) → guillaume@athanor-studio.io
 7. Footer
 
-## App publiée
+## Apps
 - **Healthy Guru** — nutrition/fitness IA, Health & Fitness
   - https://apps.apple.com/fr/app/healthy-guru/id6575388387
+- **Clash List** — Quiz Game, "Challenge your friends in 45-second word duels."
+  - Pas encore lancée. Carte affiche un badge `.status-badge` "Coming Soon" à la place des `app-metrics` + `app-links`. Quand l'app sortira, remplacer le `<span class="status-badge">` par les blocs métriques + store comme Healthy Guru.
 
 ## Contact
 - Fondateur : Guillaume — guillaume@athanor-studio.io
