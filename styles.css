@@ -535,6 +535,20 @@ a {
     height: 16px;
 }
 
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    background: rgba(248, 234, 193, 0.08);
+    border: 1px solid rgba(248, 234, 193, 0.25);
+    border-radius: var(--radius-full);
+    color: var(--accent);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: var(--letter-wide);
+    text-transform: uppercase;
+}
+
 /* ========================================
    10. COMPANY
    ======================================== */
