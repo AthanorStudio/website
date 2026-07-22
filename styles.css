@@ -549,6 +549,31 @@ a {
     text-transform: uppercase;
 }
 
+.app-card-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.app-card-link:hover {
+    border-color: rgba(248, 234, 193, 0.35);
+    background: var(--bg-card-hover);
+}
+
+.app-card-link:hover .app-card-cta {
+    color: var(--accent);
+    transform: translateX(2px);
+}
+
+.app-card-cta {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
 /* ========================================
    10. COMPANY
    ======================================== */

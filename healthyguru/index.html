@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">Healthy Guru — AI Nutrition Coach</title>
+    <meta name="description" data-i18n="meta.description" content="Snap a photo. Know your nutrition. Healthy Guru turns any meal photo into instant calorie tracking and a personalized plan tailored to your goals.">
+    <link rel="icon" href="../healthyguru_icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../healthyguru_icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="../healthyguru_icon.png" alt="Healthy Guru" class="nav-icon">
+                <span class="nav-name">Healthy Guru</span>
+            </a>
+            <button class="nav-burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#how" class="nav-link" data-i18n="nav.how">How it works</a>
+                <a href="#features" class="nav-link" data-i18n="nav.features">Features</a>
+                <a href="#reviews" class="nav-link" data-i18n="nav.reviews">Reviews</a>
+                <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
+                <button class="lang-toggle" aria-label="Change language">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+                    <span class="lang-toggle-label">FR</span>
+                </button>
+                <a href="https://apps.apple.com/fr/app/healthy-guru/id6575388387" target="_blank" rel="noopener" class="btn btn-primary btn-sm" data-i18n="nav.download">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text fade-up">
+                <div class="hero-social">
+                    <div class="hero-stars" aria-hidden="true">★★★★★</div>
+                    <p data-i18n="hero.social">4.6 · 150,000+ people eating better every day</p>
+                </div>
+                <h1 class="hero-title" data-i18n="hero.title">Nutrition,<br><span class="ink-soft">down to the micronutrient.</span></h1>
+                <p class="hero-sub" data-i18n="hero.sub">Log any meal in seconds and track your calories, macros, and micronutrients to reach your goal.</p>
+                <div class="hero-cta">
+                    <a href="https://apps.apple.com/fr/app/healthy-guru/id6575388387" target="_blank" rel="noopener" class="store-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <span>
+                            <small data-i18n="hero.storeSmall">Download on the</small>
+                            <strong data-i18n="hero.storeStrong">App Store</strong>
+                        </span>
+                    </a>
+                </div>
+                <ul class="hero-trust">
+                    <li data-i18n="hero.trust1">No ads</li>
+                    <li data-i18n="hero.trust3">Your data stays private</li>
+                </ul>
+            </div>
+
+            <div class="hero-visual fade-up">
+                <!-- TODO: replace each .phone-shot placeholder with a real app screenshot when assets are ready -->
+                <div class="phones">
+                    <!-- Left phone: scanned meal detail -->
+                    <div class="phone phone-side phone-left">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="screen-meal.webp" alt="Healthy Guru meal analysis screen" class="phone-shot" loading="lazy" width="620" height="1346">
+                        </div>
+                    </div>
+                    <!-- Center phone: home dashboard -->
+                    <div class="phone phone-center">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="screen-home.webp" alt="Healthy Guru daily dashboard with calorie ring" class="phone-shot" width="620" height="1346">
+                        </div>
+                    </div>
+                    <!-- Right phone: recipes -->
+                    <div class="phone phone-side phone-right">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="screen-recipes.webp" alt="Healthy Guru recipes library screen" class="phone-shot" loading="lazy" width="620" height="1346">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section section-cream">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow" data-i18n="features.eyebrow">Features</span>
+                <h2 class="section-title" data-i18n="features.title">Everything you need to eat smarter.</h2>
+            </div>
+            <div class="features-grid fade-up">
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true">🎯</div>
+                    <h3 data-i18n="features.f1t">Tailored nutrition plan</h3>
+                    <p data-i18n="features.f1b">A personalized plan that adapts to your weight, activity, and goals — and evolves as you do.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true">📸</div>
+                    <h3 data-i18n="features.f2t">Ultra-precise food tracking</h3>
+                    <p data-i18n="features.f2b">Barcode, food database, AI photo analysis, manual entry, or your own custom recipes — log every meal the fastest way, down to the detail.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true">⌚</div>
+                    <h3 data-i18n="features.f3t">Effortless activity sync</h3>
+                    <p data-i18n="features.f3b">Your daily activity is tracked precisely through Apple Health or your smartwatch — with manual entry always an option.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true">📈</div>
+                    <h3 data-i18n="features.f4t">Progress you can see</h3>
+                    <p data-i18n="features.f4b">Clear charts track your progress so you can stay on course, week after week.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section compare">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow" data-i18n="compare.eyebrow">Why it sticks</span>
+                <h2 class="section-title" data-i18n="compare.title">Tracking, without the tedium.</h2>
+            </div>
+            <div class="compare-grid fade-up">
+                <div class="compare-col compare-old">
+                    <h3 data-i18n="compare.oldTitle">Basic trackers</h3>
+                    <ul>
+                        <li data-i18n="compare.old1">One slow way in: type every food by hand</li>
+                        <li data-i18n="compare.old2">Weigh, convert, and guess your portions</li>
+                        <li data-i18n="compare.old3">Only calories and a couple of macros</li>
+                        <li data-i18n="compare.old4">No micronutrients at all</li>
+                    </ul>
+                </div>
+                <div class="compare-col compare-new">
+                    <div class="compare-badge"><img src="../healthyguru_icon.png" alt="" class="compare-icon"><span>Healthy Guru</span></div>
+                    <ul>
+                        <li data-i18n="compare.new1">Photo, barcode, database, or manual — your choice</li>
+                        <li data-i18n="compare.new2">Portions estimated for you, adjustable in a tap</li>
+                        <li data-i18n="compare.new3">Calories, macros, and every micronutrient</li>
+                        <li data-i18n="compare.new4">Reference-grade data you can trust</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="section section-cream">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+                <h2 class="section-title" data-i18n="how.title">3 simple steps</h2>
+            </div>
+            <div class="steps fade-up">
+                <article class="step">
+                    <div class="step-badge">1</div>
+                    <span class="step-label" data-i18n="how.l1">Step 1</span>
+                    <h3 data-i18n="how.s1t">Set your goals</h3>
+                    <p data-i18n="how.s1b">Answer a few quick questions and we'll calibrate your targets — calories, macros, and micronutrients made for you.</p>
+                </article>
+                <article class="step">
+                    <div class="step-badge">2</div>
+                    <span class="step-label" data-i18n="how.l2">Step 2</span>
+                    <h3 data-i18n="how.s2t">Log your meals</h3>
+                    <p data-i18n="how.s2b">AI photo analysis, barcode, database, or manual entry — whatever's fastest. No tedious typing required.</p>
+                </article>
+                <article class="step">
+                    <div class="step-badge">3</div>
+                    <span class="step-label" data-i18n="how.l3">Step 3</span>
+                    <h3 data-i18n="how.s3t">Track your progress</h3>
+                    <p data-i18n="how.s3b">Clear charts show your results so you can stay on course, day after day.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials + rating -->
+    <section id="reviews" class="section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow" data-i18n="reviews.eyebrow">Reviews</span>
+                <h2 class="section-title" data-i18n="reviews.title">What people are saying.</h2>
+                <a href="https://apps.apple.com/fr/app/healthy-guru/id6575388387" target="_blank" rel="noopener" class="reviews-rating">
+                    <span class="reviews-rating-stars" aria-hidden="true">★★★★★</span>
+                    <span data-i18n="reviews.stat"><strong>4.6</strong> · 500+ reviews on the App Store</span>
+                </a>
+            </div>
+            <div class="reviews-grid fade-up">
+                <figure class="review">
+                    <div class="review-stars" aria-hidden="true">★★★★★</div>
+                    <blockquote data-i18n="reviews.q1">"Amazing — no more hunting for foods: everything is recognized from a photo. The suggested macros are great, I eat my fill and the tracking finally gives me a real picture of things."</blockquote>
+                    <figcaption><strong data-i18n="reviews.n1">Beyrima</strong><span data-i18n="reviews.r1">"Top-notch" · App Store</span></figcaption>
+                </figure>
+                <figure class="review">
+                    <div class="review-stars" aria-hidden="true">★★★★★</div>
+                    <blockquote data-i18n="reviews.q2">"The photo capture, calorie tracking and recipes keep getting better. The app is really intuitive and easy to pick up. It's become an essential part of my daily routine!"</blockquote>
+                    <figcaption><strong data-i18n="reviews.n2">Alexaa A</strong><span data-i18n="reviews.r2">"Gets better every week" · App Store</span></figcaption>
+                </figure>
+                <figure class="review">
+                    <div class="review-stars" aria-hidden="true">★★★★★</div>
+                    <blockquote data-i18n="reviews.q3">"A wonderful app, with a plan that actually works. It's helped me so much — I highly recommend it. Thank you, Healthy Guru!"</blockquote>
+                    <figcaption><strong data-i18n="reviews.n3">Kiwak_.</strong><span data-i18n="reviews.r3">"A great app" · App Store</span></figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section section-cream">
+        <div class="container container-narrow">
+            <div class="section-header fade-up">
+                <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+                <h2 class="section-title" data-i18n="faq.title">Questions, answered.</h2>
+            </div>
+            <div class="faq-list fade-up">
+                <details class="faq-item">
+                    <summary data-i18n="faq.q1">Is Healthy Guru free?</summary>
+                    <p data-i18n="faq.a1">You can download and try Healthy Guru at no cost. Premium features unlock advanced plans, deeper insights, and unlimited tracking.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q2">How accurate is the AI photo analysis?</summary>
+                    <p data-i18n="faq.a2">Our model is trained on a wide range of cuisines and portion sizes. You can fine-tune any estimate in one tap, and the app learns from your corrections.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q3">Does it work with any cuisine?</summary>
+                    <p data-i18n="faq.a3">Yes — from sushi to tagine to a homemade salad. If something looks off, a quick edit teaches the model your habits.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q4">Can I track macros and micronutrients?</summary>
+                    <p data-i18n="faq.a4">Absolutely. Calories, protein, carbs, fats, fiber, and the key vitamins and minerals — all in one place.</p>
+                </details>
+                <details class="faq-item">
+                    <summary data-i18n="faq.q5">What about my data?</summary>
+                    <p data-i18n="faq.a5">Your data stays yours. We use it only to power your experience. See our <a href="../privacy.html">Privacy Policy</a> for the full breakdown.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="final-cta-card fade-up">
+                <div class="final-cta-text">
+                    <h2 class="section-title" data-i18n="cta.title">Start your healthier journey today.</h2>
+                    <p class="section-sub" data-i18n="cta.sub">Free to download. No account required to start.</p>
+                    <a href="https://apps.apple.com/fr/app/healthy-guru/id6575388387" target="_blank" rel="noopener" class="store-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <span>
+                            <small data-i18n="hero.storeSmall">Download on the</small>
+                            <strong data-i18n="hero.storeStrong">App Store</strong>
+                        </span>
+                    </a>
+                </div>
+                <div class="final-cta-visual">
+                    <div class="phone phone-center">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="screen-home.webp" alt="Healthy Guru dashboard" class="phone-shot" loading="lazy" width="620" height="1346">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <img src="../healthyguru_icon.png" alt="" class="footer-icon">
+                <div class="footer-brand-text">
+                    <strong>Healthy Guru</strong>
+                    <span data-i18n="footer.by">by <a href="../">Athanor Studio</a></span>
+                </div>
+            </div>
+            <nav class="footer-links">
+                <a href="#how" data-i18n="nav.how">How it works</a>
+                <a href="#features" data-i18n="nav.features">Features</a>
+                <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
+                <a href="#faq" data-i18n="nav.faq">FAQ</a>
+                <a href="../privacy.html" data-i18n="footer.privacy">Privacy</a>
+            </nav>
+            <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 Athanor Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================================
+        //  i18n dictionary (EN / FR) — auto-detect + manual toggle
+        // ==========================================================
+        const I18N = {
+            en: {
+                'meta.title': 'Healthy Guru — AI Nutrition Coach',
+                'meta.description': 'Snap a photo. Know your nutrition. Healthy Guru turns any meal photo into instant calorie tracking and a personalized plan tailored to your goals.',
+                'nav.how': 'How it works',
+                'nav.features': 'Features',
+                'nav.reviews': 'Reviews',
+                'nav.faq': 'FAQ',
+                'nav.download': 'Download',
+                'hero.title': 'Nutrition,<br><span class="ink-soft">down to the micronutrient.</span>',
+                'hero.sub': 'Log any meal in seconds and track your calories, macros, and micronutrients to reach your goal.',
+                'hero.storeSmall': 'Download on the',
+                'hero.storeStrong': 'App Store',
+                'hero.social': '4.6 · 150,000+ people eating better every day',
+                'hero.trust1': 'No ads',
+                'hero.trust3': 'Your data stays private',
+                'compare.eyebrow': 'Why it sticks',
+                'compare.title': 'Complete, precise, effortless.',
+                'compare.oldTitle': 'Basic trackers',
+                'compare.old1': 'One slow way in: type every food by hand',
+                'compare.old2': 'Weigh, convert, and guess your portions',
+                'compare.old3': 'Only calories and a couple of macros',
+                'compare.old4': 'No micronutrients at all',
+                'compare.new1': 'Photo, barcode, database, or manual — your choice',
+                'compare.new2': 'Portions estimated for you, adjustable in a tap',
+                'compare.new3': 'Calories, macros, and every micronutrient',
+                'compare.new4': 'Reference-grade data you can trust',
+                'how.eyebrow': 'How it works',
+                'how.title': '3 simple steps',
+                'how.l1': 'Step 1',
+                'how.l2': 'Step 2',
+                'how.l3': 'Step 3',
+                'how.s1t': 'Set your goals',
+                'how.s1b': 'Answer a few quick questions and we\'ll calibrate your targets — calories, macros, and micronutrients made for you.',
+                'how.s2t': 'Log your meals',
+                'how.s2b': 'AI photo analysis, barcode, database, or manual entry — whatever\'s fastest. No tedious typing required.',
+                'how.s3t': 'Track your progress',
+                'how.s3b': 'Clear charts show your results so you can stay on course, day after day.',
+                'features.eyebrow': 'Features',
+                'features.title': 'Everything you need to eat smarter.',
+                'features.f1t': 'Tailored nutrition plan',
+                'features.f1b': 'A personalized plan that adapts to your weight, activity, and goals — and evolves as you do.',
+                'features.f2t': 'Ultra-precise food tracking',
+                'features.f2b': 'Barcode, food database, AI photo analysis, manual entry, or your own custom recipes — log every meal the fastest way, down to the detail.',
+                'features.f3t': 'Effortless activity sync',
+                'features.f3b': 'Your daily activity is tracked precisely through Apple Health or your smartwatch — with manual entry always an option.',
+                'features.f4t': 'Progress you can see',
+                'features.f4b': 'Clear charts track your progress so you can stay on course, week after week.',
+                'reviews.eyebrow': 'Reviews',
+                'reviews.title': 'What people are saying.',
+                'reviews.stat': '<strong>4.6</strong> · 500+ reviews on the App Store',
+                'reviews.q1': '"Amazing — no more hunting for foods: everything is recognized from a photo. The suggested macros are great, I eat my fill and the tracking finally gives me a real picture of things."',
+                'reviews.n1': 'Beyrima',
+                'reviews.r1': '"Top-notch" · App Store',
+                'reviews.q2': '"The photo capture, calorie tracking and recipes keep getting better. The app is really intuitive and easy to pick up. It\'s become an essential part of my daily routine!"',
+                'reviews.n2': 'Alexaa A',
+                'reviews.r2': '"Gets better every week" · App Store',
+                'reviews.q3': '"A wonderful app, with a plan that actually works. It\'s helped me so much — I highly recommend it. Thank you, Healthy Guru!"',
+                'reviews.n3': 'Kiwak_.',
+                'reviews.r3': '"A great app" · App Store',
+                'faq.eyebrow': 'FAQ',
+                'faq.title': 'Questions, answered.',
+                'faq.q1': 'Is Healthy Guru free?',
+                'faq.a1': 'You can download and try Healthy Guru at no cost. Premium features unlock advanced plans, deeper insights, and unlimited tracking.',
+                'faq.q2': 'How accurate is the AI photo analysis?',
+                'faq.a2': 'Our model is trained on a wide range of cuisines and portion sizes. You can fine-tune any estimate in one tap, and the app learns from your corrections.',
+                'faq.q3': 'Does it work with any cuisine?',
+                'faq.a3': 'Yes — from sushi to tagine to a homemade salad. If something looks off, a quick edit teaches the model your habits.',
+                'faq.q4': 'Can I track macros and micronutrients?',
+                'faq.a4': 'Absolutely. Calories, protein, carbs, fats, fiber, and the key vitamins and minerals — all in one place.',
+                'faq.q5': 'What about my data?',
+                'faq.a5': 'Your data stays yours. We use it only to power your experience. See our <a href="../privacy.html">Privacy Policy</a> for the full breakdown.',
+                'cta.title': 'Start your healthier journey today.',
+                'cta.sub': 'Free to download. No account required to start.',
+                'footer.by': 'by <a href="../">Athanor Studio</a>',
+                'footer.privacy': 'Privacy',
+                'footer.copy': '© 2026 Athanor Studio. All rights reserved.'
+            },
+            fr: {
+                'meta.title': 'Healthy Guru — Coach nutrition IA',
+                'meta.description': 'Photographie ton repas. Connais ta nutrition. Healthy Guru transforme la photo de n\'importe quel plat en suivi calorique instantané et en un plan personnalisé adapté à tes objectifs.',
+                'nav.how': 'Comment ça marche',
+                'nav.features': 'Fonctionnalités',
+                'nav.reviews': 'Avis',
+                'nav.faq': 'FAQ',
+                'nav.download': 'Télécharger',
+                'hero.title': 'La nutrition,<br><span class="ink-soft">jusqu\'au micronutriment.</span>',
+                'hero.sub': 'Enregistre n\'importe quel repas en quelques secondes et suis tes calories, macros et micronutriments pour atteindre ton objectif.',
+                'hero.storeSmall': 'Télécharger sur',
+                'hero.storeStrong': 'l\'App Store',
+                'hero.social': '4,6 · 150 000+ utilisateurs mangent mieux au quotidien',
+                'hero.trust1': 'Sans pub',
+                'hero.trust3': 'Tes données restent privées',
+                'compare.eyebrow': 'Pourquoi ça marche',
+                'compare.title': 'Complet, précis, sans effort.',
+                'compare.oldTitle': 'Les trackers basiques',
+                'compare.old1': 'Une seule voie, lente : tout saisir à la main',
+                'compare.old2': 'Peser, convertir et deviner les portions',
+                'compare.old3': 'Seulement les calories et deux-trois macros',
+                'compare.old4': 'Aucun micronutriment',
+                'compare.new1': 'Photo, code-barres, base de données ou manuel — au choix',
+                'compare.new2': 'Portions estimées pour toi, ajustables en un geste',
+                'compare.new3': 'Calories, macros et chaque micronutriment',
+                'compare.new4': 'Des données de référence, fiables',
+                'how.eyebrow': 'Comment ça marche',
+                'how.title': '3 étapes simples',
+                'how.l1': 'Étape 1',
+                'how.l2': 'Étape 2',
+                'how.l3': 'Étape 3',
+                'how.s1t': 'Définis tes objectifs',
+                'how.s1b': 'Réponds à quelques questions et on calibre tes cibles : calories, macros et micronutriments adaptés à toi.',
+                'how.s2t': 'Enregistre tes repas',
+                'how.s2b': 'Photo analysée par l\'IA, code-barres, base de données ou saisie manuelle — au plus rapide, sans corvée.',
+                'how.s3t': 'Suis ta progression',
+                'how.s3b': 'Des graphiques clairs montrent tes résultats pour garder le cap, jour après jour.',
+                'features.eyebrow': 'Fonctionnalités',
+                'features.title': 'Tout ce qu\'il te faut pour mieux manger.',
+                'features.f1t': 'Plan nutrition sur mesure',
+                'features.f1b': 'Un plan personnalisé qui s\'ajuste à ton poids, ton activité et tes objectifs — et évolue avec toi.',
+                'features.f2t': 'Suivi nutritionnel ultra-précis',
+                'features.f2b': 'Code-barres, base de données, photo analysée par l\'IA, saisie manuelle ou tes propres recettes — enregistre chaque repas de la façon la plus rapide, au détail près.',
+                'features.f3t': 'Suivi d\'activité automatique',
+                'features.f3b': 'Toutes tes activités de la journée sont suivies précisément via Apple Health ou ta montre connectée. Saisie manuelle toujours possible.',
+                'features.f4t': 'Suivi de progression',
+                'features.f4b': 'Des graphiques clairs pour visualiser tes progrès et garder le cap, semaine après semaine.',
+                'reviews.eyebrow': 'Avis',
+                'reviews.title': 'Ce qu\'ils en disent.',
+                'reviews.stat': '<strong>4,6</strong> · 500+ avis sur l\'App Store',
+                'reviews.q1': '« Incroyable, plus besoin d\'aller chercher nos aliments : tout est reconnu via nos photos. Les macros proposés sont tops, je mange à ma faim et le suivi via l\'application permet d\'avoir une vraie vision de la réalité. »',
+                'reviews.n1': 'Beyrima',
+                'reviews.r1': '« Au top » · App Store',
+                'reviews.q2': '« La prise de photos, le suivi calorique et les recettes s\'améliorent constamment. L\'application est très intuitive et facile à prendre en main. Elle est devenue un indispensable de mon quotidien ! »',
+                'reviews.n2': 'Alexaa A',
+                'reviews.r2': '« S\'améliore chaque semaine » · App Store',
+                'reviews.q3': '« C\'est une merveilleuse application, avec un plan qui fonctionne vraiment. Elle m\'a beaucoup aidé, je la conseille fortement. Merci Healthy Guru ! »',
+                'reviews.n3': 'Kiwak_.',
+                'reviews.r3': '« Très bonne application » · App Store',
+                'faq.eyebrow': 'FAQ',
+                'faq.title': 'Vos questions, nos réponses.',
+                'faq.q1': 'Healthy Guru est-il gratuit ?',
+                'faq.a1': 'Tu peux télécharger et essayer Healthy Guru gratuitement. Les fonctionnalités premium débloquent des plans avancés, des analyses approfondies et un suivi illimité.',
+                'faq.q2': 'L\'analyse photo par IA est-elle précise ?',
+                'faq.a2': 'Notre modèle est entraîné sur une grande variété de cuisines et de portions. Tu peux ajuster chaque estimation en un geste, et l\'app apprend de tes corrections.',
+                'faq.q3': 'Fonctionne-t-il avec toutes les cuisines ?',
+                'faq.a3': 'Oui — des sushis au tajine en passant par une salade maison. Si quelque chose ne va pas, une correction rapide apprend tes habitudes au modèle.',
+                'faq.q4': 'Puis-je suivre mes macros et micronutriments ?',
+                'faq.a4': 'Bien sûr. Calories, protéines, glucides, lipides, fibres et les principales vitamines et minéraux — le tout au même endroit.',
+                'faq.q5': 'Et mes données ?',
+                'faq.a5': 'Tes données t\'appartiennent. Nous les utilisons uniquement pour améliorer ton expérience. Consulte notre <a href="../privacy.html">politique de confidentialité</a> pour le détail complet.',
+                'cta.title': 'Commence ton parcours santé dès aujourd\'hui.',
+                'cta.sub': 'Téléchargement gratuit. Aucun compte requis pour démarrer.',
+                'footer.by': 'par <a href="../">Athanor Studio</a>',
+                'footer.privacy': 'Confidentialité',
+                'footer.copy': '© 2026 Athanor Studio. Tous droits réservés.'
+            }
+        };
+
+        const SUPPORTED = ['en', 'fr'];
+
+        function detectLang() {
+            const saved = localStorage.getItem('hg-lang');
+            if (saved && SUPPORTED.includes(saved)) return saved;
+            const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+            return nav.startsWith('fr') ? 'fr' : 'en';
+        }
+
+        function applyLang(lang) {
+            const dict = I18N[lang] || I18N.en;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] === undefined) return;
+                if (el.tagName === 'TITLE') {
+                    el.textContent = dict[key];
+                } else if (el.tagName === 'META') {
+                    el.setAttribute('content', dict[key]);
+                } else {
+                    el.innerHTML = dict[key];
+                }
+            });
+            // Toggle button shows the OTHER language
+            const toggleLabel = document.querySelector('.lang-toggle-label');
+            if (toggleLabel) toggleLabel.textContent = lang === 'fr' ? 'EN' : 'FR';
+            localStorage.setItem('hg-lang', lang);
+        }
+
+        let currentLang = detectLang();
+        applyLang(currentLang);
+
+        // ==========================================================
+        //  Interactions
+        // ==========================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.querySelector('.nav');
+            window.addEventListener('scroll', () => {
+                nav.classList.toggle('scrolled', window.scrollY > 20);
+            });
+
+            const burger = document.querySelector('.nav-burger');
+            const links = document.querySelector('.nav-links');
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('active');
+                links.classList.toggle('open');
+            });
+            document.querySelectorAll('.nav-link').forEach(l => {
+                l.addEventListener('click', () => {
+                    burger.classList.remove('active');
+                    links.classList.remove('open');
+                });
+            });
+
+            const langToggle = document.querySelector('.lang-toggle');
+            langToggle.addEventListener('click', () => {
+                currentLang = currentLang === 'fr' ? 'en' : 'fr';
+                applyLang(currentLang);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>
