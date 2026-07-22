@@ -15,6 +15,8 @@ Site vitrine d'Athanor Studio (app publishing company).
 - `healthyguru/index.html` + `healthyguru/styles.css` — landing page dédiée à l'app Healthy Guru, accessible via `/healthyguru` (light theme + accent crème)
 - `athanorstudio_logo.png`, `healthyguru_icon.png`, `clashlist_icon.png` — assets
 - `CNAME` — domaine GitHub Pages
+- `og-image.png` (racine, thème sombre studio) + `healthyguru/og-image.png` (thème vert app) — images de partage 1200×630, générées via une carte HTML rendue en Chrome headless puis redimensionnée avec `sips`. Balises Open Graph/Twitter + `canonical` + `theme-color` dans les deux `<head>`.
+- `robots.txt` + `sitemap.xml` — SEO de base (racine).
 
 ## Design system
 - Thème sombre : `bg: #0c0c0c`
