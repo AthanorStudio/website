@@ -29,9 +29,9 @@ Site vitrine d'Athanor Studio (app publishing company).
 1. Navbar (logo + Services / Apps / Company / Contact + hamburger mobile)
 2. Hero — "We build and scale apps."
 3. Services — 4 value cards (Transformation, Ownership, Data-Driven, Innovation)
-4. Apps — grille `auto-fit minmax(340px, 1fr)` avec deux cartes :
+4. Apps — grille `auto-fit minmax(340px, 1fr)` avec deux cartes : Healthy Guru et Climbr (Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt) :
    - Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs) — carte cliquable (`<a class="app-card app-card-link">`) qui mène vers `/healthyguru`. CTA "Learn more →" en bas de carte. Le lien App Store n'est plus dans la carte (il est sur la page dédiée).
-   - Clash List (Quiz Game, badge "Coming Soon" — pas encore de métriques ni de lien store)
+   - Climbr (Sports · Bouldering, badge "Coming Soon") — carte cliquable vers `/climbr`.
 5. Company — storytelling Athanor (fondé en 2024, fourneau alchimique)
 6. Contact — titre seul (sous-titre retiré) + formulaire `mailto:` (pas de backend) → guillaume@athanor-studio.io
 7. Footer
