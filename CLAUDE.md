@@ -13,9 +13,10 @@ Site vitrine d'Athanor Studio (app publishing company).
 - `styles.css` — design system du site studio (dark, tokens, composants, responsive)
 - `privacy.html` — politique de confidentialité
 - `healthyguru/index.html` + `healthyguru/styles.css` — landing page dédiée à l'app Healthy Guru, accessible via `/healthyguru` (light theme + **accent vert frais**, charte propre distincte du studio). `healthyguru/screen-*.webp` = screenshots réels de l'app (mockups + CTA).
-- `athanorstudio_logo.png`, `healthyguru_icon.png`, `clashlist_icon.png` — assets
+- `climbr/index.html` + `climbr/styles.css` — page dédiée à l'app Climbr, accessible via `/climbr` (thème **sable / encre / terre brûlée**, la palette « Grès » de l'app). `climbr/screen-*.webp` = vrais écrans de l'app, `climbr/iphone.webp` = le boîtier iPhone 17 Pro Max (capturé dans le Simulateur de Xcode, écran transparent) posé par-dessus chaque écran en CSS.
+- `athanorstudio_logo.png`, `healthyguru_icon.png`, `clashlist_icon.png`, `climbr_icon.png` — assets
 - `CNAME` — domaine GitHub Pages
-- `og-image.png` (racine, thème sombre studio) + `healthyguru/og-image.png` (thème vert app) — images de partage 1200×630, générées via une carte HTML rendue en Chrome headless puis redimensionnée avec `sips`. Balises Open Graph/Twitter + `canonical` + `theme-color` dans les deux `<head>`.
+- `og-image.png` (racine, thème sombre studio) + `healthyguru/og-image.png` (thème vert app) + `climbr/og-image.png` (sable, généré avec Pillow) — images de partage 1200×630, générées via une carte HTML rendue en Chrome headless puis redimensionnée avec `sips`. Balises Open Graph/Twitter + `canonical` + `theme-color` dans les deux `<head>`.
 - `robots.txt` + `sitemap.xml` — SEO de base (racine).
 
 ## Design system
@@ -56,6 +57,11 @@ Site vitrine d'Athanor Studio (app publishing company).
   - **Responsive du trio de mockups** : largeur fixe → géré par `transform: scale()` par palier (>1440 pleine taille / 1201-1440 `.phones` 0.85 / bascule 1 colonne ≤1200 / 820 → 0.82 / 600 → 0.64 / 400 → 0.52) + `min-width:0` sur les cellules du hero pour éviter tout débordement horizontal.
   - **Partage/SEO** : image OG dédiée `healthyguru/og-image.png` (carte verte : logo + accroche + mockup dashboard) + balises OG/Twitter/canonical/theme-color dans le `<head>`. Régénérable via le pipeline « carte HTML → Chrome headless `--screenshot` → `sips -z 630 1200` » (voir historique).
   - **Statut** : refonte complète faite et **déployée en live** (bilingue, trio vrais screenshots, features/comparaison/stepper/avis/CTA carte, thème vert, responsive, OG/SEO). Reste UNIQUEMENT : vérif des métriques 4,6★/500+ et des notes d'avis dans App Store Connect (laissées telles quelles).
+- **Climbr** — carnet de bloc en salle (Sports), app d'Athanor Studio en cours de soumission (V1, septembre 2026). Pas encore de lien App Store : carte « Coming Soon » sur l'index, cliquable vers `/climbr`.
+  - Page dédiée : `/climbr` (dossier `climbr/`), **français uniquement** — l'app est en français. Sections : navbar / hero (titre « Ton suivi de bloc, en un clin d'œil. », trio de vrais écrans dans le vrai boîtier) / Fonctions (4 cartes = les 4 titres des captures App Store) / Comment ça marche (3 gestes) / CTA sombre (mail) / Support (`#support`) / footer.
+  - Sert d'**URL marketing** (`/climbr/`) et d'**URL d'assistance** (`/climbr/#support`) dans App Store Connect ; la politique de confidentialité reste `/privacy.html`.
+  - Quand l'app sort : remplacer les deux `.store-badge.soon` par un lien App Store, et sur l'index remplacer le `status-badge` par les métriques comme Healthy Guru.
+  - Les textes viennent de la fiche App Store (nom « Climbr – Progression Escalade », sous-titre « Scanne ton bloc avec une photo »). Tutoiement, comme Healthy Guru.
 - **Clash List** — Quiz Game, "Challenge your friends in 45-second word duels."
   - Pas encore lancée. Carte affiche un badge `.status-badge` "Coming Soon" à la place des `app-metrics` + `app-links`. Quand l'app sortira, remplacer le `<span class="status-badge">` par les blocs métriques + store comme Healthy Guru.
 

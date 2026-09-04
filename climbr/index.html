@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climbr — Ton suivi de bloc en un clin d'œil</title>
+    <meta name="description" content="Climbr est le carnet de bloc de ceux qui grimpent en salle. Scanne ton bloc avec une photo, note chaque essai, suis ta progression salle par salle.">
+    <link rel="canonical" href="https://athanor-studio.io/climbr/">
+    <meta name="theme-color" content="#F4EFE8">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Climbr">
+    <meta property="og:url" content="https://athanor-studio.io/climbr/">
+    <meta property="og:title" content="Climbr — Ton suivi de bloc en un clin d'œil">
+    <meta property="og:description" content="Scanne ton bloc avec une photo, note chaque essai, suis ta progression salle par salle.">
+    <meta property="og:image" content="https://athanor-studio.io/climbr/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Climbr — Ton suivi de bloc en un clin d'œil">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Climbr — Ton suivi de bloc en un clin d'œil">
+    <meta name="twitter:description" content="Scanne ton bloc avec une photo, note chaque essai, suis ta progression salle par salle.">
+    <meta name="twitter:image" content="https://athanor-studio.io/climbr/og-image.png">
+
+    <link rel="icon" href="../climbr_icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../climbr_icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="../climbr_icon.png" alt="Climbr" class="nav-icon">
+                <span>Climbr</span>
+            </a>
+            <button class="nav-burger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#fonctions" class="nav-link">Fonctions</a>
+                <a href="#comment" class="nav-link">Comment ça marche</a>
+                <a href="#support" class="nav-link">Support</a>
+                <span class="btn btn-ghost btn-sm">Bientôt sur l'App Store</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text fade-up">
+                <span class="eyebrow">Carnet de bloc · iPhone</span>
+                <h1 class="hero-title">Ton suivi de bloc,<br><span class="accent">en un clin d'œil.</span></h1>
+                <p class="hero-sub">Prends ton bloc en photo, touche la première prise : Climbr détoure ta voie. Note chaque essai, et suis ta progression salle par salle.</p>
+                <div class="hero-cta">
+                    <span class="store-badge soon" aria-label="Bientôt disponible sur l'App Store">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        <span><small>Bientôt sur l'</small><strong>App Store</strong></span>
+                    </span>
+                </div>
+                <ul class="hero-trust">
+                    <li>Sans compte</li>
+                    <li>Sans pub</li>
+                    <li>Salles de bloc en France</li>
+                </ul>
+            </div>
+
+            <div class="hero-visual fade-up">
+                <div class="phones">
+                    <div class="phone phone-left">
+                        <div class="phone-screen"><img src="screen-voie.webp" alt="La fiche d'un bloc dans Climbr : la voie détourée sur la photo du mur, et la hauteur atteinte à chaque essai" loading="lazy" width="620" height="1347"></div>
+                        <img src="iphone.webp" alt="" class="phone-frame" aria-hidden="true" width="886" height="1851">
+                    </div>
+                    <div class="phone phone-center">
+                        <div class="phone-screen"><img src="screen-blocs.webp" alt="Le carnet de blocs de Climbr : chaque bloc sur sa photo, avec son disque de progression" width="620" height="1347"></div>
+                        <img src="iphone.webp" alt="" class="phone-frame" aria-hidden="true" width="886" height="1851">
+                    </div>
+                    <div class="phone phone-right">
+                        <div class="phone-screen"><img src="screen-progression.webp" alt="Le profil Climbr : volume d'entraînement par semaine et niveau par salle, couleur par couleur" loading="lazy" width="620" height="1347"></div>
+                        <img src="iphone.webp" alt="" class="phone-frame" aria-hidden="true" width="886" height="1851">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fonctions -->
+    <section id="fonctions" class="section section-deep">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow">Fonctions</span>
+                <h2 class="section-title">Tout ce qu'un carnet de bloc devrait faire.</h2>
+                <p class="section-lead">Pas de croquis, pas de cotation à inventer, pas de compte. La photo du mur, tes prises, tes essais.</p>
+            </div>
+            <div class="features-grid fade-up">
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.5"/></svg></div>
+                    <h3>Scanne ton bloc avec une photo</h3>
+                    <p>Photographie le pan, touche la première prise de ta voie : Climbr détoure le bloc sur la vraie photo du mur. Plus de « c'était la rouge à côté du volume ».</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M12 10l-4 4M12 10l4 4"/><circle cx="12" cy="5" r="1.5"/></svg></div>
+                    <h3>Chaque essai te rapproche</h3>
+                    <p>À chaque séance, note où tu es tombé. La prise atteinte suffit : l'app en tire ta hauteur, ton meilleur point, la séance d'avant.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M8 4v6M16 4v6"/></svg></div>
+                    <h3>Ton suivi de bloc en un clin d'œil</h3>
+                    <p>Chaque bloc sur sa photo, trié par couleur de circuit. En cours, toppés, flashés : un disque de progression par bloc dit où tu en es.</p>
+                </article>
+                <article class="feature">
+                    <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div>
+                    <h3>Suis ta progression</h3>
+                    <p>Ton volume d'entraînement sur 7 jours, un mois, trois mois. Ton niveau par salle, couleur par couleur, dans l'échelle que la salle affiche.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment ça marche -->
+    <section id="comment" class="section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow">Comment ça marche</span>
+                <h2 class="section-title">Trois gestes, au pied du mur.</h2>
+            </div>
+            <div class="steps fade-up">
+                <div class="step">
+                    <div class="step-badge">1</div>
+                    <h3>Photographie</h3>
+                    <p>Le pan entier, tel qu'il est. Une photo par mur, autant de blocs que tu veux dessus.</p>
+                </div>
+                <div class="step">
+                    <div class="step-badge">2</div>
+                    <h3>Touche la première prise</h3>
+                    <p>Climbr détoure la voie de sa couleur. Une prise oubliée, tu la touches ; une prise en trop, tu la retires.</p>
+                </div>
+                <div class="step">
+                    <div class="step-badge">3</div>
+                    <h3>Note l'essai</h3>
+                    <p>Tombé ici, arrivé là, toppé. Pas de cotation à saisir : la prise atteinte dit tout.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section section-deep">
+        <div class="container">
+            <div class="final-card fade-up">
+                <div>
+                    <h2>Bientôt sur l'App Store.</h2>
+                    <p>Climbr arrive sur iPhone. En attendant, une question, une salle à ajouter, une idée : écris-nous.</p>
+                    <a href="mailto:guillaume@athanor-studio.io?subject=Climbr" class="store-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span><small>Nous écrire</small><strong>guillaume@athanor-studio.io</strong></span>
+                    </a>
+                </div>
+                <div class="final-phone">
+                    <div class="phone-screen"><img src="screen-salles.webp" alt="La carte des salles de bloc dans Climbr" loading="lazy" width="620" height="1347"></div>
+                    <img src="iphone.webp" alt="" class="phone-frame" aria-hidden="true" width="886" height="1851">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support -->
+    <section id="support" class="section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="eyebrow">Support</span>
+                <h2 class="section-title">Une question sur Climbr ?</h2>
+            </div>
+            <div class="support fade-up">
+                <div class="support-card">
+                    <h3>Nous écrire</h3>
+                    <p>Un bug, une salle qui manque, une prise mal détourée : <a href="mailto:guillaume@athanor-studio.io?subject=Climbr">guillaume@athanor-studio.io</a>. Réponse sous quelques jours.</p>
+                </div>
+                <div class="support-card">
+                    <h3>Tes données</h3>
+                    <p>Climbr fonctionne sans compte. La photo du mur est analysée pour retrouver les prises, puis reste dans ton carnet. Le détail est dans la <a href="../privacy.html">politique de confidentialité</a>.</p>
+                </div>
+                <div class="support-card">
+                    <h3>L'éditeur</h3>
+                    <p>Climbr est une app d'<a href="../">Athanor Studio</a>, studio d'apps fondé en 2024 à Paris.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span>&copy; 2026 Athanor Studio</span>
+            <div class="footer-links">
+                <a href="../">Athanor Studio</a>
+                <a href="../privacy.html">Confidentialité</a>
+                <a href="#support">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+        const burger = document.querySelector('.nav-burger');
+        const links = document.querySelector('.nav-links');
+        burger.addEventListener('click', () => {
+            const open = links.classList.toggle('open');
+            burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        document.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
