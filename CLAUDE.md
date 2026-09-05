@@ -14,7 +14,7 @@ Site vitrine d'Athanor Studio (app publishing company).
 - `privacy.html` — politique de confidentialité
 - `healthyguru/index.html` + `healthyguru/styles.css` — landing page dédiée à l'app Healthy Guru, accessible via `/healthyguru` (light theme + **accent vert frais**, charte propre distincte du studio). `healthyguru/screen-*.webp` = screenshots réels de l'app (mockups + CTA).
 - `climbr/index.html` + `climbr/styles.css` — page dédiée à l'app Climbr, accessible via `/climbr` (thème **sable / encre / terre brûlée**, la palette « Grès » de l'app). `climbr/screen-*.webp` = vrais écrans de l'app, `climbr/iphone.webp` = le boîtier iPhone 17 Pro Max (capturé dans le Simulateur de Xcode, écran transparent) posé par-dessus chaque écran en CSS.
-- **Marque** — `athanor-mark.svg` (source vectorielle), `athanor-mark.png` (512px crème, transparent), `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180px, tuile sombre). Voir « Logo » plus bas.
+- **Marque** — `athanor-mark.svg` (source vectorielle), `athanor-mark.png` (512px crème, transparent), `athanor-mark-ink.svg` + `athanor-mark-ink.png` (version encre pour fonds clairs), `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180px, tuile sombre). Voir « Logo » plus bas.
 - `athanorstudio_logo.png` — **ancien** logo (bitmap opaque, wordmark gravé dedans). N'est plus référencé par aucune page ; conservé comme archive.
 - `healthyguru_icon.png`, `clashlist_icon.png`, `climbr_icon.png` — icônes des apps
 - `CNAME` — domaine GitHub Pages
@@ -31,7 +31,7 @@ disque   : cx 50, cy 63, r 11     (plein)
 - **Le wordmark « ATHANOR STUDIO » est du texte**, pas une image : Inter 500, `text-transform: uppercase`, `letter-spacing: .24em`.
 - **Épaisseurs optiques** : les icônes petites utilisent un trait ÉPAISSI (favicon `stroke-width: 8.5` + `r: 14`, apple-touch `5.6`/`12.5`). Ne pas se contenter de réduire le SVG 3.2 — il disparaît.
 - Les PNG sont générés par un script Pillow (suréchantillonnage ×8 puis LANCZOS), pas par un export manuel : triangle extérieur rempli, triangle intérieur évidé, disque par-dessus. L'offset se fait par homothétie autour de l'incentre `(50, 62.23)`, rayon inscrit `24.77`.
-- ⚠️ **Le crème `#f8eac1` est invisible sur fond clair.** Toute déclinaison pour l'App Store, la presse ou un fond papier a besoin d'une version encre.
+- ⚠️ **Le crème `#f8eac1` est invisible sur fond clair.** Pour l'App Store, la presse ou tout fond papier, utiliser la version encre : `athanor-mark-ink.svg` / `athanor-mark-ink.png` (encre chaude `#17140f`, même géométrie). Le site n'utilise QUE la version crème — l'encre existe uniquement pour ce qu'on envoie à l'extérieur.
 - Six directions avaient été proposées avant l'arbitrage (Ignis, Quadratura, Athanor, Sigillum, Gradus, Lumen) ; c'est « Athanor » qui a été retenue.
 
 ## Design system
