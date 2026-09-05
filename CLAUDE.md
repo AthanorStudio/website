@@ -4,7 +4,7 @@ Site vitrine d'Athanor Studio (app publishing company).
 
 ## Stack
 - HTML/CSS statique pur, pas de framework, pas de build
-- Polices : **Marcellus** (display / titres) + **Inter** (corps, UI, labels) — Google Fonts
+- Police : **Inter** seule (300/400/500/600), Google Fonts. Un display serif (Marcellus) avait été essayé le 5 septembre 2026 puis retiré le jour même — le premium passe par la graisse et le tracking, pas par un serif.
 - Hébergement : GitHub Pages, domaine via `CNAME`
 - Repo : https://github.com/AthanorStudio/website (branche `main`)
 
@@ -39,22 +39,23 @@ disque   : cx 50, cy 63, r 11     (plein)
 - **Texte** : `--fg: #f4f1ea` (blanc chaud, jamais `#fff`), puis `--fg-soft` 60 % et `--fg-mute` 38 %.
 - **Accent crème/or** : `#f8eac1` — réservé aux chiffres, à la marque et aux états de survol. Jamais un mot coloré au milieu d'un titre.
 - **Les filets sont le dispositif structurant principal** (`--rule` à 10 %), pas les boîtes. Le seul bloc encadré du site, ce sont les deux cartes d'apps.
-- **Typo** : titres en Marcellus 400 (`--fs-display` jusqu'à 5.25rem, `letter-spacing: -0.018em`) ; corps en Inter 300/400 ; labels et eyebrows en Inter 500 capitales, `letter-spacing: .18em` (`.24em` pour le wordmark).
+- **Typo, tout en Inter** : titres en 600 avec un tracking serré (`-0.03em`, et `-0.042em` sur le hero — c'est ce serrage qui fait le premium en sans-serif) ; corps en 300/400 ; labels et eyebrows en 500 capitales, `letter-spacing: .18em` (`.24em` pour le wordmark) ; chiffres en 600 + `font-variant-numeric: tabular-nums`.
+- ⚠️ **L'échelle typo est calée pour Inter.** Inter a une hauteur d'x bien supérieure à celle d'un serif d'affichage : à corps égal il paraît plus gros. `--fs-display` plafonne donc à 4.5rem et `--fs-h2` à 2.5rem. Si un jour un serif revient, il faudra REMONTER ces valeurs, pas juste changer `--font-display`.
 - Grain de film en `body::after` (turbulence SVG en data-URI, `opacity: .028`) — c'est ce qui empêche les aplats de paraître plastique.
 - Animations fade-up au scroll, avec `html:not(.js) .fade-up { opacity: 1 }` : **si le JS ne tourne pas, le contenu reste visible** (l'ancienne version le laissait à `opacity: 0`).
 - Breakpoints responsive : 1024px / 768px / 480px, plus un palier 400px pour resserrer les gouttières des métriques.
 
 ## Sections de l'index
-(Refonte éditoriale du 5 septembre 2026. Tout est **aligné à gauche** — plus rien n'est centré — et les ancres ont changé : `#services` est devenu `#practice`.)
-1. Navbar (marque SVG + wordmark texte + Practice / Apps / Company / Contact + hamburger mobile). Le filet du bas n'apparaît qu'au scroll.
-2. Hero — marque, eyebrow « Athanor Studio — Est. 2024 », titre Marcellus « We build and scale our own apps. », lede, `Get in touch →` + `See the apps`, puis un **rail de stats** séparé par des filets : 150k+ Installs / 4.6 App Store rating / 2024 Founded.
-3. Practice (`#practice`, fond `--ink-raise`) — « How we work. » puis **4 lignes `<dl>` séparées par des filets** (Ownership, Transformation, Data-driven, Innovation). Ce ne sont plus des cartes, et il n'y a plus de numéros 01–04 : ce sont des facettes, pas une séquence.
-4. Apps — grille `auto-fit minmax(360px, 1fr)` avec deux cartes : Healthy Guru et Climbr (Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt) :
+(Refonte éditoriale du 5 septembre 2026 : la **mise en page** est nouvelle, mais **les textes sont ceux d'origine** — ils ont été restaurés après coup, à la demande. Tout est désormais **aligné à gauche**, plus rien n'est centré. Les ancres n'ont pas bougé : `#services`, `#apps`, `#company`, `#contact`.)
+1. Navbar (marque SVG + wordmark texte + Services / Apps / Company / Contact + hamburger mobile). Le filet du bas n'apparaît qu'au scroll.
+2. Hero — marque, titre « We build and scale apps. », sous-titre d'origine, `Get in Touch →`, puis un **rail de stats** séparé par des filets : 150k+ Installs / 4.6 App Store rating / 2024 Founded (seul ajout de contenu conservé).
+3. Services (`#services`, fond `--ink-raise`) — label « Scale », titre « What We Do », puis **4 lignes `<dl>` séparées par des filets** (Transformation, Ownership, Data-Driven, Innovation). Ce ne sont plus des cartes, et les numéros 01–04 ont sauté : ce sont des facettes, pas une séquence. Le CSS s'appelle encore `.practice-row` / `.practice-term` / `.practice-def`.
+4. Apps — label « Portfolio », titre « Our Apps », grille `auto-fit minmax(360px, 1fr)` avec deux cartes : Healthy Guru et Climbr (Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt) :
    - Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs) — carte cliquable (`<a class="app-card">`, la classe `app-card-link` a disparu à la refonte) vers `/healthyguru`. Métriques séparées par des filets verticaux, CTA "Learn more →" en bas. Le lien App Store n'est pas dans la carte (il est sur la page dédiée).
    - Climbr (Sports · Bouldering, badge "Coming Soon") — carte cliquable vers `/climbr`.
-5. Company — grande marque à gauche (`opacity .5`), texte à droite : « Named after a furnace. » Le texte explique littéralement le logo (le four, l'œuf scellé), ce qui donne enfin une raison d'être au symbole.
-6. Contact — « Let's talk. » + **l'adresse mail en grand, en Marcellus, avec un soulignement animé**. Le formulaire a été SUPPRIMÉ : il était en `action="mailto:" method="post"`, ce qui ne fonctionne dans quasiment aucun navigateur (Chrome ne fait rien). Suit une `<dl>` : Founder / App support / Founded.
-7. Footer — marque + wordmark + tagline, colonnes Navigation et « Apps & legal », barre du bas (© + mail). Les anciens liens LinkedIn/Twitter en `href="#"` ont été retirés.
+5. Company — grande marque à gauche (`opacity .5`), texte d'origine à droite sous le titre « Athanor Studio ». Le paragraphe parle du fourneau alchimique, ce qui tombe juste puisque le logo le représente.
+6. Contact — « Get in Touch » + **l'adresse mail en grand, avec un soulignement animé**. Le formulaire a été SUPPRIMÉ : il était en `action="mailto:" method="post"`, ce qui ne fonctionne dans quasiment aucun navigateur (Chrome ne fait rien). Le CSS `.contact-lede` et `.contact-meta` est resté en place, inutilisé, si jamais on veut rajouter du contenu ici.
+7. Footer — marque + wordmark + tagline « Transforming apps into success stories. », colonnes Navigation et Legal, barre du bas (© + mail). Les anciens liens LinkedIn/Twitter en `href="#"` ont été retirés.
 
 ## Apps
 - **Healthy Guru** — nutrition/fitness IA, Health & Fitness
