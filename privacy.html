@@ -7,23 +7,34 @@
     <title>Athanor Studio — Privacy Policy</title>
     <meta property="og:title" content="Athanor Studio - Privacy Policy">
     <meta property="og:description" content="Athanor Studio Privacy Policy">
-    <link rel="icon" type="image/png" href="./athanorstudio_logo.png">
+    <meta name="theme-color" content="#0b0a08">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="./styles.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <symbol id="mark" viewBox="0 0 100 100">
+            <path d="M50 9 L91 87 L9 87 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter"/>
+            <circle cx="50" cy="63" r="11" fill="currentColor"/>
+        </symbol>
+    </svg>
 
     <!-- NAVBAR -->
     <header class="navbar scrolled">
         <div class="navbar-inner">
-            <a href="./index.html" class="navbar-logo">
-                <img src="./athanorstudio_logo.png" alt="Athanor Studio" class="navbar-logo-img">
+            <a href="./index.html" class="navbar-logo" aria-label="Athanor Studio — home">
+                <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
                 <span class="navbar-logo-text">Athanor Studio</span>
             </a>
             <nav class="navbar-nav" id="navbar-nav">
-                <a href="./index.html#scale" class="nav-link">Scale</a>
+                <a href="./index.html#practice" class="nav-link">Practice</a>
                 <a href="./index.html#apps" class="nav-link">Apps</a>
                 <a href="./index.html#company" class="nav-link">Company</a>
                 <a href="./index.html#contact" class="nav-link">Contact</a>
@@ -38,7 +49,7 @@
 
     <main class="privacy-content">
         <h2>Privacy Policy</h2>
-        <p><em>Last updated: September 4, 2026</em></p>
+        <p class="privacy-updated">Last updated: September 4, 2026</p>
         <p>This policy applies to every app published by Athanor Studio, and to this website. It explains what data our apps may collect, why, with whom it may be shared, and the rights you have. Our apps do not all work the same way: the general terms below describe everything we <em>may</em> do, and the <a href="#apps">app-specific notes</a> at the end say what each app actually does. Where they differ, the app-specific note takes precedence.</p>
 
         <h3>Who we are</h3>
@@ -123,29 +134,33 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <img src="./athanorstudio_logo.png" alt="Athanor Studio" class="footer-logo">
-                    <p class="footer-tagline">Transforming apps into success stories.</p>
+                    <a href="./index.html" class="footer-logo">
+                        <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
+                        <span class="footer-logo-text">Athanor Studio</span>
+                    </a>
+                    <p class="footer-tagline">An app publisher. We build and scale our own products, and stay for the part after launch.</p>
                 </div>
-                <div class="footer-links-group">
+                <div>
                     <h4 class="footer-heading">Navigation</h4>
-                    <a href="./index.html#scale" class="footer-link">Scale</a>
-                    <a href="./index.html#apps" class="footer-link">Apps</a>
-                    <a href="./index.html#company" class="footer-link">Company</a>
-                    <a href="./index.html#contact" class="footer-link">Contact</a>
+                    <div class="footer-links-group">
+                        <a href="./index.html#practice" class="footer-link">Practice</a>
+                        <a href="./index.html#apps" class="footer-link">Apps</a>
+                        <a href="./index.html#company" class="footer-link">Company</a>
+                        <a href="./index.html#contact" class="footer-link">Contact</a>
+                    </div>
                 </div>
-                <div class="footer-links-group">
-                    <h4 class="footer-heading">Legal</h4>
-                    <a href="/privacy.html" class="footer-link">Privacy Policy</a>
-                </div>
-                <div class="footer-links-group">
-                    <h4 class="footer-heading">Connect</h4>
-                    <a href="mailto:guillaume@athanor-studio.io" class="footer-link">Email</a>
-                    <a href="#" class="footer-link">LinkedIn</a>
-                    <a href="#" class="footer-link">Twitter</a>
+                <div>
+                    <h4 class="footer-heading">Apps &amp; legal</h4>
+                    <div class="footer-links-group">
+                        <a href="./healthyguru/" class="footer-link">Healthy Guru</a>
+                        <a href="./climbr/" class="footer-link">Climbr</a>
+                        <a href="./privacy.html" class="footer-link">Privacy Policy</a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Athanor Studio. All rights reserved.</p>
+                <span>&copy; 2026 Athanor Studio</span>
+                <a href="mailto:guillaume@athanor-studio.io" class="footer-link">guillaume@athanor-studio.io</a>
             </div>
         </div>
     </footer>

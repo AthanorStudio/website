@@ -4,37 +4,57 @@ Site vitrine d'Athanor Studio (app publishing company).
 
 ## Stack
 - HTML/CSS statique pur, pas de framework, pas de build
-- Police : Inter (Google Fonts)
+- Polices : **Marcellus** (display / titres) + **Inter** (corps, UI, labels) — Google Fonts
 - Hébergement : GitHub Pages, domaine via `CNAME`
 - Repo : https://github.com/AthanorStudio/website (branche `main`)
 
 ## Fichiers
-- `index.html` — landing page Athanor Studio (navbar, hero, services, apps, company, contact, footer)
-- `styles.css` — design system du site studio (dark, tokens, composants, responsive)
+- `index.html` — landing page Athanor Studio (navbar, hero, practice, apps, company, contact, footer)
+- `styles.css` — design system du site studio (dark éditorial, tokens, composants, responsive)
 - `privacy.html` — politique de confidentialité
 - `healthyguru/index.html` + `healthyguru/styles.css` — landing page dédiée à l'app Healthy Guru, accessible via `/healthyguru` (light theme + **accent vert frais**, charte propre distincte du studio). `healthyguru/screen-*.webp` = screenshots réels de l'app (mockups + CTA).
 - `climbr/index.html` + `climbr/styles.css` — page dédiée à l'app Climbr, accessible via `/climbr` (thème **sable / encre / terre brûlée**, la palette « Grès » de l'app). `climbr/screen-*.webp` = vrais écrans de l'app, `climbr/iphone.webp` = le boîtier iPhone 17 Pro Max (capturé dans le Simulateur de Xcode, écran transparent) posé par-dessus chaque écran en CSS.
-- `athanorstudio_logo.png`, `healthyguru_icon.png`, `clashlist_icon.png`, `climbr_icon.png` — assets
+- **Marque** — `athanor-mark.svg` (source vectorielle), `athanor-mark.png` (512px crème, transparent), `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180px, tuile sombre). Voir « Logo » plus bas.
+- `athanorstudio_logo.png` — **ancien** logo (bitmap opaque, wordmark gravé dedans). N'est plus référencé par aucune page ; conservé comme archive.
+- `healthyguru_icon.png`, `clashlist_icon.png`, `climbr_icon.png` — icônes des apps
 - `CNAME` — domaine GitHub Pages
 - `og-image.png` (racine, thème sombre studio) + `healthyguru/og-image.png` (thème vert app) + `climbr/og-image.png` (sable, généré avec Pillow) — images de partage 1200×630, générées via une carte HTML rendue en Chrome headless puis redimensionnée avec `sips`. Balises Open Graph/Twitter + `canonical` + `theme-color` dans les deux `<head>`.
 - `robots.txt` + `sitemap.xml` — SEO de base (racine).
 
+## Logo
+La marque est **« l'œuf dans le fourneau »** (refonte du 5 septembre 2026) : un triangle en contour — le signe alchimique du feu, donc l'athanor — avec un disque plein suspendu dans sa moitié basse, l'œuf philosophique. Géométrie exacte, en 100 unités :
+```
+triangle : M50 9 L91 87 L9 87 Z   (contour, stroke-width 3.2, linejoin miter)
+disque   : cx 50, cy 63, r 11     (plein)
+```
+- **Dans les pages HTML**, la marque est un `<symbol id="mark">` inline en haut du `<body>`, appelé via `<svg class="mark"><use href="#mark"/></svg>`. Elle hérite de `currentColor` — c'est ce qui permet de la teinter (crème dans la navbar, `opacity .5` en grand dans Company).
+- **Le wordmark « ATHANOR STUDIO » est du texte**, pas une image : Inter 500, `text-transform: uppercase`, `letter-spacing: .24em`.
+- **Épaisseurs optiques** : les icônes petites utilisent un trait ÉPAISSI (favicon `stroke-width: 8.5` + `r: 14`, apple-touch `5.6`/`12.5`). Ne pas se contenter de réduire le SVG 3.2 — il disparaît.
+- Les PNG sont générés par un script Pillow (suréchantillonnage ×8 puis LANCZOS), pas par un export manuel : triangle extérieur rempli, triangle intérieur évidé, disque par-dessus. L'offset se fait par homothétie autour de l'incentre `(50, 62.23)`, rayon inscrit `24.77`.
+- ⚠️ **Le crème `#f8eac1` est invisible sur fond clair.** Toute déclinaison pour l'App Store, la presse ou un fond papier a besoin d'une version encre.
+- Six directions avaient été proposées avant l'arbitrage (Ignis, Quadratura, Athanor, Sigillum, Gradus, Lumen) ; c'est « Athanor » qui a été retenue.
+
 ## Design system
-- Thème sombre : `bg: #0c0c0c`
-- Accent crème/or : `#f8eac1`
-- Animations fade-up au scroll
-- Breakpoints responsive : 1024px / 768px / 480px
+- **Fond chaud, pas gris** : `--ink: #0b0a08` (page), `#121110` (section alternée), `#161412` (cartes). Le noir neutre `#0c0c0c` d'avant faisait paraître le crème terne — le noir chaud le fait lire comme de l'or.
+- **Texte** : `--fg: #f4f1ea` (blanc chaud, jamais `#fff`), puis `--fg-soft` 60 % et `--fg-mute` 38 %.
+- **Accent crème/or** : `#f8eac1` — réservé aux chiffres, à la marque et aux états de survol. Jamais un mot coloré au milieu d'un titre.
+- **Les filets sont le dispositif structurant principal** (`--rule` à 10 %), pas les boîtes. Le seul bloc encadré du site, ce sont les deux cartes d'apps.
+- **Typo** : titres en Marcellus 400 (`--fs-display` jusqu'à 5.25rem, `letter-spacing: -0.018em`) ; corps en Inter 300/400 ; labels et eyebrows en Inter 500 capitales, `letter-spacing: .18em` (`.24em` pour le wordmark).
+- Grain de film en `body::after` (turbulence SVG en data-URI, `opacity: .028`) — c'est ce qui empêche les aplats de paraître plastique.
+- Animations fade-up au scroll, avec `html:not(.js) .fade-up { opacity: 1 }` : **si le JS ne tourne pas, le contenu reste visible** (l'ancienne version le laissait à `opacity: 0`).
+- Breakpoints responsive : 1024px / 768px / 480px, plus un palier 400px pour resserrer les gouttières des métriques.
 
 ## Sections de l'index
-1. Navbar (logo + Services / Apps / Company / Contact + hamburger mobile)
-2. Hero — "We build and scale apps."
-3. Services — 4 value cards (Transformation, Ownership, Data-Driven, Innovation)
-4. Apps — grille `auto-fit minmax(340px, 1fr)` avec deux cartes : Healthy Guru et Climbr (Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt) :
-   - Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs) — carte cliquable (`<a class="app-card app-card-link">`) qui mène vers `/healthyguru`. CTA "Learn more →" en bas de carte. Le lien App Store n'est plus dans la carte (il est sur la page dédiée).
+(Refonte éditoriale du 5 septembre 2026. Tout est **aligné à gauche** — plus rien n'est centré — et les ancres ont changé : `#services` est devenu `#practice`.)
+1. Navbar (marque SVG + wordmark texte + Practice / Apps / Company / Contact + hamburger mobile). Le filet du bas n'apparaît qu'au scroll.
+2. Hero — marque, eyebrow « Athanor Studio — Est. 2024 », titre Marcellus « We build and scale our own apps. », lede, `Get in touch →` + `See the apps`, puis un **rail de stats** séparé par des filets : 150k+ Installs / 4.6 App Store rating / 2024 Founded.
+3. Practice (`#practice`, fond `--ink-raise`) — « How we work. » puis **4 lignes `<dl>` séparées par des filets** (Ownership, Transformation, Data-driven, Innovation). Ce ne sont plus des cartes, et il n'y a plus de numéros 01–04 : ce sont des facettes, pas une séquence.
+4. Apps — grille `auto-fit minmax(360px, 1fr)` avec deux cartes : Healthy Guru et Climbr (Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt) :
+   - Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs) — carte cliquable (`<a class="app-card">`, la classe `app-card-link` a disparu à la refonte) vers `/healthyguru`. Métriques séparées par des filets verticaux, CTA "Learn more →" en bas. Le lien App Store n'est pas dans la carte (il est sur la page dédiée).
    - Climbr (Sports · Bouldering, badge "Coming Soon") — carte cliquable vers `/climbr`.
-5. Company — storytelling Athanor (fondé en 2024, fourneau alchimique)
-6. Contact — titre seul (sous-titre retiré) + formulaire `mailto:` (pas de backend) → guillaume@athanor-studio.io
-7. Footer
+5. Company — grande marque à gauche (`opacity .5`), texte à droite : « Named after a furnace. » Le texte explique littéralement le logo (le four, l'œuf scellé), ce qui donne enfin une raison d'être au symbole.
+6. Contact — « Let's talk. » + **l'adresse mail en grand, en Marcellus, avec un soulignement animé**. Le formulaire a été SUPPRIMÉ : il était en `action="mailto:" method="post"`, ce qui ne fonctionne dans quasiment aucun navigateur (Chrome ne fait rien). Suit une `<dl>` : Founder / App support / Founded.
+7. Footer — marque + wordmark + tagline, colonnes Navigation et « Apps & legal », barre du bas (© + mail). Les anciens liens LinkedIn/Twitter en `href="#"` ont été retirés.
 
 ## Apps
 - **Healthy Guru** — nutrition/fitness IA, Health & Fitness
@@ -69,6 +89,9 @@ Site vitrine d'Athanor Studio (app publishing company).
 - Fondateur : Guillaume — guillaume@athanor-studio.io
 
 ## Notes / pièges connus
-- Pas de backend : le formulaire ouvre le client mail via `mailto:`. Formspree envisagé plus tard.
+- Pas de backend, et **plus de formulaire** : le contact se fait par un lien `mailto:` direct. Si un vrai formulaire est souhaité un jour, il faudra Formspree ou équivalent — un `<form action="mailto:">` ne marche pas.
+- `privacy.html` partage `styles.css` et la même navbar/footer que l'index : **toute refonte du chrome doit être répercutée dans les deux fichiers** (ils ne partagent pas de template).
+- L'`og-image.png` de la racine se régénère avec le pipeline « carte HTML → Chrome headless `--screenshot` en 2400×1260 → `sips -z 630 1200` ». Rendre en 2× puis réduire, sinon le texte bave.
+- ⚠️ Chrome headless **clampe le viewport à 500 px minimum** sur macOS : une capture en `--window-size=390` rend la page à 500 px puis rogne à 390, ce qui donne une fausse impression de débordement. Pour vraiment mesurer, injecter une sonde `scrollWidth`/`getBoundingClientRect` et lire le résultat via `--dump-dom`.
 - Le site se positionne comme un studio qui build et scale **ses propres apps**, pas un prestataire de service.
 - L'`index.html` original (simple logo + email) a été perdu puis reconstruit à partir du `styles.css` — d'où l'importance de garder `styles.css` cohérent comme source du design.
