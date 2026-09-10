@@ -80,16 +80,19 @@ disque   : cx 50, cy 63, r 11     (plein)
   - **Responsive du trio de mockups** : largeur fixe → géré par `transform: scale()` par palier (>1440 pleine taille / 1201-1440 `.phones` 0.85 / bascule 1 colonne ≤1200 / 820 → 0.82 / 600 → 0.64 / 400 → 0.52) + `min-width:0` sur les cellules du hero pour éviter tout débordement horizontal.
   - **Partage/SEO** : image OG dédiée `healthyguru/og-image.png` (carte verte : logo + accroche + mockup dashboard) + balises OG/Twitter/canonical/theme-color dans le `<head>`. Régénérable via le pipeline « carte HTML → Chrome headless `--screenshot` → `sips -z 630 1200` » (voir historique).
   - **Statut** : refonte complète faite et **déployée en live** (bilingue, trio vrais screenshots, features/comparaison/stepper/avis/CTA carte, thème vert, responsive, OG/SEO). Reste UNIQUEMENT : vérif des métriques 4,6★/500+ et des notes d'avis dans App Store Connect (laissées telles quelles).
-- **Climbr** — carnet de bloc en salle (Sports), app d'Athanor Studio en cours de soumission (V1, septembre 2026). Pas encore de lien App Store : carte « Coming Soon » sur l'index, cliquable vers `/climbr`.
-  - Page dédiée : `/climbr` (dossier `climbr/`), **français uniquement** — l'app est en français. Sections : navbar / hero (titre « Ton suivi de bloc, en un clin d'œil. », trio de vrais écrans dans le vrai boîtier) / Fonctions (4 cartes = les 4 titres des captures App Store) / Comment ça marche (3 gestes) / CTA sombre (mail) / Support (`#support`) / footer.
+- **Climbr** — carnet de bloc en salle (Sports), app d'Athanor Studio **en ligne depuis le 10 septembre 2026** : https://apps.apple.com/fr/app/climbr-progression-escalade/id6803155208. Carte « Now on the App Store » sur l'index, cliquable vers `/climbr` ; pas encore de métriques (notes, avis) à afficher.
+  - Page dédiée : `/climbr` (dossier `climbr/`), **français uniquement** — l'app est en français. Sections : navbar (bouton « Télécharger ») / hero (titre « Ton carnet de bloc. », sous-titre « Scanne ton bloc, note tes essais et suis ta progression. », trio de vrais écrans dans le vrai boîtier) / Fonctions (4 cartes) / Comment ça marche (3 gestes) / CTA sombre (App Store + mail) / Support (`#support`) / footer.
+  - **Le trio du hero reprend la couverture Instagram du 10 septembre 2026** : même boîtier trois fois, les côtés à `scale(0.8)` centrés verticalement sur le central, recouverts de 10 px seulement. ⚠️ À 86 % et recouverts d'un sixième, les côtés se lisaient comme des téléphones plus étroits — c'est ce qui a été refusé sur Instagram. Les posts et le script qui les rend sont dans `~/Desktop/Climbr/instagram/`.
+  - **Mail de l'app : `climbr@athanor-studio.io`** (CTA et Support). Le studio, lui, est joignable sur `contact@athanor-studio.io` (index). ⚠️ `privacy.html` porte encore `guillaume@athanor-studio.io`.
+  - `climbr/og-image.png` est régénérée avec Pillow depuis les captures App Store (logo, titre, pastille « Disponible sur l'App Store », trio).
   - Sert d'**URL marketing** (`/climbr/`) et d'**URL d'assistance** (`/climbr/#support`) dans App Store Connect ; la politique de confidentialité reste `/privacy.html`.
-  - Quand l'app sort : remplacer les deux `.store-badge.soon` par un lien App Store, et sur l'index remplacer le `status-badge` par les métriques comme Healthy Guru.
+  - Quand il y aura des avis : remplacer le `status-badge` de l'index par les métriques comme Healthy Guru.
   - Les textes viennent de la fiche App Store (nom « Climbr – Progression Escalade », sous-titre « Scanne ton bloc avec une photo »). Tutoiement, comme Healthy Guru.
 - **Clash List** — Quiz Game, "Challenge your friends in 45-second word duels."
   - Pas encore lancée. Carte affiche un badge `.status-badge` "Coming Soon" à la place des `app-metrics` + `app-links`. Quand l'app sortira, remplacer le `<span class="status-badge">` par les blocs métriques + store comme Healthy Guru.
 
 ## Contact
-- Fondateur : Guillaume — guillaume@athanor-studio.io
+- Fondateur : Guillaume — contact@athanor-studio.io (studio), climbr@athanor-studio.io (Climbr)
 
 ## Notes / pièges connus
 - Pas de backend, et **plus de formulaire** : le contact se fait par un lien `mailto:` direct. Si un vrai formulaire est souhaité un jour, il faudra Formspree ou équivalent — un `<form action="mailto:">` ne marche pas.
