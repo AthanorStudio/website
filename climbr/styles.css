@@ -87,18 +87,20 @@ a { color: inherit; text-decoration: none; }
 /* Téléphones : le vrai boîtier, un écran dedans */
 /* Le trio de la couverture Instagram : même boîtier trois fois, les côtés
    à 80 % (derrière, donc plus petits), centrés sur le central, recouverts
-   de quelques pixels seulement — ⚠️ à 86 % et recouverts d'un sixième, les
-   côtés se lisaient comme des téléphones plus étroits. */
-.phones { position: relative; height: 560px; display: flex; justify-content: center; align-items: center; }
-.phone { position: absolute; top: 50%; width: 240px; aspect-ratio: 886 / 1851; transform: translateY(-50%); filter: drop-shadow(0 30px 40px rgba(30, 26, 22, 0.28)); }
+   de 10 px seulement — ⚠️ à 86 % et recouverts d'un sixième, les côtés se
+   lisaient comme des téléphones plus étroits.
+   ⚠️ Tout est proportionnel à --k, PAS à un scale() : un scale() ne réduit
+   pas la boîte, et le vide de la taille pleine restait autour du trio. */
+.phones { --k: 1; position: relative; height: calc(520px * var(--k)); display: flex; justify-content: center; align-items: center; }
+.phone { position: absolute; top: 50%; width: calc(240px * var(--k)); aspect-ratio: 886 / 1851; transform: translateY(-50%); filter: drop-shadow(0 30px 40px rgba(30, 26, 22, 0.28)); }
 .phone-screen { position: absolute; left: 3.5%; top: 1.67%; width: 92.9%; height: 96.65%; border-radius: 11.6% / 5.55%; overflow: hidden; background: #000; }
 .phone-screen img { width: 100%; height: 100%; object-fit: cover; }
 .phone-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .phone-center { z-index: 3; }
 .phone-left, .phone-right { z-index: 2; filter: drop-shadow(0 20px 30px rgba(30, 26, 22, 0.18)); }
 /* 206 px = demi-largeur du central (120) + demi-largeur du côté (96) − 10 px de recouvrement */
-.phone-left { transform: translate(-206px, -50%) scale(0.8); }
-.phone-right { transform: translate(206px, -50%) scale(0.8); }
+.phone-left { transform: translate(calc(-206px * var(--k)), -50%) scale(0.8); }
+.phone-right { transform: translate(calc(206px * var(--k)), -50%) scale(0.8); }
 
 /* Sections */
 .section { padding: var(--section-padding) 0; }
@@ -136,7 +138,7 @@ a { color: inherit; text-decoration: none; }
 .final-card .store-badge { background: #F4EFE8; color: var(--ink); margin-top: 1.5rem; }
 
 /* Contact / support */
-.support { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+.support { max-width: 32rem; }
 .support-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; }
 .support-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
 .support-card p, .support-card a { color: var(--ink-soft); font-size: var(--fs-small); }
@@ -155,16 +157,16 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
 
 /* Responsive */
-@media (max-width: 1200px) { .phones { transform: scale(0.85); transform-origin: bottom center; } }
+@media (max-width: 1200px) { .phones { --k: 0.85; } }
 @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; }
-    .phones { margin-top: 1rem; }
+    .phones { --k: 0.9; margin-top: 0.5rem; }
 }
 @media (max-width: 768px) {
     .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; padding: 1rem var(--container-padding) 1.25rem; gap: 1rem; }
     .nav-links.open { display: flex; }
     .nav-burger { display: flex; }
     .features-grid, .steps { grid-template-columns: 1fr; }
-    .phones { transform: scale(0.7); height: 420px; }
+    .phones { --k: 0.7; }
 }
-@media (max-width: 480px) { .phones { transform: scale(0.56); height: 340px; } }
+@media (max-width: 480px) { .phones { --k: 0.58; } }
