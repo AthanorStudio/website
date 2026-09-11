@@ -49,7 +49,7 @@
 
     <main class="privacy-content">
         <h2>Privacy Policy</h2>
-        <p class="privacy-updated">Last updated: September 4, 2026</p>
+        <p class="privacy-updated">Last updated: September 11, 2026</p>
         <p>This policy applies to every app published by Athanor Studio, and to this website. It explains what data our apps may collect, why, with whom it may be shared, and the rights you have. Our apps do not all work the same way: the general terms below describe everything we <em>may</em> do, and the <a href="#apps">app-specific notes</a> at the end say what each app actually does. Where they differ, the app-specific note takes precedence.</p>
 
         <h3>Who we are</h3>
@@ -67,6 +67,7 @@
         <h3>Why</h3>
         <ul>
             <li>To provide the features you use — this is the only purpose common to all our apps.</li>
+            <li>To run community features, such as rankings, where some of your information is visible to other users.</li>
             <li>To keep our apps stable and secure (crash reports, abuse prevention).</li>
             <li>To understand how our apps are used and improve them (analytics).</li>
             <li>To show ads and measure them, in the apps that are ad-supported.</li>
@@ -76,7 +77,7 @@
         <ul>
             <li><strong>Performance of the service</strong> for the data needed to run the feature you use.</li>
             <li><strong>Consent</strong> for personalised advertising and third-party analytics, where required. You can withdraw it at any time from the app's settings or from iOS Settings.</li>
-            <li><strong>Legitimate interest</strong> for stability, security and internal analytics.</li>
+            <li><strong>Legitimate interest</strong> for stability, security, internal analytics, and community features you can opt out of at any time.</li>
             <li><strong>Legal obligation</strong> where the law requires us to keep or disclose data.</li>
         </ul>
 
@@ -87,11 +88,12 @@
             <li><strong>Analytics</strong> — such as <a href="https://policies.google.com/privacy">Firebase</a>, <a href="https://www.adjust.com/terms/privacy-policy/">Adjust</a>, <a href="https://mixpanel.com/legal/privacy-policy/">Mixpanel</a> or <a href="https://gameanalytics.com/privacy/">GameAnalytics</a>, in the apps that use them.</li>
             <li><strong>Advertising</strong> — such as <a href="https://admob.google.com/home/">AdMob</a>, in the apps that show ads.</li>
             <li><strong>Apple</strong> — the App Store, Apple Maps, Apple Health, or any Apple service the app relies on, under <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</li>
+            <li><strong>Other users</strong> — in apps with community features, what you publish there (such as a pseudonym, a profile photo or activity totals) is visible to other users of the app.</li>
             <li><strong>Authorities</strong> — only when we are legally required to.</li>
         </ul>
 
         <h3>Retention</h3>
-        <p>We keep data no longer than the feature needs it. Content stored only on your device stays there until you delete it or the app. Data held on our servers is kept at most 13 months, except aggregated first-party analytics, kept up to 25 months. Content sent for one-off analysis is processed for that request and not retained, unless an app-specific note says otherwise.</p>
+        <p>We keep data no longer than the feature needs it. Content stored only on your device stays there until you delete it or the app. Data held on our servers is kept at most 13 months, except aggregated first-party analytics, kept up to 25 months, and what you publish in a community feature, kept until you remove it. Content sent for one-off analysis is processed for that request and not retained, unless an app-specific note says otherwise.</p>
 
         <h3>International transfers</h3>
         <p>Some providers are located outside the European Union. In that case the transfer relies on an adequacy decision or on the European Commission's standard contractual clauses.</p>
@@ -108,8 +110,9 @@
         <h3 id="apps">App-specific notes</h3>
         <h4 id="climbr">Climbr — indoor bouldering logbook</h4>
         <ul>
-            <li><strong>No account, no ads.</strong></li>
-            <li><strong>Your logbook stays on your device</strong> — walls, routes, attempts, profile name and photo are stored locally and never synced. Deleting the app deletes them.</li>
+            <li><strong>No sign-up, no ads.</strong> An anonymous account, with no email or password, is created automatically for the ranking.</li>
+            <li><strong>Your logbook stays on your device</strong> — walls, routes and attempts are stored locally and never synced. Deleting the app deletes them.</li>
+            <li><strong>Ranking.</strong> By default, your pseudonym, profile photo and monthly totals are published in the in-app ranking and visible to other users. Gyms are identified by an encrypted key, never by their location. You can stop appearing at any time from your Profile, which deletes this data and the anonymous account from our servers. Other users can report a pseudonym or a photo; we review reports and may hide a profile.</li>
             <li><strong>Wall photos are analysed by our server.</strong> When you scan a wall, the photo is sent to our backend (Google Cloud / Firebase) to detect the holds. It is processed in memory for that request and not stored; we keep only technical logs (timing, number of holds), never the image.</li>
             <li><strong>Analytics and attribution</strong> — the app uses <a href="https://mixpanel.com/legal/privacy-policy/">Mixpanel</a> (product analytics: which screens are used, whether a scan succeeds, never the photo nor your routes) and <a href="https://www.tenjin.com/privacy/">Tenjin</a> (install attribution), to understand how the app is used. Neither is used for advertising.</li>
             <li><strong>Location</strong>, if allowed, is used only while the app is open, to show climbing gyms around you through Apple Maps. It is not sent to us.</li>
