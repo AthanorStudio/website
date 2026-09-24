@@ -12,6 +12,7 @@ Site vitrine d'Athanor Studio (app publishing company).
 - `index.html` — landing page Athanor Studio (navbar, hero, practice, apps, company, contact, footer)
 - `styles.css` — design system du site studio (dark éditorial, tokens, composants, responsive)
 - `privacy.html` — politique de confidentialité
+- `terms.html` — conditions d'utilisation, pour toutes les apps du studio (même gabarit que `privacy.html`, classes `.privacy-content` réutilisées). ⚠️ C'est la page « Conditions » du paywall Android de Climbr (`LIEN_CONDITIONS`) : l'EULA d'Apple ne vaut pas pour Google Play. La déplacer casse le lien dans l'app.
 - `healthyguru/index.html` + `healthyguru/styles.css` — landing page dédiée à l'app Healthy Guru, accessible via `/healthyguru` (light theme + **accent vert frais**, charte propre distincte du studio). `healthyguru/screen-*.webp` = screenshots réels de l'app (mockups + CTA).
 - `climbr/index.html` + `climbr/styles.css` — page dédiée à l'app Climbr, accessible via `/climbr` (thème **sable / encre / terre brûlée**, la palette « Grès » de l'app). `climbr/screen-*.webp` = vrais écrans de l'app, `climbr/iphone.webp` = le boîtier iPhone 17 Pro Max (capturé dans le Simulateur de Xcode, écran transparent) posé par-dessus chaque écran en CSS.
 - **Marque** — `athanor-mark.svg` (source vectorielle), `athanor-mark.png` (512px crème, transparent), `athanor-mark-ink.svg` + `athanor-mark-ink.png` (version encre pour fonds clairs), `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180px, tuile sombre). Voir « Logo » plus bas.
