@@ -51,7 +51,14 @@ a { color: inherit; text-decoration: none; }
 .nav-inner { max-width: var(--container-max); margin: 0 auto; padding: 0.85rem var(--container-padding); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .nav-brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; letter-spacing: var(--letter-tight); font-size: 1.125rem; }
 .nav-wordmark { height: 30px; width: auto; display: block; }
+.nav-droite { display: flex; align-items: center; gap: 0.75rem; }
 .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+/* L'interrupteur de langue, celui de /healthyguru à la palette de Climbr.
+   ⚠️ Hors de .nav-links : il reste en haut à droite quand le menu se replie. */
+.lang-toggle { display: inline-flex; align-items: center; gap: 0.4rem; font: inherit; font-size: 0.8125rem; font-weight: 600; color: var(--ink-soft); background: transparent; padding: 0.4rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius-full); cursor: pointer; transition: color var(--transition), border-color var(--transition), background-color var(--transition); }
+.lang-toggle:hover { color: var(--ink); border-color: var(--muted); background: var(--surface); }
+.lang-toggle:focus-visible, .nav-burger:focus-visible, .store-badge:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lang-toggle svg { width: 15px; height: 15px; flex-shrink: 0; }
 .nav-link { font-size: 0.9375rem; font-weight: 500; color: var(--ink-soft); transition: color var(--transition); }
 .nav-link:hover { color: var(--ink); }
 .nav-burger { display: none; background: none; border: 0; width: 40px; height: 40px; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; }
@@ -67,6 +74,7 @@ a { color: inherit; text-decoration: none; }
 .store-badge { display: inline-flex; align-items: center; gap: 0.7rem; background: var(--ink); color: #fff; border-radius: 14px; padding: 0.65rem 1.15rem 0.65rem 0.95rem; line-height: 1.1; transition: transform var(--transition), opacity var(--transition); }
 .store-badge:hover { transform: translateY(-1px); }
 .store-badge.soon { opacity: 0.55; cursor: default; }
+/* « Bientôt sur Android » : même badge, sans lien — il ne mène nulle part. */
 .store-badge.soon:hover { transform: none; }
 .store-badge svg { width: 26px; height: 26px; flex: none; }
 .store-badge span { display: flex; flex-direction: column; }
@@ -109,20 +117,28 @@ a { color: inherit; text-decoration: none; }
 .section-title { font-size: var(--fs-h2); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.1; text-wrap: balance; }
 .section-lead { margin-top: 0.9rem; color: var(--ink-soft); font-size: var(--fs-body); max-width: 40rem; }
 
-/* Fonctions */
-.features-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
-.feature { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem; }
-.feature-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--surface-raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--accent); margin-bottom: 0.4rem; }
-.feature-icon svg { width: 22px; height: 22px; }
-.feature h3 { font-size: var(--fs-h3); font-weight: 700; letter-spacing: -0.01em; }
-.feature p { color: var(--ink-soft); font-size: var(--fs-body); }
 
-/* Étapes */
-.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-.step { text-align: center; padding: 0 0.5rem; }
-.step-badge { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 1.2rem; display: grid; place-items: center; margin: 0 auto 1rem; }
-.step h3 { font-size: var(--fs-h3); font-weight: 700; margin-bottom: 0.4rem; }
-.step p { color: var(--ink-soft); }
+
+/* Comment ça marche : un téléphone collé, les étapes défilent.
+   L'étape dont le titre est au milieu de l'écran s'allume et choisit
+   l'écran — voir le script de index.html. */
+.parcours { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(1.5rem, 6vw, 5rem); }
+.parcours ol { list-style: none; }
+.parcours li { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; padding: 1.5rem 0; opacity: 0.32; transition: opacity 0.45s ease; }
+.parcours li.actif { opacity: 1; }
+.parcours-num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; }
+.parcours h3 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.08; margin-top: 0.5rem; text-wrap: balance; }
+.parcours p { color: var(--ink-soft); margin-top: 0.75rem; max-width: 34rem; font-size: clamp(1rem, 1.2vw, 1.0625rem); }
+.parcours-colle { position: sticky; top: 10vh; height: 80vh; display: flex; align-items: center; justify-content: center; }
+/* Le même boîtier que le hero, en largeur libre. */
+.tel { position: relative; aspect-ratio: 886 / 1851; width: var(--l, 240px); filter: drop-shadow(0 26px 34px rgba(30, 26, 22, 0.24)); }
+.tel-ecran { position: absolute; left: 3.5%; top: 1.67%; width: 92.9%; height: 96.65%; border-radius: 11.6% / 5.55%; overflow: hidden; background: #000; }
+.tel-ecran img { width: 100%; height: 100%; object-fit: cover; }
+.tel-cadre { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.parcours-colle .tel { --l: min(300px, 32vh); }
+.parcours-colle .tel-ecran img { position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; }
+.parcours-colle .tel-ecran img.vu { opacity: 1; }
+.tel-enligne { display: none; }
 
 /* Progression : le disque */
 .disc-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
@@ -136,6 +152,7 @@ a { color: inherit; text-decoration: none; }
 .final-card p { margin-top: 0.9rem; color: rgba(244, 239, 232, 0.75); }
 .final-card p a { color: #F4EFE8; text-decoration: underline; text-underline-offset: 3px; }
 .final-card .store-badge { background: #F4EFE8; color: var(--ink); margin-top: 1.5rem; }
+.final-card p + .store-badge { margin-top: 1.25rem; }
 
 /* Contact / support */
 .support { max-width: 32rem; }
@@ -154,7 +171,7 @@ a { color: inherit; text-decoration: none; }
 /* Apparitions */
 .fade-up { opacity: 0; transform: translateY(18px); transition: opacity var(--transition-slow), transform var(--transition-slow); }
 .fade-up.visible { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+@media (prefers-reduced-motion: reduce) { .fade-up, .parcours li, .parcours-colle .tel-ecran img { transition: none; } .fade-up { opacity: 1; transform: none; } }
 
 /* Responsive */
 @media (max-width: 1200px) { .phones { --k: 0.85; } }
@@ -166,7 +183,10 @@ a { color: inherit; text-decoration: none; }
     .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; padding: 1rem var(--container-padding) 1.25rem; gap: 1rem; }
     .nav-links.open { display: flex; }
     .nav-burger { display: flex; }
-    .features-grid, .steps { grid-template-columns: 1fr; }
+    .parcours { grid-template-columns: 1fr; }
+    .parcours-colle { display: none; }
+    .parcours li { min-height: auto; opacity: 1; padding: 1.75rem 0; border-top: 1px solid var(--line); }
+    .tel-enligne { display: block; margin-top: 1.4rem; --l: 210px; }
     .phones { --k: 0.7; }
 }
 @media (max-width: 480px) { .phones { --k: 0.58; } }
