@@ -55,7 +55,8 @@ const I18N = {
     "support.carte": "Nous écrire",
     "support.texte": "Un bug à signaler ? Une suggestion ?",
     "pied.confidentialite": "Confidentialité",
-    "pied.conditions": "Conditions"
+    "pied.conditions": "Conditions",
+    "comment.points": "Étapes"
   },
   "en": {
     "meta.titre": "Climbr — Your bouldering logbook",
@@ -109,6 +110,7 @@ const I18N = {
     "support.carte": "Write to us",
     "support.texte": "Found a bug? Have a suggestion?",
     "pied.confidentialite": "Privacy",
-    "pied.conditions": "Terms"
+    "pied.conditions": "Terms",
+    "comment.points": "Steps"
   }
 };
