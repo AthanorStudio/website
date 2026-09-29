@@ -95,7 +95,7 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text fade-up">
-                <h1 class="hero-title" data-i18n="hero.titre">Ton carnet <span class="accent">de bloc.</span></h1>
+                <h1 class="hero-title" data-i18n="hero.titre">Ton carnet de bloc <span class="accent">pour progresser.</span></h1>
                 <p class="hero-sub" data-i18n="hero.sous">Scanne ton bloc, note tes essais et suis ta progression. Une photo du mur, une prise de ta voie, et Climbr la détoure.</p>
                 <div class="hero-cta">
                     <a href="https://apps.apple.com/fr/app/climbr-progression-escalade/id6803155208" class="store-badge" target="_blank" rel="noopener" data-lien-app-store data-i18n-aria="badge.aria"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg><span><small data-i18n="badge.petit">Télécharger sur l'</small><strong>App Store</strong></span></a>
@@ -122,7 +122,7 @@
         </div>
     </section>
 
-    <!-- Comment ça marche : un téléphone collé, les étapes défilent -->
+    <!-- Comment ça marche : le carrousel des sept étapes -->
     <section id="comment" class="section section-deep">
         <div class="container">
             <div class="section-header fade-up">
@@ -167,9 +167,10 @@
                         <div class="tel tel-enligne"><div class="tel-ecran"><img src="ecran-profil.webp" data-ecran="ecran-profil.webp" data-i18n-alt="etape7.alt" alt="Le Profil : seize tops, quatre flashs, trois séances" loading="lazy" width="620" height="1347"></div><img src="iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
                     </li>
                 </ol>
-                <div class="parcours-points" role="tablist" data-i18n-aria="comment.points" aria-label="Étapes"></div>
-                <div class="parcours-colle" aria-hidden="true">
-                    <div class="tel"><div class="tel-ecran"><img src="ecran-scan.webp" data-ecran="ecran-scan.webp" alt="" class="vu"><img src="ecran-editeur.webp" data-ecran="ecran-editeur.webp" alt=""><img src="ecran-fiche.webp" data-ecran="ecran-fiche.webp" alt=""><img src="ecran-projet.webp" data-ecran="ecran-projet.webp" alt=""><img src="ecran-salles.webp" data-ecran="ecran-salles.webp" alt=""><img src="ecran-classement.webp" data-ecran="ecran-classement.webp" alt=""><img src="ecran-profil.webp" data-ecran="ecran-profil.webp" alt=""></div><img src="iphone.webp" alt="" class="tel-cadre" width="886" height="1851"></div>
+                <div class="parcours-nav">
+                    <button type="button" class="parcours-fleche" data-sens="-1" data-i18n-aria="comment.precedente" aria-label="Étape précédente">‹</button>
+                    <div class="parcours-points" role="tablist" data-i18n-aria="comment.points" aria-label="Étapes"></div>
+                    <button type="button" class="parcours-fleche" data-sens="1" data-i18n-aria="comment.suivante" aria-label="Étape suivante">›</button>
                 </div>
             </div>
         </div>
@@ -290,60 +291,44 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // ── Comment ça marche : l'étape lue choisit l'écran ────────
-        // ⚠️ L'étape dont le TITRE est le plus près du milieu de l'écran, et
-        // non une bande d'IntersectionObserver : chaque étape fait 62 % de la
-        // hauteur, texte centré, et l'étape s'allumait au passage de son BORD
-        // — le texte qu'on lisait restait gris et la suivante s'allumait (vu
-        // sur la maquette le 27 septembre 2026).
+        // ── Comment ça marche : le carrousel ───────────────────────
+        // Un point par étape, qui suit le glissement et y mène au clic ; les
+        // flèches avancent d'une carte (sur ordinateur, sans trackpad, on ne
+        // glisse pas une liste horizontale).
         (function () {
             const bloc = document.querySelector('[data-parcours]');
-            const etapes = [...bloc.querySelectorAll('li')];
-            const ecrans = bloc.querySelectorAll('.parcours-colle .tel-ecran img');
-            let actuelle = -1, prevu = false;
-            const montrer = (i) => {
-                if (i === actuelle) return;
-                actuelle = i;
-                etapes.forEach((e, k) => e.classList.toggle('actif', k === i));
-                ecrans.forEach((img, k) => img.classList.toggle('vu', k === i));
-            };
-            const choisir = () => {
-                prevu = false;
-                const milieu = window.innerHeight / 2;
-                let meilleure = 0, ecart = Infinity;
-                etapes.forEach((e, k) => {
-                    const r = e.querySelector('h3').getBoundingClientRect();
-                    const d = Math.abs(r.top + r.height / 2 - milieu);
-                    if (d < ecart) { ecart = d; meilleure = k; }
-                });
-                montrer(meilleure);
-            };
-            const demander = () => { if (!prevu) { prevu = true; requestAnimationFrame(choisir); } };
-            window.addEventListener('scroll', demander, { passive: true });
-            window.addEventListener('resize', demander);
-            montrer(0);
-            choisir();
-
-            // Sur téléphone, le carrousel : un point par étape, qui suit le
-            // glissement et y mène au toucher.
             const liste = bloc.querySelector('ol');
+            const etapes = [...liste.children];
             const points = bloc.querySelector('.parcours-points');
+            const fleches = bloc.querySelectorAll('.parcours-fleche');
+            const aller = (k) => {
+                const e = etapes[Math.min(etapes.length - 1, Math.max(0, k))];
+                liste.scrollTo({ left: e.offsetLeft - liste.offsetLeft - parseFloat(getComputedStyle(liste).paddingLeft), behavior: 'smooth' });
+            };
             etapes.forEach((e, k) => {
                 const p = document.createElement('button');
                 p.type = 'button';
                 p.setAttribute('aria-label', String(k + 1));
-                p.addEventListener('click', () => liste.scrollTo({ left: e.offsetLeft - liste.offsetLeft - parseFloat(getComputedStyle(liste).paddingLeft), behavior: 'smooth' }));
+                p.addEventListener('click', () => aller(k));
                 points.appendChild(p);
             });
             const boutons = [...points.children];
-            let prevuPoint = false;
+            let actuelle = 0, prevu = false;
             const suivre = () => {
-                prevuPoint = false;
+                prevu = false;
                 const pas = etapes.length > 1 ? etapes[1].offsetLeft - etapes[0].offsetLeft : 1;
-                const i = Math.min(etapes.length - 1, Math.max(0, Math.round(liste.scrollLeft / pas)));
-                boutons.forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'));
+                // ⚠️ Au bout de la liste, plusieurs cartes tiennent à l'écran et
+                // le défilement plafonne avant la dernière : c'est alors la
+                // dernière qui est « actuelle », sinon son point ne s'allume jamais.
+                const auBout = liste.scrollLeft + liste.clientWidth >= liste.scrollWidth - 2;
+                actuelle = auBout ? etapes.length - 1 : Math.min(etapes.length - 1, Math.max(0, Math.round(liste.scrollLeft / pas)));
+                boutons.forEach((b, k) => b.setAttribute('aria-current', k === actuelle ? 'true' : 'false'));
+                fleches[0].disabled = liste.scrollLeft <= 2;
+                fleches[1].disabled = auBout;
             };
-            liste.addEventListener('scroll', () => { if (!prevuPoint) { prevuPoint = true; requestAnimationFrame(suivre); } }, { passive: true });
+            fleches.forEach(f => f.addEventListener('click', () => aller(actuelle + Number(f.dataset.sens))));
+            liste.addEventListener('scroll', () => { if (!prevu) { prevu = true; requestAnimationFrame(suivre); } }, { passive: true });
+            window.addEventListener('resize', suivre);
             suivre();
         })();
     </script>

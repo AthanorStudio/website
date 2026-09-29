@@ -14,7 +14,7 @@ const I18N = {
     "badge.aria": "Télécharger Climbr dans l'App Store",
     "android.petit": "Disponible sur",
     "android.aria": "Télécharger Climbr sur Google Play",
-    "hero.titre": "Ton carnet <span class=\"accent\">de bloc.</span>",
+    "hero.titre": "Ton carnet de bloc <span class=\"accent\">pour progresser.</span>",
     "hero.sous": "Scanne ton bloc, note tes essais et suis ta progression. Une photo du mur, une prise de ta voie, et Climbr la détoure.",
     "alt.projet": "Mes blocs dans Climbr : chaque bloc sur sa photo, rangé par séance",
     "alt.fiche": "La fiche d'un bloc : la voie rouge détourée, cinq essais, 85 %",
@@ -50,7 +50,9 @@ const I18N = {
     "support.texte": "Un bug à signaler ? Une suggestion ?",
     "pied.confidentialite": "Confidentialité",
     "pied.conditions": "Conditions",
-    "comment.points": "Étapes"
+    "comment.points": "Étapes",
+    "comment.precedente": "Étape précédente",
+    "comment.suivante": "Étape suivante"
   },
   "en": {
     "meta.titre": "Climbr — Your bouldering logbook",
@@ -63,7 +65,7 @@ const I18N = {
     "badge.aria": "Download Climbr on the App Store",
     "android.petit": "Get it on",
     "android.aria": "Get Climbr on Google Play",
-    "hero.titre": "Your bouldering <span class=\"accent\">logbook.</span>",
+    "hero.titre": "Your bouldering logbook <span class=\"accent\">to climb harder.</span>",
     "hero.sous": "Scan your boulder, log every attempt and track your progress. One photo of the wall, one hold of your route, and Climbr outlines the rest.",
     "alt.projet": "My boulders in Climbr: each boulder on its photo, grouped by session",
     "alt.fiche": "A boulder's page: the red route outlined, five attempts, 85%",
@@ -99,6 +101,8 @@ const I18N = {
     "support.texte": "Found a bug? Have a suggestion?",
     "pied.confidentialite": "Privacy",
     "pied.conditions": "Terms",
-    "comment.points": "Steps"
+    "comment.points": "Steps",
+    "comment.precedente": "Previous step",
+    "comment.suivante": "Next step"
   }
 };
