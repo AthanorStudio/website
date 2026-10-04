@@ -67,39 +67,25 @@
         .etapes h3 { font-size: 1.05rem; font-weight: 700; margin-top: 0.4rem; }
         .etapes p { margin-top: 0.35rem; color: var(--ink-soft); font-size: var(--fs-small); }
 
-        /* Le formulaire */
-        .postuler { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-        .form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.4rem, 3vw, 2rem); display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .champ { display: flex; flex-direction: column; gap: 0.35rem; }
-        .champ.large { grid-column: 1 / -1; }
-        .champ label { font-size: var(--fs-small); font-weight: 600; }
-        .champ label em { font-style: normal; font-weight: 400; color: var(--muted); }
-        .champ input, .champ select, .champ textarea { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; transition: border-color var(--transition); width: 100%; }
-        .champ textarea { min-height: 6.5rem; resize: vertical; }
-        .champ input:focus, .champ select:focus, .champ textarea:focus { outline: none; border-color: var(--accent); }
-        /* ⚠️ Le pot de miel : invisible pour un humain, rempli par les robots,
-           et FormSubmit jette tout message où il a une valeur. Pas display:none,
-           que certains robots savent sauter. */
-        .miel { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-        .form .btn { grid-column: 1 / -1; padding: 0.95rem 1.4rem; font-size: 1rem; }
-        .form .btn[disabled] { opacity: 0.6; cursor: wait; transform: none; }
-        .form-etat { grid-column: 1 / -1; font-size: var(--fs-small); color: var(--ink-soft); min-height: 1.2em; }
-        .form-etat.erreur { color: var(--accent-dark); }
-        .merci { display: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 2rem; }
-        .merci h3 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); }
-        .merci p { margin-top: 0.5rem; color: var(--ink-soft); }
-        .envoye .form { display: none; }
-        .envoye .merci { display: block; }
+        /* C'est quoi Climbr : le texte, et deux chiffres à droite. */
+        .quoi { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+        .quoi-chiffres { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+        .quoi-chiffres div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.4rem; display: flex; flex-direction: column-reverse; }
+        .quoi-chiffres dd { font-size: clamp(1.9rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
+        .quoi-chiffres dt { margin-top: 0.3rem; font-size: var(--fs-small); color: var(--ink-soft); }
+        .deal-deux { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.1rem; }
+        .cta-btn { background: #F4EFE8; color: var(--ink); padding: 0.95rem 1.6rem; font-size: 1rem; }
+        .cta-btn:hover { background: #fff; transform: translateY(-1px); }
 
         @media (max-width: 1024px) {
             .deal, .idees { grid-template-columns: 1fr 1fr; }
             .deal-carte.encre { grid-column: 1 / -1; grid-row: 1; }
             .etapes { grid-template-columns: 1fr 1fr; }
-            .postuler { grid-template-columns: 1fr; }
+            .quoi { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
             .deal, .idees, .etapes { grid-template-columns: 1fr; }
-            .form { grid-template-columns: 1fr; }
+            .deal-deux { grid-template-columns: 1fr; }
             .simu { grid-template-columns: 1fr; }
             .simu-gain { grid-row: auto; grid-column: 1; text-align: left; }
         }
@@ -145,7 +131,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
                     <span class="lang-toggle-label">EN</span>
                 </button>
-                <a href="#postuler" class="btn btn-primary btn-sm" data-t="nav.postuler">Postuler</a>
+                <a href="form/" class="btn btn-primary btn-sm" data-t="nav.postuler">Postuler</a>
             </div>
         </div>
     </nav>
@@ -158,7 +144,7 @@
                 <h1 class="hero-title" data-t="hero.titre">Grimpe. Filme. <span class="accent">Sois payé.</span></h1>
                 <p class="hero-sub" data-t="hero.sous">Tu grimpes en salle et tu fais des vidéos ? Montre comment tu utilises Climbr dans tes séances, et touche <strong>1&nbsp;$ pour 1&nbsp;000 vues</strong>.</p>
                 <div class="hero-cta">
-                    <a href="#postuler" class="btn btn-primary" data-t="hero.cta">Je postule</a>
+                    <a href="form/" class="btn btn-primary" data-t="hero.cta">Je postule</a>
                     <a href="#idees" class="btn btn-ghost" data-t="hero.idees">Des idées de vidéos</a>
                 </div>
                 <ul class="hero-trust">
@@ -187,23 +173,50 @@
         </div>
     </section>
 
-    <!-- Le deal -->
+    <!-- C'est quoi Climbr -->
     <section class="section section-deep">
+        <div class="container quoi fade-up">
+            <div>
+                <span class="eyebrow" data-t="quoi.sur">C'est quoi Climbr ?</span>
+                <h2 class="section-title" data-t="quoi.titre">Le carnet de bloc de ceux qui grimpent en salle.</h2>
+                <p class="section-lead" data-t="quoi.texte">Une photo du mur, un doigt sur une prise : Climbr détoure le bloc. Tu notes tes essais, tu suis ta progression, et tu te compares aux grimpeurs de ta salle.</p>
+            </div>
+            <dl class="quoi-chiffres">
+                <div><dt data-t="quoi.c1">salles référencées</dt><dd>1&nbsp;529</dd></div>
+                <div><dt data-t="quoi.c2">iPhone et Android</dt><dd data-t="quoi.c2v">2 stores</dd></div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- Le deal -->
+    <section class="section">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="eyebrow" data-t="deal.sur">Le deal</span>
+                <span class="eyebrow" data-t="deal.sur">Ce que tu reçois</span>
                 <h2 class="section-title" data-t="deal.titre">Simple, et payé à la vue.</h2>
             </div>
             <div class="deal fade-up">
+                <div class="deal-carte encre">
+                    <span class="deal-num" data-t="deal.2.num">Tu touches</span>
+                    <div class="deal-prix">1&nbsp;$<small data-t="deal.2.unite">/ 1 000 vues</small></div>
+                    <p data-t="deal.2.texte">Sur chaque vidéo publiée, dès la première. Exemple : une vidéo à 300&nbsp;000 vues = 300&nbsp;$.</p>
+                </div>
+                <div class="deal-carte">
+                    <span class="deal-num" data-t="deal.pro.num">Offert</span>
+                    <h3 data-t="deal.pro.titre">Climbr Pro</h3>
+                    <p data-t="deal.pro.texte">Toute l'app débloquée, pour la filmer en entier et la connaître de l'intérieur.</p>
+                </div>
+                <div class="deal-carte">
+                    <span class="deal-num" data-t="deal.guide.num">Pour t'aider</span>
+                    <h3 data-t="deal.guide.titre">Le guide du créateur</h3>
+                    <p data-t="deal.guide.texte">Les formats qui marchent, les conseils de tournage, ce qu'il faut montrer de l'app.</p>
+                </div>
+            </div>
+            <div class="deal deal-deux fade-up">
                 <div class="deal-carte">
                     <span class="deal-num" data-t="deal.1.num">Tu fais</span>
                     <h3 data-t="deal.1.titre">Des vidéos de toi avec Climbr</h3>
                     <p data-t="deal.1.texte">Tu scannes tes blocs, tu notes tes essais, tu montres ta progression — et tu publies sur ton TikTok ou ton Instagram.</p>
-                </div>
-                <div class="deal-carte encre">
-                    <span class="deal-num" data-t="deal.2.num">Tu touches</span>
-                    <div class="deal-prix">1&nbsp;$<small data-t="deal.2.unite">/ 1 000 vues</small></div>
-                    <p data-t="deal.2.texte">Sur chaque vidéo publiée. Et Climbr Pro offert, pour filmer l'app en entier.</p>
                 </div>
                 <div class="deal-carte">
                     <span class="deal-num" data-t="deal.3.num">On peut</span>
@@ -220,7 +233,7 @@
     </section>
 
     <!-- Idées de vidéos -->
-    <section id="idees" class="section">
+    <section id="idees" class="section section-deep">
         <div class="container">
             <div class="section-header fade-up">
                 <span class="eyebrow" data-t="idees.sur">Idées de vidéos</span>
@@ -239,15 +252,15 @@
     </section>
 
     <!-- Comment ça se passe -->
-    <section class="section section-deep">
+    <section class="section">
         <div class="container">
             <div class="section-header fade-up">
                 <span class="eyebrow" data-t="etapes.sur">Comment ça se passe</span>
                 <h2 class="section-title" data-t="etapes.titre">De la candidature au paiement.</h2>
             </div>
             <ol class="etapes fade-up">
-                <li><h3 data-t="etape1.titre">Tu postules</h3><p data-t="etape1.texte">Deux minutes, juste en dessous.</p></li>
-                <li><h3 data-t="etape2.titre">On te répond</h3><p data-t="etape2.texte">On regarde ton compte et on t'écrit, avec ton accès Climbr Pro.</p></li>
+                <li><h3 data-t="etape1.titre">Tu postules</h3><p data-t="etape1.texte">Deux minutes, sur le formulaire.</p></li>
+                <li><h3 data-t="etape2.titre">On te répond</h3><p data-t="etape2.texte">On regarde ton compte et on t'écrit, avec ton accès Climbr Pro et le guide.</p></li>
                 <li><h3 data-t="etape3.titre">Tu publies</h3><p data-t="etape3.texte">Tes vidéos, à ton rythme, sur tes réseaux.</p></li>
                 <li><h3 data-t="etape4.titre">Tu es payé</h3><p data-t="etape4.texte">1 $ pour 1 000 vues, sur chaque vidéo.</p></li>
             </ol>
@@ -255,45 +268,13 @@
     </section>
 
     <!-- Postuler -->
-    <section id="postuler" class="section">
-        <div class="container postuler">
-            <div class="section-header fade-up">
-                <span class="eyebrow" data-t="form.sur">Postuler</span>
-                <h2 class="section-title" data-t="form.titre">Tu en es ?</h2>
-                <p class="section-lead" data-t="form.lead">Dis-nous qui tu es et où tu grimpes. On revient vers toi par mail.</p>
-            </div>
-            <div class="fade-up" id="bloc-form">
-                <form class="form" id="form" novalidate>
-                    <div class="champ"><label for="prenom" data-t="form.prenom">Prénom</label><input id="prenom" name="prenom" autocomplete="given-name" required></div>
-                    <div class="champ"><label for="email" data-t="form.email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-                    <div class="champ"><label for="reseau" data-t="form.reseau">Réseau principal</label>
-                        <select id="reseau" name="reseau" required>
-                            <option value="TikTok">TikTok</option>
-                            <option value="Instagram">Instagram</option>
-                        </select>
-                    </div>
-                    <div class="champ"><label for="abonnes" data-t="form.abonnes">Abonnés</label>
-                        <select id="abonnes" name="abonnes" required>
-                            <option value="< 1 000" data-t="form.ab1">Moins de 1 000</option>
-                            <option value="1 000 – 10 000">1 000 – 10 000</option>
-                            <option value="10 000 – 50 000">10 000 – 50 000</option>
-                            <option value="50 000 – 200 000">50 000 – 200 000</option>
-                            <option value="> 200 000" data-t="form.ab5">Plus de 200 000</option>
-                        </select>
-                    </div>
-                    <div class="champ large"><label for="compte" data-t="form.compte">Lien ou pseudo de ton compte</label><input id="compte" name="compte" placeholder="@toncompte" required></div>
-                    <div class="champ large"><label for="salle"><span data-t="form.salle">Ta salle et ta ville</span> <em data-t="form.facultatif">(facultatif)</em></label><input id="salle" name="salle"></div>
-                    <div class="champ large"><label for="message"><span data-t="form.message">Un mot, une idée de vidéo</span> <em data-t="form.facultatif2">(facultatif)</em></label><textarea id="message" name="message"></textarea></div>
-                    <div class="miel" aria-hidden="true"><label for="_honey">Ne pas remplir</label><input id="_honey" name="_honey" tabindex="-1" autocomplete="off"></div>
-                    <button class="btn btn-primary" type="submit" data-t="form.envoyer">Envoyer ma candidature</button>
-                    <p class="form-etat" id="form-etat" role="status"></p>
-                </form>
-                <div class="merci" role="status">
-                    <h3 data-t="merci.titre">C'est reçu, merci !</h3>
-                    <p data-t="merci.texte">On regarde ton compte et on t'écrit très vite. En attendant, tu peux déjà installer Climbr.</p>
-                    <div class="final-badges">
-                        <a href="/climbr/download/" class="btn btn-primary" data-t="merci.installer">Installer Climbr</a>
-                    </div>
+    <section class="section section-deep">
+        <div class="container">
+            <div class="final-card fade-up">
+                <div>
+                    <h2 data-t="cta.titre">Tu en es ?</h2>
+                    <p data-t="cta.texte">Deux minutes pour dire qui tu es et où tu grimpes. On revient vers toi par e-mail ou sur WhatsApp.</p>
+                    <div class="final-badges"><a href="form/" class="btn cta-btn" data-t="cta.bouton">Je postule</a></div>
                 </div>
             </div>
         </div>
@@ -328,14 +309,20 @@
             'hero.puce1': '$1 / 1,000 views',
             'hero.puce2': 'Climbr Pro for free',
             'hero.puce3': 'TikTok and Instagram',
-            'deal.sur': 'The deal',
+            'deal.sur': 'What you get',
             'deal.titre': 'Simple, and paid per view.',
             'deal.1.num': 'You make',
             'deal.1.titre': 'Videos of you using Climbr',
             'deal.1.texte': 'Scan your boulders, log your attempts, show your progress — and post it on your TikTok or Instagram.',
             'deal.2.num': 'You earn',
             'deal.2.unite': '/ 1,000 views',
-            'deal.2.texte': 'On every video you post. Plus Climbr Pro for free, to film the whole app.',
+            'deal.2.texte': 'On every video you post, from the very first. Example: a video with 300,000 views = $300.',
+            'deal.pro.num': 'Free', 'deal.pro.titre': 'Climbr Pro', 'deal.pro.texte': 'The whole app unlocked, to film all of it and know it inside out.',
+            'deal.guide.num': 'To help you', 'deal.guide.titre': 'The creator guide', 'deal.guide.texte': 'Formats that work, filming tips, what to show of the app.',
+            'quoi.sur': 'What is Climbr?',
+            'quoi.titre': 'The bouldering logbook for indoor climbers.',
+            'quoi.texte': 'One photo of the wall, one tap on a hold: Climbr outlines the boulder. Log your attempts, track your progress, and compare yourself with the climbers at your gym.',
+            'quoi.c1': 'gyms listed', 'quoi.c2': 'iPhone and Android', 'quoi.c2v': '2 stores',
             'deal.3.num': 'We may',
             'deal.3.titre': 'Run your videos as ads',
             'deal.3.texte': 'Your videos stay on your account. We may also run them as ads on our channels, crediting you.',
@@ -353,33 +340,21 @@
             'idee6.format': 'Tip', 'idee6.titre': 'My strengths and weaknesses', 'idee6.texte': 'Slab, overhang, crimps: what the app says about your climbing style.',
             'etapes.sur': 'How it works',
             'etapes.titre': 'From application to payout.',
-            'etape1.titre': 'You apply', 'etape1.texte': 'Two minutes, right below.',
-            'etape2.titre': 'We reply', 'etape2.texte': 'We look at your account and email you, with your Climbr Pro access.',
+            'etape1.titre': 'You apply', 'etape1.texte': 'Two minutes, on the form.',
+            'etape2.titre': 'We reply', 'etape2.texte': 'We look at your account and get back to you, with your Climbr Pro access and the guide.',
             'etape3.titre': 'You post', 'etape3.texte': 'Your videos, at your own pace, on your channels.',
             'etape4.titre': 'You get paid', 'etape4.texte': '$1 per 1,000 views, on every video.',
-            'form.sur': 'Apply',
-            'form.titre': 'Are you in?',
-            'form.lead': 'Tell us who you are and where you climb. We\'ll get back to you by email.',
-            'form.prenom': 'First name', 'form.email': 'Email', 'form.reseau': 'Main platform',
-            'form.abonnes': 'Followers', 'form.ab1': 'Under 1,000', 'form.ab5': 'Over 200,000',
-            'form.compte': 'Link or handle of your account',
-            'form.salle': 'Your gym and city', 'form.facultatif': '(optional)',
-            'form.message': 'A word, a video idea', 'form.facultatif2': '(optional)',
-            'form.envoyer': 'Send my application',
-            'merci.titre': 'Got it, thank you!',
-            'merci.texte': 'We\'ll look at your account and email you soon. In the meantime, you can already install Climbr.',
-            'merci.installer': 'Install Climbr',
+            'cta.titre': 'Are you in?',
+            'cta.texte': 'Two minutes to tell us who you are and where you climb. We\'ll get back to you by email or WhatsApp.',
+            'cta.bouton': 'Apply now',
             'pied.confidentialite': 'Privacy'
         };
         const MESSAGES = {
-            fr: { manque: 'Il manque ton prénom, ton e-mail ou ton compte.', envoi: 'Envoi…', erreur: 'L\'envoi n\'est pas passé. Réessaie, ou écris-nous à climbr@athanor-studio.io.', titre: 'Climbr — Programme créateurs', aria: 'Switch to English' },
-            en: { manque: 'Your first name, email or account is missing.', envoi: 'Sending…', erreur: 'Sending failed. Try again, or email us at climbr@athanor-studio.io.', titre: 'Climbr — Creator program', aria: 'Passer en français' }
+            fr: { titre: 'Climbr — Programme créateurs', aria: 'Switch to English' },
+            en: { titre: 'Climbr — Creator program', aria: 'Passer en français' }
         };
         const FR = {};
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
-        // ⚠️ Les <option> traduites gardent leur `value` française : c'est elle
-        // qui part dans le mail, et un tri des candidatures ne doit pas voir
-        // « Under 1,000 » et « Moins de 1 000 » comme deux tranches.
 
         let langue;
         try { langue = localStorage.getItem('climbr-lang'); } catch (e) {}
@@ -413,44 +388,6 @@
         curseur.addEventListener('input', simuler);
 
         appliquer();
-
-        // ── Le formulaire ──────────────────────────────────────────
-        // FormSubmit relaie le message vers climbr@ sans compte ni backend.
-        // ⚠️ La TOUTE PREMIÈRE candidature n'arrive pas : FormSubmit envoie à la
-        // place un mail d'activation à climbr@, qu'il faut cliquer une fois.
-        // Faire un envoi d'essai soi-même avant de partager le lien.
-        const form = document.getElementById('form');
-        const etat = document.getElementById('form-etat');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const m = MESSAGES[langue];
-            etat.classList.remove('erreur');
-            if (!form.prenom.value.trim() || !form.email.checkValidity() || !form.email.value.trim() || !form.compte.value.trim()) {
-                etat.textContent = m.manque; etat.classList.add('erreur'); return;
-            }
-            const bouton = form.querySelector('button[type="submit"]');
-            bouton.disabled = true; etat.textContent = m.envoi;
-            const donnees = Object.fromEntries(new FormData(form));
-            donnees.langue = langue;
-            donnees._subject = 'Créateur Climbr : ' + donnees.prenom + ' (' + donnees.reseau + ', ' + donnees.abonnes + ')';
-            donnees._replyto = donnees.email;
-            donnees._template = 'table';
-            try {
-                const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(donnees)
-                });
-                const j = await r.json().catch(() => ({}));
-                // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
-                // qui dit si le message est parti (il vaut la chaîne "true").
-                if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
-                document.getElementById('bloc-form').classList.add('envoye');
-            } catch (err) {
-                etat.textContent = m.erreur; etat.classList.add('erreur');
-                bouton.disabled = false;
-            }
-        });
 
         // ── Navigation et apparitions ──────────────────────────────
         const nav = document.querySelector('.nav');
