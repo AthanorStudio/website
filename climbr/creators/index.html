@@ -164,7 +164,7 @@
                 <ul class="hero-trust">
                     <li data-t="hero.puce1">1&nbsp;$ / 1&nbsp;000 vues</li>
                     <li data-t="hero.puce2">Climbr Pro offert</li>
-                    <li data-t="hero.puce3">TikTok, Reels, Shorts</li>
+                    <li data-t="hero.puce3">TikTok et Instagram</li>
                 </ul>
             </div>
 
@@ -198,7 +198,7 @@
                 <div class="deal-carte">
                     <span class="deal-num" data-t="deal.1.num">Tu fais</span>
                     <h3 data-t="deal.1.titre">Des vidéos de toi avec Climbr</h3>
-                    <p data-t="deal.1.texte">Tu scannes tes blocs, tu notes tes essais, tu montres ta progression — et tu publies sur ton TikTok, tes Reels ou tes Shorts.</p>
+                    <p data-t="deal.1.texte">Tu scannes tes blocs, tu notes tes essais, tu montres ta progression — et tu publies sur ton TikTok ou ton Instagram.</p>
                 </div>
                 <div class="deal-carte encre">
                     <span class="deal-num" data-t="deal.2.num">Tu touches</span>
@@ -270,8 +270,6 @@
                         <select id="reseau" name="reseau" required>
                             <option value="TikTok">TikTok</option>
                             <option value="Instagram">Instagram</option>
-                            <option value="YouTube">YouTube</option>
-                            <option value="Autre" data-t="form.autre">Autre</option>
                         </select>
                     </div>
                     <div class="champ"><label for="abonnes" data-t="form.abonnes">Abonnés</label>
@@ -329,12 +327,12 @@
             'hero.idees': 'Video ideas',
             'hero.puce1': '$1 / 1,000 views',
             'hero.puce2': 'Climbr Pro for free',
-            'hero.puce3': 'TikTok, Reels, Shorts',
+            'hero.puce3': 'TikTok and Instagram',
             'deal.sur': 'The deal',
             'deal.titre': 'Simple, and paid per view.',
             'deal.1.num': 'You make',
             'deal.1.titre': 'Videos of you using Climbr',
-            'deal.1.texte': 'Scan your boulders, log your attempts, show your progress — and post it on your TikTok, Reels or Shorts.',
+            'deal.1.texte': 'Scan your boulders, log your attempts, show your progress — and post it on your TikTok or Instagram.',
             'deal.2.num': 'You earn',
             'deal.2.unite': '/ 1,000 views',
             'deal.2.texte': 'On every video you post. Plus Climbr Pro for free, to film the whole app.',
@@ -362,7 +360,7 @@
             'form.sur': 'Apply',
             'form.titre': 'Are you in?',
             'form.lead': 'Tell us who you are and where you climb. We\'ll get back to you by email.',
-            'form.prenom': 'First name', 'form.email': 'Email', 'form.reseau': 'Main platform', 'form.autre': 'Other',
+            'form.prenom': 'First name', 'form.email': 'Email', 'form.reseau': 'Main platform',
             'form.abonnes': 'Followers', 'form.ab1': 'Under 1,000', 'form.ab5': 'Over 200,000',
             'form.compte': 'Link or handle of your account',
             'form.salle': 'Your gym and city', 'form.facultatif': '(optional)',
@@ -381,7 +379,7 @@
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
         // ⚠️ Les <option> traduites gardent leur `value` française : c'est elle
         // qui part dans le mail, et un tri des candidatures ne doit pas voir
-        // « Other » et « Autre » comme deux réseaux.
+        // « Under 1,000 » et « Moins de 1 000 » comme deux tranches.
 
         let langue;
         try { langue = localStorage.getItem('climbr-lang'); } catch (e) {}
