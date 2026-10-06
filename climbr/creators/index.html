@@ -75,10 +75,15 @@
 
         /* Les étapes */
         .etapes { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; counter-reset: etape; }
-        .etapes li { counter-increment: etape; border-top: 2px solid var(--line); padding-top: 1rem; }
-        .etapes li::before { content: counter(etape, decimal-leading-zero); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); }
-        .etapes h3 { font-size: 1.05rem; font-weight: 700; margin-top: 0.4rem; }
-        .etapes p { margin-top: 0.35rem; color: var(--ink-soft); font-size: var(--fs-small); }
+        .etapes li { counter-increment: etape; position: relative; padding-top: 3.6rem; min-width: 0; }
+        .etapes li::before { content: counter(etape); position: absolute; top: 0; left: 0; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 0.95rem; background: var(--surface); border: 2px solid var(--accent); color: var(--accent); }
+        .etapes li:last-child::before { background: var(--accent); color: var(--on-accent); }
+        /* Le fil va du bord du rond au rond suivant (le gap fait 1.5rem), et se
+           décolore vers la droite : on lit le trajet jusqu'au paiement. */
+        .etapes li::after { content: ""; position: absolute; top: 1.2rem; left: 2.5rem; right: -1.5rem; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line)); }
+        .etapes li:last-child::after { display: none; }
+        .etapes h3 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); line-height: 1.4; }
+        .etapes p { margin-top: 0.5rem; color: var(--ink-soft); font-size: var(--fs-small); }
 
         .cta-btn { background: #F4EFE8; color: var(--ink); padding: 0.95rem 1.6rem; font-size: 1rem; }
         .cta-btn:hover { background: #fff; transform: translateY(-1px); }
@@ -86,10 +91,14 @@
         @media (max-width: 1024px) {
             .atouts, .deal-trois { grid-template-columns: 1fr; }
             .atout.remu-tete { flex-direction: row; align-items: center; gap: 1.1rem; }
-            .etapes { grid-template-columns: 1fr 1fr; }
+            .etapes { grid-template-columns: 1fr; gap: 0; }
+            .etapes li { padding: 0 0 1.8rem 3.6rem; }
+            .etapes li:last-child { padding-bottom: 0; }
+            .etapes li::after { top: 2.5rem; bottom: 0; left: 1.2rem; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--accent), var(--line)); }
+            .etapes h3 { padding-top: 0.6rem; }
         }
         @media (max-width: 640px) {
-            .atouts, .deal, .etapes { grid-template-columns: 1fr; }
+            .atouts, .deal { grid-template-columns: 1fr; }
             .simu { grid-template-columns: 1fr; }
             .simu-gain { grid-row: auto; grid-column: 1; text-align: left; }
         }
@@ -249,10 +258,10 @@
                 <h2 class="section-title" data-t="etapes.titre">De la candidature au paiement.</h2>
             </div>
             <ol class="etapes fade-up">
-                <li><h3 data-t="etape1.titre">Tu postules</h3><p data-t="etape1.texte">Deux minutes, sur le formulaire.</p></li>
-                <li><h3 data-t="etape2.titre">On te répond</h3><p data-t="etape2.texte">On regarde ton compte et on t'écrit, avec ton accès Climbr Pro et le guide.</p></li>
-                <li><h3 data-t="etape3.titre">Tu publies</h3><p data-t="etape3.texte">Tes vidéos, à ton rythme, sur tes réseaux.</p></li>
-                <li><h3 data-t="etape4.titre">Tu es payé</h3><p data-t="etape4.texte">1 $ pour 1 000 vues, sur chaque vidéo.</p></li>
+                <li><h3 data-t="etape1.titre">Tu postules</h3><p data-t="etape1.texte">2 minutes pour remplir le formulaire.</p></li>
+                <li><h3 data-t="etape2.titre">On te répond</h3><p data-t="etape2.texte">On regarde ton compte et on t'écrit avec ton accès à Climbr Pro et le guide.</p></li>
+                <li><h3 data-t="etape3.titre">Tu fais une ou des vidéos à ton rythme</h3><p data-t="etape3.texte">On valide la vidéo avec toi puis tu postes quand tu veux sur tes réseaux.</p></li>
+                <li><h3 data-t="etape4.titre">Tu es payé chaque mois</h3><p data-t="etape4.texte">1&nbsp;$ pour 1&nbsp;000 vues sur chaque vidéo.</p></li>
             </ol>
         </div>
     </section>
@@ -323,10 +332,10 @@
             'simu.vues': 'views',
             'simu.gain': 'You earn',
             'etapes.titre': 'From application to payout.',
-            'etape1.titre': 'You apply', 'etape1.texte': 'Two minutes, on the form.',
-            'etape2.titre': 'We reply', 'etape2.texte': 'We look at your account and get back to you, with your Climbr Pro access and the guide.',
-            'etape3.titre': 'You post', 'etape3.texte': 'Your videos, at your own pace, on your channels.',
-            'etape4.titre': 'You get paid', 'etape4.texte': '$1 per 1,000 views, on every video.',
+            'etape1.titre': 'You apply', 'etape1.texte': '2 minutes to fill in the form.',
+            'etape2.titre': 'We reply', 'etape2.texte': 'We look at your account and write to you with your Climbr Pro access and the guide.',
+            'etape3.titre': 'You make one or more videos at your own pace', 'etape3.texte': 'We approve the video with you, then you post it whenever you want on your channels.',
+            'etape4.titre': 'You get paid every month', 'etape4.texte': '$1 per 1,000 views on every video.',
             'cta.titre': 'Interested?',
             'cta.texte': 'Two minutes to fill in the form. We\'ll get back to you by email or WhatsApp.',
             'cta.bouton': 'Apply now',
