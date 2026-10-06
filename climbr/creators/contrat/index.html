@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climbr — Contrat créateur</title>
+    <meta name="description" content="Le contrat du programme créateurs Climbr, à lire et à signer.">
+    <!-- ⚠️ Envoyée seulement aux créateurs acceptés : hors du sitemap et des moteurs. -->
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://athanor-studio.io/climbr/creators/contrat/">
+    <meta name="theme-color" content="#F4EFE8">
+
+    <link rel="icon" href="../../../climbr_icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../../climbr_icon.png">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .contrat { padding: calc(84px + clamp(1.5rem, 4vw, 3rem)) 0 var(--section-padding); }
+        .colonne { max-width: 44rem; margin: 0 auto; padding: 0 var(--container-padding); }
+        .retour { display: inline-block; margin-bottom: 1.2rem; font-size: var(--fs-small); color: var(--ink-soft); }
+        .retour:hover { color: var(--ink); }
+        .contrat h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.1; text-wrap: balance; }
+        .chapeau { margin-top: 0.8rem; color: var(--ink-soft); }
+
+        /* Le texte du contrat : une feuille, les articles numérotés en marge.
+           ⚠️ Les deux langues sont dans le HTML et une seule est montrée :
+           l'empreinte envoyée à la signature est calculée sur celle qui est lue. */
+        .feuille { margin-top: 1.75rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.3rem, 4vw, 2.5rem); font-size: 0.95rem; line-height: 1.65; }
+        .feuille[hidden] { display: none; }
+        .version { font-size: var(--fs-xs); font-weight: 700; letter-spacing: var(--letter-wide); text-transform: uppercase; color: var(--accent); }
+        .feuille h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.2; margin-top: 0.4rem; }
+        .parties { margin-top: 1.1rem; display: grid; gap: 0.8rem; }
+        .parties p { color: var(--ink-soft); }
+        .parties strong { color: var(--ink); }
+        .article { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 0 0.4rem; margin-top: 1.3rem; padding-top: 1.3rem; border-top: 1px solid var(--line); }
+        .article > span { font-weight: 800; font-size: 0.85rem; color: var(--accent); padding-top: 0.1rem; font-variant-numeric: tabular-nums; }
+        .article h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .article p, .article li { color: var(--ink-soft); }
+        .article p + p, .article p + ul, .article ul + p, .article p + ol { margin-top: 0.5rem; }
+        .article ul, .article ol { padding-left: 1.15rem; display: grid; gap: 0.25rem; }
+        .a-completer { background: rgba(180, 83, 31, 0.12); color: var(--accent-dark); font-weight: 600; border-radius: 3px; padding: 0 0.2em; }
+
+        .signer { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.9rem; }
+        .signer h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); margin-top: 1rem; }
+        .carte { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.25rem 1.3rem; transition: border-color var(--transition); }
+        .carte.invalide { border-color: var(--accent); }
+        .question { display: block; font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.45rem; }
+        .question .req { color: var(--accent); }
+        .aide { font-size: var(--fs-small); color: var(--ink-soft); margin: -0.2rem 0 0.6rem; }
+        .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+        input[type="text"], input[type="email"], input[type="date"] { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; width: 100%; min-width: 0; transition: border-color var(--transition); }
+        input:focus { outline: none; border-color: var(--accent); }
+        .coche { display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; font-size: var(--fs-small); color: var(--ink-soft); }
+        .coche + .coche { margin-top: 0.8rem; }
+        .coche input { width: 1.15rem; height: 1.15rem; margin-top: 0.1rem; accent-color: var(--accent); flex: none; }
+        .coche strong { color: var(--ink); }
+        /* ⚠️ Le pot de miel : FormSubmit jette tout message où il est rempli. */
+        .miel { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .envoyer { padding: 1rem 1.4rem; font-size: 1rem; width: 100%; }
+        .envoyer[disabled] { opacity: 0.6; cursor: wait; transform: none; }
+        .etat { font-size: var(--fs-small); color: var(--ink-soft); min-height: 1.2em; text-align: center; }
+        .etat.erreur { color: var(--accent-dark); }
+        .merci { display: none; margin-top: 1.5rem; }
+        .merci h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); }
+        .merci p { margin-top: 0.5rem; color: var(--ink-soft); }
+        .signe .signer { display: none; }
+        .signe .merci { display: block; }
+
+        @media (max-width: 520px) {
+            .deux { grid-template-columns: 1fr; }
+            .article { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../" class="nav-brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="21.6 166.1 436.1 131.8" class="nav-wordmark" role="img" aria-label="Climbr">
+  
+  <defs>
+    <style>
+      .st0 {
+        fill: var(--ink);
+      }
+
+      .st1 {
+        fill: var(--accent);
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <path class="st0" d="M120.5,272l-1,1.3-1.4,1.8c-3.7,4.6-8.5,7.8-13.5,10.6l-1.1.6-2.9,1.3-1.4.6-.9.3-.7.3-1,.4-.8.2-.7.2-1.2.3-1.1.3c-.4,0-1,.3-1.5.4l-1.6.3-1.3.2-1.9.3-3.3.3h-6.6s-1.9-.2-1.9-.2c-.5,0-.8,0-1.3-.1l-1.7-.2-1.6-.3-1-.2-1.6-.4-1-.2-1-.3-.8-.2-1.2-.4-1-.4-.9-.3-2.5-1-5.9-2.9-1.5-.9-.9-.6-1-.6-1.7-1.2-1.4-1.1-1.9-1.7-4.5-4.4-.6-.8-1.1-1.3-1-1.4-1.7-2.4-.6-1-1.5-2.6-1-1.9-1.7-3.8c-.2-.4-.3-1-.4-1.4l-.3-.8-.2-.7-.3-1.1c-.1-.4-.3-.9-.4-1.3l-.3-1.2-.2-1.2-.2-1.2-.3-1.6c0-.4-.1-.8-.2-1.3l-.2-1.2-.2-3.7v-4.2s.2-3.2.2-3.2c0-.8.2-1.7.4-2.4l.2-1.5.2-1.2.2-1.2.3-1.1.2-1,.2-.8.2-.7.3-.9.3-.9.3-.7.4-.7.3-.7.4-1,2.4-4.6,1.5-2.5.3-.5.6-.8.7-1,.6-.8,1.3-1.6,3.4-3.7,1.5-1.4,1.6-1.3,1.2-1,1.5-1.1,3.1-2,.9-.6,3-1.6,2.2-1.1,2.1-.9.9-.3.8-.3.7-.2,1-.3.7-.3,1-.3,1.1-.3c.2,0,.4-.3.7-.2s.7-.2.9-.2l1.2-.3,1.1-.2,1.5-.2c.8-.1,1.7-.3,2.4-.4l2.5-.2h7.3c0-.1,1.2,0,1.2,0h2.4c.1.1.4.4.7.3.4,0,3.5.5,4.9.9l1.3.3.7.2,1,.3,1,.3.7.3.9.3.5.2,1.3.5,2.2,1,.6.3,1.7.9,2.6,1.5,1,.7,1.1.8,1.1.8,1.3,1.1,1.4,1.2,4.3,4.3,1.2,1.5,3.1,4.4.8,1.4-2.3,1.5-1.1.7-.7.5-1.1.6-2.2,1.4-.7.5-1.1.8-.7.5-3.2,2.1-3.5,2.2-1.1.8-.7.5-1,.6-1,.5c-.1-.5-.4-.8-.7-1.2l-.7-1-.7-1-3.8-3.8-1.2-.9-1-.7c-2.4-1.7-5.2-2.7-8.1-3.4l-.7-.2-1.9-.3h-6.5s-1.9.3-1.9.3l-.7.2c-.4.1-.7.2-1,.2-2.4.5-6.4,2.5-8.4,4.1l-1.2,1-3.6,3.6-.7.9-.7,1-1.2,1.9-1.3,2.8-.4,1.1-.2.5-.3.8-.3,1.1-.3,1-.2,1.3-.3,1.7v6.9c-.1,0,.1.5.1.5.2.4,0,.9.1,1.4l.3,1.4.2,1,.3.9.2.7.4,1,.4,1c1.4,3.7,3.7,7,6.7,9.6l1.4,1.2,1.2.9,1,.7.7.5,2.8,1.4,2.6,1,1,.2,1.2.3c.2,0,.5.1.8.2l1.4.2c2.1.3,4.2.2,6.2,0l1.7-.3,1.2-.2,1.2-.3.7-.2.5-.2,2-.8,1.5-.7,1.8-1.1,1-.7,1.2-.9,4.1-4.1.8-1.1.8-1,.7-1.1,1.3.8,3.5,2.3.5.3.9.6.7.5,1.5.9,3.6,2.4,4.8,3.1.9.6,1,.7.7.5,1.2.8c0,.4-.3.6-.5.9l-.7,1-.5.7-.7.9Z"/>
+      <rect class="st0" x="129" y="189.7" width="24.9" height="100.7"/>
+    </g>
+    <g>
+      <path class="st0" d="M280.4,237.8l-1.4.4c-1.7.5-3.1,1.5-4.2,2.8l-1,1.1-.6,1.1c-.9,1.5-1.4,3-1.7,4.8l-.4,2.4v40.2s-4.8,0-4.8,0h-12.2s-2.6,0-2.6,0h-2.6c-.7,0-1.4.2-2-.1v-40s-.3-2.1-.3-2.1c0-.4-.1-.6-.2-1l-.2-1-.2-.9-.6-1.6c-.2-.6-.6-1-.9-1.5l-.3-.5c-1-1.7-3.2-3.1-5.2-3.7l-1.1-.3c-1.9-.5-4.8-.2-6.8.6l-.7.3c-1,.4-1.9,1-2.7,1.9l-1.3,1.6-1.1,1.9-1,2.8-.2,1-.3,2v40.2c0,.3-.1.5-.4.5h-1s-12.7,0-12.7,0h-7.7c-.9,0-1.6.1-2.4,0v-11.2s0-62.1,0-62.1h22s0,5.4,0,5.4c0,.2.3.3.4,0,.2-.3.5-.4.8-.7l1-.9,1.2-.9,1.9-1.2,1.2-.7.6-.3.5-.2,2.2-.9c.2,0,.4-.2.7-.3l.7-.2c.2,0,.3-.1.5-.2l1.3-.4,1.5-.2c1-.1,2.2-.4,2.7-.4h6s1,.2,1,.2c.6.1,1.2,0,1.8.2l1.2.2,1,.2,1,.3.9.3c.3,0,.7.3,1,.4l.5.2,1.2.5,2.4,1.2,1.6,1,1.1.8,3.5,3.5.9,1.2c.2.2.2.5.5.6l2.4-2.6,2.4-2.1,1-.7,1.7-1.2,1.7-.9,2-1,1.2-.4.7-.3.7-.2.9-.3,1.2-.3,1.2-.3c.4-.1.9,0,1.3-.2s1.2,0,1.8-.2l.8-.2h6.5c.4,0,1.9.3,2.9.5l1.5.3,1.4.4,1.1.3.7.2,2.6,1,.5.2.9.4,2.8,1.7,1.4,1.1.4.3,3.2,3.3,1,1.4,1.2,1.7.5.8.2.5.2.5.4.7,1,2.1.2.6c.1.5.4.9.4,1v.5c.2.4.5,1.1.7,2.1l.3,1.2.3,1.4.2,1.7.2,2.2.2,2.2v44.8c0,.3,0,.5,0,.6s-.3.1-.5.1h-4.3c0,0-.7,0-.7,0h-7.7s-4.3,0-4.3,0h-3.1s-2.7,0-2.7,0c-.3,0-.5,0-.7,0s-.1-.3-.1-.6v-39s-.2-2.4-.2-2.4c0-.3-.2-.4-.2-.6v-1.1c-.1,0-.3-.7-.4-1.1l-.5-1.4-.2-.5-1.1-1.8c-.7-1.2-2.9-3-4.3-3.4l-1.1-.3-1-.2c-1.5-.4-3.2-.4-4.8,0Z"/>
+      <g>
+        <path class="st0" d="M403,266.5c0,.3,0,.5-.2.8l-.2.5-.9,2.5-.3.7-2,4-1.1,1.8-.7,1-.5.7-1.1,1.3-2.3,2.5-2.6,2.4-1.2.9-1,.7-1.2.7-1,.6-3.4,1.7-1.1.4-2.2.7-1.7.5-1.2.2-1.4.2c-.4,0-.7.1-1,.1l-1.7.2h-5.7s-2.7-.3-2.7-.3l-1.4-.3-1-.2-1.1-.3-1.7-.6-1.7-.7-.7-.4-1.4-.8c-1.2-.7-2.2-1.5-3.2-2.4l-1.5-1.4c-.1-.2-.4-.2-.4,0v6.1s-22.3,0-22.3,0c-.4,0-.9.3-1.3,0v-100.9s21.7,0,21.7,0h2.7c.2,0,.4,0,.3.3v31.5c.6,0,.9-.5,1.3-.8l1-.7,1-.7,1.6-1,2-.9,1.7-.7,1.2-.4.9-.3,1.2-.3c.2,0,.4-.1.8-.2l1.2-.2,2.6-.3h5.3c.5,0,.9.3,1.4.2s1.2.1,1.7.2l1.5.2,1.2.3,1,.2.9.3,1.2.3,1.5.6c2.7,1,5.2,2.5,7.5,4.3l.8.6,4,4.1.6.8,1,1.3c1.6,2.1,2.6,4.4,3.8,6.8l.2.4c.2.4.2.6.3.8l1.1,3c.2.4.3,1,.5,1.6l.3,1.2.2,1,.3,1.8.2.6c.1.4.1,1,.2,1.4l.2,2.2c.3,2.5.3,5.1,0,7.6l-.2,1.9-.3,1.9-.2,1.2-.3,1.6c-.1.5-.3,1.1-.3,1.1-.2.2-.1.6-.2.8l-.3,1ZM381.6,253.3c0-8.6-7-15.6-15.6-15.6s-15.6,7-15.6,15.6,7,15.6,15.6,15.6,15.6-7,15.6-15.6Z"/>
+        <path class="st1" d="M433.6,281l-.2,7.3c-.5,1-1.4,2.2-2.6,2.2h-16c-.2,0-1.5-.4-1.9-.9s-.7-1-.8-1.4v-11.6s0-27.8,0-27.8v-13.9c0-.6.1-1.2.3-1.8l.3-1.4.5-1.7.3-.9.3-.7,1.7-3.3.3-.5.8-1.1.9-1.2,2.9-2.9.9-.7c1.7-1.3,3.5-2.4,5.5-3.3l1.7-.8.8-.3.9-.3,1-.3.8-.2,1.3-.3,1.4-.3,1.7-.2,2.4-.2,2.7.2c.4,0,.9,0,1.4.2l1,.2,1.1.4c1.2.4,2.2,1,3.1,1.7s.8.9,1.3,1.4l.5.7c.4.5.7,1.1.9,1.8l.4,1.1.3,1.1.2,1.3c.4,2,.4,4.1,0,6.1l-.3,1.4-.2,1c-.4,1.7-1.1,3.4-2.4,4.6l-2.3,2.3-1,.7-1.7,1.1-.8.5-1.5.9-.9.6-1.1.8c-1.8,1.4-3.3,3.1-4.1,5.2l-.9,2.1-.4,1.2-.3,1.4-.2,1.4v6.5c0,0,0,6.7,0,6.7v13.8ZM440.9,228.1c0-2.2-1.8-4.1-4.1-4.1s-4.1,1.8-4.1,4.1,1.8,4.1,4.1,4.1,4.1-1.8,4.1-4.1Z"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="st0" x="165" y="211.5" width="25" height="78.8"/>
+    <path class="st1" d="M177.4,203.2h-2.4c-1.9,0-3.6-.3-5.3-1.3l-.7-.4c-1.8-1.1-2.8-2.9-3.3-5l-.2-1-.4-7.7.2-5.9c.1-3.9,2.4-8,6-9.3s8.4,0,11.5,1.5,3.9,2.5,5.4,4.4c3,3.8,4.5,10.6,4.1,15.6s-2.9,6.8-7,8-5.1,1.2-7.8,1.2ZM181.8,186.9c0-2.2-1.7-4-3.7-4s-3.7,1.8-3.7,4,1.7,4,3.7,4,3.7-1.8,3.7-4Z"/>
+  </g>
+</svg></a>
+            <div class="nav-droite">
+                <button class="lang-toggle" type="button" aria-label="Switch to English">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+                    <span class="lang-toggle-label">EN</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="contrat">
+        <div class="colonne" id="bloc">
+            <a href="../" class="retour" data-t="retour">← Le programme créateurs</a>
+            <h1 data-t="titre">Ton contrat créateur</h1>
+            <p class="chapeau" data-t="chapeau">Lis-le en entier, puis signe en bas de la page. Tu reçois une copie par e-mail.</p>
+
+            <!-- ⚠️ Changer un mot du contrat = changer CONTRAT_VERSION plus bas. Les
+                 versions déjà signées restent lisibles dans l'historique git :
+                 c'est la preuve de ce que chacun a accepté. -->
+            <article class="feuille" id="texte-fr" lang="fr">
+                <span class="version">Version du 6 octobre 2026</span>
+                <h2>Contrat de collaboration commerciale — Programme créateurs Climbr</h2>
+                <div class="parties">
+                    <p><strong>Entre</strong> Athanor Studio, SAS au capital de <span class="a-completer">[capital]</span> €, immatriculée au RCS de <span class="a-completer">[ville]</span> sous le n° <span class="a-completer">[SIREN]</span>, dont le siège est situé <span class="a-completer">[adresse]</span>, éditrice de l'application Climbr, ci-après « Climbr »,</p>
+                    <p><strong>Et</strong> la personne identifiée dans le formulaire de signature au bas de ce contrat, ci-après « le Créateur ».</p>
+                </div>
+
+                <div class="article"><span>1</span><div>
+                    <h3>Objet</h3>
+                    <p>Le présent contrat fixe les conditions dans lesquelles le Créateur réalise et publie, sur ses propres comptes Instagram et TikTok, des vidéos présentant l'utilisation de l'application Climbr, et les conditions de sa rémunération. Il constitue le contrat écrit de collaboration commerciale prévu par la loi n° 2023-451 du 9 juin 2023.</p>
+                </div></div>
+
+                <div class="article"><span>2</span><div>
+                    <h3>Les vidéos</h3>
+                    <p>Le Créateur réalise de courtes vidéos (Reels Instagram, vidéos TikTok), dans son style habituel, où l'on voit l'application Climbr utilisée en situation : scanner un bloc, noter un essai, consulter sa progression, etc.</p>
+                    <p>Le Créateur n'est pas tenu d'apparaître à l'image ; une vidéo en vue subjective (POV) montrant sa main utiliser l'application est acceptée.</p>
+                    <p>Le Créateur publie le nombre de vidéos qu'il souhaite, à son rythme. Chaque vidéo reste en ligne au moins 90 jours après sa publication.</p>
+                </div></div>
+
+                <div class="article"><span>3</span><div>
+                    <h3>Validation avant publication</h3>
+                    <p>Avant toute publication, le Créateur transmet la vidéo à Climbr, par WhatsApp ou par e-mail. Climbr la valide ou demande des modifications sous 48 heures ouvrées. Sans réponse dans ce délai, la vidéo est réputée validée.</p>
+                    <p>Climbr ne peut refuser une vidéo que si elle montre l'application de façon inexacte, contient une affirmation fausse sur Climbr, enfreint la loi ou les règles de la plateforme, ou porte atteinte à l'image de Climbr.</p>
+                </div></div>
+
+                <div class="article"><span>4</span><div>
+                    <h3>Transparence et règles des plateformes</h3>
+                    <p>Le Créateur signale clairement, dès le début de chaque vidéo, son caractère commercial par la mention « Collaboration commerciale » ou « Publicité », et par l'outil de partenariat de la plateforme lorsqu'il existe.</p>
+                    <p>Le Créateur respecte les conditions d'utilisation des plateformes et le règlement des salles où il filme ; il obtient au besoin l'accord de la salle et des personnes reconnaissables à l'image.</p>
+                </div></div>
+
+                <div class="article"><span>5</span><div>
+                    <h3>Ce que Climbr fournit</h3>
+                    <ul>
+                        <li>un accès gratuit à Climbr Pro pendant toute la durée du contrat ;</li>
+                        <li>un guide d'idées de vidéos ;</li>
+                        <li>un accompagnement par l'équipe, notamment au sein d'un groupe WhatsApp si le Créateur l'accepte.</li>
+                    </ul>
+                </div></div>
+
+                <div class="article"><span>6</span><div>
+                    <h3>Rémunération</h3>
+                    <p>Le Créateur perçoit 1 $ (un dollar américain) pour 1 000 vues organiques de chaque vidéo validée et publiée, dès la première vidéo.</p>
+                    <p>Une vue organique est une vue comptée par la plateforme hors diffusion sponsorisée. Les vues générées par une publicité, financée par Climbr ou par le Créateur, ne sont pas rémunérées.</p>
+                    <p>Les vues d'une vidéo sont prises en compte pendant 90 jours à compter de sa publication. Le montant est converti en euros au taux de référence de la Banque centrale européenne du jour du relevé.</p>
+                </div></div>
+
+                <div class="article"><span>7</span><div>
+                    <h3>Relevé des vues et paiement</h3>
+                    <ol>
+                        <li>Avant le 5 de chaque mois, le Créateur envoie à Climbr une capture des statistiques de chaque vidéo concernée (nombre de vues, date), prise depuis l'application de la plateforme.</li>
+                        <li>Climbr établit le relevé du mois écoulé et le communique au Créateur sous 7 jours.</li>
+                        <li>Le Créateur émet une facture ou, s'il n'a pas de statut d'entreprise, une note du montant du relevé.</li>
+                        <li>Climbr règle par virement bancaire sur le compte désigné par le Créateur, sous 15 jours à réception.</li>
+                    </ol>
+                    <p>Un montant inférieur à 10 € est reporté sur le mois suivant.</p>
+                </div></div>
+
+                <div class="article"><span>8</span><div>
+                    <h3>Autorisation de publicité sur les publications</h3>
+                    <p>Le Créateur autorise Climbr à sponsoriser les vidéos publiées sur son compte dans le cadre du contrat, au moyen des outils publicitaires des plateformes (Spark Ads sur TikTok, publicités partenaires sur Instagram et Facebook), et à les diffuser en publicité sur les comptes de Climbr en citant le Créateur.</p>
+                    <p>Cette autorisation emporte cession, à titre non exclusif, des droits de reproduction et de représentation sur les vidéos, ainsi que l'autorisation d'exploiter l'image, le nom et la voix du Créateur qui y figurent, aux conditions suivantes :</p>
+                    <ul>
+                        <li>supports : réseaux sociaux et plateformes publicitaires en ligne ;</li>
+                        <li>territoire : monde entier ;</li>
+                        <li>durée : 12 mois à compter de la publication de chaque vidéo, cette durée survivant à la fin du contrat ;</li>
+                        <li>prix : la cession est consentie en contrepartie de la rémunération prévue à l'article 6.</li>
+                    </ul>
+                    <p>Climbr ne modifie pas le contenu des vidéos, hormis les recadrages et sous-titres nécessaires à la diffusion publicitaire.</p>
+                </div></div>
+
+                <div class="article"><span>9</span><div>
+                    <h3>Engagements du Créateur</h3>
+                    <ul>
+                        <li>Le Créateur garantit être titulaire des comptes déclarés et l'auteur des vidéos.</li>
+                        <li>Il s'interdit tout achat de vues, d'abonnés ou d'interactions, et tout procédé artificiel de gonflement des statistiques. Une vidéo concernée n'est pas rémunérée, et Climbr peut résilier le contrat sans préavis.</li>
+                        <li>Il s'abstient de tout propos dénigrant envers Climbr pendant le contrat, et de toute affirmation fausse sur l'application.</li>
+                        <li>Il déclare être majeur.</li>
+                    </ul>
+                </div></div>
+
+                <div class="article"><span>10</span><div>
+                    <h3>Indépendance</h3>
+                    <p>Le Créateur agit en toute indépendance ; le contrat ne crée aucun lien de subordination. Il reste libre de collaborer avec d'autres marques, sauf avec une application concurrente de carnet d'escalade pendant la durée du contrat.</p>
+                </div></div>
+
+                <div class="article"><span>11</span><div>
+                    <h3>Durée et fin du contrat</h3>
+                    <p>Le contrat prend effet à sa signature, pour une durée indéterminée. Chaque partie peut y mettre fin à tout moment par écrit (e-mail ou WhatsApp), avec un préavis de 15 jours.</p>
+                    <p>À la fin du contrat, l'accès Climbr Pro offert prend fin, les vues acquises pendant la période de comptage restent dues, et l'autorisation de l'article 8 se poursuit pour les vidéos déjà publiées jusqu'à son terme.</p>
+                </div></div>
+
+                <div class="article"><span>12</span><div>
+                    <h3>Données personnelles</h3>
+                    <p>Climbr traite les données du Créateur (identité, coordonnées, comptes, coordonnées bancaires, statistiques) pour exécuter le contrat et le payer, conformément au RGPD et à sa politique de confidentialité. Le Créateur peut exercer ses droits à l'adresse climbr@athanor-studio.io.</p>
+                </div></div>
+
+                <div class="article"><span>13</span><div>
+                    <h3>Droit applicable et litiges</h3>
+                    <p>Le contrat est soumis au droit français. En cas de désaccord, les parties cherchent une solution amiable pendant 30 jours ; à défaut, le litige est porté devant les tribunaux compétents, sous réserve des règles protectrices applicables au Créateur s'il agit en tant que consommateur.</p>
+                </div></div>
+
+                <div class="article"><span>14</span><div>
+                    <h3>Signature électronique</h3>
+                    <p>Le Créateur signe en remplissant le formulaire ci-dessous et en cochant la case d'acceptation. Les parties reconnaissent à cette signature électronique la même valeur qu'une signature manuscrite. Une copie du contrat accepté est envoyée au Créateur par e-mail. En cas de différence entre la version française et la version anglaise, la version française prévaut.</p>
+                </div></div>
+            </article>
+
+            <article class="feuille" id="texte-en" lang="en" hidden>
+                <span class="version">Version of 6 October 2026</span>
+                <h2>Commercial collaboration agreement — Climbr creator program</h2>
+                <div class="parties">
+                    <p><strong>Between</strong> Athanor Studio, a French SAS with share capital of <span class="a-completer">[capital]</span> €, registered with the RCS of <span class="a-completer">[city]</span> under number <span class="a-completer">[SIREN]</span>, with its registered office at <span class="a-completer">[address]</span>, publisher of the Climbr app, hereinafter “Climbr”,</p>
+                    <p><strong>And</strong> the person identified in the signature form at the bottom of this agreement, hereinafter “the Creator”.</p>
+                </div>
+
+                <div class="article"><span>1</span><div>
+                    <h3>Purpose</h3>
+                    <p>This agreement sets out the terms under which the Creator makes and posts, on their own Instagram and TikTok accounts, videos showing the use of the Climbr app, and the terms of their pay. It is the written commercial collaboration agreement required by French law no. 2023-451 of 9 June 2023.</p>
+                </div></div>
+
+                <div class="article"><span>2</span><div>
+                    <h3>The videos</h3>
+                    <p>The Creator makes short videos (Instagram Reels, TikTok videos), in their usual style, showing the Climbr app in use: scanning a boulder, logging an attempt, checking their progress, and so on.</p>
+                    <p>The Creator does not have to appear on camera; a point-of-view (POV) video showing their hand using the app is accepted.</p>
+                    <p>The Creator posts as many videos as they wish, at their own pace. Each video stays online for at least 90 days after it is posted.</p>
+                </div></div>
+
+                <div class="article"><span>3</span><div>
+                    <h3>Approval before posting</h3>
+                    <p>Before posting, the Creator sends the video to Climbr by WhatsApp or email. Climbr approves it or asks for changes within 48 business hours. Without a reply within that time, the video is deemed approved.</p>
+                    <p>Climbr may only refuse a video if it shows the app inaccurately, makes a false claim about Climbr, breaks the law or the platform's rules, or harms Climbr's image.</p>
+                </div></div>
+
+                <div class="article"><span>4</span><div>
+                    <h3>Disclosure and platform rules</h3>
+                    <p>The Creator clearly discloses, from the start of each video, its commercial nature with the label “Paid partnership” or “Ad”, and with the platform's partnership tool where one exists.</p>
+                    <p>The Creator follows the platforms' terms of use and the rules of the gyms where they film, and obtains, where needed, the consent of the gym and of any recognisable person.</p>
+                </div></div>
+
+                <div class="article"><span>5</span><div>
+                    <h3>What Climbr provides</h3>
+                    <ul>
+                        <li>free access to Climbr Pro for the whole term of the agreement;</li>
+                        <li>a guide of video ideas;</li>
+                        <li>support from the team, including in a WhatsApp group if the Creator agrees.</li>
+                    </ul>
+                </div></div>
+
+                <div class="article"><span>6</span><div>
+                    <h3>Pay</h3>
+                    <p>The Creator earns $1 (one US dollar) per 1,000 organic views of each approved and posted video, from the very first video.</p>
+                    <p>An organic view is a view counted by the platform outside any sponsored distribution. Views generated by an ad, paid for by Climbr or by the Creator, are not paid.</p>
+                    <p>A video's views are counted for 90 days from its posting. The amount is converted into euros at the European Central Bank reference rate on the day of the statement.</p>
+                </div></div>
+
+                <div class="article"><span>7</span><div>
+                    <h3>View statement and payment</h3>
+                    <ol>
+                        <li>Before the 5th of each month, the Creator sends Climbr a screenshot of the statistics of each relevant video (view count, date), taken from the platform's app.</li>
+                        <li>Climbr prepares the statement for the past month and sends it to the Creator within 7 days.</li>
+                        <li>The Creator issues an invoice or, if they have no business status, a note for the amount of the statement.</li>
+                        <li>Climbr pays by bank transfer to the account given by the Creator, within 15 days of receipt.</li>
+                    </ol>
+                    <p>An amount below €10 is carried over to the following month.</p>
+                </div></div>
+
+                <div class="article"><span>8</span><div>
+                    <h3>Permission to run ads on the posts</h3>
+                    <p>The Creator authorises Climbr to sponsor the videos posted on their account under this agreement, using the platforms' advertising tools (Spark Ads on TikTok, partnership ads on Instagram and Facebook), and to run them as ads on Climbr's accounts, crediting the Creator.</p>
+                    <p>This permission includes a non-exclusive assignment of the reproduction and public performance rights in the videos, and permission to use the Creator's image, name and voice appearing in them, on the following terms:</p>
+                    <ul>
+                        <li>media: social networks and online advertising platforms;</li>
+                        <li>territory: worldwide;</li>
+                        <li>term: 12 months from the posting of each video, surviving the end of the agreement;</li>
+                        <li>price: the assignment is granted in return for the pay set out in article 6.</li>
+                    </ul>
+                    <p>Climbr does not change the content of the videos, apart from the cropping and subtitles needed to run them as ads.</p>
+                </div></div>
+
+                <div class="article"><span>9</span><div>
+                    <h3>The Creator's commitments</h3>
+                    <ul>
+                        <li>The Creator warrants that they own the declared accounts and are the author of the videos.</li>
+                        <li>They will not buy views, followers or engagement, nor artificially inflate their statistics in any way. Such a video is not paid, and Climbr may terminate the agreement without notice.</li>
+                        <li>They will not disparage Climbr during the agreement, nor make false claims about the app.</li>
+                        <li>They declare that they are of legal age.</li>
+                    </ul>
+                </div></div>
+
+                <div class="article"><span>10</span><div>
+                    <h3>Independence</h3>
+                    <p>The Creator acts fully independently; this agreement creates no relationship of subordination. They remain free to work with other brands, except with a competing climbing logbook app during the term of the agreement.</p>
+                </div></div>
+
+                <div class="article"><span>11</span><div>
+                    <h3>Term and termination</h3>
+                    <p>The agreement takes effect on signature, for an indefinite term. Either party may end it at any time in writing (email or WhatsApp), with 15 days' notice.</p>
+                    <p>When the agreement ends, the free Climbr Pro access ends, views earned during the counting period remain payable, and the permission in article 8 continues for videos already posted until it expires.</p>
+                </div></div>
+
+                <div class="article"><span>12</span><div>
+                    <h3>Personal data</h3>
+                    <p>Climbr processes the Creator's data (identity, contact details, accounts, bank details, statistics) to perform the agreement and pay them, in accordance with the GDPR and its privacy policy. The Creator can exercise their rights at climbr@athanor-studio.io.</p>
+                </div></div>
+
+                <div class="article"><span>13</span><div>
+                    <h3>Governing law and disputes</h3>
+                    <p>This agreement is governed by French law. In case of disagreement, the parties seek an amicable solution for 30 days; failing that, the dispute is brought before the competent courts, subject to any protective rules that apply to the Creator if they act as a consumer.</p>
+                </div></div>
+
+                <div class="article"><span>14</span><div>
+                    <h3>Electronic signature</h3>
+                    <p>The Creator signs by filling in the form below and ticking the acceptance box. The parties recognise this electronic signature as having the same value as a handwritten one. A copy of the accepted agreement is sent to the Creator by email. In case of any difference between the French and English versions, the French version prevails.</p>
+                </div></div>
+            </article>
+
+            <form class="signer" id="form" novalidate>
+                <h2 data-t="signer.titre">Signer le contrat</h2>
+                <div class="carte deux" data-requis="nom">
+                    <div><label class="question" for="prenom"><span data-t="q.prenom">Prénom</span> <span class="req">*</span></label><input type="text" id="prenom" name="prenom" autocomplete="given-name"></div>
+                    <div><label class="question" for="nom"><span data-t="q.nom">Nom</span> <span class="req">*</span></label><input type="text" id="nom" name="nom" autocomplete="family-name"></div>
+                </div>
+                <div class="carte" data-requis="email">
+                    <label class="question" for="email"><span data-t="q.email">E-mail</span> <span class="req">*</span></label>
+                    <p class="aide" data-t="aide.email">Ta copie du contrat part à cette adresse.</p>
+                    <input type="email" id="email" name="email" autocomplete="email">
+                </div>
+                <div class="carte" data-requis="adresse">
+                    <label class="question" for="adresse"><span data-t="q.adresse">Adresse postale</span> <span class="req">*</span></label>
+                    <input type="text" id="adresse" name="adresse" autocomplete="street-address">
+                </div>
+                <div class="carte" data-requis="comptes">
+                    <label class="question" for="comptes"><span data-t="q.comptes">Tes comptes Instagram et TikTok</span> <span class="req">*</span></label>
+                    <input type="text" id="comptes" name="comptes" autocapitalize="off" autocorrect="off" spellcheck="false" data-t-ph="ph.comptes" placeholder="@toncompte">
+                </div>
+                <div class="carte" data-requis="accord">
+                    <label class="coche"><input type="checkbox" id="majeur" name="majeur"><span data-t="c.majeur">Je déclare être majeur.</span></label>
+                    <label class="coche"><input type="checkbox" id="accepte" name="accepte"><span data-t="c.accepte"><strong>J'ai lu le contrat en entier et je l'accepte.</strong> Cocher cette case et envoyer vaut signature.</span></label>
+                </div>
+                <div class="miel" aria-hidden="true"><label for="_honey">Ne pas remplir</label><input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off"></div>
+                <button class="btn btn-primary envoyer" type="submit" data-t="envoyer">Signer le contrat</button>
+                <p class="etat" id="etat" role="status"></p>
+            </form>
+
+            <div class="merci carte" role="status">
+                <h2 data-t="merci.titre">C'est signé, bienvenue !</h2>
+                <p data-t="merci.texte">Tu reçois une copie par e-mail. On t'envoie ton accès Climbr Pro et le guide sur WhatsApp.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ⚠️ À changer à chaque modification du texte (FR ou EN).
+        const CONTRAT_VERSION = '2026-10-06';
+
+        // ── La langue ──────────────────────────────────────────────
+        // Même clé que le reste de /climbr (`climbr-lang`).
+        const EN = {
+            'retour': '← The creator program',
+            'titre': 'Your creator agreement',
+            'chapeau': 'Read it all, then sign at the bottom of the page. You\'ll get a copy by email.',
+            'signer.titre': 'Sign the agreement',
+            'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
+            'aide.email': 'Your copy of the agreement goes to this address.',
+            'q.adresse': 'Postal address', 'q.comptes': 'Your Instagram and TikTok accounts',
+            'c.majeur': 'I declare that I am of legal age.',
+            'c.accepte': '<strong>I have read the whole agreement and I accept it.</strong> Ticking this box and sending counts as my signature.',
+            'envoyer': 'Sign the agreement',
+            'merci.titre': 'Signed. Welcome aboard!',
+            'merci.texte': 'You\'ll get a copy by email. We\'ll send your Climbr Pro access and the guide on WhatsApp.'
+        };
+        const EN_PH = { 'ph.comptes': '@youraccount' };
+        const MSG = {
+            fr: { manque: 'Il manque des réponses : elles sont entourées.', envoi: 'Envoi…', erreur: 'L\'envoi n\'est pas passé. Réessaie, ou écris-nous à climbr@athanor-studio.io.', titre: 'Climbr — Contrat créateur', aria: 'Switch to English' },
+            en: { manque: 'Some answers are missing: they\'re highlighted.', envoi: 'Sending…', erreur: 'Sending failed. Try again, or email us at climbr@athanor-studio.io.', titre: 'Climbr — Creator agreement', aria: 'Passer en français' }
+        };
+        const FR = {}, FR_PH = {};
+        document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
+        document.querySelectorAll('[data-t-ph]').forEach(el => { FR_PH[el.dataset.tPh] = el.placeholder; });
+
+        let langue;
+        try { langue = localStorage.getItem('climbr-lang'); } catch (e) {}
+        if (langue !== 'fr' && langue !== 'en') langue = (navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+        function appliquer() {
+            const d = langue === 'en' ? EN : FR, ph = langue === 'en' ? EN_PH : FR_PH;
+            document.documentElement.lang = langue;
+            document.title = MSG[langue].titre;
+            document.querySelectorAll('[data-t]').forEach(el => { if (d[el.dataset.t] !== undefined) el.innerHTML = d[el.dataset.t]; });
+            document.querySelectorAll('[data-t-ph]').forEach(el => { if (ph[el.dataset.tPh] !== undefined) el.placeholder = ph[el.dataset.tPh]; });
+            document.getElementById('texte-fr').hidden = langue !== 'fr';
+            document.getElementById('texte-en').hidden = langue !== 'en';
+            document.querySelector('.lang-toggle-label').textContent = langue === 'fr' ? 'EN' : 'FR';
+            document.querySelector('.lang-toggle').setAttribute('aria-label', MSG[langue].aria);
+            try { localStorage.setItem('climbr-lang', langue); } catch (e) {}
+        }
+        document.querySelector('.lang-toggle').addEventListener('click', () => { langue = langue === 'fr' ? 'en' : 'fr'; appliquer(); });
+        appliquer();
+
+        // ── La signature ───────────────────────────────────────────
+        // L'e-mail reçu porte la version, la langue lue et l'empreinte SHA-256
+        // du texte affiché : comparée à celle du fichier de l'historique git,
+        // elle prouve mot pour mot ce que le créateur a accepté.
+        const form = document.getElementById('form');
+        const etat = document.getElementById('etat');
+        const CONTROLES = {
+            nom: () => form.prenom.value.trim() && form.nom.value.trim(),
+            email: () => form.email.value.trim() && form.email.checkValidity(),
+            adresse: () => form.adresse.value.trim().length >= 8,
+            comptes: () => form.comptes.value.trim().length >= 2,
+            accord: () => form.majeur.checked && form.accepte.checked
+        };
+        form.addEventListener('input', (e) => {
+            const carte = e.target.closest('.carte.invalide');
+            if (carte && CONTROLES[carte.dataset.requis]()) carte.classList.remove('invalide');
+        });
+        async function empreinte(texte) {
+            try {
+                const octets = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(texte));
+                return [...new Uint8Array(octets)].map(o => o.toString(16).padStart(2, '0')).join('');
+            } catch (e) { return 'indisponible'; }
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const m = MSG[langue];
+            etat.classList.remove('erreur');
+            const manquantes = [...form.querySelectorAll('[data-requis]')].filter(c => !CONTROLES[c.dataset.requis]());
+            form.querySelectorAll('.carte').forEach(c => c.classList.toggle('invalide', manquantes.includes(c)));
+            if (manquantes.length) {
+                etat.textContent = m.manque; etat.classList.add('erreur');
+                manquantes[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            const bouton = form.querySelector('.envoyer');
+            bouton.disabled = true; etat.textContent = m.envoi;
+            const lu = document.getElementById(langue === 'en' ? 'texte-en' : 'texte-fr');
+            const texte = lu.innerText.replace(/\s+/g, ' ').trim();
+            const nom = form.prenom.value.trim() + ' ' + form.nom.value.trim();
+            const donnees = {
+                prenom: form.prenom.value.trim(),
+                nom: form.nom.value.trim(),
+                email: form.email.value.trim(),
+                adresse: form.adresse.value.trim(),
+                comptes: form.comptes.value.trim(),
+                majeur: 'oui',
+                accepte: 'oui',
+                version_du_contrat: CONTRAT_VERSION,
+                langue_du_contrat: langue,
+                empreinte_sha256: await empreinte(texte),
+                signe_le: new Date().toISOString(),
+                fuseau: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+                navigateur: navigator.userAgent,
+                contrat: texte,
+                _honey: form._honey.value,
+                _subject: 'Contrat créateur signé : ' + nom + ' (version ' + CONTRAT_VERSION + ')',
+                _replyto: form.email.value.trim(),
+                _cc: form.email.value.trim(),
+                _template: 'box'
+            };
+            try {
+                const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(donnees)
+                });
+                const j = await r.json().catch(() => ({}));
+                // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
+                // qui dit si le message est parti (il vaut la chaîne "true").
+                if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
+                document.getElementById('bloc').classList.add('signe');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (err) {
+                etat.textContent = m.erreur; etat.classList.add('erreur');
+                bouton.disabled = false;
+            }
+        });
+
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+    </script>
+</body>
+</html>
