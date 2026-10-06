@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climbr — Programme créateurs</title>
-    <meta name="description" content="Tu grimpes en salle et tu fais des vidéos ? Montre Climbr dans tes contenus et touche 1 $ pour 1 000 vues.">
+    <meta name="description" content="Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche 1 $ pour 1 000 vues.">
     <!-- ⚠️ Page envoyée en message privé aux créateurs contactés : hors du
          sitemap et des moteurs, pour que la rémunération ne se lise pas
          dans une recherche Google. -->
@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="Climbr">
     <meta property="og:url" content="https://athanor-studio.io/climbr/creators/">
     <meta property="og:title" content="Climbr — Programme créateurs">
-    <meta property="og:description" content="Grimpe, filme, et touche 1 $ pour 1 000 vues.">
+    <meta property="og:description" content="Crée du contenu rémunéré avec Climbr : 1 $ pour 1 000 vues.">
     <meta property="og:image" content="https://athanor-studio.io/climbr/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -32,8 +32,9 @@
     <style>
         /* À côté du logo, séparé d'un filet. ⚠️ Masqué sous 480 px : logo,
            mention, langue et « Postuler » font ~420 px pour 350 de place sur un
-           iPhone, et le hero redit « Programme créateurs » juste dessous. */
+           iPhone ; le hero le reprend alors, et seulement là (`.hero-sur`). */
         @media (max-width: 480px) { .nav-sur { display: none; } }
+        @media (min-width: 481px) { .hero-sur { display: none; } }
         .nav-sur { padding-left: 0.7rem; border-left: 1px solid var(--line); font-size: var(--fs-small); font-weight: 600; letter-spacing: 0; color: var(--ink-soft); white-space: nowrap; }
 
         /* La photo du hero : recadrée en 4:5 sur le téléphone — en 9:16 entier,
@@ -157,7 +158,7 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text fade-up">
-                <span class="eyebrow" data-t="hero.sur">Programme créateurs</span>
+                <span class="eyebrow hero-sur" data-t="hero.sur">Programme créateurs</span>
                 <h1 class="hero-title" data-t="hero.titre">Crée du contenu <span class="accent">rémunéré</span> avec Climbr</h1>
                 <p class="hero-sub" data-t="hero.sous">Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche <strong>1&nbsp;$ pour 1&nbsp;000 vues</strong>.</p>
                 <div class="hero-cta">
@@ -320,8 +321,8 @@
         // double dans i18n.js.
         const EN = {
             'nav.sur': 'Creator program',
-            'nav.postuler': 'Apply',
             'hero.sur': 'Creator program',
+            'nav.postuler': 'Apply',
             'hero.titre': 'Create <span class="accent">paid</span> content with Climbr',
             'hero.sous': 'You climb indoors? Show how you use Climbr during your session and earn <strong>$1 per 1,000 views</strong>.',
             'hero.cta': 'Apply now',
