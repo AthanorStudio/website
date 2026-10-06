@@ -43,9 +43,8 @@
         .aide { font-size: var(--fs-small); color: var(--ink-soft); margin: -0.4rem 0 0.75rem; }
         .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
         .deux .question { margin-bottom: 0.45rem; }
-        input[type="text"], input[type="email"], input[type="tel"], select, textarea { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; width: 100%; min-width: 0; transition: border-color var(--transition); }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
-        textarea { min-height: 6rem; resize: vertical; }
+        input[type="text"], input[type="email"], input[type="tel"], select { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; width: 100%; min-width: 0; transition: border-color var(--transition); }
+        input:focus, select:focus { outline: none; border-color: var(--accent); }
 
         /* Les choix en gros boutons : le vrai <input> reste là, caché, pour
            le clavier et les lecteurs d'écran. */
@@ -168,7 +167,7 @@
 
                 <div class="carte" data-requis="whatsapp">
                     <label class="question" for="numero"><span data-t="q.whatsapp">WhatsApp</span> <span class="req">*</span></label>
-                    <p class="aide" data-t="aide.whatsapp">On te recontacte aussi par là : vérifie bien ton numéro.</p>
+                    <p class="aide" data-t="aide.whatsapp">Si tu es d'accord, on crée un groupe avec l'équipe pour faciliter la communication.</p>
                     <div class="tel-ligne">
                         <input type="tel" id="indicatif" name="indicatif" value="+33" aria-label="Indicatif" autocomplete="tel-country-code">
                         <input type="tel" id="numero" name="numero" autocomplete="tel-national" data-t-ph="ph.numero" placeholder="6 12 34 56 78">
@@ -181,36 +180,17 @@
                     <button type="button" class="ajouter" id="ajouter" data-t="ajouter">+ Ajouter un compte</button>
                 </div>
 
-                <div class="carte" data-requis="abonnes">
-                    <span class="question" id="q-abonnes"><span data-t="q.abonnes">Abonnés sur ton plus gros compte</span> <span class="req">*</span></span>
-                    <div class="choix" role="radiogroup" aria-labelledby="q-abonnes">
-                        <label><input type="radio" name="abonnes" value="Moins de 1 000"><span data-t="ab.1">Moins de 1 000</span></label>
-                        <label><input type="radio" name="abonnes" value="1 000 – 10 000"><span data-t="ab.2">1 000 – 10 000</span></label>
-                        <label><input type="radio" name="abonnes" value="10 000 – 50 000"><span data-t="ab.3">10 000 – 50 000</span></label>
-                        <label><input type="radio" name="abonnes" value="50 000 – 200 000"><span data-t="ab.4">50 000 – 200 000</span></label>
-                        <label><input type="radio" name="abonnes" value="Plus de 200 000"><span data-t="ab.5">Plus de 200 000</span></label>
-                    </div>
-                </div>
-
                 <div class="carte" data-requis="langues">
                     <span class="question" id="q-langues"><span data-t="q.langues">Langue de tes vidéos</span> <em data-t="q.langues.detail">(une ou plusieurs)</em> <span class="req">*</span></span>
                     <div class="choix" role="group" aria-labelledby="q-langues">
                         <label><input type="checkbox" name="langues" value="Français"><span data-t="l.fr">Français</span></label>
                         <label><input type="checkbox" name="langues" value="Anglais"><span data-t="l.en">Anglais</span></label>
-                        <label><input type="checkbox" name="langues" value="Espagnol"><span data-t="l.es">Espagnol</span></label>
-                        <label><input type="checkbox" name="langues" value="Allemand"><span data-t="l.de">Allemand</span></label>
-                        <label><input type="checkbox" name="langues" value="Italien"><span data-t="l.it">Italien</span></label>
                     </div>
                 </div>
 
                 <div class="carte">
-                    <label class="question" for="salle"><span data-t="q.salle">Ta salle et ta ville</span> <em data-t="facultatif">(facultatif)</em></label>
+                    <label class="question" for="salle"><span data-t="q.salle">La salle où tu as l'habitude de grimper</span> <em data-t="facultatif">(facultatif)</em></label>
                     <input type="text" id="salle" name="salle" data-t-ph="ph.salle" placeholder="Arkose Montreuil, Paris">
-                </div>
-
-                <div class="carte">
-                    <label class="question" for="message"><span data-t="q.message">Un mot, une idée de vidéo</span> <em data-t="facultatif2">(facultatif)</em></label>
-                    <textarea id="message" name="message"></textarea>
                 </div>
 
                 <div class="carte" data-requis="consent">
@@ -256,14 +236,11 @@
             'format.oui': 'Yes', 'format.oui.detail': 'facecam',
             'format.non': 'No', 'format.non.detail': 'edits, clips, carousels',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
-            'q.whatsapp': 'WhatsApp', 'aide.whatsapp': 'We\'ll also reach you there: double-check your number.',
+            'q.whatsapp': 'WhatsApp', 'aide.whatsapp': 'If you\'re up for it, we\'ll set up a group with the team to make communication easier.',
             'q.comptes': 'Your accounts', 'q.comptes.detail': '(at least one)', 'ajouter': '+ Add an account',
-            'q.abonnes': 'Followers on your biggest account',
-            'ab.1': 'Under 1,000', 'ab.2': '1,000 – 10,000', 'ab.3': '10,000 – 50,000', 'ab.4': '50,000 – 200,000', 'ab.5': 'Over 200,000',
             'q.langues': 'Language of your videos', 'q.langues.detail': '(one or more)',
-            'l.fr': 'French', 'l.en': 'English', 'l.es': 'Spanish', 'l.de': 'German', 'l.it': 'Italian',
-            'q.salle': 'Your gym and city', 'facultatif': '(optional)',
-            'q.message': 'A word, a video idea', 'facultatif2': '(optional)',
+            'l.fr': 'French', 'l.en': 'English',
+            'q.salle': 'The gym where you usually climb', 'facultatif': '(optional)',
             'consent': 'I agree that Athanor Studio, the publisher of Climbr, may contact me by email and WhatsApp about the creator program and process my information for that purpose. <a href="../../../privacy.html" target="_blank" rel="noopener">Privacy</a>',
             'envoyer': 'Send my application',
             'merci.titre': 'Got it, thank you!',
@@ -339,7 +316,6 @@
             email: () => form.email.value.trim() && form.email.checkValidity(),
             whatsapp: () => form.numero.value.replace(/\D/g, '').length >= 6,
             comptes: () => comptes().length > 0,
-            abonnes: () => coches('abonnes').length > 0,
             langues: () => coches('langues').length > 0,
             consent: () => form.consent.checked
         };
@@ -372,14 +348,12 @@
                 email: form.email.value.trim(),
                 whatsapp: indicatif + ' ' + form.numero.value.trim(),
                 comptes: liste_comptes,
-                abonnes: coches('abonnes')[0],
                 langues: coches('langues').join(', '),
                 salle: form.salle.value.trim(),
-                message: form.message.value.trim(),
                 langue_de_la_page: langue,
                 consentement: 'oui',
                 _honey: form._honey.value,
-                _subject: 'Créateur Climbr : ' + form.prenom.value.trim() + ' ' + form.nom.value.trim() + ' (' + coches('format')[0] + ', ' + coches('abonnes')[0] + ')',
+                _subject: 'Créateur Climbr : ' + form.prenom.value.trim() + ' ' + form.nom.value.trim() + ' (' + coches('format')[0] + ')',
                 _replyto: form.email.value.trim(),
                 _template: 'table'
             };
