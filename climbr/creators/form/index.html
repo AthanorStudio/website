@@ -175,13 +175,13 @@
                 </div>
 
                 <div class="carte" data-requis="comptes">
-                    <span class="question"><span data-t="q.comptes">Tes comptes</span> <em data-t="q.comptes.detail">(au moins un)</em> <span class="req">*</span></span>
+                    <span class="question"><span data-t="q.comptes">Ton compte</span> <span class="req">*</span></span>
                     <div class="comptes" id="comptes"></div>
                     <button type="button" class="ajouter" id="ajouter" data-t="ajouter">+ Ajouter un compte</button>
                 </div>
 
                 <div class="carte" data-requis="langues">
-                    <span class="question" id="q-langues"><span data-t="q.langues">Langue de tes vidéos</span> <em data-t="q.langues.detail">(une ou plusieurs)</em> <span class="req">*</span></span>
+                    <span class="question" id="q-langues"><span data-t="q.langues">Langue de tes vidéos</span> <span class="req">*</span></span>
                     <div class="choix" role="group" aria-labelledby="q-langues">
                         <label><input type="checkbox" name="langues" value="Français"><span data-t="l.fr">Français</span></label>
                         <label><input type="checkbox" name="langues" value="Anglais"><span data-t="l.en">Anglais</span></label>
@@ -213,8 +213,8 @@
     <template id="modele-compte">
         <div class="compte">
             <select name="reseau" aria-label="Réseau">
+                <option value="Instagram" selected>Instagram</option>
                 <option value="TikTok">TikTok</option>
-                <option value="Instagram">Instagram</option>
             </select>
             <div class="arobase"><input type="text" name="pseudo" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Pseudo"></div>
             <button type="button" class="retirer" aria-label="Retirer ce compte">×</button>
@@ -237,8 +237,8 @@
             'format.non': 'No', 'format.non.detail': 'edits, clips, carousels',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
             'q.whatsapp': 'WhatsApp', 'aide.whatsapp': 'If you\'re up for it, we\'ll set up a group with the team to make communication easier.',
-            'q.comptes': 'Your accounts', 'q.comptes.detail': '(at least one)', 'ajouter': '+ Add an account',
-            'q.langues': 'Language of your videos', 'q.langues.detail': '(one or more)',
+            'q.comptes': 'Your account', 'ajouter': '+ Add an account',
+            'q.langues': 'Language of your videos',
             'l.fr': 'French', 'l.en': 'English',
             'q.salle': 'The gym where you usually climb', 'facultatif': '(optional)',
             'consent': 'I agree that Athanor Studio, the publisher of Climbr, may contact me by email and WhatsApp about the creator program and process my information for that purpose. <a href="../../../privacy.html" target="_blank" rel="noopener">Privacy</a>',

@@ -67,17 +67,11 @@
         .simu-gain output { display: block; font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
 
         .deal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; margin-top: 1.1rem; }
+        .deal-trois { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0; }
         .deal-carte { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem 1.5rem; }
         .deal-carte h3 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.2; margin-top: 0.5rem; }
         .deal-carte p { margin-top: 0.6rem; color: var(--ink-soft); font-size: var(--fs-small); }
         .deal-num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; }
-
-        /* Idées de vidéos */
-        .idees { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; list-style: none; }
-        .idees li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.4rem; }
-        .idees h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
-        .idees p { margin-top: 0.4rem; color: var(--ink-soft); font-size: var(--fs-small); }
-        .idees-format { display: inline-block; margin-bottom: 0.7rem; font-size: var(--fs-xs); font-weight: 600; color: var(--accent); background: rgba(180, 83, 31, 0.08); border-radius: var(--radius-full); padding: 0.2rem 0.6rem; }
 
         /* Les étapes */
         .etapes { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; counter-reset: etape; }
@@ -86,24 +80,16 @@
         .etapes h3 { font-size: 1.05rem; font-weight: 700; margin-top: 0.4rem; }
         .etapes p { margin-top: 0.35rem; color: var(--ink-soft); font-size: var(--fs-small); }
 
-        /* C'est quoi Climbr : le texte, et deux chiffres à droite. */
-        .quoi { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-        .quoi-chiffres { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-        .quoi-chiffres div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.4rem; display: flex; flex-direction: column-reverse; }
-        .quoi-chiffres dd { font-size: clamp(1.9rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
-        .quoi-chiffres dt { margin-top: 0.3rem; font-size: var(--fs-small); color: var(--ink-soft); }
         .cta-btn { background: #F4EFE8; color: var(--ink); padding: 0.95rem 1.6rem; font-size: 1rem; }
         .cta-btn:hover { background: #fff; transform: translateY(-1px); }
 
         @media (max-width: 1024px) {
-            .atouts { grid-template-columns: 1fr; }
+            .atouts, .deal-trois { grid-template-columns: 1fr; }
             .atout.remu-tete { flex-direction: row; align-items: center; gap: 1.1rem; }
-            .idees { grid-template-columns: 1fr 1fr; }
             .etapes { grid-template-columns: 1fr 1fr; }
-            .quoi { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
-            .atouts, .deal, .idees, .etapes { grid-template-columns: 1fr; }
+            .atouts, .deal, .etapes { grid-template-columns: 1fr; }
             .simu { grid-template-columns: 1fr; }
             .simu-gain { grid-row: auto; grid-column: 1; text-align: left; }
         }
@@ -163,13 +149,7 @@
                 <p class="hero-sub" data-t="hero.sous">Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche <strong>1&nbsp;$ pour 1&nbsp;000 vues</strong>.</p>
                 <div class="hero-cta">
                     <a href="form/" class="btn btn-primary" data-t="hero.cta">Je postule</a>
-                    <a href="#idees" class="btn btn-ghost" data-t="hero.idees">Des idées de vidéos</a>
                 </div>
-                <ul class="hero-trust">
-                    <li data-t="hero.puce1">1&nbsp;$ / 1&nbsp;000 vues</li>
-                    <li data-t="hero.puce2">Climbr Pro offert</li>
-                    <li data-t="hero.puce3">TikTok et Instagram</li>
-                </ul>
             </div>
 
             <div class="hero-visual fade-up">
@@ -180,15 +160,9 @@
 
     <!-- C'est quoi Climbr -->
     <section class="section section-deep">
-        <div class="container quoi fade-up">
-            <div>
-                <h2 class="section-title" data-t="quoi.titre">Le carnet de bloc de ceux qui grimpent en salle.</h2>
-                <p class="section-lead" data-t="quoi.texte">Une photo du mur, un doigt sur une prise : Climbr détoure le bloc. Tu notes tes essais, tu suis ta progression, et tu te compares aux grimpeurs de ta salle.</p>
-            </div>
-            <dl class="quoi-chiffres">
-                <div><dt data-t="quoi.c1">salles référencées</dt><dd>1&nbsp;529</dd></div>
-                <div><dt data-t="quoi.c2">iPhone et Android</dt><dd data-t="quoi.c2v">2 stores</dd></div>
-            </dl>
+        <div class="container fade-up">
+            <h2 class="section-title" data-t="quoi.titre">C'est quoi Climbr ?</h2>
+            <p class="section-lead" data-t="quoi.texte">Climbr, c'est le carnet de bloc des grimpeurs en salle : une photo du mur, l'app détoure le bloc, et tu suis tes essais et ta progression.</p>
         </div>
     </section>
 
@@ -211,9 +185,9 @@
                     <p data-t="remu.exemple">Exemple : une vidéo à 300&nbsp;000 vues = 300&nbsp;$</p>
                 </div>
                 <div class="simu">
-                    <label for="vues"><span data-t="simu.label">Si ta vidéo fait</span> <strong id="vues-texte">50 000</strong> <span data-t="simu.vues">vues</span></label>
-                    <input type="range" id="vues" min="0" max="100" step="1" value="57" aria-describedby="gain">
-                    <div class="simu-gain"><span data-t="simu.gain">Tu touches</span><output id="gain">50 $</output></div>
+                    <label for="vues"><span data-t="simu.label">Si ta vidéo fait</span> <strong id="vues-texte">150 000</strong> <span data-t="simu.vues">vues</span></label>
+                    <input type="range" id="vues" min="0" max="100" step="1" value="73" aria-describedby="gain">
+                    <div class="simu-gain"><span data-t="simu.gain">Tu touches</span><output id="gain">150 $</output></div>
                 </div>
             </div>
             <div class="atouts fade-up">
@@ -221,7 +195,7 @@
                     <div class="remu-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="11" width="17" height="10" rx="2.5"/><path d="M7.5 11V8a4.5 4.5 0 0 1 8.7-1.6"/></svg></div>
                     <div>
                         <h3 data-t="atout.app.titre">Un accès complet à l'app</h3>
-                        <p data-t="atout.app.texte">Climbr Pro offert : toute l'app débloquée, pour la filmer en entier.</p>
+                        <p data-t="atout.app.texte">Climbr Pro offert : toute l'app débloquée.</p>
                     </div>
                 </div>
                 <div class="atout remu-tete">
@@ -234,41 +208,37 @@
                 <div class="atout remu-tete">
                     <div class="remu-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.1A8 8 0 1 1 20 12Z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg></div>
                     <div>
-                        <h3 data-t="atout.aide.titre">Une assistance dédiée</h3>
+                        <h3 data-t="atout.aide.titre">Un accompagnement dédié</h3>
                         <p data-t="atout.aide.texte">L'équipe est dispo pour t'aider à faire des vues et répondre à toutes tes questions.</p>
                     </div>
-                </div>
-            </div>
-            <div class="deal fade-up">
-                <div class="deal-carte">
-                    <span class="deal-num" data-t="deal.1.num">Tu fais</span>
-                    <h3 data-t="deal.1.titre">Des vidéos de toi avec Climbr</h3>
-                    <p data-t="deal.1.texte">Tu scannes tes blocs, tu notes tes essais, tu montres ta progression — et tu publies sur ton TikTok ou ton Instagram.</p>
-                </div>
-                <div class="deal-carte">
-                    <span class="deal-num" data-t="deal.3.num">On peut</span>
-                    <h3 data-t="deal.3.titre">Reprendre tes vidéos en pub</h3>
-                    <p data-t="deal.3.texte">Tes vidéos restent sur ton compte. On peut aussi les diffuser en publicité sur nos réseaux, en te citant.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Idées de vidéos -->
-    <section id="idees" class="section section-deep">
+    <!-- Ce que tu dois faire -->
+    <section class="section section-deep">
         <div class="container">
             <div class="section-header fade-up">
-                <h2 class="section-title" data-t="idees.titre">Pas d'inspiration ? Pars de là.</h2>
-                <p class="section-lead" data-t="idees.lead">Ce qui marche : toi, au mur, et l'app qui sert vraiment. Pas besoin de script, ni d'être fort.</p>
+                <h2 class="section-title" data-t="faire.titre">Ce que tu dois faire</h2>
             </div>
-            <ul class="idees fade-up">
-                <li><span class="idees-format" data-t="idee1.format">POV · 15 s</span><h3 data-t="idee1.titre">Scanne ton projet</h3><p data-t="idee1.texte">Une photo du mur, un doigt sur une prise, et Climbr détoure toute la voie.</p></li>
-                <li><span class="idees-format" data-t="idee2.format">Vlog · 30 s</span><h3 data-t="idee2.titre">Ma séance en 30 secondes</h3><p data-t="idee2.texte">Chaque bloc tenté, chaque essai noté, le bilan de la séance à la fin.</p></li>
-                <li><span class="idees-format" data-t="idee3.format">Avant / après</span><h3 data-t="idee3.titre">Un mois de progression</h3><p data-t="idee3.texte">Ton Profil au premier jour, puis un mois plus tard : la courbe, les niveaux.</p></li>
-                <li><span class="idees-format" data-t="idee4.format">Storytime</span><h3 data-t="idee4.titre">Le bloc qui me résiste</h3><p data-t="idee4.texte">Essai après essai, jusqu'au top — et le compteur d'essais dans l'app.</p></li>
-                <li><span class="idees-format" data-t="idee5.format">Défi</span><h3 data-t="idee5.titre">Le classement de ma salle</h3><p data-t="idee5.texte">Où tu te places ce mois-ci, et ce qu'il te faut pour monter.</p></li>
-                <li><span class="idees-format" data-t="idee6.format">Astuce</span><h3 data-t="idee6.titre">Mes forts et mes faibles</h3><p data-t="idee6.texte">Dalle, dévers, réglettes : ce que l'app dit de ton style de grimpe.</p></li>
-            </ul>
+            <div class="deal deal-trois fade-up">
+                <div class="deal-carte">
+                    <span class="deal-num" data-t="deal.1.num">Tu fais</span>
+                    <h3 data-t="deal.1.titre">Des vidéos avec Climbr</h3>
+                    <p data-t="deal.1.texte">Tu scannes tes blocs, tu notes tes essais, tu montres ta progression — et tu publies sur ton TikTok ou ton Instagram.</p>
+                </div>
+                <div class="deal-carte">
+                    <span class="deal-num" data-t="faire.pov.num">Face caméra ou pas</span>
+                    <h3 data-t="faire.pov.titre">Pas obligé de montrer ton visage</h3>
+                    <p data-t="faire.pov.texte">Un POV où on voit l'app en action marche aussi : ton téléphone, le mur, tes mains.</p>
+                </div>
+                <div class="deal-carte">
+                    <span class="deal-num" data-t="deal.3.num">Tu acceptes</span>
+                    <h3 data-t="deal.3.titre">Nous autoriser à faire de la publicité avec tes vidéos</h3>
+                    <p data-t="deal.3.texte">Tes vidéos restent sur ton compte. On peut aussi les diffuser en publicité sur nos réseaux, en te citant.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -293,7 +263,7 @@
             <div class="final-card fade-up">
                 <div>
                     <h2 data-t="cta.titre">Ça t'intéresse ?</h2>
-                    <p data-t="cta.texte">Deux minutes pour dire qui tu es et où tu grimpes. On revient vers toi par e-mail ou sur WhatsApp.</p>
+                    <p data-t="cta.texte">Deux minutes pour remplir ce formulaire. On revient vers toi par e-mail ou sur WhatsApp.</p>
                     <div class="final-badges"><a href="form/" class="btn cta-btn" data-t="cta.bouton">Je postule</a></div>
                 </div>
             </div>
@@ -326,48 +296,39 @@
             'hero.titre': 'Create <span class="accent">paid</span> content with Climbr',
             'hero.sous': 'You climb indoors? Show how you use Climbr during your session and earn <strong>$1 per 1,000 views</strong>.',
             'hero.cta': 'Apply now',
-            'hero.idees': 'Video ideas',
-            'hero.puce1': '$1 / 1,000 views',
-            'hero.puce2': 'Climbr Pro for free',
-            'hero.puce3': 'TikTok and Instagram',
             'deal.titre': 'What do you get?',
             'remu.titre': 'Clear, simple pay',
             'remu.sous': 'You get paid on performance',
             'remu.prix': '$1 / 1,000 views',
             'remu.exemple': 'Example: a video with 300,000 views = $300',
             'atout.app.titre': 'Full access to the app',
-            'atout.app.texte': 'Climbr Pro for free: the whole app unlocked, so you can film all of it.',
+            'atout.app.texte': 'Climbr Pro for free: the whole app unlocked.',
             'atout.aide.titre': 'Dedicated support',
             'atout.doc.titre': 'An ideas guide',
             'atout.doc.texte': 'A document to help you find quick, easy video ideas.',
             'atout.aide.texte': 'The team is here to help you get views and answer all your questions.',
             'deal.1.num': 'You make',
-            'deal.1.titre': 'Videos of you using Climbr',
+            'deal.1.titre': 'Videos with Climbr',
             'deal.1.texte': 'Scan your boulders, log your attempts, show your progress — and post it on your TikTok or Instagram.',
-            'quoi.titre': 'The bouldering logbook for indoor climbers.',
-            'quoi.texte': 'One photo of the wall, one tap on a hold: Climbr outlines the boulder. Log your attempts, track your progress, and compare yourself with the climbers at your gym.',
-            'quoi.c1': 'gyms listed', 'quoi.c2': 'iPhone and Android', 'quoi.c2v': '2 stores',
-            'deal.3.num': 'We may',
-            'deal.3.titre': 'Run your videos as ads',
+            'quoi.titre': 'What is Climbr?',
+            'quoi.texte': 'Climbr is the bouldering logbook for indoor climbers: one photo of the wall, the app outlines the boulder, and you track your attempts and your progress.',
+            'faire.titre': 'What you need to do',
+            'faire.pov.num': 'On camera or not',
+            'faire.pov.titre': 'No need to show your face',
+            'faire.pov.texte': 'A POV showing the app in action works too: your phone, the wall, your hands.',
+            'deal.3.num': 'You agree',
+            'deal.3.titre': 'To let us run ads with your videos',
             'deal.3.texte': 'Your videos stay on your account. We may also run them as ads on our channels, crediting you.',
             'simu.label': 'If your video gets',
             'simu.vues': 'views',
             'simu.gain': 'You earn',
-            'idees.titre': 'No inspiration? Start here.',
-            'idees.lead': 'What works: you, on the wall, and the app actually doing its job. No script needed, no need to climb hard.',
-            'idee1.format': 'POV · 15 s', 'idee1.titre': 'Scan your project', 'idee1.texte': 'One photo of the wall, one tap on a hold, and Climbr outlines the whole problem.',
-            'idee2.format': 'Vlog · 30 s', 'idee2.titre': 'My session in 30 seconds', 'idee2.texte': 'Every boulder tried, every attempt logged, the session recap at the end.',
-            'idee3.format': 'Before / after', 'idee3.titre': 'One month of progress', 'idee3.texte': 'Your Profile on day one, then a month later: the curve, the grades.',
-            'idee4.format': 'Storytime', 'idee4.titre': 'The boulder I can\'t send', 'idee4.texte': 'Attempt after attempt, all the way to the top — with the attempt count in the app.',
-            'idee5.format': 'Challenge', 'idee5.titre': 'My gym\'s leaderboard', 'idee5.texte': 'Where you rank this month, and what it takes to climb higher.',
-            'idee6.format': 'Tip', 'idee6.titre': 'My strengths and weaknesses', 'idee6.texte': 'Slab, overhang, crimps: what the app says about your climbing style.',
             'etapes.titre': 'From application to payout.',
             'etape1.titre': 'You apply', 'etape1.texte': 'Two minutes, on the form.',
             'etape2.titre': 'We reply', 'etape2.texte': 'We look at your account and get back to you, with your Climbr Pro access and the guide.',
             'etape3.titre': 'You post', 'etape3.texte': 'Your videos, at your own pace, on your channels.',
             'etape4.titre': 'You get paid', 'etape4.texte': '$1 per 1,000 views, on every video.',
             'cta.titre': 'Interested?',
-            'cta.texte': 'Two minutes to tell us who you are and where you climb. We\'ll get back to you by email or WhatsApp.',
+            'cta.texte': 'Two minutes to fill in the form. We\'ll get back to you by email or WhatsApp.',
             'cta.bouton': 'Apply now',
             'pied.confidentialite': 'Privacy'
         };
