@@ -30,28 +30,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Le deal : trois cartes, la rémunération au milieu en encre. */
-        .deal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
-        .deal-carte { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem 1.5rem; }
-        .deal-carte h3 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.2; margin-top: 0.5rem; }
-        .deal-carte p { margin-top: 0.6rem; color: var(--ink-soft); font-size: var(--fs-small); }
-        .deal-num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; }
-        .deal-carte.encre { background: var(--ink); color: #F4EFE8; border-color: var(--ink); }
-        .deal-carte.encre p { color: rgba(244, 239, 232, 0.72); }
-        .deal-carte.encre .deal-num { color: #E8A27A; }
-        .deal-prix { font-size: clamp(2.4rem, 4.5vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-top: 0.7rem; font-variant-numeric: tabular-nums; }
-        .deal-prix small { font-size: 0.42em; font-weight: 600; letter-spacing: 0; color: rgba(244, 239, 232, 0.72); margin-left: 0.15em; }
+        /* La rémunération : une carte pleine largeur, le tarif dans un encart
+           teinté, le simulateur juste dessous. Les quatre autres en deux par deux. */
+        .remu, .atout { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.25rem, 3vw, 1.75rem); }
+        .atouts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; margin-top: 1.1rem; }
+        .remu-tete { display: flex; align-items: center; gap: 1.1rem; }
+        .atout.remu-tete { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        .remu-icone { flex: none; width: 56px; height: 56px; border-radius: var(--radius-md); background: rgba(180, 83, 31, 0.09); color: var(--accent); display: grid; place-items: center; }
+        .remu-icone svg { width: 28px; height: 28px; }
+        .remu-tete h3 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.2; }
+        .remu-tete p { margin-top: 0.25rem; color: var(--ink-soft); font-size: var(--fs-small); }
+        .remu-tarif { margin-top: 1.4rem; border-radius: var(--radius-md); padding: 1.3rem 1.5rem; background: linear-gradient(100deg, rgba(180, 83, 31, 0.08), rgba(180, 83, 31, 0.025)); }
+        .remu-prix { font-size: clamp(1.9rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+        .remu-tarif p { margin-top: 0.35rem; color: var(--ink-soft); font-size: var(--fs-small); }
 
         /* Le simulateur : un curseur, le gain. Les paliers sont logarithmiques —
            de 1 000 à 1 M de vues, un curseur linéaire passerait 99 % de sa
            course au-dessus de 10 000. */
-        .simu { margin-top: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem 2rem; align-items: center; }
+        .simu { margin-top: 1.4rem; padding: 0 0.25rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem 2rem; align-items: center; }
         .simu label { font-weight: 600; font-size: var(--fs-small); color: var(--ink-soft); }
         .simu label strong { color: var(--ink); font-variant-numeric: tabular-nums; }
         .simu input[type="range"] { grid-column: 1; width: 100%; accent-color: var(--accent); margin-top: 0.6rem; }
         .simu-gain { grid-row: 1 / span 2; grid-column: 2; text-align: right; }
         .simu-gain span { display: block; font-size: var(--fs-xs); font-weight: 600; letter-spacing: var(--letter-wide); text-transform: uppercase; color: var(--muted); }
         .simu-gain output { display: block; font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
+
+        .deal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; margin-top: 1.1rem; }
+        .deal-carte { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem 1.5rem; }
+        .deal-carte h3 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.2; margin-top: 0.5rem; }
+        .deal-carte p { margin-top: 0.6rem; color: var(--ink-soft); font-size: var(--fs-small); }
+        .deal-num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; }
 
         /* Idées de vidéos */
         .idees { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; list-style: none; }
@@ -73,19 +81,18 @@
         .quoi-chiffres div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.4rem; display: flex; flex-direction: column-reverse; }
         .quoi-chiffres dd { font-size: clamp(1.9rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
         .quoi-chiffres dt { margin-top: 0.3rem; font-size: var(--fs-small); color: var(--ink-soft); }
-        .deal-deux { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.1rem; }
         .cta-btn { background: #F4EFE8; color: var(--ink); padding: 0.95rem 1.6rem; font-size: 1rem; }
         .cta-btn:hover { background: #fff; transform: translateY(-1px); }
 
         @media (max-width: 1024px) {
-            .deal, .idees { grid-template-columns: 1fr 1fr; }
-            .deal-carte.encre { grid-column: 1 / -1; grid-row: 1; }
+            .atouts { grid-template-columns: 1fr; }
+            .atout.remu-tete { flex-direction: row; align-items: center; gap: 1.1rem; }
+            .idees { grid-template-columns: 1fr 1fr; }
             .etapes { grid-template-columns: 1fr 1fr; }
             .quoi { grid-template-columns: 1fr; }
         }
         @media (max-width: 640px) {
-            .deal, .idees, .etapes { grid-template-columns: 1fr; }
-            .deal-deux { grid-template-columns: 1fr; }
+            .atouts, .deal, .idees, .etapes { grid-template-columns: 1fr; }
             .simu { grid-template-columns: 1fr; }
             .simu-gain { grid-row: auto; grid-column: 1; text-align: left; }
         }
@@ -177,7 +184,6 @@
     <section class="section section-deep">
         <div class="container quoi fade-up">
             <div>
-                <span class="eyebrow" data-t="quoi.sur">C'est quoi Climbr ?</span>
                 <h2 class="section-title" data-t="quoi.titre">Le carnet de bloc de ceux qui grimpent en salle.</h2>
                 <p class="section-lead" data-t="quoi.texte">Une photo du mur, un doigt sur une prise : Climbr détoure le bloc. Tu notes tes essais, tu suis ta progression, et tu te compares aux grimpeurs de ta salle.</p>
             </div>
@@ -192,27 +198,50 @@
     <section class="section">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="eyebrow" data-t="deal.sur">Ce que tu reçois</span>
-                <h2 class="section-title" data-t="deal.titre">Simple, et payé à la vue.</h2>
+                <h2 class="section-title" data-t="deal.titre">Ce que tu reçois ?</h2>
+            </div>
+            <div class="remu fade-up">
+                <div class="remu-tete">
+                    <div class="remu-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg></div>
+                    <div>
+                        <h3 data-t="remu.titre">Une rémunération claire</h3>
+                        <p data-t="remu.sous">Tu es payé·e à la performance</p>
+                    </div>
+                </div>
+                <div class="remu-tarif">
+                    <div class="remu-prix" data-t="remu.prix">1&nbsp;$ / 1&nbsp;000 vues</div>
+                    <p data-t="remu.exemple">Exemple : une vidéo à 300&nbsp;000 vues = 300&nbsp;$</p>
+                </div>
+                <div class="simu">
+                    <label for="vues"><span data-t="simu.label">Si ta vidéo fait</span> <strong id="vues-texte">50 000</strong> <span data-t="simu.vues">vues</span></label>
+                    <input type="range" id="vues" min="0" max="100" step="1" value="57" aria-describedby="gain">
+                    <div class="simu-gain"><span data-t="simu.gain">Tu touches</span><output id="gain">50 $</output></div>
+                </div>
+            </div>
+            <div class="atouts fade-up">
+                <div class="atout remu-tete">
+                    <div class="remu-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="11" width="17" height="10" rx="2.5"/><path d="M7.5 11V8a4.5 4.5 0 0 1 8.7-1.6"/></svg></div>
+                    <div>
+                        <h3 data-t="atout.app.titre">Un accès complet à l'app</h3>
+                        <p data-t="atout.app.texte">Climbr Pro offert : toute l'app débloquée, pour la filmer en entier.</p>
+                    </div>
+                </div>
+                <div class="atout remu-tete">
+                    <div class="remu-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+                    <div>
+                        <h3 data-t="atout.doc.titre">Un guide d'idées</h3>
+                        <p data-t="atout.doc.texte">Un document pour t'aider à trouver des idées de vidéos rapides à faire.</p>
+                    </div>
+                </div>
+                <div class="atout remu-tete">
+                    <div class="remu-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.1A8 8 0 1 1 20 12Z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg></div>
+                    <div>
+                        <h3 data-t="atout.aide.titre">Une assistance dédiée</h3>
+                        <p data-t="atout.aide.texte">L'équipe est dispo pour t'aider à faire des vues et répondre à toutes tes questions.</p>
+                    </div>
+                </div>
             </div>
             <div class="deal fade-up">
-                <div class="deal-carte encre">
-                    <span class="deal-num" data-t="deal.2.num">Tu touches</span>
-                    <div class="deal-prix">1&nbsp;$<small data-t="deal.2.unite">/ 1 000 vues</small></div>
-                    <p data-t="deal.2.texte">Sur chaque vidéo publiée, dès la première. Exemple : une vidéo à 300&nbsp;000 vues = 300&nbsp;$.</p>
-                </div>
-                <div class="deal-carte">
-                    <span class="deal-num" data-t="deal.pro.num">Offert</span>
-                    <h3 data-t="deal.pro.titre">Climbr Pro</h3>
-                    <p data-t="deal.pro.texte">Toute l'app débloquée, pour la filmer en entier et la connaître de l'intérieur.</p>
-                </div>
-                <div class="deal-carte">
-                    <span class="deal-num" data-t="deal.guide.num">Pour t'aider</span>
-                    <h3 data-t="deal.guide.titre">Le guide du créateur</h3>
-                    <p data-t="deal.guide.texte">Les formats qui marchent, les conseils de tournage, ce qu'il faut montrer de l'app.</p>
-                </div>
-            </div>
-            <div class="deal deal-deux fade-up">
                 <div class="deal-carte">
                     <span class="deal-num" data-t="deal.1.num">Tu fais</span>
                     <h3 data-t="deal.1.titre">Des vidéos de toi avec Climbr</h3>
@@ -224,11 +253,6 @@
                     <p data-t="deal.3.texte">Tes vidéos restent sur ton compte. On peut aussi les diffuser en publicité sur nos réseaux, en te citant.</p>
                 </div>
             </div>
-            <div class="simu fade-up">
-                <label for="vues"><span data-t="simu.label">Si ta vidéo fait</span> <strong id="vues-texte">50 000</strong> <span data-t="simu.vues">vues</span></label>
-                <input type="range" id="vues" min="0" max="100" step="1" value="57" aria-describedby="gain">
-                <div class="simu-gain"><span data-t="simu.gain">Tu touches</span><output id="gain">50 $</output></div>
-            </div>
         </div>
     </section>
 
@@ -236,7 +260,6 @@
     <section id="idees" class="section section-deep">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="eyebrow" data-t="idees.sur">Idées de vidéos</span>
                 <h2 class="section-title" data-t="idees.titre">Pas d'inspiration ? Pars de là.</h2>
                 <p class="section-lead" data-t="idees.lead">Ce qui marche : toi, au mur, et l'app qui sert vraiment. Pas besoin de script, ni d'être fort.</p>
             </div>
@@ -255,7 +278,6 @@
     <section class="section">
         <div class="container">
             <div class="section-header fade-up">
-                <span class="eyebrow" data-t="etapes.sur">Comment ça se passe</span>
                 <h2 class="section-title" data-t="etapes.titre">De la candidature au paiement.</h2>
             </div>
             <ol class="etapes fade-up">
@@ -309,17 +331,20 @@
             'hero.puce1': '$1 / 1,000 views',
             'hero.puce2': 'Climbr Pro for free',
             'hero.puce3': 'TikTok and Instagram',
-            'deal.sur': 'What you get',
-            'deal.titre': 'Simple, and paid per view.',
+            'deal.titre': 'What do you get?',
+            'remu.titre': 'Clear, simple pay',
+            'remu.sous': 'You get paid on performance',
+            'remu.prix': '$1 / 1,000 views',
+            'remu.exemple': 'Example: a video with 300,000 views = $300',
+            'atout.app.titre': 'Full access to the app',
+            'atout.app.texte': 'Climbr Pro for free: the whole app unlocked, so you can film all of it.',
+            'atout.aide.titre': 'Dedicated support',
+            'atout.doc.titre': 'An ideas guide',
+            'atout.doc.texte': 'A document to help you find quick, easy video ideas.',
+            'atout.aide.texte': 'The team is here to help you get views and answer all your questions.',
             'deal.1.num': 'You make',
             'deal.1.titre': 'Videos of you using Climbr',
             'deal.1.texte': 'Scan your boulders, log your attempts, show your progress — and post it on your TikTok or Instagram.',
-            'deal.2.num': 'You earn',
-            'deal.2.unite': '/ 1,000 views',
-            'deal.2.texte': 'On every video you post, from the very first. Example: a video with 300,000 views = $300.',
-            'deal.pro.num': 'Free', 'deal.pro.titre': 'Climbr Pro', 'deal.pro.texte': 'The whole app unlocked, to film all of it and know it inside out.',
-            'deal.guide.num': 'To help you', 'deal.guide.titre': 'The creator guide', 'deal.guide.texte': 'Formats that work, filming tips, what to show of the app.',
-            'quoi.sur': 'What is Climbr?',
             'quoi.titre': 'The bouldering logbook for indoor climbers.',
             'quoi.texte': 'One photo of the wall, one tap on a hold: Climbr outlines the boulder. Log your attempts, track your progress, and compare yourself with the climbers at your gym.',
             'quoi.c1': 'gyms listed', 'quoi.c2': 'iPhone and Android', 'quoi.c2v': '2 stores',
@@ -329,7 +354,6 @@
             'simu.label': 'If your video gets',
             'simu.vues': 'views',
             'simu.gain': 'You earn',
-            'idees.sur': 'Video ideas',
             'idees.titre': 'No inspiration? Start here.',
             'idees.lead': 'What works: you, on the wall, and the app actually doing its job. No script needed, no need to climb hard.',
             'idee1.format': 'POV · 15 s', 'idee1.titre': 'Scan your project', 'idee1.texte': 'One photo of the wall, one tap on a hold, and Climbr outlines the whole problem.',
@@ -338,7 +362,6 @@
             'idee4.format': 'Storytime', 'idee4.titre': 'The boulder I can\'t send', 'idee4.texte': 'Attempt after attempt, all the way to the top — with the attempt count in the app.',
             'idee5.format': 'Challenge', 'idee5.titre': 'My gym\'s leaderboard', 'idee5.texte': 'Where you rank this month, and what it takes to climb higher.',
             'idee6.format': 'Tip', 'idee6.titre': 'My strengths and weaknesses', 'idee6.texte': 'Slab, overhang, crimps: what the app says about your climbing style.',
-            'etapes.sur': 'How it works',
             'etapes.titre': 'From application to payout.',
             'etape1.titre': 'You apply', 'etape1.texte': 'Two minutes, on the form.',
             'etape2.titre': 'We reply', 'etape2.texte': 'We look at your account and get back to you, with your Climbr Pro access and the guide.',
