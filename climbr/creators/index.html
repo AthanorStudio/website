@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climbr — Programme créateurs</title>
-    <meta name="description" content="Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche 1 $ pour 1 000 vues.">
+    <meta name="description" content="Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche 1 € pour 1 000 vues.">
     <!-- ⚠️ Page envoyée en message privé aux créateurs contactés : hors du
          sitemap et des moteurs, pour que la rémunération ne se lise pas
          dans une recherche Google. -->
@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="Climbr">
     <meta property="og:url" content="https://athanor-studio.io/climbr/creators/">
     <meta property="og:title" content="Climbr — Programme créateurs">
-    <meta property="og:description" content="Crée du contenu rémunéré avec Climbr : 1 $ pour 1 000 vues.">
+    <meta property="og:description" content="Crée du contenu rémunéré avec Climbr : 1 € pour 1 000 vues.">
     <meta property="og:image" content="https://athanor-studio.io/climbr/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -160,7 +160,7 @@
             <div class="hero-text fade-up">
                 <span class="eyebrow hero-sur" data-t="hero.sur">Programme créateurs</span>
                 <h1 class="hero-title" data-t="hero.titre">Crée du contenu <span class="accent">rémunéré</span> avec Climbr</h1>
-                <p class="hero-sub" data-t="hero.sous">Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche <strong>1&nbsp;$ pour 1&nbsp;000 vues</strong>.</p>
+                <p class="hero-sub" data-t="hero.sous">Tu grimpes en salle ? Montre comment tu utilises Climbr pendant ta séance et touche <strong>1&nbsp;€ pour 1&nbsp;000 vues</strong>.</p>
                 <div class="hero-cta">
                     <a href="form/" class="btn btn-primary" data-t="hero.cta">Je postule</a>
                 </div>
@@ -187,13 +187,13 @@
                     </div>
                 </div>
                 <div class="remu-tarif">
-                    <div class="remu-prix" data-t="remu.prix">1&nbsp;$ / 1&nbsp;000 vues</div>
-                    <p data-t="remu.exemple">Exemple : une vidéo à 300&nbsp;000 vues = 300&nbsp;$</p>
+                    <div class="remu-prix" data-t="remu.prix">1&nbsp;€ / 1&nbsp;000 vues</div>
+                    <p data-t="remu.exemple">Exemple : une vidéo à 300&nbsp;000 vues = 300&nbsp;€</p>
                 </div>
                 <div class="simu">
                     <label for="vues"><span data-t="simu.label">Si ta vidéo fait</span> <strong id="vues-texte">150 000</strong> <span data-t="simu.vues">vues</span></label>
                     <input type="range" id="vues" min="0" max="100" step="1" value="73" aria-describedby="gain">
-                    <div class="simu-gain"><span data-t="simu.gain">Tu touches</span><output id="gain">150 $</output></div>
+                    <div class="simu-gain"><span data-t="simu.gain">Tu touches</span><output id="gain">150 €</output></div>
                 </div>
             </div>
             <div class="atouts fade-up">
@@ -361,7 +361,7 @@
             const gain = vues / 1000;
             const locale = langue === 'en' ? 'en-US' : 'fr-FR';
             document.getElementById('vues-texte').textContent = vues.toLocaleString(locale);
-            document.getElementById('gain').textContent = langue === 'en' ? '$' + gain.toLocaleString(locale) : gain.toLocaleString(locale) + ' $';
+            document.getElementById('gain').textContent = langue === 'en' ? '$' + gain.toLocaleString(locale) : gain.toLocaleString(locale) + ' €';
         }
         curseur.addEventListener('input', simuler);
 
