@@ -40,7 +40,6 @@
         .article p, .article li { color: var(--ink-soft); }
         .article p + p, .article p + ul, .article ul + p, .article p + ol { margin-top: 0.5rem; }
         .article ul, .article ol { padding-left: 1.15rem; display: grid; gap: 0.25rem; }
-        .a-completer { background: rgba(180, 83, 31, 0.12); color: var(--accent-dark); font-weight: 600; border-radius: 3px; padding: 0 0.2em; }
 
         .signer { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.9rem; }
         .signer h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); margin-top: 1rem; }
@@ -48,6 +47,7 @@
         .carte.invalide { border-color: var(--accent); }
         .question { display: block; font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.45rem; }
         .question .req { color: var(--accent); }
+        .question em { font-style: normal; font-weight: 400; color: var(--muted); }
         .aide { font-size: var(--fs-small); color: var(--ink-soft); margin: -0.2rem 0 0.6rem; }
         .deux { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
         input[type="text"], input[type="email"], input[type="date"] { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; width: 100%; min-width: 0; transition: border-color var(--transition); }
@@ -129,220 +129,130 @@
                  c'est la preuve de ce que chacun a accepté. -->
             <article class="feuille" id="texte-fr" lang="fr">
                 <span class="version">Version du 6 octobre 2026</span>
-                <h2>Contrat de collaboration commerciale — Programme créateurs Climbr</h2>
+                <h2>Contrat de collaboration – Créateur de contenu Climbr</h2>
                 <div class="parties">
-                    <p><strong>Entre</strong> Athanor Studio, SAS au capital de <span class="a-completer">[capital]</span> €, immatriculée au RCS de <span class="a-completer">[ville]</span> sous le n° <span class="a-completer">[SIREN]</span>, dont le siège est situé <span class="a-completer">[adresse]</span>, éditrice de l'application Climbr, ci-après « Climbr »,</p>
-                    <p><strong>Et</strong> la personne identifiée dans le formulaire de signature au bas de ce contrat, ci-après « le Créateur ».</p>
+                    <p><strong>Entre</strong></p>
+                    <p><strong>Athanor Studio</strong>, SAS au capital de 1 000 €, immatriculée au RCS de Paris sous le n° 932 414 139, dont le siège social est situé au 122 rue Amelot, 75011 Paris, éditrice de l'application Climbr, représentée par Guillaume Faugère, Président (ci-après « <strong>Climbr</strong> »),</p>
+                    <p><strong>Et</strong></p>
+                    <p>la personne identifiée dans le formulaire de signature au bas de ce contrat (nom, adresse, comptes et, si applicable, n° SIRET) (ci-après « <strong>le Créateur</strong> »).</p>
                 </div>
 
                 <div class="article"><span>1</span><div>
                     <h3>Objet</h3>
-                    <p>Le présent contrat fixe les conditions dans lesquelles le Créateur réalise et publie, sur ses propres comptes Instagram et TikTok, des vidéos présentant l'utilisation de l'application Climbr, et les conditions de sa rémunération. Il constitue le contrat écrit de collaboration commerciale prévu par la loi n° 2023-451 du 9 juin 2023.</p>
+                    <p>Le Créateur réalise des vidéos présentant l'application Climbr et les publie sur ses réseaux sociaux. Le présent contrat fixe les conditions de cette collaboration, la rémunération du Créateur et l'utilisation des contenus par Climbr.</p>
                 </div></div>
 
                 <div class="article"><span>2</span><div>
-                    <h3>Les vidéos</h3>
-                    <p>Le Créateur réalise de courtes vidéos (Reels Instagram, vidéos TikTok), dans son style habituel, où l'on voit l'application Climbr utilisée en situation : scanner un bloc, noter un essai, consulter sa progression, etc.</p>
-                    <p>Le Créateur n'est pas tenu d'apparaître à l'image ; une vidéo en vue subjective (POV) montrant sa main utiliser l'application est acceptée.</p>
-                    <p>Le Créateur publie le nombre de vidéos qu'il souhaite, à son rythme. Chaque vidéo reste en ligne au moins 90 jours après sa publication.</p>
+                    <h3>Contenus et validation</h3>
+                    <p>Le Créateur réalise des vidéos dans son style, à son rythme, sans nombre minimum. Climbr peut lui fournir des idées et un brief.</p>
+                    <p>Avant toute publication, le Créateur envoie la vidéo à Climbr (WhatsApp) pour validation. Une vidéo publiée sans validation écrite de Climbr n'est pas rémunérée.</p>
+                    <p>Chaque vidéo validée reste en ligne sur le compte du Créateur pendant au moins 90 jours.</p>
                 </div></div>
 
                 <div class="article"><span>3</span><div>
-                    <h3>Validation avant publication</h3>
-                    <p>Avant toute publication, le Créateur transmet la vidéo à Climbr, par WhatsApp ou par e-mail. Climbr la valide ou demande des modifications sous 48 heures ouvrées. Sans réponse dans ce délai, la vidéo est réputée validée.</p>
-                    <p>Climbr ne peut refuser une vidéo que si elle montre l'application de façon inexacte, contient une affirmation fausse sur Climbr, enfreint la loi ou les règles de la plateforme, ou porte atteinte à l'image de Climbr.</p>
+                    <h3>Rémunération</h3>
+                    <p>Le Créateur perçoit <strong>1 $ pour 1 000 vues organiques</strong> sur chaque vidéo validée et publiée. Les vues issues d'une diffusion sponsorisée ne sont pas comptées. La rémunération est plafonnée à <strong>1 000 $ par vidéo</strong>.</p>
+                    <p>Chaque mois, Climbr relève les vues de chaque vidéo et communique le relevé au Créateur. Le Créateur dispose de 7 jours pour le contester ; à défaut, le relevé est réputé accepté. Climbr paie par virement bancaire sous 15 jours, sur facture lorsque le Créateur dispose d'un statut d'entreprise.</p>
+                    <p>Le Créateur bénéficie aussi d'un accès gratuit à Climbr Pro pendant la collaboration.</p>
                 </div></div>
 
                 <div class="article"><span>4</span><div>
-                    <h3>Transparence et règles des plateformes</h3>
-                    <p>Le Créateur signale clairement, dès le début de chaque vidéo, son caractère commercial par la mention « Collaboration commerciale » ou « Publicité », et par l'outil de partenariat de la plateforme lorsqu'il existe.</p>
-                    <p>Le Créateur respecte les conditions d'utilisation des plateformes et le règlement des salles où il filme ; il obtient au besoin l'accord de la salle et des personnes reconnaissables à l'image.</p>
+                    <h3>Mention commerciale</h3>
+                    <p>Conformément à la loi du 9 juin 2023 sur l'influence commerciale, le Créateur indique clairement sur chaque vidéo la mention « Collaboration commerciale » ou « Publicité », et active l'outil de partenariat de la plateforme lorsqu'il existe.</p>
                 </div></div>
 
                 <div class="article"><span>5</span><div>
-                    <h3>Ce que Climbr fournit</h3>
-                    <ul>
-                        <li>un accès gratuit à Climbr Pro pendant toute la durée du contrat ;</li>
-                        <li>un guide d'idées de vidéos ;</li>
-                        <li>un accompagnement par l'équipe, notamment au sein d'un groupe WhatsApp si le Créateur l'accepte.</li>
-                    </ul>
+                    <h3>Propriété des contenus et modifications</h3>
+                    <p>Le Créateur cède à Climbr, à titre exclusif, pour le monde entier et pour une durée de 3 ans à compter de chaque publication, les droits de <strong>reproduction, de représentation, d'adaptation et de modification</strong> des vidéos et rushes réalisés dans le cadre du contrat, pour tout usage promotionnel et publicitaire de Climbr, sur tous supports (réseaux sociaux, sites, applications, plateformes publicitaires). Le Créateur conserve le droit de laisser les vidéos en ligne sur ses propres comptes.</p>
+                    <p>Le Créateur accepte que Climbr <strong>retravaille les contenus pour les rendre plus efficaces</strong> : nouveaux montages et découpages, nouvelles versions d'une même vidéo, changement des textes, accroches et légendes, sous-titres, musique et <strong>ajout d'une voix off</strong>. Climbr ne modifie ni le visage ni la voix du Créateur, y compris par intelligence artificielle, et ne lui fait pas dire ce qu'il n'a pas dit.</p>
+                    <p>Le Créateur autorise Climbr à utiliser son image, sa voix et son nom tels qu'ils apparaissent dans les contenus, pour les mêmes usages, dans le monde entier, pendant 3 ans à compter de chaque publication.</p>
+                    <p>Le Créateur fournit les rushes et fichiers originaux sur simple demande. La rémunération de l'article 3 inclut le prix de cette cession.</p>
                 </div></div>
 
                 <div class="article"><span>6</span><div>
-                    <h3>Rémunération</h3>
-                    <p>Le Créateur perçoit 1 $ (un dollar américain) pour 1 000 vues organiques de chaque vidéo validée et publiée, dès la première vidéo.</p>
-                    <p>Une vue organique est une vue comptée par la plateforme hors diffusion sponsorisée. Les vues générées par une publicité, financée par Climbr ou par le Créateur, ne sont pas rémunérées.</p>
-                    <p>Les vues d'une vidéo sont prises en compte pendant 90 jours à compter de sa publication. Le montant est converti en euros au taux de référence de la Banque centrale européenne du jour du relevé.</p>
+                    <h3>Sponsorisation des contenus</h3>
+                    <p>Climbr peut sponsoriser les vidéos <strong>depuis le compte du Créateur</strong> ou <strong>depuis l'un de ses propres comptes</strong>.</p>
+                    <p>Pour cela, le Créateur fournit à Climbr, pour chaque vidéo validée, les autorisations publicitaires nécessaires : <strong>code Spark Ads (TikTok)</strong>, <strong>autorisation de publicité partenaire Meta (Instagram / Facebook)</strong>, ou tout outil équivalent, valables au moins 365 jours. Il s'engage à ne pas les révoquer pendant cette durée.</p>
                 </div></div>
 
                 <div class="article"><span>7</span><div>
-                    <h3>Relevé des vues et paiement</h3>
-                    <ol>
-                        <li>Avant le 5 de chaque mois, le Créateur envoie à Climbr une capture des statistiques de chaque vidéo concernée (nombre de vues, date), prise depuis l'application de la plateforme.</li>
-                        <li>Climbr établit le relevé du mois écoulé et le communique au Créateur sous 7 jours.</li>
-                        <li>Le Créateur émet une facture ou, s'il n'a pas de statut d'entreprise, une note du montant du relevé.</li>
-                        <li>Climbr règle par virement bancaire sur le compte désigné par le Créateur, sous 15 jours à réception.</li>
-                    </ol>
-                    <p>Un montant inférieur à 10 € est reporté sur le mois suivant.</p>
+                    <h3>Fin du contrat</h3>
+                    <p>Chaque partie peut mettre fin au contrat à tout moment, par simple message écrit. Les vidéos déjà validées restent dues, et les articles 5 et 6 continuent de s'appliquer aux contenus déjà réalisés.</p>
                 </div></div>
 
                 <div class="article"><span>8</span><div>
-                    <h3>Autorisation de publicité sur les publications</h3>
-                    <p>Le Créateur autorise Climbr à sponsoriser les vidéos publiées sur son compte dans le cadre du contrat, au moyen des outils publicitaires des plateformes (Spark Ads sur TikTok, publicités partenaires sur Instagram et Facebook), et à les diffuser en publicité sur les comptes de Climbr en citant le Créateur.</p>
-                    <p>Cette autorisation emporte cession, à titre non exclusif, des droits de reproduction et de représentation sur les vidéos, ainsi que l'autorisation d'exploiter l'image, le nom et la voix du Créateur qui y figurent, aux conditions suivantes :</p>
-                    <ul>
-                        <li>supports : réseaux sociaux et plateformes publicitaires en ligne ;</li>
-                        <li>territoire : monde entier ;</li>
-                        <li>durée : 12 mois à compter de la publication de chaque vidéo, cette durée survivant à la fin du contrat ;</li>
-                        <li>prix : la cession est consentie en contrepartie de la rémunération prévue à l'article 6.</li>
-                    </ul>
-                    <p>Climbr ne modifie pas le contenu des vidéos, hormis les recadrages et sous-titres nécessaires à la diffusion publicitaire.</p>
+                    <h3>Droit applicable</h3>
+                    <p>Le contrat est soumis au droit français. En cas de litige, les parties cherchent d'abord un accord amiable ; à défaut, les tribunaux de Paris sont compétents.</p>
                 </div></div>
 
-                <div class="article"><span>9</span><div>
-                    <h3>Engagements du Créateur</h3>
-                    <ul>
-                        <li>Le Créateur garantit être titulaire des comptes déclarés et l'auteur des vidéos.</li>
-                        <li>Il s'interdit tout achat de vues, d'abonnés ou d'interactions, et tout procédé artificiel de gonflement des statistiques. Une vidéo concernée n'est pas rémunérée, et Climbr peut résilier le contrat sans préavis.</li>
-                        <li>Il s'abstient de tout propos dénigrant envers Climbr pendant le contrat, et de toute affirmation fausse sur l'application.</li>
-                        <li>Il déclare être majeur.</li>
-                    </ul>
-                </div></div>
-
-                <div class="article"><span>10</span><div>
-                    <h3>Indépendance</h3>
-                    <p>Le Créateur agit en toute indépendance ; le contrat ne crée aucun lien de subordination. Il reste libre de collaborer avec d'autres marques, sauf avec une application concurrente de carnet d'escalade pendant la durée du contrat.</p>
-                </div></div>
-
-                <div class="article"><span>11</span><div>
-                    <h3>Durée et fin du contrat</h3>
-                    <p>Le contrat prend effet à sa signature, pour une durée indéterminée. Chaque partie peut y mettre fin à tout moment par écrit (e-mail ou WhatsApp), avec un préavis de 15 jours.</p>
-                    <p>À la fin du contrat, l'accès Climbr Pro offert prend fin, les vues acquises pendant la période de comptage restent dues, et l'autorisation de l'article 8 se poursuit pour les vidéos déjà publiées jusqu'à son terme.</p>
-                </div></div>
-
-                <div class="article"><span>12</span><div>
-                    <h3>Données personnelles</h3>
-                    <p>Climbr traite les données du Créateur (identité, coordonnées, comptes, coordonnées bancaires, statistiques) pour exécuter le contrat et le payer, conformément au RGPD et à sa politique de confidentialité. Le Créateur peut exercer ses droits à l'adresse climbr@athanor-studio.io.</p>
-                </div></div>
-
-                <div class="article"><span>13</span><div>
-                    <h3>Droit applicable et litiges</h3>
-                    <p>Le contrat est soumis au droit français. En cas de désaccord, les parties cherchent une solution amiable pendant 30 jours ; à défaut, le litige est porté devant les tribunaux compétents, sous réserve des règles protectrices applicables au Créateur s'il agit en tant que consommateur.</p>
-                </div></div>
-
-                <div class="article"><span>14</span><div>
-                    <h3>Signature électronique</h3>
-                    <p>Le Créateur signe en remplissant le formulaire ci-dessous et en cochant la case d'acceptation. Les parties reconnaissent à cette signature électronique la même valeur qu'une signature manuscrite. Une copie du contrat accepté est envoyée au Créateur par e-mail. En cas de différence entre la version française et la version anglaise, la version française prévaut.</p>
-                </div></div>
+                <div class="parties">
+                    <p>Fait à Paris, signé électroniquement à la date d'envoi du formulaire ci-dessous. Une copie est adressée au Créateur par e-mail.</p>
+                    <p><strong>Pour Climbr (Athanor Studio)</strong> – Guillaume Faugère, Président</p>
+                </div>
             </article>
 
             <article class="feuille" id="texte-en" lang="en" hidden>
-                <span class="version">Version of 6 October 2026</span>
-                <h2>Commercial collaboration agreement — Climbr creator program</h2>
+                <span class="version">Version of 6 October 2026 · English translation for information; the French version prevails</span>
+                <h2>Collaboration agreement – Climbr content creator</h2>
                 <div class="parties">
-                    <p><strong>Between</strong> Athanor Studio, a French SAS with share capital of <span class="a-completer">[capital]</span> €, registered with the RCS of <span class="a-completer">[city]</span> under number <span class="a-completer">[SIREN]</span>, with its registered office at <span class="a-completer">[address]</span>, publisher of the Climbr app, hereinafter “Climbr”,</p>
-                    <p><strong>And</strong> the person identified in the signature form at the bottom of this agreement, hereinafter “the Creator”.</p>
+                    <p><strong>Between</strong></p>
+                    <p><strong>Athanor Studio</strong>, a French SAS with share capital of €1,000, registered with the Paris Trade and Companies Register under no. 932 414 139, with its registered office at 122 rue Amelot, 75011 Paris, France, publisher of the Climbr app, represented by Guillaume Faugère, President (hereinafter “<strong>Climbr</strong>”),</p>
+                    <p><strong>And</strong></p>
+                    <p>the person identified in the signature form at the bottom of this agreement (name, address, accounts and, where applicable, business registration number) (hereinafter “<strong>the Creator</strong>”).</p>
                 </div>
 
                 <div class="article"><span>1</span><div>
                     <h3>Purpose</h3>
-                    <p>This agreement sets out the terms under which the Creator makes and posts, on their own Instagram and TikTok accounts, videos showing the use of the Climbr app, and the terms of their pay. It is the written commercial collaboration agreement required by French law no. 2023-451 of 9 June 2023.</p>
+                    <p>The Creator makes videos presenting the Climbr app and posts them on their social networks. This agreement sets out the terms of this collaboration, the Creator's pay and Climbr's use of the content.</p>
                 </div></div>
 
                 <div class="article"><span>2</span><div>
-                    <h3>The videos</h3>
-                    <p>The Creator makes short videos (Instagram Reels, TikTok videos), in their usual style, showing the Climbr app in use: scanning a boulder, logging an attempt, checking their progress, and so on.</p>
-                    <p>The Creator does not have to appear on camera; a point-of-view (POV) video showing their hand using the app is accepted.</p>
-                    <p>The Creator posts as many videos as they wish, at their own pace. Each video stays online for at least 90 days after it is posted.</p>
+                    <h3>Content and approval</h3>
+                    <p>The Creator makes videos in their own style, at their own pace, with no minimum number. Climbr may provide ideas and a brief.</p>
+                    <p>Before posting, the Creator sends the video to Climbr (WhatsApp) for approval. A video posted without Climbr's written approval is not paid.</p>
+                    <p>Each approved video stays online on the Creator's account for at least 90 days.</p>
                 </div></div>
 
                 <div class="article"><span>3</span><div>
-                    <h3>Approval before posting</h3>
-                    <p>Before posting, the Creator sends the video to Climbr by WhatsApp or email. Climbr approves it or asks for changes within 48 business hours. Without a reply within that time, the video is deemed approved.</p>
-                    <p>Climbr may only refuse a video if it shows the app inaccurately, makes a false claim about Climbr, breaks the law or the platform's rules, or harms Climbr's image.</p>
+                    <h3>Pay</h3>
+                    <p>The Creator earns <strong>$1 per 1,000 organic views</strong> on each approved and posted video. Views from sponsored distribution are not counted. Pay is capped at <strong>$1,000 per video</strong>.</p>
+                    <p>Each month, Climbr records the views of each video and sends the statement to the Creator. The Creator has 7 days to dispute it; otherwise, the statement is deemed accepted. Climbr pays by bank transfer within 15 days, against an invoice when the Creator has a business status.</p>
+                    <p>The Creator also gets free access to Climbr Pro during the collaboration.</p>
                 </div></div>
 
                 <div class="article"><span>4</span><div>
-                    <h3>Disclosure and platform rules</h3>
-                    <p>The Creator clearly discloses, from the start of each video, its commercial nature with the label “Paid partnership” or “Ad”, and with the platform's partnership tool where one exists.</p>
-                    <p>The Creator follows the platforms' terms of use and the rules of the gyms where they film, and obtains, where needed, the consent of the gym and of any recognisable person.</p>
+                    <h3>Commercial disclosure</h3>
+                    <p>In accordance with the French law of 9 June 2023 on commercial influence, the Creator clearly displays on each video the label “Collaboration commerciale” (paid partnership) or “Publicité” (ad), and turns on the platform's partnership tool where one exists.</p>
                 </div></div>
 
                 <div class="article"><span>5</span><div>
-                    <h3>What Climbr provides</h3>
-                    <ul>
-                        <li>free access to Climbr Pro for the whole term of the agreement;</li>
-                        <li>a guide of video ideas;</li>
-                        <li>support from the team, including in a WhatsApp group if the Creator agrees.</li>
-                    </ul>
+                    <h3>Ownership of the content and edits</h3>
+                    <p>The Creator assigns to Climbr, exclusively, worldwide and for 3 years from each posting, the rights of <strong>reproduction, public performance, adaptation and modification</strong> of the videos and raw footage made under this agreement, for any promotional and advertising use by Climbr, on all media (social networks, websites, apps, advertising platforms). The Creator keeps the right to leave the videos online on their own accounts.</p>
+                    <p>The Creator agrees that Climbr may <strong>rework the content to make it more effective</strong>: new edits and cuts, new versions of the same video, changes to on-screen text, hooks and captions, subtitles, music and <strong>an added voice-over</strong>. Climbr does not alter the Creator's face or voice, including with artificial intelligence, and does not make them say anything they did not say.</p>
+                    <p>The Creator authorises Climbr to use their image, voice and name as they appear in the content, for the same uses, worldwide, for 3 years from each posting.</p>
+                    <p>The Creator provides the raw footage and original files on request. The pay in article 3 includes the price of this assignment.</p>
                 </div></div>
 
                 <div class="article"><span>6</span><div>
-                    <h3>Pay</h3>
-                    <p>The Creator earns $1 (one US dollar) per 1,000 organic views of each approved and posted video, from the very first video.</p>
-                    <p>An organic view is a view counted by the platform outside any sponsored distribution. Views generated by an ad, paid for by Climbr or by the Creator, are not paid.</p>
-                    <p>A video's views are counted for 90 days from its posting. The amount is converted into euros at the European Central Bank reference rate on the day of the statement.</p>
+                    <h3>Sponsoring the content</h3>
+                    <p>Climbr may sponsor the videos <strong>from the Creator's account</strong> or <strong>from one of its own accounts</strong>.</p>
+                    <p>To this end, for each approved video, the Creator gives Climbr the necessary advertising authorisations: <strong>Spark Ads code (TikTok)</strong>, <strong>Meta partnership ad permission (Instagram / Facebook)</strong>, or any equivalent tool, valid for at least 365 days. They undertake not to revoke them during that period.</p>
                 </div></div>
 
                 <div class="article"><span>7</span><div>
-                    <h3>View statement and payment</h3>
-                    <ol>
-                        <li>Before the 5th of each month, the Creator sends Climbr a screenshot of the statistics of each relevant video (view count, date), taken from the platform's app.</li>
-                        <li>Climbr prepares the statement for the past month and sends it to the Creator within 7 days.</li>
-                        <li>The Creator issues an invoice or, if they have no business status, a note for the amount of the statement.</li>
-                        <li>Climbr pays by bank transfer to the account given by the Creator, within 15 days of receipt.</li>
-                    </ol>
-                    <p>An amount below €10 is carried over to the following month.</p>
+                    <h3>End of the agreement</h3>
+                    <p>Either party may end the agreement at any time by a simple written message. Videos already approved remain payable, and articles 5 and 6 continue to apply to content already made.</p>
                 </div></div>
 
                 <div class="article"><span>8</span><div>
-                    <h3>Permission to run ads on the posts</h3>
-                    <p>The Creator authorises Climbr to sponsor the videos posted on their account under this agreement, using the platforms' advertising tools (Spark Ads on TikTok, partnership ads on Instagram and Facebook), and to run them as ads on Climbr's accounts, crediting the Creator.</p>
-                    <p>This permission includes a non-exclusive assignment of the reproduction and public performance rights in the videos, and permission to use the Creator's image, name and voice appearing in them, on the following terms:</p>
-                    <ul>
-                        <li>media: social networks and online advertising platforms;</li>
-                        <li>territory: worldwide;</li>
-                        <li>term: 12 months from the posting of each video, surviving the end of the agreement;</li>
-                        <li>price: the assignment is granted in return for the pay set out in article 6.</li>
-                    </ul>
-                    <p>Climbr does not change the content of the videos, apart from the cropping and subtitles needed to run them as ads.</p>
+                    <h3>Governing law</h3>
+                    <p>This agreement is governed by French law. In case of dispute, the parties first seek an amicable agreement; failing that, the courts of Paris have jurisdiction.</p>
                 </div></div>
 
-                <div class="article"><span>9</span><div>
-                    <h3>The Creator's commitments</h3>
-                    <ul>
-                        <li>The Creator warrants that they own the declared accounts and are the author of the videos.</li>
-                        <li>They will not buy views, followers or engagement, nor artificially inflate their statistics in any way. Such a video is not paid, and Climbr may terminate the agreement without notice.</li>
-                        <li>They will not disparage Climbr during the agreement, nor make false claims about the app.</li>
-                        <li>They declare that they are of legal age.</li>
-                    </ul>
-                </div></div>
-
-                <div class="article"><span>10</span><div>
-                    <h3>Independence</h3>
-                    <p>The Creator acts fully independently; this agreement creates no relationship of subordination. They remain free to work with other brands, except with a competing climbing logbook app during the term of the agreement.</p>
-                </div></div>
-
-                <div class="article"><span>11</span><div>
-                    <h3>Term and termination</h3>
-                    <p>The agreement takes effect on signature, for an indefinite term. Either party may end it at any time in writing (email or WhatsApp), with 15 days' notice.</p>
-                    <p>When the agreement ends, the free Climbr Pro access ends, views earned during the counting period remain payable, and the permission in article 8 continues for videos already posted until it expires.</p>
-                </div></div>
-
-                <div class="article"><span>12</span><div>
-                    <h3>Personal data</h3>
-                    <p>Climbr processes the Creator's data (identity, contact details, accounts, bank details, statistics) to perform the agreement and pay them, in accordance with the GDPR and its privacy policy. The Creator can exercise their rights at climbr@athanor-studio.io.</p>
-                </div></div>
-
-                <div class="article"><span>13</span><div>
-                    <h3>Governing law and disputes</h3>
-                    <p>This agreement is governed by French law. In case of disagreement, the parties seek an amicable solution for 30 days; failing that, the dispute is brought before the competent courts, subject to any protective rules that apply to the Creator if they act as a consumer.</p>
-                </div></div>
-
-                <div class="article"><span>14</span><div>
-                    <h3>Electronic signature</h3>
-                    <p>The Creator signs by filling in the form below and ticking the acceptance box. The parties recognise this electronic signature as having the same value as a handwritten one. A copy of the accepted agreement is sent to the Creator by email. In case of any difference between the French and English versions, the French version prevails.</p>
-                </div></div>
+                <div class="parties">
+                    <p>Made in Paris, signed electronically on the date the form below is sent. A copy is sent to the Creator by email.</p>
+                    <p><strong>For Climbr (Athanor Studio)</strong> – Guillaume Faugère, President</p>
+                </div>
             </article>
 
             <form class="signer" id="form" novalidate>
@@ -364,9 +274,12 @@
                     <label class="question" for="comptes"><span data-t="q.comptes">Tes comptes Instagram et TikTok</span> <span class="req">*</span></label>
                     <input type="text" id="comptes" name="comptes" autocapitalize="off" autocorrect="off" spellcheck="false" data-t-ph="ph.comptes" placeholder="@toncompte">
                 </div>
+                <div class="carte">
+                    <label class="question" for="siret"><span data-t="q.siret">N° SIRET</span> <em data-t="facultatif">(si tu as un statut d'entreprise)</em></label>
+                    <input type="text" id="siret" name="siret" inputmode="numeric">
+                </div>
                 <div class="carte" data-requis="accord">
-                    <label class="coche"><input type="checkbox" id="majeur" name="majeur"><span data-t="c.majeur">Je déclare être majeur.</span></label>
-                    <label class="coche"><input type="checkbox" id="accepte" name="accepte"><span data-t="c.accepte"><strong>J'ai lu le contrat en entier et je l'accepte.</strong> Cocher cette case et envoyer vaut signature.</span></label>
+                    <label class="coche"><input type="checkbox" id="accepte" name="accepte"><span data-t="c.accepte"><strong>Lu et approuvé.</strong> J'ai lu le contrat en entier et je l'accepte ; cocher cette case et envoyer vaut signature.</span></label>
                 </div>
                 <div class="miel" aria-hidden="true"><label for="_honey">Ne pas remplir</label><input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off"></div>
                 <button class="btn btn-primary envoyer" type="submit" data-t="envoyer">Signer le contrat</button>
@@ -394,8 +307,8 @@
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
             'aide.email': 'Your copy of the agreement goes to this address.',
             'q.adresse': 'Postal address', 'q.comptes': 'Your Instagram and TikTok accounts',
-            'c.majeur': 'I declare that I am of legal age.',
-            'c.accepte': '<strong>I have read the whole agreement and I accept it.</strong> Ticking this box and sending counts as my signature.',
+            'q.siret': 'Business registration number', 'facultatif': '(if you have a business status)',
+            'c.accepte': '<strong>Read and approved.</strong> I have read the whole agreement and I accept it; ticking this box and sending counts as my signature.',
             'envoyer': 'Sign the agreement',
             'merci.titre': 'Signed. Welcome aboard!',
             'merci.texte': 'You\'ll get a copy by email. We\'ll send your Climbr Pro access and the guide on WhatsApp.'
@@ -438,7 +351,7 @@
             email: () => form.email.value.trim() && form.email.checkValidity(),
             adresse: () => form.adresse.value.trim().length >= 8,
             comptes: () => form.comptes.value.trim().length >= 2,
-            accord: () => form.majeur.checked && form.accepte.checked
+            accord: () => form.accepte.checked
         };
         form.addEventListener('input', (e) => {
             const carte = e.target.closest('.carte.invalide');
@@ -473,8 +386,8 @@
                 email: form.email.value.trim(),
                 adresse: form.adresse.value.trim(),
                 comptes: form.comptes.value.trim(),
-                majeur: 'oui',
-                accepte: 'oui',
+                siret: form.siret.value.trim(),
+                lu_et_approuve: 'oui',
                 version_du_contrat: CONTRAT_VERSION,
                 langue_du_contrat: langue,
                 empreinte_sha256: await empreinte(texte),
