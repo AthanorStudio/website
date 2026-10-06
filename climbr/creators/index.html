@@ -41,9 +41,6 @@
            elle ferait plus de 900 px de haut à côté du texte. */
         .hero-photo { display: block; width: 100%; height: auto; max-width: 460px; margin-inline: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 52%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
 
-        /* C'est quoi Climbr : la phrase, puis le carrousel de /climbr (styles.css). */
-        .quoi-texte { margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
-
         /* La rémunération : une carte pleine largeur, le tarif dans un encart
            teinté, le simulateur juste dessous. Les quatre autres en deux par deux. */
         .remu, .atout { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.25rem, 3vw, 1.75rem); }
@@ -169,59 +166,8 @@
         </div>
     </section>
 
-    <!-- C'est quoi Climbr -->
-    <section class="section section-deep">
-        <div class="container fade-up">
-            <p class="section-lead quoi-texte" data-t="quoi.texte">Climbr, c'est le carnet de bloc des grimpeurs en salle : une photo du mur, l'app détoure le bloc, et tu suis tes essais et ta progression.</p>
-            <div class="parcours" data-parcours>
-                <ol>
-                    <li data-etape="0">
-                        <span class="parcours-num" data-t="app1.num">Étape 1</span>
-                        <h3 data-t="app1.titre">Scanne le mur.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-scan.webp" data-ecran="ecran-scan.webp" data-t-alt="app1.alt" alt="Le viseur de Climbr devant un mur en bois" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                    <li data-etape="1">
-                        <span class="parcours-num" data-t="app2.num">Étape 2</span>
-                        <h3 data-t="app2.titre">Touche une prise de ta voie.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-editeur.webp" data-ecran="ecran-editeur.webp" data-t-alt="app2.alt" alt="Les prises rouges détourées sur la photo du mur" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                    <li data-etape="2">
-                        <span class="parcours-num" data-t="app3.num">Étape 3</span>
-                        <h3 data-t="app3.titre">Note chaque essai, prise par prise.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-fiche.webp" data-ecran="ecran-fiche.webp" data-t-alt="app3.alt" alt="La fiche d'un bloc : deux séances, cinq essais, 85 %" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                    <li data-etape="3">
-                        <span class="parcours-num" data-t="app4.num">Étape 4</span>
-                        <h3 data-t="app4.titre">Retrouve tes blocs, séance par séance.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-projet.webp" data-ecran="ecran-projet.webp" data-t-alt="app4.alt" alt="Mes blocs, rangés par séance" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                    <li data-etape="4">
-                        <span class="parcours-num" data-t="app5.num">Étape 5</span>
-                        <h3 data-t="app5.titre">Trouve les salles autour de toi.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-salles.webp" data-ecran="ecran-salles.webp" data-t-alt="app5.alt" alt="La carte des salles" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                    <li data-etape="5">
-                        <span class="parcours-num" data-t="app6.num">Étape 6</span>
-                        <h3 data-t="app6.titre">Compare-toi aux grimpeurs de ta salle.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-classement.webp" data-ecran="ecran-classement.webp" data-t-alt="app6.alt" alt="Le classement d'une salle" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                    <li data-etape="6">
-                        <span class="parcours-num" data-t="app7.num">Étape 7</span>
-                        <h3 data-t="app7.titre">Analyse ta progression.</h3>
-                        <div class="tel tel-enligne"><div class="tel-ecran"><img src="../ecran-profil.webp" data-ecran="ecran-profil.webp" data-t-alt="app7.alt" alt="Le Profil : seize tops, quatre flashs, trois séances" loading="lazy" width="620" height="1347"></div><img src="../iphone.webp" alt="" class="tel-cadre" aria-hidden="true" width="886" height="1851"></div>
-                    </li>
-                </ol>
-                <div class="parcours-nav">
-                    <button type="button" class="parcours-fleche" data-sens="-1" data-t-aria="app.precedente" aria-label="Étape précédente">‹</button>
-                    <div class="parcours-points" role="tablist" data-t-aria="app.points" aria-label="Étapes"></div>
-                    <button type="button" class="parcours-fleche" data-sens="1" data-t-aria="app.suivante" aria-label="Étape suivante">›</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Le deal -->
-    <section class="section">
+    <section class="section section-deep">
         <div class="container">
             <div class="section-header fade-up">
                 <h2 class="section-title" data-t="deal.titre">Ce que tu reçois ?</h2>
@@ -271,7 +217,7 @@
     </section>
 
     <!-- Ce que tu dois faire -->
-    <section class="section section-deep">
+    <section class="section">
         <div class="container">
             <div class="section-header fade-up">
                 <h2 class="section-title" data-t="faire.titre">Ce que tu dois faire</h2>
@@ -294,7 +240,7 @@
     </section>
 
     <!-- Comment ça se passe -->
-    <section class="section">
+    <section class="section section-deep">
         <div class="container">
             <div class="section-header fade-up">
                 <h2 class="section-title" data-t="etapes.titre">De la candidature au paiement.</h2>
@@ -309,7 +255,7 @@
     </section>
 
     <!-- Postuler -->
-    <section class="section section-deep">
+    <section class="section">
         <div class="container">
             <div class="final-card fade-up">
                 <div>
@@ -358,15 +304,6 @@
             'atout.doc.titre': 'An ideas guide',
             'atout.doc.texte': 'A document to help you find quick, easy video ideas.',
             'atout.aide.texte': 'The team is here to help you get views and answer all your questions.',
-            'app1.num': "Step 1", 'app1.titre': "Scan the wall.", 'app1.alt': "Climbr's viewfinder in front of a wooden wall",
-            'app2.num': "Step 2", 'app2.titre': "Tap one hold of your route.", 'app2.alt': "The red holds outlined on the photo of the wall",
-            'app3.num': "Step 3", 'app3.titre': "Log every attempt, hold by hold.", 'app3.alt': "A boulder's page: two sessions, five attempts, 85%",
-            'app4.num': "Step 4", 'app4.titre': "Find your boulders, session by session.", 'app4.alt': "My boulders, grouped by session",
-            'app5.num': "Step 5", 'app5.titre': "Find the gyms around you.", 'app5.alt': "The gym map",
-            'app6.num': "Step 6", 'app6.titre': "See how you rank in your gym.", 'app6.alt': "A gym's leaderboard",
-            'app7.num': "Step 7", 'app7.titre': "Analyse your progress.", 'app7.alt': "The Profile: sixteen tops, four flashes, three sessions",
-            'app.precedente': 'Previous step', 'app.suivante': 'Next step', 'app.points': 'Steps',
-            'quoi.texte': 'Climbr is the bouldering logbook for indoor climbers: one photo of the wall, the app outlines the boulder, and you track your attempts and your progress.',
             'faire.titre': 'What you need to do',
             'faire.1.titre': 'Videos using Climbr', 'faire.1.texte': 'You make short Instagram Reels or TikToks, in your usual style. We need to see you scan a boulder with Climbr, log an attempt, and so on.',
             'faire.2.titre': 'No need to show your face', 'faire.2.texte': 'Film however you like, the way you usually post. A POV showing your hand using the app works too.',
@@ -390,8 +327,6 @@
         };
         const FR = {};
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
-        document.querySelectorAll('[data-t-alt]').forEach(el => { FR[el.dataset.tAlt] = el.alt; });
-        document.querySelectorAll('[data-t-aria]').forEach(el => { FR[el.dataset.tAria] = el.getAttribute('aria-label'); });
 
         let langue;
         try { langue = localStorage.getItem('climbr-lang'); } catch (e) {}
@@ -401,8 +336,6 @@
             document.documentElement.lang = langue;
             document.title = MESSAGES[langue].titre;
             document.querySelectorAll('[data-t]').forEach(el => { if (d[el.dataset.t] !== undefined) el.innerHTML = d[el.dataset.t]; });
-            document.querySelectorAll('[data-t-alt]').forEach(el => { if (d[el.dataset.tAlt] !== undefined) el.alt = d[el.dataset.tAlt]; });
-            document.querySelectorAll('[data-t-aria]').forEach(el => { if (d[el.dataset.tAria] !== undefined) el.setAttribute('aria-label', d[el.dataset.tAria]); });
             document.querySelectorAll('img[data-ecran]').forEach(img => { img.src = '../' + (langue === 'en' ? 'en/' : '') + img.dataset.ecran; });
             document.querySelector('.lang-toggle-label').textContent = langue === 'fr' ? 'EN' : 'FR';
             document.querySelector('.lang-toggle').setAttribute('aria-label', MESSAGES[langue].aria);
@@ -427,47 +360,6 @@
         curseur.addEventListener('input', simuler);
 
         appliquer();
-
-        // ── C'est quoi Climbr : le carrousel (repris de /climbr) ────
-        // Un point par étape, qui suit le glissement et y mène au clic ; les
-        // flèches avancent d'une carte (sur ordinateur, sans trackpad, on ne
-        // glisse pas une liste horizontale).
-        (function () {
-            const bloc = document.querySelector('[data-parcours]');
-            const liste = bloc.querySelector('ol');
-            const etapes = [...liste.children];
-            const points = bloc.querySelector('.parcours-points');
-            const fleches = bloc.querySelectorAll('.parcours-fleche');
-            const aller = (k) => {
-                const e = etapes[Math.min(etapes.length - 1, Math.max(0, k))];
-                liste.scrollTo({ left: e.offsetLeft - liste.offsetLeft - parseFloat(getComputedStyle(liste).paddingLeft), behavior: 'smooth' });
-            };
-            etapes.forEach((e, k) => {
-                const p = document.createElement('button');
-                p.type = 'button';
-                p.setAttribute('aria-label', String(k + 1));
-                p.addEventListener('click', () => aller(k));
-                points.appendChild(p);
-            });
-            const boutons = [...points.children];
-            let actuelle = 0, prevu = false;
-            const suivre = () => {
-                prevu = false;
-                const pas = etapes.length > 1 ? etapes[1].offsetLeft - etapes[0].offsetLeft : 1;
-                // ⚠️ Au bout de la liste, plusieurs cartes tiennent à l'écran et
-                // le défilement plafonne avant la dernière : c'est alors la
-                // dernière qui est « actuelle », sinon son point ne s'allume jamais.
-                const auBout = liste.scrollLeft + liste.clientWidth >= liste.scrollWidth - 2;
-                actuelle = auBout ? etapes.length - 1 : Math.min(etapes.length - 1, Math.max(0, Math.round(liste.scrollLeft / pas)));
-                boutons.forEach((b, k) => b.setAttribute('aria-current', k === actuelle ? 'true' : 'false'));
-                fleches[0].disabled = liste.scrollLeft <= 2;
-                fleches[1].disabled = auBout;
-            };
-            fleches.forEach(f => f.addEventListener('click', () => aller(actuelle + Number(f.dataset.sens))));
-            liste.addEventListener('scroll', () => { if (!prevu) { prevu = true; requestAnimationFrame(suivre); } }, { passive: true });
-            window.addEventListener('resize', suivre);
-            suivre();
-        })();
 
         // ── Navigation et apparitions ──────────────────────────────
         const nav = document.querySelector('.nav');
