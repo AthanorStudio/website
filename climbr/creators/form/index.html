@@ -49,12 +49,9 @@
         /* Les choix en gros boutons : le vrai <input> reste là, caché, pour
            le clavier et les lecteurs d'écran. */
         .choix { display: flex; flex-wrap: wrap; gap: 0.55rem; }
-        .choix.plein { display: grid; grid-template-columns: 1fr 1fr; }
         .choix label { position: relative; cursor: pointer; }
         .choix input { position: absolute; opacity: 0; width: 1px; height: 1px; }
         .choix input + span { display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--line); border-radius: var(--radius-sm); font-size: 0.9375rem; font-weight: 500; color: var(--ink-soft); background: var(--surface-raised); transition: border-color var(--transition), background var(--transition), color var(--transition); }
-        .choix.plein input + span { padding: 1rem; text-align: center; font-weight: 600; color: var(--ink); }
-        .choix.plein small { display: block; margin-top: 0.2rem; font-size: var(--fs-xs); font-weight: 400; color: var(--ink-soft); }
         .choix label:hover input + span { border-color: var(--muted); }
         .choix input:checked + span { border-color: var(--accent); background: rgba(180, 83, 31, 0.07); color: var(--ink); }
         .choix input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -147,14 +144,6 @@
             <p class="chapeau" data-t="chapeau">Tu grimpes en salle et tu fais des vidéos ? Tu es payé <strong>1&nbsp;$ pour 1&nbsp;000 vues</strong>, dès la première vidéo, et Climbr Pro t'est offert. Deux minutes, et on revient vers toi.</p>
 
             <form class="form" id="form" novalidate>
-                <div class="carte" data-requis="format">
-                    <span class="question" id="q-format"><span data-t="q.format">Tu montres ton visage dans tes vidéos ?</span> <span class="req">*</span></span>
-                    <div class="choix plein" role="radiogroup" aria-labelledby="q-format">
-                        <label><input type="radio" name="format" value="Face caméra"><span><span data-t="format.oui">Oui</span><small data-t="format.oui.detail">face caméra</small></span></label>
-                        <label><input type="radio" name="format" value="Sans visage"><span><span data-t="format.non">Non</span><small data-t="format.non.detail">montage, clips, carrousel</small></span></label>
-                    </div>
-                </div>
-
                 <div class="carte deux" data-requis="nom">
                     <div><label class="question" for="prenom"><span data-t="q.prenom">Prénom</span> <span class="req">*</span></label><input type="text" id="prenom" name="prenom" autocomplete="given-name" data-t-ph="ph.prenom" placeholder="Ton prénom"></div>
                     <div><label class="question" for="nom"><span data-t="q.nom">Nom</span> <span class="req">*</span></label><input type="text" id="nom" name="nom" autocomplete="family-name" data-t-ph="ph.nom" placeholder="Ton nom"></div>
@@ -232,9 +221,6 @@
             'retour': '← The creator program',
             'titre': 'Join the Climbr creators',
             'chapeau': 'You climb indoors and make videos? You earn <strong>$1 per 1,000 views</strong>, from your very first video, and get Climbr Pro for free. Two minutes, and we\'ll get back to you.',
-            'q.format': 'Do you show your face in your videos?',
-            'format.oui': 'Yes', 'format.oui.detail': 'facecam',
-            'format.non': 'No', 'format.non.detail': 'edits, clips, carousels',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
             'q.whatsapp': 'WhatsApp', 'aide.whatsapp': 'If you\'re up for it, we\'ll set up a group with the team to make communication easier.',
             'q.comptes': 'Your account', 'ajouter': '+ Add an account',
@@ -294,12 +280,6 @@
         document.getElementById('ajouter').addEventListener('click', () => ajouter().querySelector('input').focus());
         ajouter();
 
-        // `?type=facecam` (ou `?type=montage`) présélectionne la première
-        // question : un lien par famille de créateurs.
-        const type = new URLSearchParams(location.search).get('type');
-        if (type === 'facecam') document.querySelector('input[name="format"][value="Face caméra"]').checked = true;
-        if (type === 'montage') document.querySelector('input[name="format"][value="Sans visage"]').checked = true;
-
         appliquer();
 
         // ── L'envoi ────────────────────────────────────────────────
@@ -311,7 +291,6 @@
             .filter(c => c.pseudo);
         const coches = (nom) => [...form.querySelectorAll(`input[name="${nom}"]:checked`)].map(i => i.value);
         const CONTROLES = {
-            format: () => coches('format').length > 0,
             nom: () => form.prenom.value.trim() && form.nom.value.trim(),
             email: () => form.email.value.trim() && form.email.checkValidity(),
             whatsapp: () => form.numero.value.replace(/\D/g, '').length >= 6,
@@ -342,7 +321,6 @@
             const liste_comptes = comptes().map(c => c.reseau + ' @' + c.pseudo).join(', ');
             const indicatif = form.indicatif.value.trim().replace(/^(?!\+)/, '+');
             const donnees = {
-                format: coches('format')[0],
                 prenom: form.prenom.value.trim(),
                 nom: form.nom.value.trim(),
                 email: form.email.value.trim(),
@@ -353,7 +331,7 @@
                 langue_de_la_page: langue,
                 consentement: 'oui',
                 _honey: form._honey.value,
-                _subject: 'Créateur Climbr : ' + form.prenom.value.trim() + ' ' + form.nom.value.trim() + ' (' + coches('format')[0] + ')',
+                _subject: 'Créateur Climbr : ' + form.prenom.value.trim() + ' ' + form.nom.value.trim(),
                 _replyto: form.email.value.trim(),
                 _template: 'table'
             };

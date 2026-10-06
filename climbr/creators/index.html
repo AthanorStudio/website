@@ -30,6 +30,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ⚠️ Écarts resserrés pour cette page seulement : styles.css (partagé avec
+           /climbr) donne 7rem au-dessus et au-dessous de chaque section, soit
+           ~220 px de vide entre deux sections courtes comme celles-ci. */
+        :root { --section-padding: clamp(2.5rem, 5vw, 4rem); }
+        .section-header { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+
         /* À côté du logo, séparé d'un filet. ⚠️ Masqué sous 480 px : logo,
            mention, langue et « Postuler » font ~420 px pour 350 de place sur un
            iPhone ; le hero le reprend alors, et seulement là (`.hero-sur`). */
