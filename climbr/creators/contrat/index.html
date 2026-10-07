@@ -135,7 +135,7 @@
                     <p><strong>Entre</strong></p>
                     <p><strong>Athanor Studio</strong>, SAS au capital de 1 000 €, immatriculée au RCS de Paris sous le n° 932 414 139, dont le siège social est situé au 122 rue Amelot, 75011 Paris, éditrice de l'application Climbr, représentée par Guillaume Faugère, Président (ci-après « <strong>Climbr</strong> »),</p>
                     <p><strong>Et</strong></p>
-                    <p>la personne identifiée dans le formulaire de signature au bas de ce contrat (nom, adresse, comptes et, si applicable, n° SIRET) (ci-après « <strong>le Créateur</strong> »).</p>
+                    <p class="id-createur">la personne identifiée dans le formulaire de signature au bas de ce contrat (nom, adresse, comptes et, si applicable, n° SIRET) (ci-après « <strong>le Créateur</strong> »).</p>
                 </div>
 
                 <div class="article"><span>1</span><div>
@@ -187,7 +187,7 @@
                 </div></div>
 
                 <div class="parties">
-                    <p>Fait à Paris, signé électroniquement à la date d'envoi du formulaire ci-dessous. Une copie est adressée au Créateur par e-mail.</p>
+                    <p class="cloture">Fait à Paris, signé électroniquement à la date d'envoi du formulaire ci-dessous. Une copie est adressée au Créateur par e-mail.</p>
                     <p><strong>Pour Climbr (Athanor Studio)</strong> – Guillaume Faugère, Président</p>
                 </div>
             </article>
@@ -199,7 +199,7 @@
                     <p><strong>Between</strong></p>
                     <p><strong>Athanor Studio</strong>, a French SAS with share capital of €1,000, registered with the Paris Trade and Companies Register under no. 932 414 139, with its registered office at 122 rue Amelot, 75011 Paris, France, publisher of the Climbr app, represented by Guillaume Faugère, President (hereinafter “<strong>Climbr</strong>”),</p>
                     <p><strong>And</strong></p>
-                    <p>the person identified in the signature form at the bottom of this agreement (name, address, accounts and, where applicable, business registration number) (hereinafter “<strong>the Creator</strong>”).</p>
+                    <p class="id-createur">the person identified in the signature form at the bottom of this agreement (name, address, accounts and, where applicable, business registration number) (hereinafter “<strong>the Creator</strong>”).</p>
                 </div>
 
                 <div class="article"><span>1</span><div>
@@ -251,7 +251,7 @@
                 </div></div>
 
                 <div class="parties">
-                    <p>Made in Paris, signed electronically on the date the form below is sent. A copy is sent to the Creator by email.</p>
+                    <p class="cloture">Made in Paris, signed electronically on the date the form below is sent. A copy is sent to the Creator by email.</p>
                     <p><strong>For Climbr (Athanor Studio)</strong> – Guillaume Faugère, President</p>
                 </div>
             </article>
@@ -372,14 +372,16 @@
         // Construit depuis le texte affiché (la langue lue), avec un bloc de
         // signature à la fin. ⚠️ Polices standard de jsPDF : seul le jeu
         // WinAnsi passe (accents, « », €, – oui ; pas d'emoji ni de « ≠ »).
-        function contratPdf(article, titre, sig) {
+        function contratPdf(article, titre, identite, cloture, sig) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ unit: 'mm', format: 'a4' });
             doc.setProperties({ title: titre, author: 'Athanor Studio – Climbr' });
             const G = 20, L = 170, BAS = 280;
             let y = 22;
-            // ⚠️ Le € de la police standard n'a pas de chasse correcte : il mange l'espace qui le suit.
-            const propre = t => t.replace(/[\u202f\u00a0]/g, ' ').replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim().replace(/€ /g, '€  ');
+            // ⚠️ Le € de la police standard n'a pas de chasse correcte : il chevauche ce qui le
+            // suit (« 1 €pour », « €, »). Écrit en toutes lettres, il n'y a plus rien à rattraper.
+            const propre = t => t.replace(/[\u202f\u00a0]/g, ' ').replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim()
+                .replace(/€(?=\d)/g, 'EUR ').replace(/\b1 €/g, '1 euro').replace(/ €/g, ' euros').replace(/€/g, 'euros');
             const place = h => { if (y + h > BAS) { doc.addPage(); y = 22; } };
             const ecrire = (t, taille, gras, retrait = 0, apres = 2) => {
                 doc.setFont('helvetica', gras ? 'bold' : 'normal'); doc.setFontSize(taille);
@@ -391,7 +393,8 @@
             doc.setTextColor(180, 83, 31); ecrire(article.querySelector('.version').innerText, 8, true, 0, 3);
             doc.setTextColor(30, 26, 22); ecrire(article.querySelector('h2').innerText, 15, true, 0, 5);
             const blocs = article.querySelectorAll(':scope > .parties');
-            blocs[0].querySelectorAll('p').forEach(p => ecrire(p.innerText, 9.5, p.innerText.trim().length < 6, 0, 2));
+            // Le paragraphe « la personne identifiée… » devient l'identité saisie, comme dans un contrat papier rempli.
+            blocs[0].querySelectorAll('p').forEach(p => ecrire(p.classList.contains('id-createur') ? identite : p.innerText, 9.5, p.innerText.trim().length < 6, 0, 2));
             article.querySelectorAll('.article').forEach(a => {
                 y += 3; place(14);
                 ecrire('Article ' + a.querySelector(':scope > span').innerText + ' – ' + a.querySelector('h3').innerText, 11, true, 0, 2);
@@ -402,7 +405,7 @@
             });
             // La formule de clôture, puis le bloc de signature, à sa hauteur.
             y += 4;
-            blocs[blocs.length - 1].querySelectorAll('p').forEach(p => ecrire(p.innerText, 9.5, false, 0, 2));
+            blocs[blocs.length - 1].querySelectorAll('p').forEach(p => ecrire(p.classList.contains('cloture') ? cloture : p.innerText, 9.5, false, 0, 2));
             doc.setFontSize(8.5);
             const lignes = sig.map(([lab, val]) => [propre(lab), doc.splitTextToSize(propre(val), L - 52)]);
             const hauteur = 10 + lignes.reduce((h, [, l]) => h + 4.6 * l.length, 0);
@@ -496,15 +499,22 @@
                 version_du_contrat: CONTRAT_VERSION,
                 langue_du_contrat: langue,
                 empreinte_sha256: hash,
-                signe_le: signeLe.toISOString() + ' (' + fuseau + ')',
-                navigateur: navigator.userAgent
+                signe_le: signeLe.toISOString() + ' (' + fuseau + ')'
+                // ⚠️ Pas de `navigator.userAgent` : FormSubmit jette en silence tout
+                // message qui le contient (« Mozilla/5.0 … ») — tests G et H du 7 oct. 2026.
             };
             const en = langue === 'en';
             // « contrat-createur-MarieDupont.pdf » : sans accents ni espaces, pour que tous les clients mail l'ouvrent.
             const titre = 'contrat-createur-' + [champs.prenom, champs.nom].map(t => t.normalize('NFD').replace(/[^A-Za-z0-9]/g, '')).join('');
             let pdf = null, fichier = titre + '.pdf';
             try {
-                pdf = contratPdf(lu, titre, [
+                const identite = en
+                    ? nom + ', residing at ' + champs.adresse + ', holder of the account(s) ' + champs.comptes + (champs.siret ? ', business registration no. ' + champs.siret : '') + ' (hereinafter “the Creator”).'
+                    : nom + ', demeurant ' + champs.adresse + ', titulaire du ou des comptes ' + champs.comptes + (champs.siret ? ', n° SIRET ' + champs.siret : '') + ' (ci-après « le Créateur »).';
+                const cloture = en
+                    ? 'Made in Paris, signed electronically on ' + quand + '. A copy is sent to the Creator by email.'
+                    : 'Fait à Paris, signé électroniquement le ' + quand + '. Une copie est adressée au Créateur par e-mail.';
+                pdf = contratPdf(lu, titre, identite, cloture, [
                     [en ? 'Signed by' : 'Signé par', nom + (champs.siret ? ' (SIRET ' + champs.siret + ')' : '')],
                     [en ? 'Address' : 'Adresse', champs.adresse],
                     [en ? 'Email' : 'E-mail', champs.email],
