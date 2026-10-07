@@ -394,7 +394,7 @@
             doc.setTextColor(30, 26, 22); ecrire(article.querySelector('h2').innerText, 15, true, 0, 5);
             const blocs = article.querySelectorAll(':scope > .parties');
             // Le paragraphe « la personne identifiée… » devient l'identité saisie, comme dans un contrat papier rempli.
-            blocs[0].querySelectorAll('p').forEach(p => ecrire(p.classList.contains('id-createur') ? identite : p.innerText, 9.5, p.innerText.trim().length < 6, 0, 2));
+            blocs[0].querySelectorAll('p').forEach(p => ecrire(p.classList.contains('id-createur') ? identite : p.innerText, 9.5, p.children.length === 1 && p.textContent.trim() === p.firstElementChild.textContent.trim(), 0, 2));
             article.querySelectorAll('.article').forEach(a => {
                 y += 3; place(14);
                 ecrire('Article ' + a.querySelector(':scope > span').innerText + ' – ' + a.querySelector('h3').innerText, 11, true, 0, 2);
@@ -450,8 +450,17 @@
                 const dt = new DataTransfer(); dt.items.add(new File([pdf], fichier, { type: 'application/pdf' })); piece.files = dt.files;
                 f.appendChild(piece);
                 document.body.append(cadre, f);
-                const delai = setTimeout(() => ko(new Error('délai')), 30000);
-                cadre.addEventListener('load', () => { clearTimeout(delai); ok(); }, { once: true });
+                const fin = (err) => { clearTimeout(delai); cadre.removeEventListener('load', charge); f.remove(); if (err) { cadre.remove(); ko(err); } else ok(); };
+                const delai = setTimeout(() => fin(new Error('délai')), 30000);
+                // ⚠️ Le cadre charge d'abord une page vierge, et FormSubmit peut répondre par
+                // une page d'erreur ou de captcha : seul le retour sur notre page `?envoye`
+                // (même origine, donc lisible) prouve que le message est parti.
+                function charge() {
+                    let ici;
+                    try { ici = cadre.contentWindow.location.href; } catch (e) { return fin(new Error('refus de FormSubmit')); }
+                    if (ici && ici.indexOf('?envoye') !== -1) fin();
+                }
+                cadre.addEventListener('load', charge);
                 f.submit();
             });
         }
@@ -505,7 +514,7 @@
             };
             const en = langue === 'en';
             // « contrat-createur-MarieDupont.pdf » : sans accents ni espaces, pour que tous les clients mail l'ouvrent.
-            const titre = 'contrat-createur-' + [champs.prenom, champs.nom].map(t => t.normalize('NFD').replace(/[^A-Za-z0-9]/g, '')).join('');
+            const titre = 'contrat-createur-' + ([champs.prenom, champs.nom].map(t => t.normalize('NFD').replace(/[^A-Za-z0-9]/g, '')).join('') || 'Climbr-' + signeLe.toISOString().slice(0, 10));
             let pdf = null, fichier = titre + '.pdf';
             try {
                 const identite = en
@@ -526,7 +535,11 @@
             } catch (err) { pdf = null; }
             const sujet = 'Contrat créateur signé : ' + nom + ' (version ' + CONTRAT_VERSION + ')';
             try {
-                if (pdf && window.DataTransfer) await envoyerAvecPdf(champs, sujet, pdf, fichier);
+                let avecPdf = false;
+                if (pdf && window.DataTransfer) {
+                    try { new DataTransfer().items.add(new File([pdf], fichier)); avecPdf = true; } catch (e) {}
+                }
+                if (avecPdf) await envoyerAvecPdf(champs, sujet, pdf, fichier);
                 else await envoyerSansPdf(champs, sujet, texte);
                 const lien = document.getElementById('telecharger');
                 if (pdf) { lien.href = URL.createObjectURL(pdf); lien.download = fichier; } else lien.hidden = true;
