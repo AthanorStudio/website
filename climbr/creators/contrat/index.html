@@ -65,6 +65,7 @@
         .merci { display: none; margin-top: 1.5rem; }
         .merci h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); }
         .merci p { margin-top: 0.5rem; color: var(--ink-soft); }
+        .merci .telecharger { margin-top: 1.1rem; }
         .signe .signer { display: none; }
         .signe .merci { display: block; }
 
@@ -288,11 +289,13 @@
 
             <div class="merci carte" role="status">
                 <h2 data-t="merci.titre">C'est signé, bienvenue !</h2>
-                <p data-t="merci.texte">Tu reçois une copie par e-mail. On t'envoie ton accès Climbr Pro et le guide sur WhatsApp.</p>
+                <p data-t="merci.texte">Tu reçois ton contrat signé en PDF par e-mail. On t'envoie ton accès Climbr Pro et le guide sur WhatsApp.</p>
+                <a class="btn btn-primary telecharger" id="telecharger" data-t="merci.pdf">Télécharger mon contrat (PDF)</a>
             </div>
         </div>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         // ⚠️ À changer à chaque modification du texte (FR ou EN).
         const CONTRAT_VERSION = '2026-10-06';
@@ -311,7 +314,8 @@
             'c.accepte': '<strong>Read and approved.</strong> I have read the whole agreement and I accept it; ticking this box and sending counts as my signature.',
             'envoyer': 'Sign the agreement',
             'merci.titre': 'Signed. Welcome aboard!',
-            'merci.texte': 'You\'ll get a copy by email. We\'ll send your Climbr Pro access and the guide on WhatsApp.'
+            'merci.texte': 'You\'ll get your signed agreement as a PDF by email. We\'ll send your Climbr Pro access and the guide on WhatsApp.',
+            'merci.pdf': 'Download my agreement (PDF)'
         };
         const EN_PH = { 'ph.comptes': '@youraccount' };
         const MSG = {
@@ -364,6 +368,103 @@
             } catch (e) { return 'indisponible'; }
         }
 
+        // ── Le PDF du contrat signé ────────────────────────────────
+        // Construit depuis le texte affiché (la langue lue), avec un bloc de
+        // signature à la fin. ⚠️ Polices standard de jsPDF : seul le jeu
+        // WinAnsi passe (accents, « », €, – oui ; pas d'emoji ni de « ≠ »).
+        function contratPdf(article, titre, sig) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+            doc.setProperties({ title: titre, author: 'Athanor Studio – Climbr' });
+            const G = 20, L = 170, BAS = 280;
+            let y = 22;
+            // ⚠️ Le € de la police standard n'a pas de chasse correcte : il mange l'espace qui le suit.
+            const propre = t => t.replace(/[\u202f\u00a0]/g, ' ').replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim().replace(/€ /g, '€  ');
+            const place = h => { if (y + h > BAS) { doc.addPage(); y = 22; } };
+            const ecrire = (t, taille, gras, retrait = 0, apres = 2) => {
+                doc.setFont('helvetica', gras ? 'bold' : 'normal'); doc.setFontSize(taille);
+                const lignes = doc.splitTextToSize(propre(t), L - retrait);
+                const h = taille * 0.42;
+                lignes.forEach(l => { place(h); doc.text(l, G + retrait, y); y += h; });
+                y += apres;
+            };
+            doc.setTextColor(180, 83, 31); ecrire(article.querySelector('.version').innerText, 8, true, 0, 3);
+            doc.setTextColor(30, 26, 22); ecrire(article.querySelector('h2').innerText, 15, true, 0, 5);
+            const blocs = article.querySelectorAll(':scope > .parties');
+            blocs[0].querySelectorAll('p').forEach(p => ecrire(p.innerText, 9.5, p.innerText.trim().length < 6, 0, 2));
+            article.querySelectorAll('.article').forEach(a => {
+                y += 3; place(14);
+                ecrire('Article ' + a.querySelector(':scope > span').innerText + ' – ' + a.querySelector('h3').innerText, 11, true, 0, 2);
+                a.querySelectorAll('h3 ~ *').forEach(el => {
+                    if (el.tagName === 'P') ecrire(el.innerText, 9.5, false, 0, 2);
+                    else el.querySelectorAll('li').forEach((li, i) => ecrire((el.tagName === 'OL' ? (i + 1) + '. ' : '• ') + li.innerText, 9.5, false, 4, 1));
+                });
+            });
+            // La formule de clôture, puis le bloc de signature, à sa hauteur.
+            y += 4;
+            blocs[blocs.length - 1].querySelectorAll('p').forEach(p => ecrire(p.innerText, 9.5, false, 0, 2));
+            doc.setFontSize(8.5);
+            const lignes = sig.map(([lab, val]) => [propre(lab), doc.splitTextToSize(propre(val), L - 52)]);
+            const hauteur = 10 + lignes.reduce((h, [, l]) => h + 4.6 * l.length, 0);
+            y += 4; place(hauteur + 2);
+            doc.setDrawColor(230, 220, 208); doc.setFillColor(251, 247, 241);
+            doc.roundedRect(G, y, L, hauteur, 3, 3, 'FD'); y += 7;
+            lignes.forEach(([lab, l]) => {
+                doc.setFont('helvetica', 'bold'); doc.text(lab, G + 5, y);
+                doc.setFont('helvetica', 'normal'); doc.text(l, G + 45, y); y += 4.6 * l.length;
+            });
+            // Pied de page
+            const n = doc.getNumberOfPages();
+            for (let i = 1; i <= n; i++) {
+                doc.setPage(i); doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(150, 140, 128);
+                doc.text('Climbr – Athanor Studio · ' + CONTRAT_VERSION, G, 290);
+                doc.text(i + ' / ' + n, G + L, 290, { align: 'right' });
+            }
+            return doc.output('blob');
+        }
+
+        // ── L'envoi ────────────────────────────────────────────────
+        // ⚠️ L'envoi en arrière-plan de FormSubmit (/ajax) JETTE les pièces
+        // jointes sans rien dire (essai du 7 oct. 2026) ; seul l'envoi
+        // classique les garde. On le poste donc dans un cadre caché, pour
+        // rester sur la page et proposer le PDF au téléchargement.
+        // ⚠️ `_captcha=false` : sinon FormSubmit répond par une page de
+        // captcha, invisible dans le cadre, et rien ne part.
+        const DESTINATAIRE = 'climbr@athanor-studio.io';
+        function envoyerAvecPdf(champs, sujet, pdf, fichier) {
+            return new Promise((ok, ko) => {
+                const cadre = document.createElement('iframe');
+                cadre.name = 'envoi-' + Date.now(); cadre.hidden = true;
+                const f = document.createElement('form');
+                f.method = 'POST'; f.enctype = 'multipart/form-data'; f.target = cadre.name; f.hidden = true;
+                f.action = 'https://formsubmit.co/' + DESTINATAIRE;
+                const ajoute = (k, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; f.appendChild(i); };
+                Object.entries(champs).forEach(([k, v]) => ajoute(k, v));
+                ajoute('_honey', form._honey.value); ajoute('_subject', sujet); ajoute('_replyto', champs.email);
+                ajoute('_cc', champs.email); ajoute('_template', 'table'); ajoute('_captcha', 'false');
+                ajoute('_next', location.origin + location.pathname + '?envoye');
+                const piece = document.createElement('input'); piece.type = 'file'; piece.name = 'attachment';
+                const dt = new DataTransfer(); dt.items.add(new File([pdf], fichier, { type: 'application/pdf' })); piece.files = dt.files;
+                f.appendChild(piece);
+                document.body.append(cadre, f);
+                const delai = setTimeout(() => ko(new Error('délai')), 30000);
+                cadre.addEventListener('load', () => { clearTimeout(delai); ok(); }, { once: true });
+                f.submit();
+            });
+        }
+        // Repli sans PDF (bibliothèque bloquée, navigateur ancien) : le texte part en clair.
+        async function envoyerSansPdf(champs, sujet, texte) {
+            const r = await fetch('https://formsubmit.co/ajax/' + DESTINATAIRE, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(Object.assign({}, champs, { contrat: texte, _honey: form._honey.value, _subject: sujet, _replyto: champs.email, _cc: champs.email, _template: 'table' }))
+            });
+            const j = await r.json().catch(() => ({}));
+            // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
+            // qui dit si le message est parti (il vaut la chaîne "true").
+            if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const m = MSG[langue];
@@ -380,7 +481,11 @@
             const lu = document.getElementById(langue === 'en' ? 'texte-en' : 'texte-fr');
             const texte = lu.innerText.replace(/\s+/g, ' ').trim();
             const nom = form.prenom.value.trim() + ' ' + form.nom.value.trim();
-            const donnees = {
+            const signeLe = new Date();
+            const quand = signeLe.toLocaleString(langue === 'en' ? 'en-GB' : 'fr-FR', { dateStyle: 'long', timeStyle: 'short' });
+            const fuseau = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            const hash = await empreinte(texte);
+            const champs = {
                 prenom: form.prenom.value.trim(),
                 nom: form.nom.value.trim(),
                 email: form.email.value.trim(),
@@ -390,29 +495,34 @@
                 lu_et_approuve: 'oui',
                 version_du_contrat: CONTRAT_VERSION,
                 langue_du_contrat: langue,
-                empreinte_sha256: await empreinte(texte),
-                signe_le: new Date().toISOString(),
-                fuseau: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
-                navigateur: navigator.userAgent,
-                contrat: texte,
-                _honey: form._honey.value,
-                _subject: 'Contrat créateur signé : ' + nom + ' (version ' + CONTRAT_VERSION + ')',
-                _replyto: form.email.value.trim(),
-                _cc: form.email.value.trim(),
-                _template: 'box'
+                empreinte_sha256: hash,
+                signe_le: signeLe.toISOString() + ' (' + fuseau + ')',
+                navigateur: navigator.userAgent
             };
+            const en = langue === 'en';
+            // « contrat-createur-MarieDupont.pdf » : sans accents ni espaces, pour que tous les clients mail l'ouvrent.
+            const titre = 'contrat-createur-' + [champs.prenom, champs.nom].map(t => t.normalize('NFD').replace(/[^A-Za-z0-9]/g, '')).join('');
+            let pdf = null, fichier = titre + '.pdf';
             try {
-                const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(donnees)
-                });
-                const j = await r.json().catch(() => ({}));
-                // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
-                // qui dit si le message est parti (il vaut la chaîne "true").
-                if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
+                pdf = contratPdf(lu, titre, [
+                    [en ? 'Signed by' : 'Signé par', nom + (champs.siret ? ' (SIRET ' + champs.siret + ')' : '')],
+                    [en ? 'Address' : 'Adresse', champs.adresse],
+                    [en ? 'Email' : 'E-mail', champs.email],
+                    [en ? 'Accounts' : 'Comptes', champs.comptes],
+                    [en ? 'Signed on' : 'Signé le', quand + ' (' + fuseau + '), ' + (en ? 'electronically, “Read and approved”' : 'électroniquement, « Lu et approuvé »')],
+                    [en ? 'For Climbr' : 'Pour Climbr', 'Guillaume Faugère, ' + (en ? 'President of Athanor Studio' : 'Président d\'Athanor Studio')],
+                    [en ? 'SHA-256 of the text' : 'Empreinte SHA-256', hash]
+                ]);
+            } catch (err) { pdf = null; }
+            const sujet = 'Contrat créateur signé : ' + nom + ' (version ' + CONTRAT_VERSION + ')';
+            try {
+                if (pdf && window.DataTransfer) await envoyerAvecPdf(champs, sujet, pdf, fichier);
+                else await envoyerSansPdf(champs, sujet, texte);
+                const lien = document.getElementById('telecharger');
+                if (pdf) { lien.href = URL.createObjectURL(pdf); lien.download = fichier; } else lien.hidden = true;
                 document.getElementById('bloc').classList.add('signe');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // ⚠️ Le message apparaît sous le contrat, pas en haut : on va à lui.
+                document.querySelector('.merci').scrollIntoView({ behavior: 'smooth', block: 'center' });
             } catch (err) {
                 etat.textContent = m.erreur; etat.classList.add('erreur');
                 bouton.disabled = false;
