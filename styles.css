@@ -129,6 +129,7 @@ html:not(.js) .fade-up { opacity: 1; transform: none; }
 /* Le wordmark est du texte : « athanor », le o en or — c'est l'œuf */
 .wordmark { font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: var(--fg); white-space: nowrap; }
 .wordmark .wm-o { color: var(--gold); }
+.wordmark .wm-studio { font-weight: 500; letter-spacing: -0.02em; color: var(--fg-soft); }
 
 /* ========================================
    6. BOUTONS & CHIPS
