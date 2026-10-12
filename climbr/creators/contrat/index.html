@@ -7,6 +7,16 @@
     <meta name="description" content="Le contrat du programme créateurs Climbr, à lire et à signer.">
     <!-- ⚠️ Envoyée seulement aux créateurs acceptés : hors du sitemap et des moteurs. -->
     <meta name="robots" content="noindex">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Climbr">
+    <meta property="og:url" content="https://athanor-studio.io/climbr/creators/contrat/">
+    <meta property="og:title" content="Climbr · Creator agreement / Contrat créateur">
+    <meta property="og:description" content="To read and sign · À lire et à signer">
+    <meta property="og:image" content="https://athanor-studio.io/climbr/creators/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://athanor-studio.io/climbr/creators/og-image.jpg">
     <link rel="canonical" href="https://athanor-studio.io/climbr/creators/contrat/">
     <meta name="theme-color" content="#F4EFE8">
 
@@ -326,8 +336,11 @@
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
         document.querySelectorAll('[data-t-ph]').forEach(el => { FR_PH[el.dataset.tPh] = el.placeholder; });
 
-        let langue;
-        try { langue = localStorage.getItem('climbr-lang'); } catch (e) {}
+        // `?lang=en` (ou `fr`) dans le lien passe avant tout : un lien envoyé à un
+        // créateur anglophone s'ouvre en anglais, quelle que soit la langue de
+        // son téléphone. Le choix est ensuite gardé comme un clic sur EN/FR.
+        let langue = new URLSearchParams(location.search).get('lang');
+        if (langue !== 'fr' && langue !== 'en') { try { langue = localStorage.getItem('climbr-lang'); } catch (e) {} }
         if (langue !== 'fr' && langue !== 'en') langue = (navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en';
         function appliquer() {
             const d = langue === 'en' ? EN : FR, ph = langue === 'en' ? EN_PH : FR_PH;
@@ -340,6 +353,8 @@
             document.querySelector('.lang-toggle-label').textContent = langue === 'fr' ? 'EN' : 'FR';
             document.querySelector('.lang-toggle').setAttribute('aria-label', MSG[langue].aria);
             try { localStorage.setItem('climbr-lang', langue); } catch (e) {}
+            // L'adresse suit la langue affichée : copiée telle quelle, elle rouvre la même version.
+            try { const u = new URL(location.href); u.searchParams.set('lang', langue); history.replaceState(null, '', u); } catch (e) {}
         }
         document.querySelector('.lang-toggle').addEventListener('click', () => { langue = langue === 'fr' ? 'en' : 'fr'; appliquer(); });
         appliquer();
