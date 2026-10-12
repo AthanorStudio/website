@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="./apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="./styles.css">
     <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -21,8 +21,8 @@
 
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <symbol id="mark" viewBox="0 0 100 100">
-            <path d="M50 9 L91 87 L9 87 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter"/>
-            <circle cx="50" cy="63" r="11" fill="currentColor"/>
+            <path d="M50 15 L87 81 L13 81 Z" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
+            <circle cx="50" cy="59" r="9.5" style="fill: var(--mark-egg, currentColor)"/>
         </symbol>
     </svg>
 
@@ -31,13 +31,13 @@
         <div class="navbar-inner">
             <a href="./index.html" class="navbar-logo" aria-label="Athanor Studio — home">
                 <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
-                <span class="navbar-logo-text">Athanor Studio</span>
+                <span class="wordmark" aria-hidden="true">athan<span class="wm-o">o</span>r</span>
             </a>
             <nav class="navbar-nav" id="navbar-nav">
                 <a href="./index.html#services" class="nav-link">Services</a>
                 <a href="./index.html#apps" class="nav-link">Apps</a>
                 <a href="./index.html#company" class="nav-link">Company</a>
-                <a href="./index.html#contact" class="nav-link">Contact</a>
+                <a href="./index.html#contact" class="nav-link btn btn-primary btn-sm">Contact</a>
             </nav>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="hamburger-line"></span>
@@ -117,9 +117,9 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="./index.html" class="footer-logo">
+                    <a href="./index.html" class="footer-logo" aria-label="Athanor Studio — home">
                         <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
-                        <span class="footer-logo-text">Athanor Studio</span>
+                        <span class="wordmark" aria-hidden="true">athan<span class="wm-o">o</span>r</span>
                     </a>
                     <p class="footer-tagline">Transforming apps into success stories.</p>
                 </div>

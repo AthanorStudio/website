@@ -31,17 +31,17 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-    <!-- The mark: the philosophical egg sealed inside the alchemist's furnace -->
+    <!-- La marque : le fourneau (triangle du feu) et l'œuf philosophique, en or -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <symbol id="mark" viewBox="0 0 100 100">
-            <path d="M50 9 L91 87 L9 87 Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="miter"/>
-            <circle cx="50" cy="63" r="11" fill="currentColor"/>
+            <path d="M50 15 L87 81 L13 81 Z" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
+            <circle cx="50" cy="59" r="9.5" style="fill: var(--mark-egg, currentColor)"/>
         </symbol>
     </svg>
 
@@ -50,7 +50,7 @@
         <div class="navbar-inner">
             <a href="#" class="navbar-logo" aria-label="Athanor Studio — home">
                 <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
-                <span class="navbar-logo-text">Athanor Studio</span>
+                <span class="wordmark" aria-hidden="true">athan<span class="wm-o">o</span>r</span>
             </a>
             <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="navbar-nav">
                 <span class="hamburger-line"></span>
@@ -61,72 +61,63 @@
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#apps" class="nav-link">Apps</a>
                 <a href="#company" class="nav-link">Company</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="nav-link btn btn-primary btn-sm">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
     <header class="hero">
-        <div class="container hero-inner">
-            <svg class="mark hero-mark" aria-hidden="true"><use href="#mark"/></svg>
-            <h1 class="hero-title">We build and scale apps.</h1>
-            <p class="hero-lede">Athanor Studio turns ideas into apps, handling everything from product vision and development to user acquisition and long-term scaling.</p>
-            <div class="hero-actions">
-                <a href="#contact" class="link-arrow">Get in Touch <span aria-hidden="true">&rarr;</span></a>
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">App publishing studio</p>
+                <h1 class="hero-title">We build <span class="accent">and scale apps.</span></h1>
+                <p class="hero-sub">Athanor Studio turns ideas into apps, handling everything from product vision and development to user acquisition and long-term scaling.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Get in Touch <span aria-hidden="true">&rarr;</span></a>
+                    <a href="#apps" class="btn btn-ghost">Our Apps</a>
+                </div>
             </div>
-
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-value">150k+</span>
-                    <span class="stat-label">Installs</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">4.6</span>
-                    <span class="stat-label">App Store rating</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">2024</span>
-                    <span class="stat-label">Founded</span>
-                </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-tile"><svg class="mark"><use href="#mark"/></svg></div>
             </div>
         </div>
     </header>
 
-    <!-- Practice -->
-    <section id="services" class="section section-raise">
+    <!-- Services -->
+    <section id="services" class="section section-deep">
         <div class="container">
-            <div class="fade-up">
+            <div class="section-header fade-up">
                 <p class="eyebrow">Scale</p>
                 <h2 class="section-title">What We Do</h2>
-                <p class="section-lede">We built our own tools and methodology to scale apps.</p>
+                <p class="section-lead">We built our own tools and methodology to scale apps.</p>
             </div>
 
-            <dl class="practice fade-up">
-                <div class="practice-row">
-                    <dt class="practice-term">Transformation</dt>
-                    <dd class="practice-def">We take raw ideas and forge them into polished products through data, strategy, and relentless optimization.</dd>
+            <div class="services-grid">
+                <div class="service-card fade-up">
+                    <h3>Transformation</h3>
+                    <p>We take raw ideas and forge them into polished products through data, strategy, and relentless optimization.</p>
                 </div>
-                <div class="practice-row">
-                    <dt class="practice-term">Ownership</dt>
-                    <dd class="practice-def">We build, publish, and grow our own apps — fully invested in every product from concept to scale.</dd>
+                <div class="service-card fade-up">
+                    <h3>Ownership</h3>
+                    <p>We build, publish, and grow our own apps — fully invested in every product from concept to scale.</p>
                 </div>
-                <div class="practice-row">
-                    <dt class="practice-term">Data-Driven</dt>
-                    <dd class="practice-def">Every decision is backed by analytics. We combine deep industry expertise with rigorous data analysis to maximize results.</dd>
+                <div class="service-card fade-up">
+                    <h3>Data-Driven</h3>
+                    <p>Every decision is backed by analytics. We combine deep industry expertise with rigorous data analysis to maximize results.</p>
                 </div>
-                <div class="practice-row">
-                    <dt class="practice-term">Innovation</dt>
-                    <dd class="practice-def">The mobile landscape evolves constantly. We stay ahead of trends in UA, monetization, and creative to keep our apps at the forefront.</dd>
+                <div class="service-card fade-up">
+                    <h3>Innovation</h3>
+                    <p>The mobile landscape evolves constantly. We stay ahead of trends in UA, monetization, and creative to keep our apps at the forefront.</p>
                 </div>
-            </dl>
+            </div>
         </div>
     </section>
 
     <!-- Apps -->
     <section id="apps" class="section">
         <div class="container">
-            <div class="fade-up">
+            <div class="section-header fade-up">
                 <p class="eyebrow">Portfolio</p>
                 <h2 class="section-title">Our Apps</h2>
             </div>
@@ -141,20 +132,11 @@
                         </div>
                     </div>
                     <p class="app-description">AI-powered nutrition coach. Photograph your meals, get instant calorie tracking and personalized nutrition plans tailored to your goals.</p>
-                    <div class="app-metrics">
-                        <div class="metric">
-                            <span class="metric-value">4.6</span>
-                            <span class="metric-label">Rating</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">500+</span>
-                            <span class="metric-label">Reviews</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">150k+</span>
-                            <span class="metric-label">Installs</span>
-                        </div>
-                    </div>
+                    <ul class="chips">
+                        <li><strong>4.6 ★</strong> rating</li>
+                        <li><strong>500+</strong> reviews</li>
+                        <li><strong>150k+</strong> installs</li>
+                    </ul>
                     <span class="app-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
                 </a>
 
@@ -167,7 +149,10 @@
                         </div>
                     </div>
                     <p class="app-description">The indoor bouldering logbook. Photograph the wall, tap the first hold and Climbr outlines your route. Log every attempt, track your progress gym by gym.</p>
-                    <span class="status-badge">Now on the App Store &amp; Google Play</span>
+                    <ul class="chips">
+                        <li><strong>5.0 ★</strong> rating</li>
+                        <li class="chip-live">App Store &amp; Google Play</li>
+                    </ul>
                     <span class="app-cta">Learn more <span aria-hidden="true">&rarr;</span></span>
                 </a>
             </div>
@@ -175,19 +160,13 @@
     </section>
 
     <!-- Company -->
-    <section id="company" class="section section-raise">
-        <div class="container">
-            <div class="fade-up">
+    <section id="company" class="section section-deep">
+        <div class="container company-layout fade-up">
+            <svg class="mark company-mark" aria-hidden="true"><use href="#mark"/></svg>
+            <div class="company-body">
                 <p class="eyebrow">Company</p>
-            </div>
-            <div class="company-layout fade-up">
-                <div>
-                    <svg class="mark company-mark" aria-hidden="true"><use href="#mark"/></svg>
-                </div>
-                <div class="company-body">
-                    <h2 class="section-title">Athanor Studio</h2>
-                    <p>Founded in 2024 and named after the alchemist's furnace — built to sustain relentless heat until base metals become gold — Athanor Studio applies that philosophy to apps. Patient strategy, constant refinement, and one core belief: any idea, with the right process, can become extraordinary.</p>
-                </div>
+                <h2 class="section-title">Athanor Studio</h2>
+                <p>Founded in 2024 and named after the alchemist's furnace — built to sustain relentless heat until base metals become gold — Athanor Studio applies that philosophy to apps. Patient strategy, constant refinement, and one core belief: any idea, with the right process, can become extraordinary.</p>
             </div>
         </div>
     </section>
@@ -195,10 +174,12 @@
     <!-- Contact -->
     <section id="contact" class="section">
         <div class="container">
-            <div class="fade-up">
-                <p class="eyebrow">Contact</p>
-                <h2 class="section-title">Get in Touch</h2>
-                <a href="mailto:contact@athanor-studio.io" class="contact-email">contact@athanor-studio.io</a>
+            <div class="final-card fade-up">
+                <div>
+                    <p class="eyebrow">Contact</p>
+                    <h2 class="section-title">Get in Touch</h2>
+                </div>
+                <a href="mailto:contact@athanor-studio.io" class="btn btn-dark">contact@athanor-studio.io <span aria-hidden="true">&rarr;</span></a>
             </div>
         </div>
     </section>
@@ -208,9 +189,9 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="footer-logo">
+                    <a href="#" class="footer-logo" aria-label="Athanor Studio — home">
                         <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
-                        <span class="footer-logo-text">Athanor Studio</span>
+                        <span class="wordmark">athan<span class="wm-o">o</span>r</span>
                     </a>
                     <p class="footer-tagline">Transforming apps into success stories.</p>
                 </div>

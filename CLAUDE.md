@@ -4,61 +4,63 @@ Site vitrine d'Athanor Studio (app publishing company).
 
 ## Stack
 - HTML/CSS statique pur, pas de framework, pas de build
-- Police : **Inter** seule (300/400/500/600), Google Fonts. Un display serif (Marcellus) avait été essayé le 5 septembre 2026 puis retiré le jour même — le premium passe par la graisse et le tracking, pas par un serif.
+- Police : **Inter** seule (400/500/600/700/800), Google Fonts. Un display serif (Marcellus) avait été essayé le 5 septembre 2026 puis retiré le jour même. Depuis le 12 octobre 2026 les titres sont en 800, comme sur la page Climbr.
 - Hébergement : GitHub Pages, domaine via `CNAME`
 - Repo : https://github.com/AthanorStudio/website (branche `main`)
 
 ## Fichiers
 - `index.html` — landing page Athanor Studio (navbar, hero, practice, apps, company, contact, footer)
-- `styles.css` — design system du site studio (dark éditorial, tokens, composants, responsive)
+- `styles.css` — design system du site studio (noir et or champagne, composants de la page Climbr, responsive)
 - `privacy.html` — politique de confidentialité
 - `terms.html` — conditions d'utilisation, pour toutes les apps du studio (même gabarit que `privacy.html`, classes `.privacy-content` réutilisées). ⚠️ C'est la page « Conditions » du paywall Android de Climbr (`LIEN_CONDITIONS`) : l'EULA d'Apple ne vaut pas pour Google Play. La déplacer casse le lien dans l'app.
 - `healthyguru/index.html` + `healthyguru/styles.css` — landing page dédiée à l'app Healthy Guru, accessible via `/healthyguru` (light theme + **accent vert frais**, charte propre distincte du studio). `healthyguru/screen-*.webp` = screenshots réels de l'app (mockups + CTA).
 - `climbr/index.html` + `climbr/styles.css` — page dédiée à l'app Climbr, accessible via `/climbr` (thème **sable / encre / terre brûlée**, la palette « Grès » de l'app). `climbr/ecran-*.webp` et `climbr/en/ecran-*.webp` = vrais écrans de l'app, français et anglais, `climbr/iphone.webp` = le boîtier iPhone 17 Pro Max (capturé dans le Simulateur de Xcode, écran transparent) posé par-dessus chaque écran en CSS.
-- **Marque** — `athanor-mark.svg` (source vectorielle), `athanor-mark.png` (512px crème, transparent), `athanor-mark-ink.svg` + `athanor-mark-ink.png` (version encre pour fonds clairs), `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180px, tuile sombre). Voir « Logo » plus bas.
+- **Marque** — `athanor-mark.svg` (source vectorielle), `athanor-mark.png` (512px, triangle blanc chaud + œuf champagne, transparent), `athanor-mark-ink.svg` + `athanor-mark-ink.png` (version encre pour fonds clairs), `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180px, tuile sombre). Voir « Logo » plus bas.
 - `athanorstudio_logo.png` — **ancien** logo (bitmap opaque, wordmark gravé dedans). N'est plus référencé par aucune page ; conservé comme archive.
 - `healthyguru_icon.png`, `clashlist_icon.png`, `climbr_icon.png` — icônes des apps
 - `CNAME` — domaine GitHub Pages
-- `og-image.png` (racine, thème sombre studio) + `healthyguru/og-image.png` (thème vert app) + `climbr/og-image.png` (sable, refaite le 29 septembre 2026 : trio fiche · Mes blocs · Profil, « Sur l’App Store et Google Play ») — images de partage 1200×630, générées via une carte HTML rendue en Chrome headless puis redimensionnée avec `sips`. Balises Open Graph/Twitter + `canonical` + `theme-color` dans les deux `<head>`.
+- `og-image.png` (racine, noir et or, refaite le 12 octobre 2026 : marque, « We build and scale apps. », tuile + icônes des deux apps) + `healthyguru/og-image.png` (thème vert app) + `climbr/og-image.png` (sable, refaite le 29 septembre 2026 : trio fiche · Mes blocs · Profil, « Sur l’App Store et Google Play ») — images de partage 1200×630, générées via une carte HTML rendue en Chrome headless puis redimensionnée avec `sips`. Balises Open Graph/Twitter + `canonical` + `theme-color` dans les deux `<head>`.
 - `robots.txt` + `sitemap.xml` — SEO de base (racine).
 
 ## Logo
-La marque est **« l'œuf dans le fourneau »** (refonte du 5 septembre 2026) : un triangle en contour — le signe alchimique du feu, donc l'athanor — avec un disque plein suspendu dans sa moitié basse, l'œuf philosophique. Géométrie exacte, en 100 unités :
+La marque est **« Fourneau »** (refonte du 12 octobre 2026, choisie parmi quatre directions — Fourneau, Voûte, Transmutation, Monogramme — dont la planche est dans `~/Desktop/Athanor/branding/propositions.html`). C'est l'évolution de « l'œuf dans le fourneau » du 5 septembre : même idée — le triangle du feu (l'athanor) et l'œuf philosophique dedans — mais **épaissie et arrondie** pour avoir le poids des lettres de Climbr, et l'œuf passe en **or champagne**. Géométrie exacte, en 100 unités :
 ```
-triangle : M50 9 L91 87 L9 87 Z   (contour, stroke-width 3.2, linejoin miter)
-disque   : cx 50, cy 63, r 11     (plein)
+triangle : M50 15 L87 81 L13 81 Z   (contour, stroke-width 10, linejoin round)
+disque   : cx 50, cy 59, r 9.5      (plein, en or)
 ```
-- **Dans les pages HTML**, la marque est un `<symbol id="mark">` inline en haut du `<body>`, appelé via `<svg class="mark"><use href="#mark"/></svg>`. Elle hérite de `currentColor` — c'est ce qui permet de la teinter (crème dans la navbar, `opacity .5` en grand dans Company).
-- **Le wordmark « ATHANOR STUDIO » est du texte**, pas une image : Inter 500, `text-transform: uppercase`, `letter-spacing: .24em`.
-- **Épaisseurs optiques** : les icônes petites utilisent un trait ÉPAISSI (favicon `stroke-width: 8.5` + `r: 14`, apple-touch `5.6`/`12.5`). Ne pas se contenter de réduire le SVG 3.2 — il disparaît.
-- Les PNG sont générés par un script Pillow (suréchantillonnage ×8 puis LANCZOS), pas par un export manuel : triangle extérieur rempli, triangle intérieur évidé, disque par-dessus. L'offset se fait par homothétie autour de l'incentre `(50, 62.23)`, rayon inscrit `24.77`.
-- ⚠️ **Le crème `#f8eac1` est invisible sur fond clair.** Pour l'App Store, la presse ou tout fond papier, utiliser la version encre : `athanor-mark-ink.svg` / `athanor-mark-ink.png` (encre chaude `#17140f`, même géométrie). Le site n'utilise QUE la version crème — l'encre existe uniquement pour ce qu'on envoie à l'extérieur.
-- Six directions avaient été proposées avant l'arbitrage (Ignis, Quadratura, Athanor, Sigillum, Gradus, Lumen) ; c'est « Athanor » qui a été retenue.
+- La marque occupe y 10→86 : pour la centrer dans une tuile, la recentrer sur y 48 (c'est ce que font `favicon.svg` et le script).
+- **Dans les pages HTML**, la marque est un `<symbol id="mark">` inline en haut du `<body>` (index, privacy, terms), appelé via `<svg class="mark"><use href="#mark"/></svg>`. Le triangle prend `currentColor` (blanc chaud), l'œuf prend `--mark-egg` (l'or, posé par `.mark` dans le CSS).
+- **Le wordmark est du texte** : « athanor » en minuscules, Inter 800, `letter-spacing: -0.045em`, le **« o » en or** (`.wordmark .wm-o`) — c'est l'œuf, comme les prises remplacent des lettres dans le logo de Climbr. Le lien porte `aria-label="Athanor Studio — home"`, le wordmark est `aria-hidden`.
+- **Épaisseurs optiques** : les petites tailles ÉPAISSISSENT le trait — favicon `stroke-width 14` + `r 12` à 80 % de la tuile, apple-touch `12` + `11` à 66 %.
+- Les PNG (`athanor-mark.png`, `athanor-mark-ink.png`, `apple-touch-icon.png`, `favicon-32.png`) sont générés par un script Pillow (suréchantillonnage ×8 puis LANCZOS) : trait tracé en `line(joint='curve')` + un disque à chaque sommet pour les coins ronds, puis l'œuf.
+- ⚠️ **Le blanc chaud et le champagne sont invisibles sur fond clair.** Pour l'App Store, la presse ou tout fond papier : `athanor-mark-ink.svg` / `.png` (triangle encre `#17140f`, œuf vieil or `#b08a45`). Le site n'utilise que la version claire.
+- L'ancienne marque (triangle fin 3.2, angles vifs, tout en crème `#f8eac1`) a été remplacée partout le 12 octobre 2026.
 
 ## Design system
-- **Fond chaud, pas gris** : `--ink: #0b0a08` (page), `#121110` (section alternée), `#161412` (cartes). Le noir neutre `#0c0c0c` d'avant faisait paraître le crème terne — le noir chaud le fait lire comme de l'or.
-- **Texte** : `--fg: #f4f1ea` (blanc chaud, jamais `#fff`), puis `--fg-soft` 60 % et `--fg-mute` 38 %.
-- **Accent crème/or** : `#f8eac1` — réservé aux chiffres, à la marque et aux états de survol. Jamais un mot coloré au milieu d'un titre.
-- **Les filets sont le dispositif structurant principal** (`--rule` à 10 %), pas les boîtes. Le seul bloc encadré du site, ce sont les deux cartes d'apps.
-- **Typo, tout en Inter** : titres en 600 avec un tracking serré (`-0.03em`, et `-0.042em` sur le hero — c'est ce serrage qui fait le premium en sans-serif) ; corps en 300/400 ; labels et eyebrows en 500 capitales, `letter-spacing: .18em` (`.24em` pour le wordmark) ; chiffres en 600 + `font-variant-numeric: tabular-nums`.
-- ⚠️ **L'échelle typo est calée pour Inter.** Inter a une hauteur d'x bien supérieure à celle d'un serif d'affichage : à corps égal il paraît plus gros. `--fs-display` plafonne donc à 4.5rem et `--fs-h2` à 2.5rem. Si un jour un serif revient, il faudra REMONTER ces valeurs, pas juste changer `--font-display`.
-- Grain de film en `body::after` (turbulence SVG en data-URI, `opacity: .028`) — c'est ce qui empêche les aplats de paraître plastique.
-- Animations fade-up au scroll, avec `html:not(.js) .fade-up { opacity: 1 }` : **si le JS ne tourne pas, le contenu reste visible** (l'ancienne version le laissait à `opacity: 0`).
-- Breakpoints responsive : 1024px / 768px / 480px, plus un palier 400px pour resserrer les gouttières des métriques.
+Refonte du 12 octobre 2026 : **le site reprend les composants de la page Climbr** (Inter 800 serré, boutons en pilule, cartes à coins de 24 px, chips, grande carte de fin) **en gardant le noir et or** du studio — la palette sable de Climbr avait été proposée, Guillaume a préféré garder le noir.
+- **Fond chaud, pas gris** : `--bg: #0b0a08` (page), `--bg-deep: #121110` (sections alternées, `.section-deep`), `--surface: #181613` (cartes, chips), `--surface-hi` au survol.
+- **Texte** : `--fg: #f4f1ea` (blanc chaud, jamais `#fff`), `--fg-soft` 64 %, `--fg-mute` 40 %. Filets `--line` à 10 %.
+- **Or champagne `--gold: #e6cc94`** (choisi parmi crème / champagne / or / vieil or) : boutons primaires (texte noir `--on-gold`), 2ᵉ ligne du titre du hero, liens « Learn more », l'œuf de la marque, le « o » du wordmark, et la **carte Contact** en aplat d'or. L'ancien crème `#f8eac1` faisait plus crème qu'or à côté du noir.
+- **Typo, tout en Inter** : titres 800, `--letter-tight: -0.028em` (`-0.032em` sur le hero) ; corps 400 ; eyebrows en 600 capitales `letter-spacing: .08em` ; chiffres des chips en 700 `tabular-nums`.
+- **Composants** (mêmes noms que `climbr/styles.css` quand ils existent) : `.btn` + `.btn-primary` / `.btn-ghost` / `.btn-dark` / `.btn-sm`, `.chips` (`.chip-live` = point d'or devant), `.section-header`, `.eyebrow`, `.section-title`, `.section-lead`.
+- ⚠️ Le bouton Contact de la navbar est à la fois `.nav-link` et `.btn-primary` : `.nav-link.btn-primary` force la couleur du texte, sinon il hérite du gris des liens et disparaît sur l'or.
+- Grain de film en `body::after` (turbulence SVG en data-URI, `opacity: .028`), conservé.
+- Animations fade-up au scroll, avec `html:not(.js) .fade-up { opacity: 1 }` : **si le JS ne tourne pas, le contenu reste visible**.
+- Breakpoints : 1024px (hero et Company sur une colonne, services 2×2) / 768px (menu burger, apps sur une colonne) / 480px (services sur une colonne, tuile du hero réduite).
 
 ## Sections de l'index
-(Refonte éditoriale du 5 septembre 2026 : la **mise en page** est nouvelle, mais **les textes sont ceux d'origine** — ils ont été restaurés après coup, à la demande. Tout est désormais **aligné à gauche**, plus rien n'est centré. Les ancres n'ont pas bougé : `#services`, `#apps`, `#company`, `#contact`.)
-1. Navbar (marque SVG + wordmark texte + Services / Apps / Company / Contact + hamburger mobile). Le filet du bas n'apparaît qu'au scroll.
-2. Hero — marque, titre « We build and scale apps. », sous-titre d'origine, `Get in Touch →`, puis un **rail de stats** séparé par des filets : 150k+ Installs / 4.6 App Store rating / 2024 Founded (seul ajout de contenu conservé).
-3. Services (`#services`, fond `--ink-raise`) — label « Scale », titre « What We Do », puis **4 lignes `<dl>` séparées par des filets** (Transformation, Ownership, Data-Driven, Innovation). Ce ne sont plus des cartes, et les numéros 01–04 ont sauté : ce sont des facettes, pas une séquence. Le CSS s'appelle encore `.practice-row` / `.practice-term` / `.practice-def`.
-4. Apps — label « Portfolio », titre « Our Apps », grille `auto-fit minmax(360px, 1fr)` avec deux cartes : Healthy Guru et Climbr (Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt) :
-   - Healthy Guru (4.6 ★, 500+ reviews, 150k+ installs) — carte cliquable (`<a class="app-card">`, la classe `app-card-link` a disparu à la refonte) vers `/healthyguru`. Métriques séparées par des filets verticaux, CTA "Learn more →" en bas. Le lien App Store n'est pas dans la carte (il est sur la page dédiée).
-   - Climbr (Sports · Bouldering, badge « Now on the App Store & Google Play ») — carte cliquable vers `/climbr`. Google Play depuis le 29 septembre 2026 : https://play.google.com/store/apps/details?id=com.athanorstudio.climb (liens `data-lien-play`, `&hl=` suit la langue ; le bouton « Télécharger » du menu va sur Play quand le navigateur est Android).
-5. Company — grande marque à gauche (`opacity .5`), texte d'origine à droite sous le titre « Athanor Studio ». Le paragraphe parle du fourneau alchimique, ce qui tombe juste puisque le logo le représente.
-6. Contact — « Get in Touch » + l'adresse mail en **lien discret** (`clamp(1.0625rem, 1.8vw, 1.375rem)`, soulignement animé au survol). Elle avait d'abord été posée en très grand corps (jusqu'à 38px) : elle concurrençait le titre de section juste au-dessus, elle a été ramenée à une taille de lien.
-   - Le formulaire a été SUPPRIMÉ. Il était en `action="mailto:" method="post"` : un `mailto:` n'envoie rien, il ouvre au mieux un brouillon dans le client mail du visiteur, qu'il doit envoyer lui-même — donc il faut un client configuré (or la plupart des gens sont sur Gmail dans un onglet), il n'y a aucun retour ni validation, et `POST` est la variante la moins bien supportée des deux (`GET` passe les données dans l'URL, ce que les clients comprennent). Pour un vrai formulaire il faut un service tiers (Formspree, gratuit jusqu'à 50 messages/mois) — ça demande un compte côté Guillaume.
-   - Le CSS `.contact-lede` et `.contact-meta` est resté en place, inutilisé, si jamais on veut rajouter du contenu ici.
-7. Footer — marque + wordmark + tagline « Transforming apps into success stories. », colonnes Navigation et Legal, barre du bas (© + mail). Les anciens liens LinkedIn/Twitter en `href="#"` ont été retirés.
+(Refonte du 12 octobre 2026 : composants Climbr, noir et or. **Les textes sont ceux d'origine**, restaurés à la demande lors de la refonte du 5 septembre. Ancres inchangées : `#services`, `#apps`, `#company`, `#contact`.)
+1. Navbar — marque + wordmark « athanor » ; Services / Apps / Company + **Contact en bouton pilule d'or** ; burger sous 768px. Le filet du bas n'apparaît qu'au scroll.
+2. Hero — deux colonnes, comme Climbr. À gauche : eyebrow « App publishing studio », titre « We build / and scale apps. » (2ᵉ ligne en or, `display: block`), sous-titre d'origine, boutons `Get in Touch →` (or) et `Our Apps` (contour). Les 3 chips du hero (150k+ installs / 4.6 ★ / Founded in 2024) ont été retirées le 12 octobre 2026, à la demande — les métriques restent dans les cartes Apps. À droite : **grande tuile de la marque** seule (halo d'or centré sur l'œuf, `aria-hidden`). Les icônes des apps qui flottaient autour ont été retirées le 12 octobre 2026, à la demande — elles restent dans les cartes Apps.
+3. Services (`#services`, `.section-deep`) — « Scale » / « What We Do », **4 cartes** `.service-card` (Transformation, Ownership, Data-Driven, Innovation), sans numéros : ce sont des facettes, pas une séquence.
+4. Apps (`#apps`) — « Portfolio » / « Our Apps », grille de 2 cartes `<a class="app-card">` (une colonne sous 768px) : icône, nom, catégorie, description, chips de métriques, « Learn more → » en or.
+   - Healthy Guru (4.6 ★ rating / 500+ reviews / 150k+ installs) → `/healthyguru`. Le lien App Store n'est pas dans la carte (il est sur la page dédiée).
+   - Climbr (Sports · Bouldering) → `/climbr`. Chips **5.0 ★ rating** (ajouté le 12 octobre 2026 : 5,0 sur 9 notes, App Store France, lu via `https://itunes.apple.com/lookup?id=6803155208&country=fr` — à surveiller, la note bougera) + « App Store & Google Play » (`.chip-live`). Google Play depuis le 29 septembre 2026 : https://play.google.com/store/apps/details?id=com.athanorstudio.climb
+   - Clash List retirée de l'accueil le 4 septembre 2026, son icône reste dans le dépôt.
+5. Company (`#company`, `.section-deep`) — grande marque à gauche, « Athanor Studio » + texte d'origine à droite (le paragraphe parle du fourneau alchimique, ce que représente le logo).
+6. Contact (`#contact`) — **carte d'or** `.final-card` (le pendant de la carte d'encre de Climbr) : « Get in Touch » + bouton noir `contact@athanor-studio.io →` en `mailto:`.
+   - Le formulaire a été SUPPRIMÉ en septembre : il était en `action="mailto:" method="post"`, ce qui n'envoie rien (au mieux un brouillon dans le client mail du visiteur). Pour un vrai formulaire il faut un service tiers (Formspree, gratuit jusqu'à 50 messages/mois) — ça demande un compte côté Guillaume.
+7. Footer — marque + wordmark + tagline « Transforming apps into success stories. », colonnes Navigation et Legal, barre du bas (© + mail).
 
 ## Apps
 - **Healthy Guru** — nutrition/fitness IA, Health & Fitness
@@ -81,7 +83,7 @@ disque   : cx 50, cy 63, r 11     (plein)
   - **Responsive du trio de mockups** : largeur fixe → géré par `transform: scale()` par palier (>1440 pleine taille / 1201-1440 `.phones` 0.85 / bascule 1 colonne ≤1200 / 820 → 0.82 / 600 → 0.64 / 400 → 0.52) + `min-width:0` sur les cellules du hero pour éviter tout débordement horizontal.
   - **Partage/SEO** : image OG dédiée `healthyguru/og-image.png` (carte verte : logo + accroche + mockup dashboard) + balises OG/Twitter/canonical/theme-color dans le `<head>`. Régénérable via le pipeline « carte HTML → Chrome headless `--screenshot` → `sips -z 630 1200` » (voir historique).
   - **Statut** : refonte complète faite et **déployée en live** (bilingue, trio vrais screenshots, features/comparaison/stepper/avis/CTA carte, thème vert, responsive, OG/SEO). Reste UNIQUEMENT : vérif des métriques 4,6★/500+ et des notes d'avis dans App Store Connect (laissées telles quelles).
-- **Climbr** — carnet de bloc en salle (Sports), app d'Athanor Studio **en ligne depuis le 10 septembre 2026** : https://apps.apple.com/fr/app/climbr-progression-escalade/id6803155208. Carte « Now on the App Store » sur l'index, cliquable vers `/climbr` ; pas encore de métriques (notes, avis) à afficher.
+- **Climbr** — carnet de bloc en salle (Sports), app d'Athanor Studio **en ligne depuis le 10 septembre 2026** : https://apps.apple.com/fr/app/climbr-progression-escalade/id6803155208. Carte cliquable vers `/climbr` sur l'index, avec la note App Store (5.0 ★ le 12 octobre 2026, 9 notes en France).
   - Page dédiée : `/climbr` (dossier `climbr/`), **bilingue FR/EN depuis le 27 septembre 2026**. Sections : navbar (Comment ça marche / Support / « Télécharger », puis l'interrupteur de langue et le burger) / hero (titre « Ton carnet de bloc. », badges App Store + « Bientôt sur Android », trio Mes blocs · fiche · Profil dans le vrai boîtier) / **Comment ça marche** (`#comment`, sept étapes tirées des visuels ASO, en **carrousel à toutes les tailles depuis le 29 septembre 2026** (cartes de 300 px, flèches ‹ › et points dessous ; le téléphone collé à droite dont l'écran suivait l'étape lue a été retiré) — sous 768 px, le **carrousel** qu'on fait glisser — une carte par étape avec son écran, la suivante dépasse du bord, des points dessous — au lieu des sept étapes empilées, qui faisaient près de neuf écrans de haut (retour du 28 septembre 2026)) / CTA sombre (App Store + « Bientôt sur Android ») / Support (`#support`) / footer.
   - **Langue** : même mécanique que Healthy Guru — `navigator.language` au premier passage, puis l'interrupteur `.lang-toggle`, gardé en `localStorage` (`climbr-lang`). ⚠️ L'interrupteur est HORS de `.nav-links` : il reste en haut à droite quand le menu se replie. Les textes sont dans `climbr/i18n.js` (`I18N = { fr, en }`, clés `data-i18n`, `data-i18n-alt`, `data-i18n-aria`) ; ⚠️ le français est AUSSI écrit en dur dans `index.html` pour une lecture sans JavaScript — changer un texte français aux deux endroits. Le lien App Store suit la langue (`data-lien-app-store` : `/fr/app/…` ou l'adresse sans pays).
   - **Écrans** : `climbr/ecran-*.webp` (français) et `climbr/en/ecran-*.webp` (anglais), **mêmes noms** — `data-ecran` garde le nom nu et la langue le préfixe. Tirés des captures ASO du dépôt Climb (`Fixtures/aso/captures/<langue>/simulateur/`), 620 px de large, `cwebp -q 80`. L'éditeur (prises rouges détourées) vient du simulateur avec `--demo-photo --demo-scan --demo-photo-fichier 08-mur-bois-rouge.jpg --demo-prises video/prises.json --demo-toucher 0.497,0.478`. Les anciens `screen-*.webp` ont été retirés.
@@ -93,7 +95,6 @@ disque   : cx 50, cy 63, r 11     (plein)
   - `climbr/og-image.png` est régénérée avec Pillow depuis les captures App Store (logo, titre, pastille « Disponible sur l'App Store », trio). ⚠️ Elle montre encore le trio d'avant le 27 septembre 2026, et reste en français (les robots ne lancent pas le JavaScript).
   - **`/climbr/download`** (29 septembre 2026) — le lien unique à partager (bio, affiches, QR) : dans le `<head>`, un iPhone/iPad part sur l'App Store et un Android sur Google Play par `location.replace` (⚠️ pas `href` : le retour depuis le store bouclerait) ; un ordinateur voit les deux badges et un QR code SVG en ligne qui pointe vers cette même adresse. ⚠️ Un iPad se déclare Mac : c'est `maxTouchPoints > 1` qui le reconnaît. `?liens` garde la page affichée sur un téléphone, pour la vérifier. Les adresses des stores y sont écrites en dur, à changer aussi ici si elles changent.
   - Sert d'**URL marketing** (`/climbr/`) et d'**URL d'assistance** (`/climbr/#support`) dans App Store Connect ; la politique de confidentialité reste `/privacy.html`.
-  - Quand il y aura des avis : remplacer le `status-badge` de l'index par les métriques comme Healthy Guru.
   - Les textes viennent de la fiche App Store (nom « Climbr – Progression Escalade », sous-titre « Scanne ton bloc avec une photo »). Tutoiement, comme Healthy Guru.
 - **Clash List** — Quiz Game, "Challenge your friends in 45-second word duels."
   - Pas encore lancée. Carte affiche un badge `.status-badge` "Coming Soon" à la place des `app-metrics` + `app-links`. Quand l'app sortira, remplacer le `<span class="status-badge">` par les blocs métriques + store comme Healthy Guru.
@@ -103,8 +104,8 @@ disque   : cx 50, cy 63, r 11     (plein)
 
 ## Notes / pièges connus
 - Pas de backend, et **plus de formulaire** : le contact se fait par un lien `mailto:` direct. Si un vrai formulaire est souhaité un jour, il faudra Formspree ou équivalent — un `<form action="mailto:">` ne marche pas.
-- `privacy.html` partage `styles.css` et la même navbar/footer que l'index : **toute refonte du chrome doit être répercutée dans les deux fichiers** (ils ne partagent pas de template).
-- L'`og-image.png` de la racine se régénère avec le pipeline « carte HTML → Chrome headless `--screenshot` en 2400×1260 → `sips -z 630 1200` ». Rendre en 2× puis réduire, sinon le texte bave.
+- `privacy.html` et `terms.html` partagent `styles.css` et la même navbar/footer que l'index (y compris le `<symbol id="mark">`) : **toute refonte du chrome doit être répercutée dans les trois fichiers** (ils ne partagent pas de template).
+- L'`og-image.png` de la racine se régénère avec le pipeline « carte HTML → Chrome headless `--screenshot` en 2400×1260 (`zoom: 2` sur le body) → `sips -z 630 1200` ». Rendre en 2× puis réduire, sinon le texte bave. Les icônes d'apps doivent être copiées à côté de la carte HTML.
 - ⚠️ Chrome headless **clampe le viewport à 500 px minimum** sur macOS : une capture en `--window-size=390` rend la page à 500 px puis rogne à 390, ce qui donne une fausse impression de débordement. Pour vraiment mesurer, injecter une sonde `scrollWidth`/`getBoundingClientRect` et lire le résultat via `--dump-dom`.
 - Le site se positionne comme un studio qui build et scale **ses propres apps**, pas un prestataire de service.
 - L'`index.html` original (simple logo + email) a été perdu puis reconstruit à partir du `styles.css` — d'où l'importance de garder `styles.css` cohérent comme source du design.
