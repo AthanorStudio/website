@@ -64,6 +64,9 @@
         .ecrans figcaption strong { display: block; color: var(--ink); font-size: 0.9375rem; margin-bottom: 0.1rem; }
         .encart { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); padding: 1rem 1.15rem; color: var(--ink-soft); }
         .encart strong { color: var(--ink); }
+        .exemple { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+        .exemple video { width: min(100%, 260px); height: auto; border-radius: 13% / 6.2%; background: #000; }
+        .exemple figcaption { font-size: var(--fs-small); color: var(--ink-soft); text-align: center; max-width: 30rem; }
 
         .regles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
         .regles li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.05rem 1.15rem; }
@@ -171,7 +174,7 @@
                 </header>
 
                 <section id="fr-etapes">
-                    <h2>De la séance au virement</h2>
+                    <h2>Les 5 étapes</h2>
                     <ol class="etapes">
                         <li><h3>Tu tournes</h3><p>Une séance où tu utilises Climbr, dans ton style habituel. Pas besoin de montrer ton visage&nbsp;: les mains au mur et une voix off marchent très bien.</p></li>
                         <li><h3>Tu nous l'envoies sur WhatsApp</h3><p>Avant de publier, envoie-nous la vidéo pour validation. On répond vite. <strong>Une vidéo publiée sans validation n'est pas payée.</strong> Une fois validée, dépose-la en qualité d'origine sur <a href="../upload/?lang=fr">la page de dépôt</a>.</p></li>
@@ -192,6 +195,7 @@
                     </div>
                     <p class="encart"><strong>Le moment le plus fort, c'est le scan d'un bloc.</strong> Prends le mur en photo, montre les prises détourées, touche une prise et enregistre un essai. Tu peux aussi faire défiler rapidement le Profil et le classement.</p>
                     <p class="lead">Au montage, accélère ou coupe certains passages pour garder du rythme.</p>
+                    <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>Un exemple d'enregistrement d'écran, accéléré&nbsp;: le scan, un essai, le Profil et le classement en 16&nbsp;secondes.</figcaption></figure>
                 </section>
 
                 <section id="fr-regles">
@@ -256,7 +260,6 @@
                         <div class="liste faire"><h3>À faire</h3><ul>
                             <li><strong>Signaler la collaboration</strong>&nbsp;: c'est la loi (loi influenceurs du 9 juin 2023). Active «&nbsp;Contenu de marque&nbsp;» sur TikTok ou «&nbsp;Partenariat rémunéré&nbsp;» sur Instagram, et écris «&nbsp;Collaboration commerciale&nbsp;» dans la vidéo ou la légende.</li>
                             <li>Identifier <strong>@climbr.application</strong> dans la légende.</li>
-                            <li>Demander à ta salle si elle accepte qu'on filme.</li>
                         </ul></div>
                         <div class="liste eviter"><h3>À éviter</h3><ul>
                             <li>Filmer d'autres grimpeurs reconnaissables sans leur accord.</li>
@@ -281,7 +284,7 @@
                 </header>
 
                 <section id="en-etapes">
-                    <h2>From the session to the payment</h2>
+                    <h2>The 5 steps</h2>
                     <ol class="etapes">
                         <li><h3>You film</h3><p>A session where you use Climbr, in your usual style. No need to show your face: hands on the wall and a voice-over work great.</p></li>
                         <li><h3>You send it to us on WhatsApp</h3><p>Before posting, send us the video for approval. We reply fast. <strong>A video posted without approval isn't paid.</strong> Once approved, upload it in original quality on <a href="../upload/?lang=en">the upload page</a>.</p></li>
@@ -302,6 +305,7 @@
                     </div>
                     <p class="encart"><strong>The strongest moment is scanning a boulder.</strong> Take a photo of the wall, show the outlined holds, tap a hold and log an attempt. You can also scroll quickly through your Profile and the leaderboard.</p>
                     <p class="lead">When editing, speed up or cut some parts to keep the pace up.</p>
+                    <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>An example screen recording, sped up: the scan, an attempt, the Profile and the leaderboard in 16 seconds.</figcaption></figure>
                 </section>
 
                 <section id="en-regles">
@@ -366,7 +370,6 @@
                         <div class="liste faire"><h3>Do</h3><ul>
                             <li><strong>Disclose the partnership</strong>: it's the law. Turn on "Branded content" on TikTok or "Paid partnership" on Instagram, and write "Paid partnership" in the video or the caption.</li>
                             <li>Tag <strong>@climbr.application</strong> in the caption.</li>
-                            <li>Ask your gym if filming is OK.</li>
                         </ul></div>
                         <div class="liste eviter"><h3>Don't</h3><ul>
                             <li>Film other recognizable climbers without their consent.</li>
