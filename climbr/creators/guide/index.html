@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climbr — Le guide du créateur</title>
+    <meta name="description" content="Le guide des créateurs Climbr : les étapes, ce qu'il faut montrer, six formats de vidéos et le paiement.">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://athanor-studio.io/climbr/creators/guide/">
+    <meta name="theme-color" content="#F4EFE8">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Climbr">
+    <meta property="og:url" content="https://athanor-studio.io/climbr/creators/guide/">
+    <meta property="og:title" content="Climbr · Creator guide">
+    <meta property="og:description" content="Video ideas, golden rules and how you get paid.">
+    <meta property="og:image" content="https://athanor-studio.io/climbr/creators/og-image.jpg?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://athanor-studio.io/climbr/creators/og-image.jpg?v=3">
+
+    <link rel="icon" href="../../../climbr_icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../../climbr_icon.png">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .guide { padding: calc(84px + clamp(1.5rem, 4vw, 3rem)) 0 var(--section-padding); }
+        .colonne { max-width: 46rem; margin: 0 auto; padding: 0 var(--container-padding); }
+        .retour { display: inline-block; margin-bottom: 1.2rem; font-size: var(--fs-small); color: var(--ink-soft); }
+        .retour:hover { color: var(--ink); }
+        .guide article { display: flex; flex-direction: column; gap: clamp(2.8rem, 6vw, 4rem); }
+        /* ⚠️ Sans cette ligne, `display: flex` l'emporte sur `hidden` et les deux langues s'affichent. */
+        .guide article[hidden] { display: none; }
+        .guide a:not(.retour) { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+        .eyebrow { font-size: var(--fs-xs); font-weight: 600; letter-spacing: var(--letter-wide); text-transform: uppercase; color: var(--accent); }
+        .tete h1 { margin-top: 0.4rem; font-size: clamp(2rem, 5.5vw, 3rem); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.05; text-wrap: balance; }
+        .chapeau { margin-top: 0.9rem; color: var(--ink-soft); font-size: 1.0625rem; max-width: 38rem; }
+        /* ⚠️ Les liens du sommaire sont des pastilles, pas soulignés : la règle
+           `.guide a` ci-dessus est plus forte, d'où le sélecteur doublé. */
+        .sommaire { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+        .guide .sommaire a { text-decoration: none; color: var(--ink-soft); font-size: var(--fs-small); font-weight: 500; padding: 0.38rem 0.8rem; border: 1px solid var(--line); border-radius: var(--radius-full); background: var(--surface); transition: border-color var(--transition), color var(--transition); }
+        .guide .sommaire a:hover { color: var(--ink); border-color: var(--muted); }
+
+        .guide section { display: flex; flex-direction: column; gap: 1.1rem; scroll-margin-top: 96px; }
+        .guide h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 800; letter-spacing: var(--letter-tight); line-height: 1.15; text-wrap: balance; }
+        .guide h3 { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+        .lead { color: var(--ink-soft); }
+        .note { font-size: var(--fs-small); color: var(--ink-soft); }
+
+        /* Les étapes : une vraie séquence, d'où les numéros. */
+        .etapes { list-style: none; counter-reset: e; display: flex; flex-direction: column; }
+        .etapes li { counter-increment: e; position: relative; padding: 0 0 1.4rem 3.2rem; }
+        .etapes li::before { content: counter(e); position: absolute; left: 0; top: -0.1rem; width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-weight: 700; display: grid; place-items: center; font-size: 0.95rem; }
+        .etapes li:not(:last-child)::after { content: ""; position: absolute; left: 1.03rem; top: 2.3rem; bottom: 0.2rem; width: 2px; background: var(--line); }
+        .etapes p { margin-top: 0.25rem; color: var(--ink-soft); }
+        .etapes p strong { color: var(--ink); }
+
+        .ecrans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+        .ecrans figure { display: flex; flex-direction: column; gap: 0.7rem; }
+        .ecrans img { width: 100%; height: auto; border-radius: 18px; box-shadow: var(--shadow-md); border: 1px solid var(--line); }
+        .ecrans figcaption { font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.45; }
+        .ecrans figcaption strong { display: block; color: var(--ink); font-size: 0.9375rem; margin-bottom: 0.1rem; }
+        .encart { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); padding: 1rem 1.15rem; color: var(--ink-soft); }
+        .encart strong { color: var(--ink); }
+
+        .regles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+        .regles li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.05rem 1.15rem; }
+        .regles li:last-child { grid-column: 1 / -1; }
+        .regles p { margin-top: 0.35rem; color: var(--ink-soft); font-size: 0.9375rem; }
+        .regles strong { color: var(--ink); }
+
+        .formats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+        .format { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.1rem 1.2rem 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .genre { align-self: flex-start; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.04em; color: var(--accent); background: rgba(180, 83, 31, 0.08); padding: 0.18rem 0.6rem; border-radius: var(--radius-full); }
+        .phrase { font-weight: 600; color: var(--ink); }
+        .format ol { padding-left: 1.15rem; color: var(--ink-soft); font-size: 0.9375rem; display: flex; flex-direction: column; gap: 0.15rem; }
+
+        .accroches { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+        .accroches li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.9rem; font-weight: 600; font-size: 0.9375rem; }
+
+        .paie { background: var(--ink); color: var(--bg); border-radius: var(--radius-lg); padding: clamp(1.3rem, 4vw, 1.9rem); display: flex; flex-direction: column; gap: 1.3rem; }
+        .chiffre { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 0.9rem; }
+        .chiffre b { font-size: clamp(2.4rem, 7vw, 3.2rem); font-weight: 800; letter-spacing: var(--letter-tight); color: #F0A673; line-height: 1; }
+        .chiffre span { color: rgba(244, 239, 232, 0.8); max-width: 26rem; }
+        .paie dl { display: flex; flex-direction: column; border-top: 1px solid rgba(244, 239, 232, 0.14); }
+        .paie dl div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.2rem 1rem; padding: 0.8rem 0; border-bottom: 1px solid rgba(244, 239, 232, 0.14); }
+        .paie dl div:last-child { border-bottom: 0; padding-bottom: 0; }
+        .paie dt { font-weight: 700; }
+        .paie dd { color: rgba(244, 239, 232, 0.78); font-size: 0.9375rem; }
+
+        .deux-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+        .liste { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; }
+        .liste ul { list-style: none; margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.55rem; }
+        .liste li { position: relative; padding-left: 1.4rem; color: var(--ink-soft); font-size: 0.9375rem; }
+        .liste li strong { color: var(--ink); }
+        .liste li::before { position: absolute; left: 0; font-weight: 700; }
+        .faire li::before { content: "✓"; color: var(--sent); }
+        .eviter li::before { content: "✕"; color: var(--accent); }
+
+        .fin { text-align: center; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1.6rem; }
+
+        @media (max-width: 760px) {
+            .ecrans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .regles, .formats, .accroches, .deux-col { grid-template-columns: 1fr; }
+            .paie dl div { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../" class="nav-brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="21.6 166.1 436.1 131.8" class="nav-wordmark" role="img" aria-label="Climbr">
+  
+  <defs>
+    <style>
+      .st0 {
+        fill: var(--ink);
+      }
+
+      .st1 {
+        fill: var(--accent);
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <path class="st0" d="M120.5,272l-1,1.3-1.4,1.8c-3.7,4.6-8.5,7.8-13.5,10.6l-1.1.6-2.9,1.3-1.4.6-.9.3-.7.3-1,.4-.8.2-.7.2-1.2.3-1.1.3c-.4,0-1,.3-1.5.4l-1.6.3-1.3.2-1.9.3-3.3.3h-6.6s-1.9-.2-1.9-.2c-.5,0-.8,0-1.3-.1l-1.7-.2-1.6-.3-1-.2-1.6-.4-1-.2-1-.3-.8-.2-1.2-.4-1-.4-.9-.3-2.5-1-5.9-2.9-1.5-.9-.9-.6-1-.6-1.7-1.2-1.4-1.1-1.9-1.7-4.5-4.4-.6-.8-1.1-1.3-1-1.4-1.7-2.4-.6-1-1.5-2.6-1-1.9-1.7-3.8c-.2-.4-.3-1-.4-1.4l-.3-.8-.2-.7-.3-1.1c-.1-.4-.3-.9-.4-1.3l-.3-1.2-.2-1.2-.2-1.2-.3-1.6c0-.4-.1-.8-.2-1.3l-.2-1.2-.2-3.7v-4.2s.2-3.2.2-3.2c0-.8.2-1.7.4-2.4l.2-1.5.2-1.2.2-1.2.3-1.1.2-1,.2-.8.2-.7.3-.9.3-.9.3-.7.4-.7.3-.7.4-1,2.4-4.6,1.5-2.5.3-.5.6-.8.7-1,.6-.8,1.3-1.6,3.4-3.7,1.5-1.4,1.6-1.3,1.2-1,1.5-1.1,3.1-2,.9-.6,3-1.6,2.2-1.1,2.1-.9.9-.3.8-.3.7-.2,1-.3.7-.3,1-.3,1.1-.3c.2,0,.4-.3.7-.2s.7-.2.9-.2l1.2-.3,1.1-.2,1.5-.2c.8-.1,1.7-.3,2.4-.4l2.5-.2h7.3c0-.1,1.2,0,1.2,0h2.4c.1.1.4.4.7.3.4,0,3.5.5,4.9.9l1.3.3.7.2,1,.3,1,.3.7.3.9.3.5.2,1.3.5,2.2,1,.6.3,1.7.9,2.6,1.5,1,.7,1.1.8,1.1.8,1.3,1.1,1.4,1.2,4.3,4.3,1.2,1.5,3.1,4.4.8,1.4-2.3,1.5-1.1.7-.7.5-1.1.6-2.2,1.4-.7.5-1.1.8-.7.5-3.2,2.1-3.5,2.2-1.1.8-.7.5-1,.6-1,.5c-.1-.5-.4-.8-.7-1.2l-.7-1-.7-1-3.8-3.8-1.2-.9-1-.7c-2.4-1.7-5.2-2.7-8.1-3.4l-.7-.2-1.9-.3h-6.5s-1.9.3-1.9.3l-.7.2c-.4.1-.7.2-1,.2-2.4.5-6.4,2.5-8.4,4.1l-1.2,1-3.6,3.6-.7.9-.7,1-1.2,1.9-1.3,2.8-.4,1.1-.2.5-.3.8-.3,1.1-.3,1-.2,1.3-.3,1.7v6.9c-.1,0,.1.5.1.5.2.4,0,.9.1,1.4l.3,1.4.2,1,.3.9.2.7.4,1,.4,1c1.4,3.7,3.7,7,6.7,9.6l1.4,1.2,1.2.9,1,.7.7.5,2.8,1.4,2.6,1,1,.2,1.2.3c.2,0,.5.1.8.2l1.4.2c2.1.3,4.2.2,6.2,0l1.7-.3,1.2-.2,1.2-.3.7-.2.5-.2,2-.8,1.5-.7,1.8-1.1,1-.7,1.2-.9,4.1-4.1.8-1.1.8-1,.7-1.1,1.3.8,3.5,2.3.5.3.9.6.7.5,1.5.9,3.6,2.4,4.8,3.1.9.6,1,.7.7.5,1.2.8c0,.4-.3.6-.5.9l-.7,1-.5.7-.7.9Z"/>
+      <rect class="st0" x="129" y="189.7" width="24.9" height="100.7"/>
+    </g>
+    <g>
+      <path class="st0" d="M280.4,237.8l-1.4.4c-1.7.5-3.1,1.5-4.2,2.8l-1,1.1-.6,1.1c-.9,1.5-1.4,3-1.7,4.8l-.4,2.4v40.2s-4.8,0-4.8,0h-12.2s-2.6,0-2.6,0h-2.6c-.7,0-1.4.2-2-.1v-40s-.3-2.1-.3-2.1c0-.4-.1-.6-.2-1l-.2-1-.2-.9-.6-1.6c-.2-.6-.6-1-.9-1.5l-.3-.5c-1-1.7-3.2-3.1-5.2-3.7l-1.1-.3c-1.9-.5-4.8-.2-6.8.6l-.7.3c-1,.4-1.9,1-2.7,1.9l-1.3,1.6-1.1,1.9-1,2.8-.2,1-.3,2v40.2c0,.3-.1.5-.4.5h-1s-12.7,0-12.7,0h-7.7c-.9,0-1.6.1-2.4,0v-11.2s0-62.1,0-62.1h22s0,5.4,0,5.4c0,.2.3.3.4,0,.2-.3.5-.4.8-.7l1-.9,1.2-.9,1.9-1.2,1.2-.7.6-.3.5-.2,2.2-.9c.2,0,.4-.2.7-.3l.7-.2c.2,0,.3-.1.5-.2l1.3-.4,1.5-.2c1-.1,2.2-.4,2.7-.4h6s1,.2,1,.2c.6.1,1.2,0,1.8.2l1.2.2,1,.2,1,.3.9.3c.3,0,.7.3,1,.4l.5.2,1.2.5,2.4,1.2,1.6,1,1.1.8,3.5,3.5.9,1.2c.2.2.2.5.5.6l2.4-2.6,2.4-2.1,1-.7,1.7-1.2,1.7-.9,2-1,1.2-.4.7-.3.7-.2.9-.3,1.2-.3,1.2-.3c.4-.1.9,0,1.3-.2s1.2,0,1.8-.2l.8-.2h6.5c.4,0,1.9.3,2.9.5l1.5.3,1.4.4,1.1.3.7.2,2.6,1,.5.2.9.4,2.8,1.7,1.4,1.1.4.3,3.2,3.3,1,1.4,1.2,1.7.5.8.2.5.2.5.4.7,1,2.1.2.6c.1.5.4.9.4,1v.5c.2.4.5,1.1.7,2.1l.3,1.2.3,1.4.2,1.7.2,2.2.2,2.2v44.8c0,.3,0,.5,0,.6s-.3.1-.5.1h-4.3c0,0-.7,0-.7,0h-7.7s-4.3,0-4.3,0h-3.1s-2.7,0-2.7,0c-.3,0-.5,0-.7,0s-.1-.3-.1-.6v-39s-.2-2.4-.2-2.4c0-.3-.2-.4-.2-.6v-1.1c-.1,0-.3-.7-.4-1.1l-.5-1.4-.2-.5-1.1-1.8c-.7-1.2-2.9-3-4.3-3.4l-1.1-.3-1-.2c-1.5-.4-3.2-.4-4.8,0Z"/>
+      <g>
+        <path class="st0" d="M403,266.5c0,.3,0,.5-.2.8l-.2.5-.9,2.5-.3.7-2,4-1.1,1.8-.7,1-.5.7-1.1,1.3-2.3,2.5-2.6,2.4-1.2.9-1,.7-1.2.7-1,.6-3.4,1.7-1.1.4-2.2.7-1.7.5-1.2.2-1.4.2c-.4,0-.7.1-1,.1l-1.7.2h-5.7s-2.7-.3-2.7-.3l-1.4-.3-1-.2-1.1-.3-1.7-.6-1.7-.7-.7-.4-1.4-.8c-1.2-.7-2.2-1.5-3.2-2.4l-1.5-1.4c-.1-.2-.4-.2-.4,0v6.1s-22.3,0-22.3,0c-.4,0-.9.3-1.3,0v-100.9s21.7,0,21.7,0h2.7c.2,0,.4,0,.3.3v31.5c.6,0,.9-.5,1.3-.8l1-.7,1-.7,1.6-1,2-.9,1.7-.7,1.2-.4.9-.3,1.2-.3c.2,0,.4-.1.8-.2l1.2-.2,2.6-.3h5.3c.5,0,.9.3,1.4.2s1.2.1,1.7.2l1.5.2,1.2.3,1,.2.9.3,1.2.3,1.5.6c2.7,1,5.2,2.5,7.5,4.3l.8.6,4,4.1.6.8,1,1.3c1.6,2.1,2.6,4.4,3.8,6.8l.2.4c.2.4.2.6.3.8l1.1,3c.2.4.3,1,.5,1.6l.3,1.2.2,1,.3,1.8.2.6c.1.4.1,1,.2,1.4l.2,2.2c.3,2.5.3,5.1,0,7.6l-.2,1.9-.3,1.9-.2,1.2-.3,1.6c-.1.5-.3,1.1-.3,1.1-.2.2-.1.6-.2.8l-.3,1ZM381.6,253.3c0-8.6-7-15.6-15.6-15.6s-15.6,7-15.6,15.6,7,15.6,15.6,15.6,15.6-7,15.6-15.6Z"/>
+        <path class="st1" d="M433.6,281l-.2,7.3c-.5,1-1.4,2.2-2.6,2.2h-16c-.2,0-1.5-.4-1.9-.9s-.7-1-.8-1.4v-11.6s0-27.8,0-27.8v-13.9c0-.6.1-1.2.3-1.8l.3-1.4.5-1.7.3-.9.3-.7,1.7-3.3.3-.5.8-1.1.9-1.2,2.9-2.9.9-.7c1.7-1.3,3.5-2.4,5.5-3.3l1.7-.8.8-.3.9-.3,1-.3.8-.2,1.3-.3,1.4-.3,1.7-.2,2.4-.2,2.7.2c.4,0,.9,0,1.4.2l1,.2,1.1.4c1.2.4,2.2,1,3.1,1.7s.8.9,1.3,1.4l.5.7c.4.5.7,1.1.9,1.8l.4,1.1.3,1.1.2,1.3c.4,2,.4,4.1,0,6.1l-.3,1.4-.2,1c-.4,1.7-1.1,3.4-2.4,4.6l-2.3,2.3-1,.7-1.7,1.1-.8.5-1.5.9-.9.6-1.1.8c-1.8,1.4-3.3,3.1-4.1,5.2l-.9,2.1-.4,1.2-.3,1.4-.2,1.4v6.5c0,0,0,6.7,0,6.7v13.8ZM440.9,228.1c0-2.2-1.8-4.1-4.1-4.1s-4.1,1.8-4.1,4.1,1.8,4.1,4.1,4.1,4.1-1.8,4.1-4.1Z"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="st0" x="165" y="211.5" width="25" height="78.8"/>
+    <path class="st1" d="M177.4,203.2h-2.4c-1.9,0-3.6-.3-5.3-1.3l-.7-.4c-1.8-1.1-2.8-2.9-3.3-5l-.2-1-.4-7.7.2-5.9c.1-3.9,2.4-8,6-9.3s8.4,0,11.5,1.5,3.9,2.5,5.4,4.4c3,3.8,4.5,10.6,4.1,15.6s-2.9,6.8-7,8-5.1,1.2-7.8,1.2ZM181.8,186.9c0-2.2-1.7-4-3.7-4s-3.7,1.8-3.7,4,1.7,4,3.7,4,3.7-1.8,3.7-4Z"/>
+  </g>
+</svg></a>
+            <div class="nav-droite">
+                <button class="lang-toggle" type="button" aria-label="Switch to English">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+                    <span class="lang-toggle-label">EN</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="guide">
+        <div class="colonne">
+            <a href="../" class="retour" data-t="retour">← Le programme créateurs</a>
+
+            <!-- ⚠️ Deux textes entiers, un par langue, comme le contrat : un guide se
+                 relit d'un bloc, et des centaines de clés data-t s'y perdraient.
+                 Changer l'un = changer l'autre. Les chiffres (paiement, délais)
+                 suivent le contrat (`../contrat/`, version 2026-10-13.3). -->
+            <article id="guide-fr" lang="fr">
+                <header class="tete">
+                    <span class="eyebrow">Programme créateurs</span>
+                    <h1>Le guide du créateur</h1>
+                    <p class="chapeau">Comment se passe une vidéo, de la séance au virement, ce qu'il faut montrer de l'app, et six formats prêts à tourner quand l'inspiration manque.</p>
+                    <nav class="sommaire" aria-label="Sommaire">
+                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce qu'il faut montrer</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-formats">Six formats</a><a href="#fr-accroches">Accroches</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À faire, à éviter</a>
+                    </nav>
+                </header>
+
+                <section id="fr-etapes">
+                    <h2>De la séance au virement</h2>
+                    <ol class="etapes">
+                        <li><h3>Tu tournes</h3><p>Une séance où tu utilises Climbr, dans ton style habituel. Pas besoin de montrer ton visage&nbsp;: les mains au mur et une voix off marchent très bien.</p></li>
+                        <li><h3>Tu nous l'envoies sur WhatsApp</h3><p>Avant de publier, envoie-nous la vidéo pour validation. On répond vite. <strong>Une vidéo publiée sans validation n'est pas payée.</strong></p></li>
+                        <li><h3>Tu publies</h3><p>Sur ton compte, avec la mention «&nbsp;Collaboration commerciale&nbsp;» et <strong>@climbr.application</strong> dans la légende. La vidéo reste en ligne au moins 90 jours.</p></li>
+                        <li><h3>Tu nous envoies le lien et l'autorisation pub</h3><p>Le lien de la vidéo, et le code Spark Ads (TikTok) ou l'autorisation de partenariat (Instagram). On t'explique comment faire sur WhatsApp, ça prend deux minutes.</p></li>
+                        <li><h3>Tu es payé chaque mois</h3><p>On t'envoie le relevé de tes vues, puis le virement. Le détail est plus bas, dans <a href="#fr-paiement">Le paiement</a>.</p></li>
+                    </ol>
+                </section>
+
+                <section id="fr-montrer">
+                    <h2>Ce qu'il faut montrer</h2>
+                    <p class="lead">Climbr est le carnet de bloc de ceux qui grimpent en salle, sur l'App Store et Google Play, avec plus de 1&nbsp;800 salles. Quatre moments font de l'effet à l'écran.</p>
+                    <div class="ecrans">
+                        <figure><img src="../../ecran-editeur.webp" data-ecran="ecran-editeur.webp" alt="Le mur en photo, avec les prises rouges du bloc entourées" width="620" height="1347" loading="lazy"><figcaption><strong>Le détourage</strong>Une photo du mur, un doigt sur une prise&nbsp;: Climbr entoure tout le bloc.</figcaption></figure>
+                        <figure><img src="../../ecran-fiche.webp" data-ecran="ecran-fiche.webp" alt="La fiche d'un bloc&nbsp;: la voie rouge détourée, cinq essais, 85 %" width="620" height="1347" loading="lazy"><figcaption><strong>La fiche du bloc</strong>Les essais, le top, la cotation.</figcaption></figure>
+                        <figure><img src="../../ecran-profil.webp" data-ecran="ecran-profil.webp" alt="Le Profil&nbsp;: tops, flashs et séances de la semaine" width="620" height="1347" loading="lazy"><figcaption><strong>Le Profil</strong>Tes tops, ton volume d'entraînement, ta progression.</figcaption></figure>
+                        <figure><img src="../../ecran-classement.webp" data-ecran="ecran-classement.webp" alt="Le classement du mois d'une salle" width="620" height="1347" loading="lazy"><figcaption><strong>Le classement</strong>Chaque mois, les grimpeurs d'une même salle se comparent.</figcaption></figure>
+                    </div>
+                    <p class="encart"><strong>Le moment le plus fort, c'est le détourage.</strong> Tu touches une prise, et toute la voie s'allume. Filme-le en enregistrement d'écran, puis coupe sur le vrai mur&nbsp;: la comparaison fait tout le travail.</p>
+                </section>
+
+                <section id="fr-regles">
+                    <h2>Les règles d'or</h2>
+                    <ul class="regles">
+                        <li><h3>L'accroche dans les deux premières secondes</h3><p>Une phrase à l'écran et à l'oral, qui pose une question ou fait une promesse. Si on ne comprend pas tout de suite de quoi parle la vidéo, on passe. <a href="#fr-accroches">Dix accroches plus bas.</a></p></li>
+                        <li><h3>Vertical, avec ou sans ton visage</h3><p>Format 9:16. Le visage et la voix créent la confiance, mais les mains au mur et une voix off marchent aussi.</p></li>
+                        <li><h3>L'app lisible à l'écran</h3><p>Utilise l'enregistrement d'écran du téléphone plutôt que de filmer l'écran avec un autre appareil&nbsp;: c'est net, sans reflet. Alterne avec des plans du mur.</p></li>
+                        <li><h3>15 à 35 secondes, une seule idée</h3><p>Le détourage, OU la progression, OU le classement. Pas les trois dans la même vidéo.</p></li>
+                        <li><h3>Des sous-titres</h3><p>La plupart des vidéos sont regardées sans le son. Les sous-titres automatiques de TikTok et d'Instagram suffisent.</p></li>
+                        <li><h3>Du vrai</h3><p>Ton vrai projet, tes vrais essais, tes vrais échecs. Un bloc raté cinq fois puis sorti vaut mieux qu'une démo parfaite.</p></li>
+                        <li><h3>Une fin qui dit où trouver l'app</h3><p>«&nbsp;Climbr, sur l'App Store et Google Play&nbsp;», ou «&nbsp;le lien est en bio&nbsp;». Le lien à mettre en bio&nbsp;: <strong>athanor-studio.io/climbr/download</strong>, qui envoie chacun vers le bon store.</p></li>
+                    </ul>
+                </section>
+
+                <section id="fr-formats">
+                    <h2>Six formats prêts à tourner</h2>
+                    <div class="formats">
+                        <div class="format"><span class="genre">POV · 15 s</span><h3>Scanne ton projet</h3><p class="phrase">«&nbsp;POV&nbsp;: ton app détoure ton bloc à ta place.&nbsp;»</p><ol><li>Toi devant le mur, téléphone levé.</li><li>Enregistrement d'écran&nbsp;: la photo, un doigt sur une prise.</li><li>La voie s'allume. Coupe sur le vrai mur.</li><li>Tu grimpes le bloc.</li></ol></div>
+                        <div class="format"><span class="genre">Vlog · 30 s</span><h3>Ma séance en 30 secondes</h3><p class="phrase">«&nbsp;Ma séance de bloc, mais chaque essai compte.&nbsp;»</p><ol><li>Un plan court par bloc tenté.</li><li>Après chaque bloc, l'essai noté dans l'app (1 s).</li><li>À la fin, le bilan de la séance à l'écran.</li></ol></div>
+                        <div class="format"><span class="genre">Avant / après</span><h3>Un mois de progression</h3><p class="phrase">«&nbsp;J'ai noté tous mes blocs pendant un mois. Voilà ce que ça donne.&nbsp;»</p><ol><li>Ton Profil le premier jour.</li><li>Quelques plans de séances.</li><li>Le Profil un mois plus tard&nbsp;: les tops, le volume.</li></ol></div>
+                        <div class="format"><span class="genre">Storytime</span><h3>Le bloc qui me résiste</h3><p class="phrase">«&nbsp;12 essais sur ce bloc. Le 13e…&nbsp;»</p><ol><li>Le bloc scanné, sa fiche à l'écran.</li><li>Les chutes en montage, le compteur d'essais qui monte.</li><li>Le top, et le bloc qui passe en réussi.</li></ol></div>
+                        <div class="format"><span class="genre">Défi</span><h3>Le classement de ma salle</h3><p class="phrase">«&nbsp;Je suis 14e de ma salle ce mois-ci. Objectif&nbsp;: le top 10.&nbsp;»</p><ol><li>Le classement du mois à l'écran.</li><li>Tes séances de la semaine.</li><li>Le nouveau rang. Suite au prochain épisode.</li></ol></div>
+                        <div class="format"><span class="genre">Astuce</span><h3>Mes forts et mes faibles</h3><p class="phrase">«&nbsp;Mon app m'a dit pourquoi je stagne.&nbsp;»</p><ol><li>Les styles du Profil&nbsp;: dalle, dévers, réglettes…</li><li>Ton point faible, et un bloc de ce style.</li><li>Ce que tu vas travailler.</li></ol></div>
+                    </div>
+                </section>
+
+                <section id="fr-accroches">
+                    <h2>Dix accroches toutes prêtes</h2>
+                    <ul class="accroches">
+                        <li>«&nbsp;Arrête de noter tes blocs dans tes notes.&nbsp;»</li>
+                        <li>«&nbsp;POV&nbsp;: ton app détoure ton bloc à ta place.&nbsp;»</li>
+                        <li>«&nbsp;J'ai noté tous mes essais pendant un mois.&nbsp;»</li>
+                        <li>«&nbsp;Pourquoi tu stagnes en bloc (selon mon app).&nbsp;»</li>
+                        <li>«&nbsp;Je suis combien dans ma salle ce mois-ci&nbsp;?&nbsp;»</li>
+                        <li>«&nbsp;Ce bloc m'a pris 13 essais.&nbsp;»</li>
+                        <li>«&nbsp;L'app que tous les grimpeurs de ma salle me demandent.&nbsp;»</li>
+                        <li>«&nbsp;Je scanne le mur, et voilà ce qui se passe.&nbsp;»</li>
+                        <li>«&nbsp;Ma séance de bloc, notée bloc par bloc.&nbsp;»</li>
+                        <li>«&nbsp;Tu grimpes en salle&nbsp;? Il te faut ça.&nbsp;»</li>
+                    </ul>
+                </section>
+
+                <section id="fr-paiement">
+                    <h2>Le paiement</h2>
+                    <div class="paie">
+                        <div class="chiffre"><b>1&nbsp;€</b><span>pour 1&nbsp;000 vues organiques, sur chaque vidéo validée. Jusqu'à 1&nbsp;000&nbsp;€ par vidéo.</span></div>
+                        <dl>
+                            <div><dt>Quelles vues</dt><dd>Les vues organiques, celles que ta vidéo fait toute seule. Elles sont comptées jusqu'à 30 jours après la publication.</dd></div>
+                            <div><dt>Et la pub&nbsp;?</dt><dd>Une fois qu'une vidéo ne fait presque plus de vues, en général au bout d'une quinzaine de jours, on peut la sponsoriser. Le compteur mélange alors vues organiques et vues payées&nbsp;: on arrête donc de compter la veille, et on te prévient avant, avec le nombre de vues retenu.</dd></div>
+                            <div><dt>Quand</dt><dd>Chaque mois, on t'envoie le relevé de tes vues. Tu as 30 jours pour le vérifier, puis on paie par virement sous 15 jours.</dd></div>
+                            <div><dt>Ce qu'il nous faut</dt><dd>Ton IBAN, et une facture si tu as un statut d'entreprise. Tu déclares toi-même les sommes reçues.</dd></div>
+                            <div><dt>Pas payées</dt><dd>Les vidéos publiées sans validation, et les vues ou abonnés achetés.</dd></div>
+                        </dl>
+                    </div>
+                    <p class="note">Tout ça est écrit dans ton <a href="../contrat/?lang=fr">contrat</a>, articles 2 et 3.</p>
+                </section>
+
+                <section id="fr-faire">
+                    <h2>À faire, à éviter</h2>
+                    <div class="deux-col">
+                        <div class="liste faire"><h3>À faire</h3><ul>
+                            <li><strong>Signaler la collaboration</strong>&nbsp;: c'est la loi (loi influenceurs du 9 juin 2023). Active «&nbsp;Contenu de marque&nbsp;» sur TikTok ou «&nbsp;Partenariat rémunéré&nbsp;» sur Instagram, et écris «&nbsp;Collaboration commerciale&nbsp;» dans la vidéo ou la légende.</li>
+                            <li>Identifier <strong>@climbr.application</strong> dans la légende.</li>
+                            <li>Demander à ta salle si elle accepte qu'on filme.</li>
+                        </ul></div>
+                        <div class="liste eviter"><h3>À éviter</h3><ul>
+                            <li>Filmer d'autres grimpeurs reconnaissables sans leur accord.</li>
+                            <li>Promettre ce que l'app ne fait pas. Dans le doute, demande-nous.</li>
+                            <li>Dire que tout est gratuit&nbsp;: l'app se télécharge gratuitement, certaines fonctions sont dans Climbr Pro.</li>
+                            <li>Acheter des vues ou des abonnés&nbsp;: ces vues ne sont pas payées.</li>
+                        </ul></div>
+                    </div>
+                </section>
+
+                <p class="fin">Une question, une idée de vidéo à faire valider&nbsp;? Écris-nous sur WhatsApp, ou à <a href="mailto:climbr@athanor-studio.io">climbr@athanor-studio.io</a>.</p>
+            </article>
+
+            <article id="guide-en" lang="en" hidden>
+                <header class="tete">
+                    <span class="eyebrow">Creator program</span>
+                    <h1>The creator guide</h1>
+                    <p class="chapeau">How a video works, from the session to the payment, what to show in the app, and six ready-to-film formats for when you're out of ideas.</p>
+                    <nav class="sommaire" aria-label="Contents">
+                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What to show</a><a href="#en-regles">Golden rules</a><a href="#en-formats">Six formats</a><a href="#en-accroches">Hooks</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Do's and don'ts</a>
+                    </nav>
+                </header>
+
+                <section id="en-etapes">
+                    <h2>From the session to the payment</h2>
+                    <ol class="etapes">
+                        <li><h3>You film</h3><p>A session where you use Climbr, in your usual style. No need to show your face: hands on the wall and a voice-over work great.</p></li>
+                        <li><h3>You send it to us on WhatsApp</h3><p>Before posting, send us the video for approval. We reply fast. <strong>A video posted without approval isn't paid.</strong></p></li>
+                        <li><h3>You post</h3><p>On your account, with the paid partnership label and <strong>@climbr.application</strong> in the caption. The video stays online for at least 90 days.</p></li>
+                        <li><h3>You send us the link and the ad authorization</h3><p>The video link, and the Spark Ads code (TikTok) or the partnership authorization (Instagram). We'll show you how on WhatsApp, it takes two minutes.</p></li>
+                        <li><h3>You get paid every month</h3><p>We send you your view statement, then the payment. Details below, in <a href="#en-paiement">Getting paid</a>.</p></li>
+                    </ol>
+                </section>
+
+                <section id="en-montrer">
+                    <h2>What to show</h2>
+                    <p class="lead">Climbr is the bouldering logbook for indoor climbers, on the App Store and Google Play, with more than 1,800 gyms. Four moments look great on screen.</p>
+                    <div class="ecrans">
+                        <figure><img src="../../en/ecran-editeur.webp" data-ecran="ecran-editeur.webp" alt="A photo of the wall, with the boulder's red holds outlined" width="620" height="1347" loading="lazy"><figcaption><strong>The outline</strong>A photo of the wall, one finger on a hold: Climbr outlines the whole boulder.</figcaption></figure>
+                        <figure><img src="../../en/ecran-fiche.webp" data-ecran="ecran-fiche.webp" alt="A boulder's page: the red route outlined, five attempts, 85%" width="620" height="1347" loading="lazy"><figcaption><strong>The boulder page</strong>Attempts, the top, the grade.</figcaption></figure>
+                        <figure><img src="../../en/ecran-profil.webp" data-ecran="ecran-profil.webp" alt="The Profile: this week's tops, flashes and sessions" width="620" height="1347" loading="lazy"><figcaption><strong>The Profile</strong>Your tops, your training volume, your progress.</figcaption></figure>
+                        <figure><img src="../../en/ecran-classement.webp" data-ecran="ecran-classement.webp" alt="A gym's monthly leaderboard" width="620" height="1347" loading="lazy"><figcaption><strong>The leaderboard</strong>Every month, climbers at the same gym compare.</figcaption></figure>
+                    </div>
+                    <p class="encart"><strong>The strongest moment is the outline.</strong> You tap one hold, and the whole route lights up. Film it as a screen recording, then cut to the real wall: the comparison does all the work.</p>
+                </section>
+
+                <section id="en-regles">
+                    <h2>Golden rules</h2>
+                    <ul class="regles">
+                        <li><h3>Hook in the first two seconds</h3><p>One line on screen and out loud, asking a question or making a promise. If people don't get what the video is about right away, they scroll. <a href="#en-accroches">Ten hooks below.</a></p></li>
+                        <li><h3>Vertical, with or without your face</h3><p>9:16 format. Face and voice build trust, but hands on the wall and a voice-over work too.</p></li>
+                        <li><h3>The app readable on screen</h3><p>Use your phone's screen recording rather than filming the screen with another device: it's sharp, no glare. Alternate with shots of the wall.</p></li>
+                        <li><h3>15 to 35 seconds, one idea</h3><p>The outline, OR your progress, OR the leaderboard. Not all three in one video.</p></li>
+                        <li><h3>Subtitles</h3><p>Most videos are watched with the sound off. TikTok's and Instagram's auto captions are enough.</p></li>
+                        <li><h3>Keep it real</h3><p>Your real project, your real attempts, your real fails. A boulder failed five times then sent beats a perfect demo.</p></li>
+                        <li><h3>An ending that says where to get the app</h3><p>"Climbr, on the App Store and Google Play", or "link in bio". The link for your bio: <strong>athanor-studio.io/climbr/download</strong>, which sends everyone to the right store.</p></li>
+                    </ul>
+                </section>
+
+                <section id="en-formats">
+                    <h2>Six ready-to-film formats</h2>
+                    <div class="formats">
+                        <div class="format"><span class="genre">POV · 15 s</span><h3>Scan your project</h3><p class="phrase">"POV: your app outlines your boulder for you."</p><ol><li>You in front of the wall, phone up.</li><li>Screen recording: the photo, one finger on a hold.</li><li>The route lights up. Cut to the real wall.</li><li>You climb the boulder.</li></ol></div>
+                        <div class="format"><span class="genre">Vlog · 30 s</span><h3>My session in 30 seconds</h3><p class="phrase">"My bouldering session, but every attempt counts."</p><ol><li>One short shot per boulder tried.</li><li>After each boulder, the attempt logged in the app (1 s).</li><li>At the end, the session summary on screen.</li></ol></div>
+                        <div class="format"><span class="genre">Before / after</span><h3>One month of progress</h3><p class="phrase">"I logged every boulder for a month. Here's what happened."</p><ol><li>Your Profile on day one.</li><li>A few session shots.</li><li>The Profile a month later: tops, volume.</li></ol></div>
+                        <div class="format"><span class="genre">Storytime</span><h3>The boulder that won't go</h3><p class="phrase">"12 attempts on this boulder. The 13th…"</p><ol><li>The boulder scanned, its page on screen.</li><li>A montage of falls, the attempt counter going up.</li><li>The top, and the boulder marked as sent.</li></ol></div>
+                        <div class="format"><span class="genre">Challenge</span><h3>My gym's leaderboard</h3><p class="phrase">"I'm 14th at my gym this month. Goal: top 10."</p><ol><li>The monthly leaderboard on screen.</li><li>Your sessions this week.</li><li>The new rank. To be continued.</li></ol></div>
+                        <div class="format"><span class="genre">Tip</span><h3>My strengths and weaknesses</h3><p class="phrase">"My app told me why I'm plateauing."</p><ol><li>The styles in your Profile: slab, overhang, crimps…</li><li>Your weak spot, and a boulder in that style.</li><li>What you're going to work on.</li></ol></div>
+                    </div>
+                </section>
+
+                <section id="en-accroches">
+                    <h2>Ten ready-made hooks</h2>
+                    <ul class="accroches">
+                        <li>"Stop logging your boulders in your notes app."</li>
+                        <li>"POV: your app outlines your boulder for you."</li>
+                        <li>"I logged every attempt for a month."</li>
+                        <li>"Why you're plateauing in bouldering (according to my app)."</li>
+                        <li>"Where do I rank at my gym this month?"</li>
+                        <li>"This boulder took me 13 attempts."</li>
+                        <li>"The app every climber at my gym keeps asking about."</li>
+                        <li>"I scan the wall, and here's what happens."</li>
+                        <li>"My bouldering session, logged boulder by boulder."</li>
+                        <li>"You climb indoors? You need this."</li>
+                    </ul>
+                </section>
+
+                <section id="en-paiement">
+                    <h2>Getting paid</h2>
+                    <div class="paie">
+                        <div class="chiffre"><b>$1</b><span>per 1,000 organic views, on every approved video. Up to $1,000 per video.</span></div>
+                        <dl>
+                            <div><dt>Which views</dt><dd>Organic views, the ones your video gets on its own. They're counted for up to 30 days after posting.</dd></div>
+                            <div><dt>What about ads?</dt><dd>Once a video gets almost no views anymore, usually after about fifteen days, we may sponsor it. The counter then mixes organic and paid views, so we stop counting the day before, and we tell you beforehand, with the view count we keep.</dd></div>
+                            <div><dt>When</dt><dd>Every month, we send you your view statement. You have 30 days to check it, then we pay by bank transfer within 15 days.</dd></div>
+                            <div><dt>What we need</dt><dd>Your bank details, and an invoice if you have a business status. You declare the amounts you receive yourself.</dd></div>
+                            <div><dt>Not paid</dt><dd>Videos posted without approval, and bought views or followers.</dd></div>
+                        </dl>
+                    </div>
+                    <p class="note">All of this is in your <a href="../contrat/?lang=en">agreement</a>, articles 2 and 3.</p>
+                </section>
+
+                <section id="en-faire">
+                    <h2>Do's and don'ts</h2>
+                    <div class="deux-col">
+                        <div class="liste faire"><h3>Do</h3><ul>
+                            <li><strong>Disclose the partnership</strong>: it's the law. Turn on "Branded content" on TikTok or "Paid partnership" on Instagram, and write "Paid partnership" in the video or the caption.</li>
+                            <li>Tag <strong>@climbr.application</strong> in the caption.</li>
+                            <li>Ask your gym if filming is OK.</li>
+                        </ul></div>
+                        <div class="liste eviter"><h3>Don't</h3><ul>
+                            <li>Film other recognizable climbers without their consent.</li>
+                            <li>Promise things the app doesn't do. When in doubt, ask us.</li>
+                            <li>Say everything is free: the app is free to download, some features are in Climbr Pro.</li>
+                            <li>Buy views or followers: those views aren't paid.</li>
+                        </ul></div>
+                    </div>
+                </section>
+
+                <p class="fin">A question, a video idea to get approved? Message us on WhatsApp, or email <a href="mailto:climbr@athanor-studio.io">climbr@athanor-studio.io</a>.</p>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        // ── La langue ──────────────────────────────────────────────
+        // Même mécanique que /creators, /form et /contrat : `?lang` d'abord,
+        // puis `climbr-lang`, puis la langue du téléphone.
+        const EN = { 'retour': '← The creator program' };
+        const FR = {};
+        document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
+        const TITRES = { fr: 'Climbr — Le guide du créateur', en: 'Climbr — The creator guide' };
+        let langue = new URLSearchParams(location.search).get('lang');
+        if (langue !== 'fr' && langue !== 'en') { try { langue = localStorage.getItem('climbr-lang'); } catch (e) {} }
+        if (langue !== 'fr' && langue !== 'en') langue = (navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+        function appliquer() {
+            const d = langue === 'en' ? EN : FR;
+            document.documentElement.lang = langue;
+            document.title = TITRES[langue];
+            document.getElementById('guide-fr').hidden = langue !== 'fr';
+            document.getElementById('guide-en').hidden = langue !== 'en';
+            document.querySelectorAll('[data-t]').forEach(el => { if (d[el.dataset.t] !== undefined) el.innerHTML = d[el.dataset.t]; });
+            document.querySelector('.retour').href = '../?lang=' + langue;
+            document.querySelector('.lang-toggle-label').textContent = langue === 'fr' ? 'EN' : 'FR';
+            document.querySelector('.lang-toggle').setAttribute('aria-label', langue === 'fr' ? 'Switch to English' : 'Passer en français');
+            try { localStorage.setItem('climbr-lang', langue); } catch (e) {}
+            try { const u = new URL(location.href); u.searchParams.set('lang', langue); history.replaceState(null, '', u); } catch (e) {}
+        }
+        document.querySelector('.lang-toggle').addEventListener('click', () => { langue = langue === 'fr' ? 'en' : 'fr'; appliquer(); });
+        appliquer();
+
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+    </script>
+</body>
+</html>
