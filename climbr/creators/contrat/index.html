@@ -133,7 +133,7 @@
         <div class="colonne" id="bloc">
             <a href="../" class="retour" data-t="retour">← Le programme créateurs</a>
             <h1 data-t="titre">Ton contrat créateur</h1>
-            <p class="chapeau" data-t="chapeau">Lis-le en entier, puis signe en bas de la page. Tu reçois une copie par e-mail.</p>
+            <p class="chapeau" data-t="chapeau">Lis-le en entier, puis signe en bas de la page. On t'envoie ensuite ton contrat signé par e-mail.</p>
 
             <!-- ⚠️ Changer un mot du contrat = changer CONTRAT_VERSION plus bas. Les
                  versions déjà signées restent lisibles dans l'historique git :
@@ -278,7 +278,7 @@
                 </div>
                 <div class="carte" data-requis="email">
                     <label class="question" for="email"><span data-t="q.email">E-mail</span> <span class="req">*</span></label>
-                    <p class="aide" data-t="aide.email">Ta copie du contrat part à cette adresse.</p>
+                    <p class="aide" data-t="aide.email">On t'envoie ton contrat signé à cette adresse.</p>
                     <input type="email" id="email" name="email" autocomplete="email">
                 </div>
                 <div class="carte" data-requis="adresse">
@@ -304,7 +304,7 @@
 
             <div class="merci carte" role="status">
                 <h2 data-t="merci.titre">C'est signé, bienvenue !</h2>
-                <p data-t="merci.texte">Tu reçois ton contrat signé en PDF par e-mail. On t'envoie ton accès Climbr Pro et le guide sur WhatsApp.</p>
+                <p data-t="merci.texte">On t'envoie ton contrat signé en PDF par e-mail sous 24 h, avec ton accès Climbr Pro et le guide pour commencer.</p>
                 <a class="btn btn-primary telecharger" id="telecharger" data-t="merci.pdf">Télécharger mon contrat (PDF)</a>
             </div>
         </div>
@@ -320,17 +320,17 @@
         const EN = {
             'retour': '← The creator program',
             'titre': 'Your creator agreement',
-            'chapeau': 'Read it all, then sign at the bottom of the page. You\'ll get a copy by email.',
+            'chapeau': 'Read it all, then sign at the bottom of the page. We\'ll then email you your signed agreement.',
             'signer.titre': 'Sign the agreement',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
-            'aide.email': 'Your copy of the agreement goes to this address.',
+            'aide.email': 'We\'ll send your signed agreement to this address.',
             'q.adresse': 'Postal address', 'q.comptes': 'Your Instagram and TikTok accounts',
             'q.siret': 'Business registration number', 'facultatif': '(if you have a business status)',
             'c.majeur': 'I am 18 or older.',
             'c.accepte': '<strong>Read and approved.</strong> I have read the whole agreement and I accept it; ticking this box and sending counts as my signature.',
             'envoyer': 'Sign the agreement',
             'merci.titre': 'Signed. Welcome aboard!',
-            'merci.texte': 'You\'ll get your signed agreement as a PDF by email. We\'ll send your Climbr Pro access and the guide on WhatsApp.',
+            'merci.texte': 'We\'ll email you your signed agreement as a PDF within 24 hours, with your Climbr Pro access and the guide to get started.',
             'merci.pdf': 'Download my agreement (PDF)'
         };
         const EN_PH = { 'ph.comptes': '@youraccount' };
@@ -465,7 +465,9 @@
                 const ajoute = (k, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; f.appendChild(i); };
                 Object.entries(champs).forEach(([k, v]) => ajoute(k, v));
                 ajoute('_honey', form._honey.value); ajoute('_subject', sujet); ajoute('_replyto', champs.email);
-                ajoute('_cc', champs.email); ajoute('_template', 'table'); ajoute('_captcha', 'false');
+                // ⚠️ Pas de `_cc` : la copie du créateur partait de FormSubmit, avant qu'on
+                // ait vu la signature. On la lui envoie nous-mêmes (13 oct. 2026).
+                ajoute('_template', 'table'); ajoute('_captcha', 'false');
                 ajoute('_next', location.origin + location.pathname + '?envoye');
                 const piece = document.createElement('input'); piece.type = 'file'; piece.name = 'attachment';
                 const dt = new DataTransfer(); dt.items.add(new File([pdf], fichier, { type: 'application/pdf' })); piece.files = dt.files;
@@ -490,7 +492,7 @@
             const r = await fetch('https://formsubmit.co/ajax/' + DESTINATAIRE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(Object.assign({}, champs, { contrat: texte, _honey: form._honey.value, _subject: sujet, _replyto: champs.email, _cc: champs.email, _template: 'table' }))
+                body: JSON.stringify(Object.assign({}, champs, { contrat: texte, _honey: form._honey.value, _subject: sujet, _replyto: champs.email, _template: 'table' }))
             });
             const j = await r.json().catch(() => ({}));
             // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
