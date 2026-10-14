@@ -97,19 +97,14 @@
         .paie dt { font-weight: 700; }
         .paie dd { color: rgba(244, 239, 232, 0.78); font-size: 0.9375rem; }
 
-        .deux-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
-        .liste { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.1rem 1.2rem; }
-        .liste ul { list-style: none; margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.55rem; }
-        .liste li { position: relative; padding-left: 1.4rem; color: var(--ink-soft); font-size: 0.9375rem; }
-        .liste li strong { color: var(--ink); }
-        .liste li::before { position: absolute; left: 0; font-weight: 700; }
-        .faire li::before { content: "✓"; color: var(--sent); }
-        .eviter li::before { content: "✕"; color: var(--accent); }
+        .eviter { list-style: none; border-top: 1px solid var(--line); }
+        .eviter li { position: relative; padding: 0.8rem 0 0.8rem 1.6rem; border-bottom: 1px solid var(--line); color: var(--ink-soft); font-size: 0.9375rem; }
+        .eviter li::before { content: "✕"; position: absolute; left: 0.1rem; color: var(--accent); font-weight: 700; }
 
         .fin { text-align: center; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1.6rem; }
 
         @media (max-width: 760px) {
-            .formats, .deux-col, .regles li { grid-template-columns: 1fr; }
+            .formats, .regles li { grid-template-columns: 1fr; }
             .contenu { grid-template-columns: 1fr; }
             .exemple { max-width: 13.5rem; margin: 0 auto; }
             .paie dl div { grid-template-columns: 1fr; }
@@ -174,7 +169,7 @@
                     <h1>Le guide du créateur</h1>
                     <p class="chapeau">Des conseils pour t'aider à réaliser des vidéos qui font des vues avec l'appli Climbr.</p>
                     <nav class="sommaire" aria-label="Sommaire">
-                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce que doit contenir une vidéo</a><a href="#fr-formats">Idées de vidéos</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À faire, à éviter</a>
+                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce que doit contenir une vidéo</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-formats">Idées de vidéos</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À éviter</a>
                     </nav>
                 </header>
 
@@ -201,15 +196,6 @@
                     </div>
                 </section>
 
-                <section id="fr-formats">
-                    <h2>Quelques idées de vidéos</h2>
-                    <div class="formats">
-                        <div class="format"><span class="genre">POV</span><p>Ta main qui scanne un bloc, devant le mur.</p></div>
-                        <div class="format"><span class="genre">Vlog</span><p>Un petit vlog de ta séance, dans lequel tu intègres un scan avec l'appli.</p></div>
-                        <div class="format"><span class="genre">Grimpe</span><p>Tu te filmes en train de grimper un bloc, et tu intègres dans la vidéo le scan de ce bloc.</p></div>
-                    </div>
-                </section>
-
                 <section id="fr-regles">
                     <h2>Les règles d'or</h2>
                     <p class="lead">Des conseils pour optimiser la performance de tes vidéos.</p>
@@ -221,6 +207,15 @@
                         <li><h3>Les sous-titres</h3><p>La plupart des vidéos sont regardées sans le son. Si tu fais une voix off, ajoute les sous-titres automatiques de TikTok ou d'Instagram&nbsp;: les gens regardent plus longtemps.</p></li>
                         <li><h3>Le naturel</h3><p>Pas besoin d'une grosse perf&nbsp;: quel que soit ton niveau, reste toi-même. C'est ce qui permet aux gens de s'identifier à toi.</p></li>
                     </ul>
+                </section>
+
+                <section id="fr-formats">
+                    <h2>Quelques idées de vidéos</h2>
+                    <div class="formats">
+                        <div class="format"><span class="genre">POV</span><p>Ta main qui scanne un bloc, devant le mur.</p></div>
+                        <div class="format"><span class="genre">Vlog</span><p>Un petit vlog de ta séance, dans lequel tu intègres un scan avec l'appli.</p></div>
+                        <div class="format"><span class="genre">Grimpe</span><p>Tu te filmes en train de grimper un bloc, et tu intègres dans la vidéo le scan de ce bloc.</p></div>
+                    </div>
                 </section>
 
 
@@ -240,19 +235,14 @@
                 </section>
 
                 <section id="fr-faire">
-                    <h2>À faire, à éviter</h2>
-                    <div class="deux-col">
-                        <div class="liste faire"><h3>À faire</h3><ul>
-                            <li><strong>Signaler la collaboration</strong>&nbsp;: c'est la loi (loi influenceurs du 9 juin 2023). Active «&nbsp;Contenu de marque&nbsp;» sur TikTok ou «&nbsp;Partenariat rémunéré&nbsp;» sur Instagram, et écris «&nbsp;Collaboration commerciale&nbsp;» dans la vidéo ou la légende.</li>
-                            <li>Identifier <strong>@climbr.application</strong> dans la légende.</li>
-                        </ul></div>
-                        <div class="liste eviter"><h3>À éviter</h3><ul>
-                            <li>Filmer d'autres grimpeurs reconnaissables sans leur accord.</li>
-                            <li>Promettre ce que l'app ne fait pas. Dans le doute, demande-nous.</li>
-                            <li>Dire que tout est gratuit&nbsp;: l'app se télécharge gratuitement, certaines fonctions sont dans Climbr Pro.</li>
-                            <li>Acheter des vues ou des abonnés&nbsp;: ces vues ne sont pas payées.</li>
-                        </ul></div>
-                    </div>
+                    <h2>Les choses à éviter</h2>
+                    <ul class="eviter">
+                        <li>Oublier la mention «&nbsp;Collaboration commerciale&nbsp;»&nbsp;: c'est obligatoire.</li>
+                        <li>Filmer d'autres grimpeurs reconnaissables sans leur accord.</li>
+                        <li>Promettre ce que l'app ne fait pas. Dans le doute, demande-nous.</li>
+                        <li>Dire que tout est gratuit&nbsp;: l'app se télécharge gratuitement, certaines fonctions sont dans Climbr Pro.</li>
+                        <li>Acheter des vues ou des abonnés&nbsp;: ces vues ne sont pas payées.</li>
+                    </ul>
                 </section>
 
                 <p class="fin">Une question, une idée de vidéo à faire valider&nbsp;?<br>Écris-nous sur WhatsApp, ou à <a href="mailto:climbr@athanor-studio.io">climbr@athanor-studio.io</a>.</p>
@@ -264,7 +254,7 @@
                     <h1>The creator guide</h1>
                     <p class="chapeau">Tips to help you make videos that get views with the Climbr app.</p>
                     <nav class="sommaire" aria-label="Contents">
-                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What a video should include</a><a href="#en-formats">Video ideas</a><a href="#en-regles">Golden rules</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Do's and don'ts</a>
+                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What a video should include</a><a href="#en-regles">Golden rules</a><a href="#en-formats">Video ideas</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Things to avoid</a>
                     </nav>
                 </header>
 
@@ -291,15 +281,6 @@
                     </div>
                 </section>
 
-                <section id="en-formats">
-                    <h2>A few video ideas</h2>
-                    <div class="formats">
-                        <div class="format"><span class="genre">POV</span><p>Your hand scanning a boulder, in front of the wall.</p></div>
-                        <div class="format"><span class="genre">Vlog</span><p>A short vlog of your session, with a scan in the app edited in.</p></div>
-                        <div class="format"><span class="genre">Climb</span><p>Film yourself climbing a boulder, and edit in the scan of that boulder.</p></div>
-                    </div>
-                </section>
-
                 <section id="en-regles">
                     <h2>Golden rules</h2>
                     <p class="lead">Tips to get the most out of your videos.</p>
@@ -311,6 +292,15 @@
                         <li><h3>Subtitles</h3><p>Most videos are watched with the sound off. If you do a voice-over, turn on TikTok's or Instagram's auto captions: people watch for longer.</p></li>
                         <li><h3>Being natural</h3><p>No need for an impressive climb: whatever your level, be yourself. That's what makes people relate to you.</p></li>
                     </ul>
+                </section>
+
+                <section id="en-formats">
+                    <h2>A few video ideas</h2>
+                    <div class="formats">
+                        <div class="format"><span class="genre">POV</span><p>Your hand scanning a boulder, in front of the wall.</p></div>
+                        <div class="format"><span class="genre">Vlog</span><p>A short vlog of your session, with a scan in the app edited in.</p></div>
+                        <div class="format"><span class="genre">Climb</span><p>Film yourself climbing a boulder, and edit in the scan of that boulder.</p></div>
+                    </div>
                 </section>
 
 
@@ -330,19 +320,14 @@
                 </section>
 
                 <section id="en-faire">
-                    <h2>Do's and don'ts</h2>
-                    <div class="deux-col">
-                        <div class="liste faire"><h3>Do</h3><ul>
-                            <li><strong>Disclose the partnership</strong>: it's the law. Turn on "Branded content" on TikTok or "Paid partnership" on Instagram, and write "Paid partnership" in the video or the caption.</li>
-                            <li>Tag <strong>@climbr.application</strong> in the caption.</li>
-                        </ul></div>
-                        <div class="liste eviter"><h3>Don't</h3><ul>
-                            <li>Film other recognizable climbers without their consent.</li>
-                            <li>Promise things the app doesn't do. When in doubt, ask us.</li>
-                            <li>Say everything is free: the app is free to download, some features are in Climbr Pro.</li>
-                            <li>Buy views or followers: those views aren't paid.</li>
-                        </ul></div>
-                    </div>
+                    <h2>Things to avoid</h2>
+                    <ul class="eviter">
+                        <li>Forgetting the "Paid partnership" label: it's mandatory.</li>
+                        <li>Film other recognizable climbers without their consent.</li>
+                        <li>Promise things the app doesn't do. When in doubt, ask us.</li>
+                        <li>Say everything is free: the app is free to download, some features are in Climbr Pro.</li>
+                        <li>Buy views or followers: those views aren't paid.</li>
+                    </ul>
                 </section>
 
                 <p class="fin">A question, a video idea to get approved?<br>Message us on WhatsApp, or email <a href="mailto:climbr@athanor-studio.io">climbr@athanor-studio.io</a>.</p>
