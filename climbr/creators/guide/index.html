@@ -57,11 +57,6 @@
         .etapes p { margin-top: 0.25rem; color: var(--ink-soft); }
         .etapes p strong { color: var(--ink); }
 
-        .ecrans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
-        .ecrans figure { display: flex; flex-direction: column; gap: 0.7rem; }
-        .ecrans img { width: 100%; height: auto; border-radius: 18px; box-shadow: var(--shadow-md); border: 1px solid var(--line); }
-        .ecrans figcaption { font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.45; }
-        .ecrans figcaption strong { display: block; color: var(--ink); font-size: 0.9375rem; margin-bottom: 0.1rem; }
         .encart { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); padding: 1rem 1.15rem; color: var(--ink-soft); }
         .encart strong { color: var(--ink); }
         .exemple { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
@@ -105,7 +100,6 @@
         .fin { text-align: center; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1.6rem; }
 
         @media (max-width: 760px) {
-            .ecrans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .regles, .formats, .accroches, .deux-col { grid-template-columns: 1fr; }
             .paie dl div { grid-template-columns: 1fr; }
         }
@@ -178,7 +172,7 @@
                     <ol class="etapes">
                         <li><h3>Tu tournes et montes la vidéo</h3><p>Dans ton style habituel, le plus naturel possible&nbsp;: le but n'est pas d'avoir un rendu «&nbsp;publicité&nbsp;».</p></li>
                         <li><h3>Tu nous l'envoies sur WhatsApp</h3><p>Avant de publier, envoie-nous la vidéo pour validation.<br><strong>Une vidéo publiée sans validation n'est pas payée.</strong><br>Une fois validée, dépose-la en qualité d'origine sur <a href="../upload/?lang=fr">la page de dépôt</a>.</p></li>
-                        <li><h3>Tu publies la vidéo quand tu veux</h3><p>Sur ton compte, avec une phrase simple dans la description pour dire que tu utilises l'appli. Exemple&nbsp;: «&nbsp;J'utilise <strong>@climbr.application</strong> pour scanner mes blocs et suivre ma progression.&nbsp;»<br>Garde la vidéo en ligne au moins 1&nbsp;an.</p></li>
+                        <li><h3>Tu publies la vidéo quand tu veux</h3><p>Ajoute une phrase simple en description pour dire que tu utilises l'appli. Exemple&nbsp;: «&nbsp;J'utilise <strong>@climbr.application</strong> pour scanner mes blocs et suivre ma progression.&nbsp;»<br>Garde la vidéo en ligne au moins 1&nbsp;an.</p></li>
                         <li><h3>Tu nous envoies le lien et l'autorisation pub</h3><p>Le lien de la vidéo, et l'autorisation de partenariat (Instagram) ou le code Spark Ads (TikTok). On t'explique comment faire sur WhatsApp, ça prend 2 minutes.</p></li>
                         <li><h3>Tu es payé chaque mois</h3><p>On t'envoie le relevé de tes vues, on valide ensemble, puis on te fait le virement.</p></li>
                     </ol>
@@ -187,13 +181,7 @@
                 <section id="fr-montrer">
                     <h2>Ce que doit contenir une vidéo</h2>
                     <p class="lead">L'appli doit apparaître au moins une fois dans ta vidéo. Tu peux filmer ton téléphone en main avec un deuxième téléphone, ou intégrer au montage un enregistrement d'écran pendant que tu utilises l'appli.</p>
-                    <div class="ecrans">
-                        <figure><img src="../../ecran-editeur.webp" data-ecran="ecran-editeur.webp" alt="Le mur en photo, avec les prises rouges du bloc entourées" width="620" height="1347" loading="lazy"><figcaption><strong>Le détourage</strong>Une photo du mur, un doigt sur une prise&nbsp;: Climbr entoure tout le bloc.</figcaption></figure>
-                        <figure><img src="../../ecran-fiche.webp" data-ecran="ecran-fiche.webp" alt="La fiche d'un bloc&nbsp;: la voie rouge détourée, cinq essais, 85 %" width="620" height="1347" loading="lazy"><figcaption><strong>La fiche du bloc</strong>Les essais, le top, la cotation.</figcaption></figure>
-                        <figure><img src="../../ecran-profil.webp" data-ecran="ecran-profil.webp" alt="Le Profil&nbsp;: tops, flashs et séances de la semaine" width="620" height="1347" loading="lazy"><figcaption><strong>Le Profil</strong>Tes tops, ton volume d'entraînement, ta progression.</figcaption></figure>
-                        <figure><img src="../../ecran-classement-pays.webp" data-ecran="ecran-classement-pays.webp" alt="Le classement du mois : monde, pays ou salle" width="620" height="1347" loading="lazy"><figcaption><strong>Le classement</strong>Chaque mois, compare-toi aux grimpeurs du monde, de ton pays ou de ta salle.</figcaption></figure>
-                    </div>
-                    <p class="encart"><strong>Le moment le plus fort, c'est le scan d'un bloc.</strong> Prends le mur en photo, montre les prises détourées, touche une prise et enregistre un essai. Tu peux aussi faire défiler rapidement le Profil et le classement.</p>
+                    <p class="encart"><strong>Le moment le plus intéressant visuellement, c'est le scan d'un bloc.</strong><br>Prends le mur en photo, laisse l'appli détourer les prises, touche une prise et enregistre un essai.</p>
                     <p class="lead">Au montage, accélère ou coupe certains passages pour garder du rythme.</p>
                     <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>Un exemple de ce qu'on peut voir à l'écran de ton téléphone.</figcaption></figure>
                 </section>
@@ -288,7 +276,7 @@
                     <ol class="etapes">
                         <li><h3>You film and edit the video</h3><p>In your usual style, as natural as possible: the goal isn't an "ad" look.</p></li>
                         <li><h3>You send it to us on WhatsApp</h3><p>Before posting, send us the video for approval.<br><strong>A video posted without approval isn't paid.</strong><br>Once approved, upload it in original quality on <a href="../upload/?lang=en">the upload page</a>.</p></li>
-                        <li><h3>You post the video whenever you want</h3><p>On your account, with a simple sentence in the caption saying you use the app. For example: "I use <strong>@climbr.application</strong> to scan my boulders and track my progress."<br>Keep the video online for at least one year.</p></li>
+                        <li><h3>You post the video whenever you want</h3><p>Add a simple sentence to the caption saying you use the app. For example: "I use <strong>@climbr.application</strong> to scan my boulders and track my progress."<br>Keep the video online for at least one year.</p></li>
                         <li><h3>You send us the link and the ad authorization</h3><p>The video link, and the partnership authorization (Instagram) or the Spark Ads code (TikTok). We'll show you how on WhatsApp, it takes 2 minutes.</p></li>
                         <li><h3>You get paid every month</h3><p>We send you your view statement, we confirm it together, then we send you the payment.</p></li>
                     </ol>
@@ -297,13 +285,7 @@
                 <section id="en-montrer">
                     <h2>What a video should include</h2>
                     <p class="lead">The app must appear at least once in your video. You can film your phone in your hand with a second phone, or edit in a screen recording of you using the app.</p>
-                    <div class="ecrans">
-                        <figure><img src="../../en/ecran-editeur.webp" data-ecran="ecran-editeur.webp" alt="A photo of the wall, with the boulder's red holds outlined" width="620" height="1347" loading="lazy"><figcaption><strong>The outline</strong>A photo of the wall, one finger on a hold: Climbr outlines the whole boulder.</figcaption></figure>
-                        <figure><img src="../../en/ecran-fiche.webp" data-ecran="ecran-fiche.webp" alt="A boulder's page: the red route outlined, five attempts, 85%" width="620" height="1347" loading="lazy"><figcaption><strong>The boulder page</strong>Attempts, the top, the grade.</figcaption></figure>
-                        <figure><img src="../../en/ecran-profil.webp" data-ecran="ecran-profil.webp" alt="The Profile: this week's tops, flashes and sessions" width="620" height="1347" loading="lazy"><figcaption><strong>The Profile</strong>Your tops, your training volume, your progress.</figcaption></figure>
-                        <figure><img src="../../en/ecran-classement-pays.webp" data-ecran="ecran-classement-pays.webp" alt="The monthly leaderboard: world, country or gym" width="620" height="1347" loading="lazy"><figcaption><strong>The leaderboard</strong>Every month, compare yourself with climbers worldwide, in your country or at your gym.</figcaption></figure>
-                    </div>
-                    <p class="encart"><strong>The strongest moment is scanning a boulder.</strong> Take a photo of the wall, show the outlined holds, tap a hold and log an attempt. You can also scroll quickly through your Profile and the leaderboard.</p>
+                    <p class="encart"><strong>The most visually interesting moment is scanning a boulder.</strong><br>Take a photo of the wall, let the app outline the holds, tap a hold and log an attempt.</p>
                     <p class="lead">When editing, speed up or cut some parts to keep the pace up.</p>
                     <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>An example of what can be seen on your phone's screen.</figcaption></figure>
                 </section>
