@@ -75,8 +75,6 @@
         .phrase { font-weight: 600; color: var(--ink); }
         .format ol { padding-left: 1.15rem; color: var(--ink-soft); font-size: 0.9375rem; display: flex; flex-direction: column; gap: 0.15rem; }
 
-        .accroches { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
-        .accroches li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.9rem; font-weight: 600; font-size: 0.9375rem; }
 
         .paie { background: var(--ink); color: var(--bg); border-radius: var(--radius-lg); padding: clamp(1.3rem, 4vw, 1.9rem); display: flex; flex-direction: column; gap: 1.3rem; }
         .chiffre { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 0.9rem; }
@@ -100,7 +98,7 @@
         .fin { text-align: center; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1.6rem; }
 
         @media (max-width: 760px) {
-            .regles, .formats, .accroches, .deux-col { grid-template-columns: 1fr; }
+            .regles, .formats, .deux-col { grid-template-columns: 1fr; }
             .paie dl div { grid-template-columns: 1fr; }
         }
     </style>
@@ -163,7 +161,7 @@
                     <h1>Le guide du créateur</h1>
                     <p class="chapeau">Des conseils pour t'aider à réaliser des vidéos qui font des vues avec l'appli Climbr.</p>
                     <nav class="sommaire" aria-label="Sommaire">
-                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce que doit contenir une vidéo</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-formats">Six formats</a><a href="#fr-accroches">Accroches</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À faire, à éviter</a>
+                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce que doit contenir une vidéo</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-formats">Six formats</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À faire, à éviter</a>
                     </nav>
                 </header>
 
@@ -190,7 +188,7 @@
                     <h2>Les règles d'or</h2>
                     <p class="lead">Des conseils pour optimiser la performance de tes vidéos.</p>
                     <ul class="regles">
-                        <li><h3>Le hook</h3><p>Ajoute une phrase d'accroche à l'écran pendant les 2 ou 3 premières secondes de ta vidéo. Il faut qu'on comprenne tout de suite de quoi elle va parler. <a href="#fr-accroches">Dix accroches plus bas.</a></p></li>
+                        <li><h3>Le hook</h3><p>Ajoute une phrase d'accroche à l'écran pendant les 2 ou 3 premières secondes de ta vidéo. Il faut qu'on comprenne tout de suite de quoi elle va parler.</p></li>
                         <li><h3>Le format</h3><p>Format vertical 9:16.</p></li>
                         <li><h3>L'éclairage</h3><p>Tu ne choisis pas la lumière de ta salle, mais fais de ton mieux&nbsp;: place-toi près d'une source de lumière et évite le contre-jour. Une vidéo bien éclairée est plus nette, et elle fait plus de vues.</p></li>
                         <li><h3>La durée</h3><p>Il n'y a pas de règle stricte, mais en général les vidéos de 15 à 35&nbsp;secondes marchent mieux.</p></li>
@@ -211,21 +209,6 @@
                     </div>
                 </section>
 
-                <section id="fr-accroches">
-                    <h2>Dix accroches toutes prêtes</h2>
-                    <ul class="accroches">
-                        <li>«&nbsp;Arrête de noter tes blocs dans tes notes.&nbsp;»</li>
-                        <li>«&nbsp;POV&nbsp;: ton app détoure ton bloc à ta place.&nbsp;»</li>
-                        <li>«&nbsp;J'ai noté tous mes essais pendant un mois.&nbsp;»</li>
-                        <li>«&nbsp;Pourquoi tu stagnes en bloc (selon mon app).&nbsp;»</li>
-                        <li>«&nbsp;Je suis combien dans ma salle ce mois-ci&nbsp;?&nbsp;»</li>
-                        <li>«&nbsp;Ce bloc m'a pris 13 essais.&nbsp;»</li>
-                        <li>«&nbsp;L'app que tous les grimpeurs de ma salle me demandent.&nbsp;»</li>
-                        <li>«&nbsp;Je scanne le mur, et voilà ce qui se passe.&nbsp;»</li>
-                        <li>«&nbsp;Ma séance de bloc, notée bloc par bloc.&nbsp;»</li>
-                        <li>«&nbsp;Tu grimpes en salle&nbsp;? Il te faut ça.&nbsp;»</li>
-                    </ul>
-                </section>
 
                 <section id="fr-paiement">
                     <h2>Le paiement</h2>
@@ -239,7 +222,7 @@
                             <div><dt>Pas payées</dt><dd>Les vidéos publiées sans validation, et les vues ou abonnés achetés.</dd></div>
                         </dl>
                     </div>
-                    <p class="note">Tout ça est écrit dans ton <a href="../contrat/?lang=fr">contrat</a>, articles 2 et 3.</p>
+                    <p class="note">Tout ça est écrit dans ton contrat, articles 2 et 3.</p>
                 </section>
 
                 <section id="fr-faire">
@@ -267,7 +250,7 @@
                     <h1>The creator guide</h1>
                     <p class="chapeau">Tips to help you make videos that get views with the Climbr app.</p>
                     <nav class="sommaire" aria-label="Contents">
-                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What a video should include</a><a href="#en-regles">Golden rules</a><a href="#en-formats">Six formats</a><a href="#en-accroches">Hooks</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Do's and don'ts</a>
+                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What a video should include</a><a href="#en-regles">Golden rules</a><a href="#en-formats">Six formats</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Do's and don'ts</a>
                     </nav>
                 </header>
 
@@ -294,7 +277,7 @@
                     <h2>Golden rules</h2>
                     <p class="lead">Tips to get the most out of your videos.</p>
                     <ul class="regles">
-                        <li><h3>The hook</h3><p>Add a hook line on screen for the first 2 or 3 seconds of your video. People need to get what it's about right away. <a href="#en-accroches">Ten hooks below.</a></p></li>
+                        <li><h3>The hook</h3><p>Add a hook line on screen for the first 2 or 3 seconds of your video. People need to get what it's about right away.</p></li>
                         <li><h3>The format</h3><p>Vertical 9:16.</p></li>
                         <li><h3>Lighting</h3><p>You don't choose your gym's lighting, but do your best: stand near a light source and avoid backlight. A well-lit video looks sharper and gets more views.</p></li>
                         <li><h3>Length</h3><p>There's no strict rule, but videos of 15 to 35 seconds usually do best.</p></li>
@@ -315,21 +298,6 @@
                     </div>
                 </section>
 
-                <section id="en-accroches">
-                    <h2>Ten ready-made hooks</h2>
-                    <ul class="accroches">
-                        <li>"Stop logging your boulders in your notes app."</li>
-                        <li>"POV: your app outlines your boulder for you."</li>
-                        <li>"I logged every attempt for a month."</li>
-                        <li>"Why you're plateauing in bouldering (according to my app)."</li>
-                        <li>"Where do I rank at my gym this month?"</li>
-                        <li>"This boulder took me 13 attempts."</li>
-                        <li>"The app every climber at my gym keeps asking about."</li>
-                        <li>"I scan the wall, and here's what happens."</li>
-                        <li>"My bouldering session, logged boulder by boulder."</li>
-                        <li>"You climb indoors? You need this."</li>
-                    </ul>
-                </section>
 
                 <section id="en-paiement">
                     <h2>Getting paid</h2>
@@ -343,7 +311,7 @@
                             <div><dt>Not paid</dt><dd>Videos posted without approval, and bought views or followers.</dd></div>
                         </dl>
                     </div>
-                    <p class="note">All of this is in your <a href="../contrat/?lang=en">agreement</a>, articles 2 and 3.</p>
+                    <p class="note">All of this is in your agreement, articles 2 and 3.</p>
                 </section>
 
                 <section id="en-faire">
