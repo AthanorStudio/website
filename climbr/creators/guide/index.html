@@ -83,7 +83,13 @@
         .regles p { color: var(--ink-soft); font-size: 0.9375rem; }
         .regles strong { color: var(--ink); }
 
-        .formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+        /* Grille de 6 : trois idées par rangée (2 colonnes chacune), et une rangée
+           de deux idées en 3 + 3. Sans ça, la 5ᵉ carte laissait un trou. */
+        .formats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.8rem; }
+        @media (min-width: 761px) {
+            .format { grid-column: span 2; }
+            .format:nth-child(3n+1):nth-last-child(2), .format:nth-child(3n+1):nth-last-child(2) ~ .format { grid-column: span 3; }
+        }
         .format { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.1rem 1.2rem 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
         .genre { align-self: flex-start; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.04em; color: var(--accent); background: rgba(180, 83, 31, 0.08); padding: 0.18rem 0.6rem; border-radius: var(--radius-full); }
         .phrase { font-weight: 600; color: var(--ink); }
@@ -218,6 +224,8 @@
                         <div class="format"><span class="genre">POV</span><p>Ta main qui scanne un bloc, devant le mur.</p></div>
                         <div class="format"><span class="genre">Vlog</span><p>Un petit vlog de ta séance, dans lequel tu intègres un scan avec l'appli.</p></div>
                         <div class="format"><span class="genre">Grimpe</span><p>Tu te filmes en train de grimper un bloc, et tu intègres dans la vidéo le scan de ce bloc.</p></div>
+                        <div class="format"><span class="genre">Projet</span><p>Tu racontes ton projet, du premier essai jusqu'au top&nbsp;: tu filmes tes essais, tu montres le scan du bloc, et tu termines sur la fiche de partage qui résume toutes tes stats sur ce bloc.</p></div>
+                        <div class="format"><span class="genre">Progresser</span><p>Tu donnes tes conseils pour progresser en escalade, ou tu racontes comment tu as progressé. Tu y glisses un passage sur l'intérêt de suivre sa progression, et tu montres que tu utilises Climbr pour ça.</p></div>
                     </div>
                 </section>
 
@@ -301,6 +309,8 @@
                         <div class="format"><span class="genre">POV</span><p>Your hand scanning a boulder, in front of the wall.</p></div>
                         <div class="format"><span class="genre">Vlog</span><p>A short vlog of your session, with a scan in the app edited in.</p></div>
                         <div class="format"><span class="genre">Climb</span><p>Film yourself climbing a boulder, and edit in the scan of that boulder.</p></div>
+                        <div class="format"><span class="genre">Project</span><p>Tell the story of your project, from the first attempt to the top: film your attempts, show the scan of the boulder, and end on the share card that sums up all your stats on it.</p></div>
+                        <div class="format"><span class="genre">Progress</span><p>Share your tips for getting better at climbing, or tell how you improved. Slip in a moment about why tracking your progress helps, and show that you use Climbr for it.</p></div>
                     </div>
                 </section>
 
