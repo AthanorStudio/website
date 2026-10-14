@@ -59,14 +59,21 @@
 
         .encart { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); padding: 1rem 1.15rem; color: var(--ink-soft); }
         .encart strong { color: var(--ink); }
-        .exemple { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
-        .exemple video { width: min(100%, 260px); height: auto; border-radius: 13% / 6.2%; background: #000; }
-        .exemple figcaption { font-size: var(--fs-small); color: var(--ink-soft); text-align: center; max-width: 30rem; }
+        /* Le texte à gauche, le téléphone à droite : centré sous le texte, il
+           prenait un écran entier de hauteur pour seize secondes de vidéo. */
+        .contenu { display: grid; grid-template-columns: minmax(0, 1fr) 13.5rem; gap: 1.6rem; align-items: start; }
+        .contenu-texte { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+        .exemple { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+        .exemple video { width: 100%; height: auto; border-radius: 13% / 6.2%; background: #000; }
+        .exemple figcaption { font-size: var(--fs-xs); color: var(--ink-soft); text-align: center; }
 
-        .regles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
-        .regles li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 1.05rem 1.15rem; }
-        .regles li:last-child { grid-column: 1 / -1; }
-        .regles p { margin-top: 0.35rem; color: var(--ink-soft); font-size: 0.9375rem; }
+        /* Les règles : une liste à deux colonnes (titre | conseil), filets entre les
+           lignes, comme le tableau du paiement. Des cartes en grille laissaient
+           une carte seule sur sa ligne dès que le nombre de règles était impair. */
+        .regles { list-style: none; border-top: 1px solid var(--line); }
+        .regles li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.2rem 1.2rem; padding: 0.95rem 0; border-bottom: 1px solid var(--line); }
+        .regles h3 { font-size: 1rem; }
+        .regles p { color: var(--ink-soft); font-size: 0.9375rem; }
         .regles strong { color: var(--ink); }
 
         .formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
@@ -98,7 +105,9 @@
         .fin { text-align: center; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 1.6rem; }
 
         @media (max-width: 760px) {
-            .regles, .formats, .deux-col { grid-template-columns: 1fr; }
+            .formats, .deux-col, .regles li { grid-template-columns: 1fr; }
+            .contenu { grid-template-columns: 1fr; }
+            .exemple { max-width: 13.5rem; margin: 0 auto; }
             .paie dl div { grid-template-columns: 1fr; }
         }
     </style>
@@ -161,7 +170,7 @@
                     <h1>Le guide du créateur</h1>
                     <p class="chapeau">Des conseils pour t'aider à réaliser des vidéos qui font des vues avec l'appli Climbr.</p>
                     <nav class="sommaire" aria-label="Sommaire">
-                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce que doit contenir une vidéo</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-formats">Idées de vidéos</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À faire, à éviter</a>
+                        <a href="#fr-etapes">Les étapes</a><a href="#fr-montrer">Ce que doit contenir une vidéo</a><a href="#fr-formats">Idées de vidéos</a><a href="#fr-regles">Les règles d'or</a><a href="#fr-paiement">Le paiement</a><a href="#fr-faire">À faire, à éviter</a>
                     </nav>
                 </header>
 
@@ -178,10 +187,23 @@
 
                 <section id="fr-montrer">
                     <h2>Ce que doit contenir une vidéo</h2>
-                    <p class="lead">L'appli doit apparaître au moins une fois dans ta vidéo. Tu peux filmer ton téléphone en main avec un deuxième téléphone, ou intégrer au montage un enregistrement d'écran pendant que tu utilises l'appli.</p>
-                    <p class="encart"><strong>Le moment le plus intéressant visuellement, c'est le scan d'un bloc.</strong><br>Prends le mur en photo, laisse l'appli détourer les prises, touche une prise et enregistre un essai.</p>
-                    <p class="lead">Au montage, accélère ou coupe certains passages pour garder du rythme.</p>
-                    <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>Un exemple de ce qu'on peut voir à l'écran de ton téléphone.</figcaption></figure>
+                    <div class="contenu">
+                        <div class="contenu-texte">
+                            <p class="lead">L'appli doit apparaître au moins une fois dans ta vidéo. Tu peux filmer ton téléphone en main avec un deuxième téléphone, ou intégrer au montage un enregistrement d'écran pendant que tu utilises l'appli.</p>
+                            <p class="encart"><strong>Le moment le plus intéressant visuellement, c'est le scan d'un bloc.</strong><br>Prends le mur en photo, laisse l'appli détourer les prises, touche une prise et enregistre un essai.</p>
+                            <p class="lead">Au montage, accélère ou coupe certains passages pour garder du rythme.</p>
+                        </div>
+                        <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>Un exemple de ce qu'on peut voir à l'écran de ton téléphone.</figcaption></figure>
+                    </div>
+                </section>
+
+                <section id="fr-formats">
+                    <h2>Trois idées de vidéos</h2>
+                    <div class="formats">
+                        <div class="format"><span class="genre">POV</span><p>Ta main qui scanne un bloc, devant le mur.</p></div>
+                        <div class="format"><span class="genre">Vlog</span><p>Un petit vlog de ta séance, dans lequel tu intègres un scan avec l'appli.</p></div>
+                        <div class="format"><span class="genre">Grimpe</span><p>Tu te filmes en train de grimper un bloc, et tu intègres dans la vidéo le scan de ce bloc.</p></div>
+                    </div>
                 </section>
 
                 <section id="fr-regles">
@@ -195,15 +217,6 @@
                         <li><h3>Les sous-titres</h3><p>La plupart des vidéos sont regardées sans le son. Si tu fais une voix off, ajoute les sous-titres automatiques de TikTok ou d'Instagram&nbsp;: les gens regardent plus longtemps.</p></li>
                         <li><h3>Le naturel</h3><p>Pas besoin d'une grosse perf&nbsp;: quel que soit ton niveau, reste toi-même. C'est ce qui permet aux gens de s'identifier à toi.</p></li>
                     </ul>
-                </section>
-
-                <section id="fr-formats">
-                    <h2>Trois idées de vidéos</h2>
-                    <div class="formats">
-                        <div class="format"><span class="genre">POV</span><p>Ta main qui scanne un bloc, devant le mur.</p></div>
-                        <div class="format"><span class="genre">Vlog</span><p>Un petit vlog de ta séance, dans lequel tu intègres un scan avec l'appli.</p></div>
-                        <div class="format"><span class="genre">Grimpe</span><p>Tu te filmes en train de grimper un bloc, et tu intègres dans la vidéo le scan de ce bloc.</p></div>
-                    </div>
                 </section>
 
 
@@ -247,7 +260,7 @@
                     <h1>The creator guide</h1>
                     <p class="chapeau">Tips to help you make videos that get views with the Climbr app.</p>
                     <nav class="sommaire" aria-label="Contents">
-                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What a video should include</a><a href="#en-regles">Golden rules</a><a href="#en-formats">Video ideas</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Do's and don'ts</a>
+                        <a href="#en-etapes">The steps</a><a href="#en-montrer">What a video should include</a><a href="#en-formats">Video ideas</a><a href="#en-regles">Golden rules</a><a href="#en-paiement">Getting paid</a><a href="#en-faire">Do's and don'ts</a>
                     </nav>
                 </header>
 
@@ -264,10 +277,23 @@
 
                 <section id="en-montrer">
                     <h2>What a video should include</h2>
-                    <p class="lead">The app must appear at least once in your video. You can film your phone in your hand with a second phone, or edit in a screen recording of you using the app.</p>
-                    <p class="encart"><strong>The most visually interesting moment is scanning a boulder.</strong><br>Take a photo of the wall, let the app outline the holds, tap a hold and log an attempt.</p>
-                    <p class="lead">When editing, speed up or cut some parts to keep the pace up.</p>
-                    <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>An example of what can be seen on your phone's screen.</figcaption></figure>
+                    <div class="contenu">
+                        <div class="contenu-texte">
+                            <p class="lead">The app must appear at least once in your video. You can film your phone in your hand with a second phone, or edit in a screen recording of you using the app.</p>
+                            <p class="encart"><strong>The most visually interesting moment is scanning a boulder.</strong><br>Take a photo of the wall, let the app outline the holds, tap a hold and log an attempt.</p>
+                            <p class="lead">When editing, speed up or cut some parts to keep the pace up.</p>
+                        </div>
+                        <figure class="exemple"><video src="exemple-appli.mp4" poster="exemple-appli.webp" width="540" height="1132" autoplay muted loop playsinline preload="metadata"></video><figcaption>An example of what can be seen on your phone's screen.</figcaption></figure>
+                    </div>
+                </section>
+
+                <section id="en-formats">
+                    <h2>Three video ideas</h2>
+                    <div class="formats">
+                        <div class="format"><span class="genre">POV</span><p>Your hand scanning a boulder, in front of the wall.</p></div>
+                        <div class="format"><span class="genre">Vlog</span><p>A short vlog of your session, with a scan in the app edited in.</p></div>
+                        <div class="format"><span class="genre">Climb</span><p>Film yourself climbing a boulder, and edit in the scan of that boulder.</p></div>
+                    </div>
                 </section>
 
                 <section id="en-regles">
@@ -281,15 +307,6 @@
                         <li><h3>Subtitles</h3><p>Most videos are watched with the sound off. If you do a voice-over, turn on TikTok's or Instagram's auto captions: people watch for longer.</p></li>
                         <li><h3>Being natural</h3><p>No need for an impressive climb: whatever your level, be yourself. That's what makes people relate to you.</p></li>
                     </ul>
-                </section>
-
-                <section id="en-formats">
-                    <h2>Three video ideas</h2>
-                    <div class="formats">
-                        <div class="format"><span class="genre">POV</span><p>Your hand scanning a boulder, in front of the wall.</p></div>
-                        <div class="format"><span class="genre">Vlog</span><p>A short vlog of your session, with a scan in the app edited in.</p></div>
-                        <div class="format"><span class="genre">Climb</span><p>Film yourself climbing a boulder, and edit in the scan of that boulder.</p></div>
-                    </div>
                 </section>
 
 
