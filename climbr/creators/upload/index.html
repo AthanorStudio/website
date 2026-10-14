@@ -41,8 +41,6 @@
         .aide { font-size: var(--fs-small); color: var(--ink-soft); margin: -0.4rem 0 0.75rem; }
         input[type="text"] { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem 0.7rem 1.8rem; width: 100%; min-width: 0; transition: border-color var(--transition); }
         input[type="text"]:focus { outline: none; border-color: var(--accent); }
-        .arobase { position: relative; }
-        .arobase::before { content: '@'; position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--muted); }
 
         /* La zone de dépôt : un vrai <input type=file> par-dessus, invisible,
            pour le clic, le clavier et le glisser-déposer d'un coup. */
@@ -126,11 +124,7 @@
             <p class="chapeau" data-t="chapeau">Une fois ta vidéo validée sur WhatsApp, dépose-la ici <strong>en qualité d'origine</strong> : on la garde pour pouvoir l'adapter en publicité si besoin.</p>
 
             <form class="form" id="form" novalidate>
-                <div class="carte" data-requis="compte">
-                    <label class="question" for="compte"><span data-t="q.compte">Ton compte</span> <span class="req">*</span></label>
-                    <p class="aide" data-t="aide.compte">Celui qui est dans ton contrat, Instagram ou TikTok.</p>
-                    <div class="arobase"><input type="text" id="compte" name="compte" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="username" data-t-ph="ph.compte" placeholder="toncompte"></div>
-                </div>
+                <p class="etat erreur" id="sans-lien" hidden data-t="sansLien">Ce lien n'est pas ton lien personnel. Ouvre celui du mail de ton contrat, ou écris-nous sur WhatsApp.</p>
 
                 <div class="carte" data-requis="fichiers">
                     <span class="question"><span data-t="q.video">Ta vidéo</span> <span class="req">*</span></span>
@@ -163,7 +157,7 @@
             'retour': '← The creator program',
             'titre': 'Upload your video',
             'chapeau': 'Once your video is approved on WhatsApp, upload it here <strong>in original quality</strong>: we keep it so we can adapt it for ads if needed.',
-            'q.compte': 'Your account', 'aide.compte': 'The one in your agreement, Instagram or TikTok.',
+            'sansLien': 'This isn\'t your personal link. Open the one in your agreement email, or message us on WhatsApp.',
             'q.video': 'Your video',
             'zone.titre': 'Choose or drop your video here', 'zone.texte': 'The file as it comes out of your phone or your editing app.',
             'zone.limite': 'Video only, 5 GB max. Several files allowed.',
@@ -171,7 +165,7 @@
             'merci.titre': 'Got it, thank you!', 'merci.texte': 'Your video reached us in original quality. You can post it as soon as it\'s approved.',
             'merci.encore': 'Upload another video'
         };
-        const EN_PH = { 'ph.compte': 'youraccount' };
+        const EN_PH = {};
         const EN_ARIA = { 'aria.video': 'Choose a video' };
         const MSG = {
             fr: {
@@ -179,7 +173,7 @@
                 manque: 'Il manque des réponses : elles sont entourées.', envoi: 'Envoi en cours… Garde cette page ouverte.',
                 attente: 'En attente', fini: 'Reçu', pasVideo: 'Ce fichier n\'est pas une vidéo.', tropGros: 'Plus de 5 Go : trop lourd.',
                 erreurs: {
-                    inconnu: 'On ne trouve pas ce compte parmi les créateurs sous contrat. Vérifie le pseudo, ou écris-nous sur WhatsApp.',
+                    lien: 'Ce lien de dépôt ne marche pas ou plus. Ouvre celui du mail de ton contrat, ou écris-nous sur WhatsApp.',
                     trop: 'Trop d\'envois depuis cette connexion. Réessaie dans une heure.',
                     ferme: 'Le dépôt n\'est pas encore ouvert. Envoie-nous la vidéo sur WhatsApp en attendant.',
                     coupe: 'L\'envoi a été coupé. Vérifie ta connexion et réessaie : seuls les fichiers non reçus repartiront.',
@@ -192,7 +186,7 @@
                 manque: 'Some answers are missing: they\'re highlighted.', envoi: 'Uploading… Keep this page open.',
                 attente: 'Waiting', fini: 'Received', pasVideo: 'This file isn\'t a video.', tropGros: 'Over 5 GB: too large.',
                 erreurs: {
-                    inconnu: 'We can\'t find this account among the creators under contract. Check the handle, or message us on WhatsApp.',
+                    lien: 'This upload link doesn\'t work (anymore). Open the one in your agreement email, or message us on WhatsApp.',
                     trop: 'Too many uploads from this connection. Try again in an hour.',
                     ferme: 'Uploads aren\'t open yet. Send us the video on WhatsApp in the meantime.',
                     coupe: 'The upload was interrupted. Check your connection and try again: only the files not received will be sent.',
@@ -230,6 +224,12 @@
         // dans le Drive (climbr-dashboard, /api/depot), et la vidéo y part
         // directement, par morceaux. Un morceau raté se renvoie seul.
         const API = location.hostname === 'localhost' ? 'http://localhost:3123/api/depot' : 'https://climbr-dashboard.vercel.app/api/depot';
+        // ⚠️ La clé du lien personnel (…/upload/?cle=…), reçu dans le mail du
+        // contrat : c'est elle, et non un pseudo public, qui ouvre le dépôt.
+        // Gardée sur l'appareil pour un retour par la simple adresse.
+        let cle = new URLSearchParams(location.search).get('cle') || '';
+        try { if (cle) localStorage.setItem('climbr-depot-cle', cle); else cle = localStorage.getItem('climbr-depot-cle') || ''; } catch (e) {}
+        document.getElementById('sans-lien').hidden = !!cle;
         // ⚠️ Un multiple de 256 Kio, sinon le Drive refuse le morceau.
         const MORCEAU = 8 * 1024 * 1024;
         const TAILLE_MAX = 5 * 1024 ** 3;
@@ -271,7 +271,6 @@
         entree.addEventListener('change', () => { ajouter([...entree.files]); entree.value = ''; });
         ['dragenter', 'dragover'].forEach(t => zone.addEventListener(t, () => zone.classList.add('survol')));
         ['dragleave', 'drop'].forEach(t => zone.addEventListener(t, () => zone.classList.remove('survol')));
-        form.compte.addEventListener('input', () => form.compte.closest('.carte').classList.remove('invalide'));
 
         // ── L'envoi ────────────────────────────────────────────────
         class Refus extends Error { constructor(code) { super(code); this.code = code; } }
@@ -299,11 +298,11 @@
             });
         }
 
-        async function ouvrir(x, compte) {
+        async function ouvrir(x) {
             const f = x.fichier;
             let r;
             try {
-                r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ compte, fichier: { nom: f.name, type: typeDe(f), taille: f.size } }) });
+                r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cle, fichier: { nom: f.name, type: typeDe(f), taille: f.size } }) });
             } catch (e) { throw new Refus('coupe'); }
             const j = await r.json().catch(() => ({}));
             if (!r.ok || !j.url) throw new Refus(j.code || 'autre');
@@ -315,9 +314,9 @@
         // garanti en CORS) : sans elle, impossible de savoir où reprendre, et
         // renvoyer au hasard est refusé. On repart alors de zéro, sur une
         // nouvelle session (essai du 13 oct. 2026, coupure au 2e morceau).
-        async function envoyerUneFois(x, compte) {
+        async function envoyerUneFois(x) {
             const f = x.fichier;
-            if (!x.session) await ouvrir(x, compte);
+            if (!x.session) await ouvrir(x);
             x.etat = 'envoi'; majLigne(x);
             while (x.fait < f.size) {
                 const fin = Math.min(x.fait + MORCEAU, f.size);
@@ -344,9 +343,9 @@
             x.fait = f.size; x.etat = 'fini'; majLigne(x);
         }
 
-        async function envoyer(x, compte) {
+        async function envoyer(x) {
             for (let reprise = 0; ; reprise++) {
-                try { return await envoyerUneFois(x, compte); }
+                try { return await envoyerUneFois(x); }
                 catch (e) {
                     if (!(e instanceof Refus) || e.code !== 'recommencer') throw e;
                     if (reprise >= 2) throw new Refus('coupe');
@@ -361,24 +360,24 @@
             if (enCours) return;
             const m = MSG[langue];
             etat.classList.remove('erreur');
-            const compte = form.compte.value.trim();
             const aEnvoyer = liste.filter(x => !x.refus && x.etat !== 'fini');
-            const carteCompte = form.compte.closest('.carte'), carteVideo = zone.closest('.carte');
-            carteCompte.classList.toggle('invalide', !compte);
+            const carteVideo = zone.closest('.carte');
             carteVideo.classList.toggle('invalide', !aEnvoyer.length);
-            if (!compte || !aEnvoyer.length) { etat.textContent = m.manque; etat.classList.add('erreur'); return; }
+            if (!cle) { etat.textContent = m.erreurs.lien; etat.classList.add('erreur'); return; }
+            if (!aEnvoyer.length) { etat.textContent = m.manque; etat.classList.add('erreur'); return; }
             enCours = true;
             const bouton = form.querySelector('.envoyer');
             bouton.disabled = true; entree.disabled = true; etat.textContent = m.envoi;
             try {
-                for (const x of aEnvoyer) await envoyer(x, compte);
+                for (const x of aEnvoyer) await envoyer(x);
                 document.getElementById('bloc').classList.add('envoye');
                 document.querySelector('.merci').scrollIntoView({ behavior: 'smooth', block: 'center' });
             } catch (err) {
                 const code = err instanceof Refus ? err.code : 'autre';
                 etat.textContent = MSG[langue].erreurs[code] || MSG[langue].erreurs.autre;
                 etat.classList.add('erreur');
-                if (code === 'inconnu') carteCompte.classList.add('invalide');
+                // Une clé refusée (remplacée, ou contrat clos) ne resservira pas.
+                if (code === 'lien') { try { localStorage.removeItem('climbr-depot-cle'); } catch (e) {} }
             } finally {
                 enCours = false; bouton.disabled = false; entree.disabled = false;
             }
