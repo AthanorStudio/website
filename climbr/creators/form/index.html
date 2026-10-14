@@ -342,6 +342,16 @@
                 _replyto: form.email.value.trim(),
                 _template: 'table'
             };
+            // Copie vers le dashboard (onglet Créateurs), sans l'attendre : la
+            // candidature y arrive en fiche. ⚠️ Un échec ici ne doit RIEN bloquer,
+            // l'e-mail de FormSubmit reste la trace.
+            try {
+                fetch(location.hostname === 'localhost' ? 'http://localhost:3123/api/candidature' : 'https://climbr-dashboard.vercel.app/api/candidature', {
+                    method: 'POST', keepalive: true,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.assign({ type: 'candidature', langue: langue, comptes_liste: comptes() }, donnees))
+                }).catch(() => {});
+            } catch (e) {}
             try {
                 const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
                     method: 'POST',
