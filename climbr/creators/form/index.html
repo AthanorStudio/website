@@ -46,16 +46,6 @@
         input[type="text"], input[type="email"], input[type="tel"], select { font: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; width: 100%; min-width: 0; transition: border-color var(--transition); }
         input:focus, select:focus { outline: none; border-color: var(--accent); }
 
-        /* Les choix en gros boutons : le vrai <input> reste là, caché, pour
-           le clavier et les lecteurs d'écran. */
-        .choix { display: flex; flex-wrap: wrap; gap: 0.55rem; }
-        .choix label { position: relative; cursor: pointer; }
-        .choix input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-        .choix input + span { display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--line); border-radius: var(--radius-sm); font-size: 0.9375rem; font-weight: 500; color: var(--ink-soft); background: var(--surface-raised); transition: border-color var(--transition), background var(--transition), color var(--transition); }
-        .choix label:hover input + span { border-color: var(--muted); }
-        .choix input:checked + span { border-color: var(--accent); background: rgba(180, 83, 31, 0.07); color: var(--ink); }
-        .choix input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
-
         /* Les comptes : une ligne par réseau, au moins une. */
         .comptes { display: flex; flex-direction: column; gap: 0.55rem; }
         .compte { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) 2.5rem; gap: 0.5rem; align-items: center; }
@@ -170,14 +160,6 @@
                     <button type="button" class="ajouter" id="ajouter" data-t="ajouter">+ Ajouter un compte</button>
                 </div>
 
-                <div class="carte" data-requis="langues">
-                    <span class="question" id="q-langues"><span data-t="q.langues">Langue de tes vidéos</span> <span class="req">*</span></span>
-                    <div class="choix" role="group" aria-labelledby="q-langues">
-                        <label><input type="checkbox" name="langues" value="Français"><span data-t="l.fr">Français</span></label>
-                        <label><input type="checkbox" name="langues" value="Anglais"><span data-t="l.en">Anglais</span></label>
-                    </div>
-                </div>
-
                 <div class="carte">
                     <label class="question" for="salle"><span data-t="q.salle">La salle où tu as l'habitude de grimper</span> <em data-t="facultatif">(facultatif)</em></label>
                     <input type="text" id="salle" name="salle" data-t-ph="ph.salle" placeholder="Arkose Montreuil">
@@ -216,17 +198,12 @@
         // ── La langue ──────────────────────────────────────────────
         // Même clé que /climbr et /climbr/creators (`climbr-lang`). Le français
         // est dans le HTML, lu au chargement : un seul endroit à changer.
-        // ⚠️ Les `value` restent en français dans les deux langues : c'est elle
-        // qui part dans le mail, un tri ne doit pas voir « English » et
-        // « Anglais » comme deux langues.
         const EN = {
             'retour': '← The creator program',
             'titre': 'Join the Climbr creators',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
             'q.whatsapp': 'WhatsApp', 'aide.whatsapp': 'If you\'re up for it, we\'ll set up a group with the team to make communication easier.',
             'q.comptes': 'Your account', 'ajouter': '+ Add an account',
-            'q.langues': 'Language of your videos',
-            'l.fr': 'French', 'l.en': 'English',
             'q.salle': 'The gym where you usually climb', 'facultatif': '(optional)',
             'consent': 'I agree that Athanor Studio, the publisher of Climbr, may contact me by email and WhatsApp about the creator program and process my information for that purpose. <a href="../../../privacy.html" target="_blank" rel="noopener">Privacy</a>',
             'envoyer': 'Send my application',
@@ -298,13 +275,11 @@
         const comptes = () => [...liste.querySelectorAll('.compte')]
             .map(l => ({ reseau: l.querySelector('select').value, pseudo: l.querySelector('input').value.trim().replace(/^@+/, '') }))
             .filter(c => c.pseudo);
-        const coches = (nom) => [...form.querySelectorAll(`input[name="${nom}"]:checked`)].map(i => i.value);
         const CONTROLES = {
             nom: () => form.prenom.value.trim() && form.nom.value.trim(),
             email: () => form.email.value.trim() && form.email.checkValidity(),
             whatsapp: () => form.numero.value.replace(/\D/g, '').length >= 6,
             comptes: () => comptes().length > 0,
-            langues: () => coches('langues').length > 0,
             consent: () => form.consent.checked
         };
         // Une carte entourée se libère dès qu'on y répond (`input` part aussi
@@ -335,7 +310,6 @@
                 email: form.email.value.trim(),
                 whatsapp: indicatif + ' ' + form.numero.value.trim(),
                 comptes: liste_comptes,
-                langues: coches('langues').join(', '),
                 salle: form.salle.value.trim(),
                 langue_de_la_page: langue,
                 consentement: 'oui',
