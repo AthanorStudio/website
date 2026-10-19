@@ -76,7 +76,11 @@
         .merci h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); }
         .merci p { margin-top: 0.5rem; color: var(--ink-soft); }
         .merci .telecharger { margin-top: 1.1rem; }
-        .signe .signer { display: none; }
+        /* Le paragraphe « Et » du contrat se remplit avec ce qui est saisi plus
+           haut ; ce qui manque encore reste entre crochets, en clair. */
+        .id-createur .a-remplir { color: var(--muted); }
+        .id-createur .saisi { color: var(--ink); font-weight: 600; }
+        .signe .saisie, .signe .signature { display: none; }
         .signe .merci { display: block; }
 
         @media (max-width: 520px) {
@@ -133,19 +137,45 @@
         <div class="colonne" id="bloc">
             <a href="../" class="retour" data-t="retour">← Le programme créateurs</a>
             <h1 data-t="titre">Ton contrat créateur</h1>
-            <p class="chapeau" data-t="chapeau">Lis-le en entier, puis complète tes infos et signe en bas de la page.<br>On t'envoie ensuite le contrat signé par e-mail.</p>
+            <p class="chapeau" data-t="chapeau">Remplis tes informations : le contrat les reprend. Lis-le en entier, puis signe en bas de la page.<br>On t'envoie ensuite le contrat signé par e-mail.</p>
+
+            <form class="signer" id="form" novalidate>
+                <div class="saisie">
+                <h2 data-t="infos.titre">Tes informations</h2>
+                <div class="carte deux" data-requis="nom">
+                    <div><label class="question" for="prenom"><span data-t="q.prenom">Prénom</span> <span class="req">*</span></label><input type="text" id="prenom" name="prenom" autocomplete="given-name"></div>
+                    <div><label class="question" for="nom"><span data-t="q.nom">Nom</span> <span class="req">*</span></label><input type="text" id="nom" name="nom" autocomplete="family-name"></div>
+                </div>
+                <div class="carte" data-requis="email">
+                    <label class="question" for="email"><span data-t="q.email">E-mail</span> <span class="req">*</span></label>
+                    <p class="aide" data-t="aide.email">On t'envoie le contrat signé à cette adresse.</p>
+                    <input type="email" id="email" name="email" autocomplete="email">
+                </div>
+                <div class="carte" data-requis="adresse">
+                    <label class="question" for="adresse"><span data-t="q.adresse">Adresse postale</span> <span class="req">*</span></label>
+                    <input type="text" id="adresse" name="adresse" autocomplete="street-address">
+                </div>
+                <div class="carte" data-requis="comptes">
+                    <label class="question" for="comptes"><span data-t="q.comptes">Ton compte Instagram ou TikTok</span> <span class="req">*</span></label>
+                    <input type="text" id="comptes" name="comptes" autocapitalize="off" autocorrect="off" spellcheck="false" data-t-ph="ph.comptes" placeholder="@toncompte">
+                </div>
+                <div class="carte">
+                    <label class="question" for="siret"><span data-t="q.siret">N° SIRET</span> <em data-t="facultatif">(si tu as un statut d'entreprise)</em></label>
+                    <input type="text" id="siret" name="siret" inputmode="numeric">
+                </div>
+                </div>
 
             <!-- ⚠️ Changer un mot du contrat = changer CONTRAT_VERSION plus bas. Les
                  versions déjà signées restent lisibles dans l'historique git :
                  c'est la preuve de ce que chacun a accepté. -->
             <article class="feuille" id="texte-fr" lang="fr">
-                <span class="version">Version du 14 octobre 2026</span>
+                <span class="version">Version du 19 octobre 2026</span>
                 <h2>Contrat de collaboration – Créateur de contenu Climbr</h2>
                 <div class="parties">
                     <p><strong>Entre</strong></p>
                     <p><strong>Athanor Studio</strong>, SAS au capital de 1 000 €, immatriculée au RCS de Paris sous le n° 932 414 139, dont le siège social est situé au 122 rue Amelot, 75011 Paris, éditrice de l'application Climbr, représentée par Guillaume Faugère, Président (ci-après « <strong>Athanor Studio</strong> »),</p>
                     <p><strong>Et</strong></p>
-                    <p class="id-createur">la personne identifiée dans le formulaire de signature au bas de ce contrat (nom, adresse, comptes et, si applicable, n° SIRET) (ci-après « <strong>le Créateur</strong> »).</p>
+                    <p class="id-createur">la personne identifiée dans le formulaire « Tes informations » de ce contrat (nom, adresse, comptes et, si applicable, n° SIRET) (ci-après « <strong>le Créateur</strong> »).</p>
                     <p>Le Créateur déclare être âgé d'au moins 18 ans.</p>
                 </div>
 
@@ -171,7 +201,12 @@
 
                 <div class="article"><span>4</span><div>
                     <h3>Mention commerciale</h3>
-                    <p>Conformément à la loi du 9 juin 2023 sur l'influence commerciale, le Créateur indique dans la description de chaque vidéo la mention « Collaboration commerciale », y cite <strong>@climbr.application</strong>, et active l'outil de partenariat de la plateforme lorsqu'il existe.</p>
+                    <p>Le Créateur signale clairement, dans la description de chaque vidéo, qu'il s'agit d'une collaboration commerciale, avec une mention que son public comprend :</p>
+                    <ul>
+                        <li>en France, « Collaboration commerciale », conformément à la loi du 9 juin 2023 sur l'influence commerciale ;</li>
+                        <li>ailleurs, la mention qu'imposent les règles locales, et au minimum « #ad » ou « Paid partnership » (aux États-Unis : les règles de la FTC).</li>
+                    </ul>
+                    <p>Cette mention se place en début de description, visible sans dérouler le texte. Le Créateur y cite <strong>@climbr.application</strong> et active l'outil de partenariat de la plateforme lorsqu'il existe.</p>
                 </div></div>
 
                 <div class="article"><span>5</span><div>
@@ -210,13 +245,13 @@
             </article>
 
             <article class="feuille" id="texte-en" lang="en" hidden>
-                <span class="version">Version of 14 October 2026 · English version; the French version prevails, except for the currency of pay set out in article 3</span>
+                <span class="version">Version of 19 October 2026 · English version; the French version prevails, except for the currency of pay set out in article 3</span>
                 <h2>Collaboration agreement – Climbr content creator</h2>
                 <div class="parties">
                     <p><strong>Between</strong></p>
                     <p><strong>Athanor Studio</strong>, a French SAS with share capital of €1,000, registered with the Paris Trade and Companies Register under no. 932 414 139, with its registered office at 122 rue Amelot, 75011 Paris, France, publisher of the Climbr app, represented by Guillaume Faugère, President (hereinafter “<strong>Athanor Studio</strong>”),</p>
                     <p><strong>And</strong></p>
-                    <p class="id-createur">the person identified in the signature form at the bottom of this agreement (name, address, accounts and, where applicable, business registration number) (hereinafter “<strong>the Creator</strong>”).</p>
+                    <p class="id-createur">the person identified in the “Your details” form of this agreement (name, address, accounts and, where applicable, business registration number) (hereinafter “<strong>the Creator</strong>”).</p>
                     <p>The Creator declares that they are at least 18 years old.</p>
                 </div>
 
@@ -242,7 +277,12 @@
 
                 <div class="article"><span>4</span><div>
                     <h3>Commercial disclosure</h3>
-                    <p>In accordance with the French law of 9 June 2023 on commercial influence, the Creator states in the caption of each video the label “Collaboration commerciale” (paid partnership), tags <strong>@climbr.application</strong> there, and turns on the platform's partnership tool where one exists.</p>
+                    <p>In the caption of each video, the Creator clearly discloses that it is a paid partnership, using a label their audience understands:</p>
+                    <ul>
+                        <li>in France, “Collaboration commerciale”, in accordance with the French law of 9 June 2023 on commercial influence;</li>
+                        <li>elsewhere, the label required by local rules, and at least “#ad” or “Paid partnership” (in the United States: the FTC rules).</li>
+                    </ul>
+                    <p>This label goes at the start of the caption, visible without expanding the text. The Creator tags <strong>@climbr.application</strong> there and turns on the platform's partnership tool where one exists.</p>
                 </div></div>
 
                 <div class="article"><span>5</span><div>
@@ -280,29 +320,8 @@
                 </div>
             </article>
 
-            <form class="signer" id="form" novalidate>
+                <div class="signature">
                 <h2 data-t="signer.titre">Signer le contrat</h2>
-                <div class="carte deux" data-requis="nom">
-                    <div><label class="question" for="prenom"><span data-t="q.prenom">Prénom</span> <span class="req">*</span></label><input type="text" id="prenom" name="prenom" autocomplete="given-name"></div>
-                    <div><label class="question" for="nom"><span data-t="q.nom">Nom</span> <span class="req">*</span></label><input type="text" id="nom" name="nom" autocomplete="family-name"></div>
-                </div>
-                <div class="carte" data-requis="email">
-                    <label class="question" for="email"><span data-t="q.email">E-mail</span> <span class="req">*</span></label>
-                    <p class="aide" data-t="aide.email">On t'envoie le contrat signé à cette adresse.</p>
-                    <input type="email" id="email" name="email" autocomplete="email">
-                </div>
-                <div class="carte" data-requis="adresse">
-                    <label class="question" for="adresse"><span data-t="q.adresse">Adresse postale</span> <span class="req">*</span></label>
-                    <input type="text" id="adresse" name="adresse" autocomplete="street-address">
-                </div>
-                <div class="carte" data-requis="comptes">
-                    <label class="question" for="comptes"><span data-t="q.comptes">Ton compte Instagram ou TikTok</span> <span class="req">*</span></label>
-                    <input type="text" id="comptes" name="comptes" autocapitalize="off" autocorrect="off" spellcheck="false" data-t-ph="ph.comptes" placeholder="@toncompte">
-                </div>
-                <div class="carte">
-                    <label class="question" for="siret"><span data-t="q.siret">N° SIRET</span> <em data-t="facultatif">(si tu as un statut d'entreprise)</em></label>
-                    <input type="text" id="siret" name="siret" inputmode="numeric">
-                </div>
                 <div class="carte" data-requis="accord">
                     <label class="coche"><input type="checkbox" id="majeur" name="majeur"><span data-t="c.majeur">J'ai 18 ans ou plus.</span></label>
                     <label class="coche"><input type="checkbox" id="accepte" name="accepte"><span data-t="c.accepte"><strong>Lu et approuvé.</strong> J'ai lu le contrat en entier et je l'accepte ; cocher cette case et envoyer vaut signature.</span></label>
@@ -310,7 +329,9 @@
                 <div class="miel" aria-hidden="true"><label for="_honey">Ne pas remplir</label><input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off"></div>
                 <button class="btn btn-primary envoyer" type="submit" data-t="envoyer">Signer le contrat</button>
                 <p class="etat" id="etat" role="status"></p>
+                </div>
             </form>
+
 
             <div class="merci carte" role="status">
                 <h2 data-t="merci.titre">C'est signé, bienvenue !</h2>
@@ -323,14 +344,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         // ⚠️ À changer à chaque modification du texte (FR ou EN).
-        const CONTRAT_VERSION = '2026-10-14.3';
+        const CONTRAT_VERSION = '2026-10-19.2';
 
         // ── La langue ──────────────────────────────────────────────
         // Même clé que le reste de /climbr (`climbr-lang`).
         const EN = {
             'retour': '← The creator program',
             'titre': 'Your creator agreement',
-            'chapeau': 'Read it all, then fill in your details and sign at the bottom of the page.<br>We\'ll then email you the signed agreement.',
+            'chapeau': 'Fill in your details: the agreement includes them. Read it all, then sign at the bottom of the page.<br>We\'ll then email you the signed agreement.',
+            'infos.titre': 'Your details',
             'signer.titre': 'Sign the agreement',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
             'aide.email': 'We\'ll send the signed agreement to this address.',
@@ -392,6 +414,41 @@
             const carte = e.target.closest('.carte.invalide');
             if (carte && CONTROLES[carte.dataset.requis]()) carte.classList.remove('invalide');
         });
+        // ── Le Créateur, nommé dans le contrat ─────────────────────
+        // Le paragraphe « Et » reprend la saisie au fil de la frappe : on relit
+        // le contrat avec son nom et son adresse, tels qu'ils seront dans le PDF.
+        // ⚠️ L'empreinte, elle, porte sur le texte GÉNÉRIQUE (`texteSigne`) :
+        // c'est lui qui est dans l'historique git, et qui prouve la version lue.
+        const GENERIQUE = {};
+        document.querySelectorAll('.id-createur').forEach(p => { GENERIQUE[p.closest('article').id] = p.innerHTML; });
+        const echapper = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+        function identiteSaisie(en, html) {
+            const v = k => form[k].value.trim();
+            const champ = (val, manque) => html ? (val ? '<span class="saisi">' + echapper(val) + '</span>' : '<span class="a-remplir">[' + manque + ']</span>') : val;
+            const nom = [v('prenom'), v('nom')].filter(Boolean).join(' ');
+            const siret = v('siret');
+            return en
+                ? champ(nom, 'your name') + ', residing at ' + champ(v('adresse'), 'your address') + ', holder of the account(s) ' + champ(v('comptes'), 'your account') + (siret ? ', business registration no. ' + champ(siret, '') : '') + ' (hereinafter “' + (html ? '<strong>the Creator</strong>' : 'the Creator') + '”).'
+                : champ(nom, 'ton nom') + ', demeurant ' + champ(v('adresse'), 'ton adresse') + ', titulaire du ou des comptes ' + champ(v('comptes'), 'ton compte') + (siret ? ', n° SIRET ' + champ(siret, '') : '') + ' (ci-après « ' + (html ? '<strong>le Créateur</strong>' : 'le Créateur') + ' »).';
+        }
+        function nommerCreateur() {
+            const vide = ['prenom', 'nom', 'adresse', 'comptes', 'siret'].every(k => !form[k].value.trim());
+            document.querySelectorAll('.id-createur').forEach(p => {
+                const article = p.closest('article');
+                p.innerHTML = vide ? GENERIQUE[article.id] : identiteSaisie(article.id === 'texte-en', true);
+            });
+        }
+        form.addEventListener('input', nommerCreateur);
+        nommerCreateur();
+        // Le texte tel que versionné dans git, sans la saisie.
+        function texteSigne(article) {
+            const p = article.querySelector('.id-createur');
+            const affiche = p.innerHTML;
+            p.innerHTML = GENERIQUE[article.id];
+            const texte = article.innerText.replace(/\s+/g, ' ').trim();
+            p.innerHTML = affiche;
+            return texte;
+        }
         async function empreinte(texte) {
             try {
                 const octets = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(texte));
@@ -524,7 +581,7 @@
             const bouton = form.querySelector('.envoyer');
             bouton.disabled = true; etat.textContent = m.envoi;
             const lu = document.getElementById(langue === 'en' ? 'texte-en' : 'texte-fr');
-            const texte = lu.innerText.replace(/\s+/g, ' ').trim();
+            const texte = texteSigne(lu);
             const nom = form.prenom.value.trim() + ' ' + form.nom.value.trim();
             const signeLe = new Date();
             const quand = signeLe.toLocaleString(langue === 'en' ? 'en-GB' : 'fr-FR', { dateStyle: 'long', timeStyle: 'short' });
@@ -551,9 +608,8 @@
             const titre = 'contrat-createur-' + ([champs.prenom, champs.nom].map(t => t.normalize('NFD').replace(/[^A-Za-z0-9]/g, '')).join('') || 'Climbr-' + signeLe.toISOString().slice(0, 10));
             let pdf = null, fichier = titre + '.pdf';
             try {
-                const identite = en
-                    ? nom + ', residing at ' + champs.adresse + ', holder of the account(s) ' + champs.comptes + (champs.siret ? ', business registration no. ' + champs.siret : '') + ' (hereinafter “the Creator”).'
-                    : nom + ', demeurant ' + champs.adresse + ', titulaire du ou des comptes ' + champs.comptes + (champs.siret ? ', n° SIRET ' + champs.siret : '') + ' (ci-après « le Créateur »).';
+                // Le même paragraphe que celui affiché au-dessus.
+                const identite = identiteSaisie(en, false);
                 const cloture = en
                     ? 'Made in Paris, signed electronically on ' + quand + '. A copy is sent to the Creator by email.'
                     : 'Fait à Paris, signé électroniquement le ' + quand + '. Une copie est adressée au Créateur par e-mail.';
