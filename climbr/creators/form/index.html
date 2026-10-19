@@ -86,6 +86,8 @@
         .merci h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); }
         .merci p { margin-top: 0.5rem; color: var(--ink-soft); }
         .merci .btn { margin-top: 1.1rem; }
+        .merci .installer { font-size: var(--fs-small); }
+        .merci .installer a { color: var(--ink-soft); text-decoration: underline; }
         .envoye .form { display: none; }
         .envoye .merci { display: block; }
 
@@ -143,7 +145,7 @@
         <div class="colonne" id="bloc">
             <a href="../" class="retour" data-t="retour">← Le programme créateurs</a>
             <h1 data-t="titre">Rejoins les créateurs Climbr</h1>
-            <p class="chapeau" data-t="chapeau">Tu grimpes en salle et tu fais des vidéos ? Tu es payé <strong>1&nbsp;€ pour 1&nbsp;000 vues</strong>, dès la première vidéo, et Climbr Pro t'est offert. Deux minutes, et on revient vers toi.</p>
+            <p class="chapeau" data-t="chapeau">Tu grimpes en salle et tu fais des vidéos ? Tu es payé <strong>1&nbsp;€ pour 1&nbsp;000 vues</strong>, dès la première vidéo, et Climbr Pro t'est offert. Deux minutes pour postuler, puis tu signes ton contrat dans la foulée.</p>
 
             <form class="form" id="form" novalidate>
                 <div class="carte deux" data-requis="nom">
@@ -194,9 +196,10 @@
             </form>
 
             <div class="merci carte" role="status">
-                <h2 data-t="merci.titre">C'est reçu, merci !</h2>
-                <p data-t="merci.texte">On regarde ton compte et on t'écrit très vite, par e-mail ou sur WhatsApp. En attendant, tu peux déjà installer Climbr.</p>
-                <a href="../../download/" class="btn btn-primary" data-t="merci.installer">Installer Climbr</a>
+                <h2 data-t="merci.titre">C'est reçu ! Dernière étape : ton contrat</h2>
+                <p data-t="merci.texte">Signe-le en ligne maintenant, tes infos y sont déjà. On vérifie ensuite ton compte, puis on t'envoie ton contrat signé, ton code Climbr Pro et le guide.</p>
+                <a href="../contrat/" class="btn btn-primary" id="vers-contrat" data-t="merci.contrat">Signer mon contrat</a>
+                <p class="installer"><a href="../../download/" data-t="merci.installer">Installer Climbr en attendant</a></p>
             </div>
         </div>
     </main>
@@ -222,7 +225,7 @@
         const EN = {
             'retour': '← The creator program',
             'titre': 'Join the Climbr creators',
-            'chapeau': 'You climb indoors and make videos? You earn <strong>$1 per 1,000 views</strong>, from your very first video, and get Climbr Pro for free. Two minutes, and we\'ll get back to you.',
+            'chapeau': 'You climb indoors and make videos? You earn <strong>$1 per 1,000 views</strong>, from your very first video, and get Climbr Pro for free. Two minutes to apply, then you sign your agreement right away.',
             'q.prenom': 'First name', 'q.nom': 'Last name', 'q.email': 'Email',
             'q.whatsapp': 'WhatsApp', 'aide.whatsapp': 'If you\'re up for it, we\'ll set up a group with the team to make communication easier.',
             'q.comptes': 'Your account', 'ajouter': '+ Add an account',
@@ -231,9 +234,10 @@
             'q.salle': 'The gym where you usually climb', 'facultatif': '(optional)',
             'consent': 'I agree that Athanor Studio, the publisher of Climbr, may contact me by email and WhatsApp about the creator program and process my information for that purpose. <a href="../../../privacy.html" target="_blank" rel="noopener">Privacy</a>',
             'envoyer': 'Send my application',
-            'merci.titre': 'Got it, thank you!',
-            'merci.texte': 'We\'ll look at your account and get back to you soon, by email or WhatsApp. In the meantime, you can already install Climbr.',
-            'merci.installer': 'Install Climbr'
+            'merci.titre': 'Got it! Last step: your agreement',
+            'merci.texte': 'Sign it online now, your details are already in it. We\'ll then check your account and send you the signed agreement, your Climbr Pro code and the guide.',
+            'merci.contrat': 'Sign my agreement',
+            'merci.installer': 'Install Climbr in the meantime'
         };
         const EN_PH = { 'ph.prenom': 'Your first name', 'ph.nom': 'Your last name', 'ph.email': 'you@example.com', 'ph.numero': '7700 900123', 'ph.salle': 'The Castle' };
         const MSG = {
@@ -262,6 +266,8 @@
             try { localStorage.setItem('climbr-lang', langue); } catch (e) {}
             // L'adresse suit la langue affichée : copiée telle quelle, elle rouvre la même version.
             try { const u = new URL(location.href); u.searchParams.set('lang', langue); history.replaceState(null, '', u); } catch (e) {}
+            // Le contrat s'ouvre dans la langue de la candidature.
+            document.getElementById('vers-contrat').href = '../contrat/?lang=' + langue;
         }
         document.querySelector('.lang-toggle').addEventListener('click', () => { langue = langue === 'fr' ? 'en' : 'fr'; appliquer(); });
 
@@ -362,6 +368,10 @@
                 // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
                 // qui dit si le message est parti (il vaut la chaîne "true").
                 if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
+                // Le contrat, ouvert juste après, reprend ce qui vient d'être saisi.
+                // ⚠️ `sessionStorage` : ces données ne restent que dans cet onglet,
+                // le temps d'aller au contrat, jamais sur le téléphone.
+                try { sessionStorage.setItem('climbr-candidature', JSON.stringify({ prenom: donnees.prenom, nom: donnees.nom, email: donnees.email, comptes: comptes().map(c => '@' + c.pseudo + ' (' + c.reseau + ')').join(', ') })); } catch (e) {}
                 document.getElementById('bloc').classList.add('envoye');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } catch (err) {

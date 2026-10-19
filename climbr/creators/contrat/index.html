@@ -439,6 +439,11 @@
                 p.innerHTML = vide ? GENERIQUE[article.id] : identiteSaisie(article.id === 'texte-en', true);
             });
         }
+        // Arrivé juste après sa candidature : ce qu'il vient de saisir est déjà là.
+        try {
+            const c = JSON.parse(sessionStorage.getItem('climbr-candidature') || 'null');
+            if (c) for (const k of ['prenom', 'nom', 'email', 'comptes']) if (c[k] && !form[k].value) form[k].value = c[k];
+        } catch (e) {}
         form.addEventListener('input', nommerCreateur);
         nommerCreateur();
         // Le texte tel que versionné dans git, sans la saisie.
