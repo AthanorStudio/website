@@ -83,6 +83,14 @@
         .id-createur .saisi { color: var(--ink); font-weight: 600; }
         .signe .saisie, .signe .signature { display: none; }
         .signe .merci { display: block; }
+        /* La régénération depuis le dashboard : ni saisie ni signature, seulement le PDF. */
+        .regen { margin-top: 1.5rem; }
+        .regen h2 { font-size: var(--fs-h3); font-weight: 800; letter-spacing: var(--letter-tight); }
+        .regen p { margin-top: 0.5rem; color: var(--ink-soft); }
+        .regen p.erreur { color: var(--accent-dark); }
+        .regen .telecharger { margin-top: 1.1rem; }
+        .regen .telecharger[hidden] { display: none; }
+        .regenere .chapeau, .regenere .saisie, .regenere .signature { display: none; }
 
         @media (max-width: 520px) {
             .deux { grid-template-columns: 1fr; }
@@ -339,6 +347,12 @@
                 <p data-t="merci.texte">On t'envoie le contrat signé en PDF par e-mail sous 24 h, avec ton accès Climbr Pro et le guide pour commencer.</p>
                 <a class="btn btn-primary telecharger" id="telecharger" data-t="merci.pdf">Télécharger mon contrat (PDF)</a>
             </div>
+
+            <div class="regen carte" id="regen" role="status" hidden>
+                <h2>Contrat régénéré</h2>
+                <p id="regen-texte"></p>
+                <a class="btn btn-primary telecharger" id="regen-pdf" hidden>Télécharger le PDF</a>
+            </div>
         </div>
     </main>
 
@@ -466,7 +480,8 @@
         // Construit depuis le texte affiché (la langue lue), avec un bloc de
         // signature à la fin. ⚠️ Polices standard de jsPDF : seul le jeu
         // WinAnsi passe (accents, « », €, – oui ; pas d'emoji ni de « ≠ »).
-        function contratPdf(article, titre, identite, cloture, sig) {
+        // `version` : celle de la signature, quand le PDF est régénéré depuis le dashboard.
+        function contratPdf(article, titre, identite, cloture, sig, version = CONTRAT_VERSION) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ unit: 'mm', format: 'a4' });
             doc.setProperties({ title: titre, author: 'Athanor Studio – Climbr' });
@@ -514,7 +529,7 @@
             const n = doc.getNumberOfPages();
             for (let i = 1; i <= n; i++) {
                 doc.setPage(i); doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(150, 140, 128);
-                doc.text('Climbr – Athanor Studio · ' + CONTRAT_VERSION, G, 290);
+                doc.text('Climbr – Athanor Studio · ' + version, G, 290);
                 doc.text(i + ' / ' + n, G + L, 290, { align: 'right' });
             }
             return doc.output('blob');
@@ -667,6 +682,67 @@
                 bouton.disabled = false;
             }
         });
+
+        // ── La régénération, depuis la fiche du dashboard ──────────
+        // `#regenerer=…` porte la signature enregistrée (JSON en base64url) ;
+        // `?lang=` dit la langue du PDF voulu. Rien n'est envoyé nulle part.
+        // ⚠️ Le PDF n'est refait que si le texte de la langue signée donne
+        // encore l'empreinte enregistrée : sinon le contrat a changé depuis, et
+        // ce texte n'est plus celui que la personne a accepté.
+        (async () => {
+            if (!location.hash.startsWith('#regenerer=')) return;
+            const brut = location.hash.slice('#regenerer='.length);
+            // L'adresse et l'e-mail ne restent pas dans l'historique.
+            history.replaceState(null, '', location.pathname + location.search);
+            document.getElementById('bloc').classList.add('regenere');
+            form.querySelector('.envoyer').disabled = true;
+            const bloc = document.getElementById('regen'), texteBloc = document.getElementById('regen-texte'), lien = document.getElementById('regen-pdf');
+            bloc.hidden = false;
+            const refus = t => { texteBloc.textContent = t; texteBloc.classList.add('erreur'); };
+            let s;
+            try {
+                const b64 = brut.replace(/-/g, '+').replace(/_/g, '/');
+                s = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0))));
+            } catch (e) { return refus('Le lien de régénération est illisible : rouvre-le depuis la fiche du dashboard.'); }
+            if (!s.empreinte || s.empreinte === 'indisponible') return refus("Cette signature n'a pas d'empreinte : rien ne prouve quel texte a été signé, le PDF n'est pas refait.");
+            for (const k of ['prenom', 'nom', 'email', 'adresse', 'comptes', 'siret']) form[k].value = s[k] || '';
+            nommerCreateur();
+            const cible = langue, signee = s.langue === 'en' ? 'en' : 'fr';
+            // ⚠️ `innerText` d'un texte caché n'a pas la mise en page : la langue signée est affichée le temps du calcul.
+            langue = signee; appliquer();
+            const hashSigne = await empreinte(texteSigne(document.getElementById(signee === 'en' ? 'texte-en' : 'texte-fr')));
+            langue = cible; appliquer();
+            if (hashSigne !== s.empreinte)
+                return refus("L'empreinte enregistrée ne correspond pas au texte " + (signee === 'en' ? 'anglais' : 'français') + ' de cette page (signé en version ' + s.version + ', page en ' + CONTRAT_VERSION + ") : ce n'est plus le texte accepté, le PDF n'est pas refait. L'original est dans le Drive, ou dans l'historique git du site.");
+            const en = cible === 'en';
+            const lu = document.getElementById(en ? 'texte-en' : 'texte-fr');
+            const nom = s.prenom + ' ' + s.nom;
+            // L'heure du serveur, à Paris : celle du téléphone n'est pas enregistrée.
+            const enDate = d => new Date(d).toLocaleString(en ? 'en-GB' : 'fr-FR', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Paris' });
+            const quand = enDate(s.signeLe);
+            const autre = signee !== cible;
+            const titre = 'contrat-createur-' + ([s.prenom, s.nom].map(t => (t || '').normalize('NFD').replace(/[^A-Za-z0-9]/g, '')).join('') || 'Climbr') + '-' + cible;
+            const cloture = en
+                ? 'Made in Paris, signed electronically on ' + quand + '. A copy is sent to the Creator by email.'
+                : 'Fait à Paris, signé électroniquement le ' + quand + '. Une copie est adressée au Créateur par e-mail.';
+            const sig = [
+                [en ? 'Signed by' : 'Signé par', nom + (s.siret ? ' (SIRET ' + s.siret + ')' : '')],
+                [en ? 'Address' : 'Adresse', s.adresse],
+                [en ? 'Email' : 'E-mail', s.email],
+                [en ? 'Accounts' : 'Comptes', s.comptes],
+                [en ? 'Signed on' : 'Signé le', quand + ' (Europe/Paris), ' + (en ? 'electronically, “Read and approved”' : 'électroniquement, « Lu et approuvé »') + (autre ? (en ? ', on the French version' : ', sur la version anglaise') : '')],
+                [en ? 'For Athanor Studio' : 'Pour Athanor Studio', 'Guillaume Faugère, ' + (en ? 'President' : 'Président')]
+            ];
+            if (autre) {
+                sig.push([en ? 'SHA-256 signed (FR)' : 'SHA-256 signé (EN)', s.empreinte]);
+                sig.push([en ? 'SHA-256 of this text' : 'SHA-256 de ce texte', await empreinte(texteSigne(lu))]);
+            } else sig.push([en ? 'SHA-256 of the text' : 'Empreinte SHA-256', s.empreinte]);
+            sig.push([en ? 'Copy' : 'Copie', (en ? 'regenerated on ' : 'régénérée le ') + enDate(Date.now()) + (en ? ' from the recorded signature' : ' depuis la signature enregistrée')]);
+            let pdf;
+            try { pdf = contratPdf(lu, titre, identiteSaisie(en, false), cloture, sig, s.version); } catch (e) { return refus("Le PDF n'a pas pu être fabriqué (" + e.message + ').'); }
+            texteBloc.textContent = 'Contrat de ' + nom + ', signé le ' + enDate(s.signeLe) + ' en ' + (signee === 'en' ? 'anglais' : 'français') + ', refait en ' + (en ? 'anglais' : 'français') + ". L'empreinte du texte signé correspond.";
+            lien.href = URL.createObjectURL(pdf); lien.download = titre + '.pdf'; lien.hidden = false;
+        })().catch(() => {});
 
         const nav = document.querySelector('.nav');
         window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
