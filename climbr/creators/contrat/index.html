@@ -652,26 +652,28 @@
                 }
                 if (avecPdf) await envoyerAvecPdf(champs, sujet, pdf, fichier);
                 else await envoyerSansPdf(champs, sujet, texte);
-                // Le dashboard passe la personne en « Contrat signé », ce qui lui
-                // ouvre le dépôt des vidéos. Seulement APRÈS l'e-mail : la signature
-                // n'existe pour nous qu'une fois reçue. Le PDF y part aussi, pour être
-                // rangé dans le Drive. ⚠️ Sans l'attendre.
-                // ⚠️ `keepalive` refuse tout corps de plus de 64 Ko : avec le PDF, on
-                // s'en passe, la page reste ouverte sur le message de remerciement.
-                (async () => {
+                // Le dashboard reçoit la signature (« Signature à vérifier ») et range le
+                // PDF dans le Drive. Seulement APRÈS l'e-mail : la signature n'existe pour
+                // nous qu'une fois reçue.
+                // ⚠️ Attendu avant le message de remerciement : parti en arrière-plan,
+                // l'envoi mourait avec la page, refermée aussitôt (navigateur
+                // d'Instagram), et la fiche n'arrivait jamais (21 oct. 2026). `keepalive`
+                // refuse tout corps de plus de 64 Ko : le repli part donc sans le PDF,
+                // qui reste dans l'e-mail. Un renvoi identique ne compte pas en double.
+                const sansPdf = { type: 'signature', langue: langue, prenom: champs.prenom, nom: champs.nom, email: champs.email, adresse: champs.adresse, comptes: champs.comptes, siret: champs.siret, version: CONTRAT_VERSION, empreinte: hash, _honey: form._honey.value };
+                const poster = (corps, keepalive) => fetch(location.hostname === 'localhost' ? 'http://localhost:3123/api/candidature' : 'https://climbr-dashboard.vercel.app/api/candidature', {
+                    method: 'POST', keepalive: keepalive,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: corps
+                });
+                let recu = false;
+                try {
                     let base64 = '';
-                    if (pdf) {
-                        try {
-                            base64 = await new Promise((ok, ko) => { const l = new FileReader(); l.onload = () => ok(String(l.result).split(',')[1] || ''); l.onerror = ko; l.readAsDataURL(pdf); });
-                        } catch (e) {}
-                    }
-                    const corps = JSON.stringify({ type: 'signature', langue: langue, prenom: champs.prenom, nom: champs.nom, email: champs.email, adresse: champs.adresse, comptes: champs.comptes, siret: champs.siret, version: CONTRAT_VERSION, empreinte: hash, pdf: base64, _honey: form._honey.value });
-                    fetch(location.hostname === 'localhost' ? 'http://localhost:3123/api/candidature' : 'https://climbr-dashboard.vercel.app/api/candidature', {
-                        method: 'POST', keepalive: corps.length < 60000,
-                        headers: { 'Content-Type': 'application/json' },
-                        body: corps
-                    }).catch(() => {});
-                })().catch(() => {});
+                    if (pdf) base64 = await new Promise((ok, ko) => { const l = new FileReader(); l.onload = () => ok(String(l.result).split(',')[1] || ''); l.onerror = ko; l.readAsDataURL(pdf); });
+                    const r = await Promise.race([poster(JSON.stringify(Object.assign({}, sansPdf, { pdf: base64 })), false), new Promise((_, ko) => setTimeout(() => ko(new Error('délai')), 15000))]);
+                    recu = r.ok;
+                } catch (e) {}
+                if (!recu) poster(JSON.stringify(sansPdf), true).catch(() => {});
                 const lien = document.getElementById('telecharger');
                 if (pdf) { lien.href = URL.createObjectURL(pdf); lien.download = fichier; } else lien.hidden = true;
                 document.getElementById('bloc').classList.add('signe');
