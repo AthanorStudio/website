@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["265F6SQ3J2.com.athanor-studio.climb"],
+        "components": [
+          { "/": "/climbr/ami/*", "comment": "Lien ami de Climbr" },
+          { "/": "/climbr/ami", "comment": "Lien ami de Climbr, sans barre finale" }
+        ]
+      }
+    ]
+  }
+}

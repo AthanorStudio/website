@@ -1,0 +1,4 @@
+# GitHub Pages passe le site dans Jekyll, qui ignore les dossiers en point.
+# Sans cette ligne, /.well-known/apple-app-site-association n'est pas publié,
+# et le lien ami de Climbr (/climbr/ami/) s'ouvre dans Safari au lieu de l'app.
+include: [".well-known"]
