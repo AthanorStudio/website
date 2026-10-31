@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.athanorstudio.climb",
+      "sha256_cert_fingerprints": [
+        "45:4D:E9:4F:66:00:BB:F1:04:83:40:80:C3:C3:02:A6:0A:55:C9:F8:89:C6:82:1E:93:6A:06:AD:5B:D4:62:A9",
+        "55:33:B5:3F:0C:71:A1:26:8D:27:16:19:3E:AF:43:80:F7:0E:53:59:1A:BE:37:B4:1B:77:90:3E:13:8B:2B:7C"
+      ]
+    }
+  }
+]

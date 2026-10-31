@@ -115,6 +115,32 @@
         })();
     </script>
     <script>
+        // ── L'invitation emportée par Google Play ─────────────────
+        // ⚠️ C'est ce qui relie l'ami MÊME s'il doit d'abord installer l'app :
+        // Play garde le texte `referrer` et le rend à l'app Android au premier
+        // lancement (Install Referrer, `ReferrerDInstallation` dans l'app).
+        // Apple n'a rien d'équivalent : sur l'App Store, l'invitation se perd.
+        // `utm_source=lien_ami` : Tenjin lit le même texte, il y verra la source.
+        // ⚠️ Avec ET sans l'app : quand Bouldr est installée, Android ouvre
+        // l'app directement (/.well-known/assetlinks.json) et cette page ne
+        // s'affiche pas.
+        // ⚠️ Ce script passe AVANT celui de la langue, qui réécrit le lien Play
+        // en anglais : il relit donc le lien au clic, pas au chargement.
+        (function () {
+            var p = new URLSearchParams(location.search);
+            var de = p.get('de');
+            if (!de || !/^[A-Za-z0-9]{1,128}$/.test(de)) return;
+            var invitation = 'utm_source=lien_ami&de=' + encodeURIComponent(de) +
+                '&nom=' + encodeURIComponent((p.get('nom') || '').slice(0, 40));
+            var play = document.querySelector('[data-lien="play"]');
+            play.addEventListener('click', function () {
+                var lien = new URL(play.href);
+                lien.searchParams.set('referrer', invitation);
+                play.href = lien.toString();
+            });
+        })();
+    </script>
+    <script>
         // Ordinateur, ou téléphone ni Apple ni Android : la page reste, dans la
         // langue du navigateur — celle que /climbr aurait gardée d'abord.
         (function () {
