@@ -1,6 +1,6 @@
 /* ========================================
    ATHANOR STUDIO — design system
-   Noir et or champagne, avec les composants de la page Climbr :
+   Noir et or champagne, avec les composants de la page Bouldr :
    Inter 800 serré, boutons en pilule, cartes arrondies, chips.
    ======================================== */
 
@@ -248,7 +248,7 @@ html:not(.js) .fade-up { opacity: 1; transform: none; }
     align-items: center;
 }
 .hero-title { font-size: var(--fs-hero); line-height: 1.03; letter-spacing: -0.032em; }
-/* La partie en or ouvre sa propre ligne, comme sur la page Climbr */
+/* La partie en or ouvre sa propre ligne, comme sur la page Bouldr */
 .hero-title .accent { display: block; color: var(--gold); }
 .hero-sub { margin-top: 1.25rem; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--fg-soft); max-width: 34rem; }
 .hero-cta { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }

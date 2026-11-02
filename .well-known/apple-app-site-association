@@ -4,8 +4,10 @@
       {
         "appIDs": ["265F6SQ3J2.com.athanor-studio.climb"],
         "components": [
-          { "/": "/climbr/ami/*", "comment": "Lien ami de Climbr" },
-          { "/": "/climbr/ami", "comment": "Lien ami de Climbr, sans barre finale" }
+          { "/": "/climbr/ami/*", "comment": "Lien ami, adresse d'avant Bouldr : celle que l'app envoie" },
+          { "/": "/climbr/ami", "comment": "Lien ami, adresse d'avant Bouldr, sans barre finale" },
+          { "/": "/bouldr/ami/*", "comment": "Lien ami de Bouldr" },
+          { "/": "/bouldr/ami", "comment": "Lien ami de Bouldr, sans barre finale" }
         ]
       }
     ]
