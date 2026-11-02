@@ -56,12 +56,12 @@ Refonte du 12 octobre 2026 : **le site reprend les composants de la page Climbr*
 - ⚠️ Le bouton Contact de la navbar est à la fois `.nav-link` et `.btn-primary` : `.nav-link.btn-primary` force la couleur du texte, sinon il hérite du gris des liens et disparaît sur l'or.
 - Grain de film en `body::after` (turbulence SVG en data-URI, `opacity: .028`), conservé.
 - Animations fade-up au scroll, avec `html:not(.js) .fade-up { opacity: 1 }` : **si le JS ne tourne pas, le contenu reste visible**.
-- Breakpoints : 1024px (hero et Company sur une colonne, services 2×2) / 768px (menu burger, apps sur une colonne) / 480px (services sur une colonne, tuile du hero réduite).
+- Breakpoints : 1024px (hero et Company sur une colonne, services 2×2) / 768px (menu burger, apps sur une colonne) / 480px (services sur une colonne).
 
 ## Sections de l'index
 (Refonte du 12 octobre 2026 : composants Climbr, noir et or. **Les textes sont ceux d'origine**, restaurés à la demande lors de la refonte du 5 septembre. Ancres inchangées : `#services`, `#apps`, `#company`, `#contact`.)
 1. Navbar — marque + wordmark « athanor » ; Services / Apps / Company + **Contact en bouton pilule d'or** ; burger sous 768px. Le filet du bas n'apparaît qu'au scroll.
-2. Hero — deux colonnes, comme Climbr. À gauche : eyebrow « App publishing studio », titre « We build / and scale apps. » (2ᵉ ligne en or, `display: block`), sous-titre d'origine, boutons `Get in Touch →` (or) et `Our Apps` (contour). Les 3 chips du hero (150k+ installs / 4.6 ★ / Founded in 2024) ont été retirées le 12 octobre 2026, à la demande — les métriques restent dans les cartes Apps. À droite : **grande tuile de la marque** seule (halo d'or centré sur l'œuf, `aria-hidden`). Les icônes des apps qui flottaient autour ont été retirées le 12 octobre 2026, à la demande — elles restent dans les cartes Apps.
+2. Hero — UNE colonne depuis le 2 novembre 2026 (texte seul, `.hero-grid > div { max-width: 46rem }`) : eyebrow « App publishing studio », titre « We build / and scale apps. » (2ᵉ ligne en or, `display: block`), sous-titre d'origine, boutons `Get in Touch →` (or) et `Our Apps` (contour). La grande tuile de la marque qui occupait la colonne de droite a été RETIRÉE à la demande de Guillaume (« énorme logo ») ; la marque reste dans la navbar, Company et le pied de page.
 3. Services (`#services`, `.section-deep`) — « Scale » / « What We Do », **4 cartes** `.service-card` (Transformation, Ownership, Data-Driven, Innovation), sans numéros : ce sont des facettes, pas une séquence.
 4. Apps (`#apps`) — « Portfolio » / « Our Apps », grille de 2 cartes `<a class="app-card">` (une colonne sous 768px) : icône, nom, catégorie, description, chips de métriques, « Learn more → » en or.
    - Healthy Guru (4.6 ★ rating / 500+ reviews / 150k+ installs) → `/healthyguru`. Le lien App Store n'est pas dans la carte (il est sur la page dédiée).

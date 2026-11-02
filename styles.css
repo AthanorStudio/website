@@ -241,41 +241,15 @@ html:not(.js) .fade-up { opacity: 1; transform: none; }
    8. HERO
    ======================================== */
 .hero { padding: calc(84px + clamp(2rem, 6vw, 4.5rem)) 0 var(--section-y); overflow: hidden; }
-.hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: center;
-}
+/* La grande tuile de la marque, à droite, a été retirée le 2 novembre 2026 à la
+   demande : le texte est seul, la marque reste dans la navbar et Company. */
+.hero-grid > div { max-width: 46rem; }
 .hero-title { font-size: var(--fs-hero); line-height: 1.03; letter-spacing: -0.032em; }
 /* La partie en or ouvre sa propre ligne, comme sur la page Bouldr */
 .hero-title .accent { display: block; color: var(--gold); }
 .hero-sub { margin-top: 1.25rem; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--fg-soft); max-width: 34rem; }
 .hero-cta { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
-/* La grande tuile de la marque */
-.hero-visual { position: relative; height: 340px; }
-.hero-tile {
-    position: absolute;
-    left: 50%; top: 50%;
-    width: 248px; height: 248px;
-    transform: translate(-50%, -50%);
-    border-radius: 58px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    display: grid;
-    place-items: center;
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
-}
-/* La chaleur du four, centrée sur l'œuf */
-.hero-tile::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle at 50% 60%, rgba(230, 204, 148, 0.2), transparent 62%);
-}
-.hero-tile .mark { position: relative; font-size: 148px; }
 
 /* ========================================
    9. SERVICES — quatre cartes
@@ -400,8 +374,6 @@ html:not(.js) .fade-up { opacity: 1; transform: none; }
    15. RESPONSIVE
    ======================================== */
 @media (max-width: 1024px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-visual { height: 300px; }
     .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .company-layout { grid-template-columns: 1fr; gap: 1.5rem; }
     .company-mark { font-size: 96px; }
@@ -430,7 +402,4 @@ html:not(.js) .fade-up { opacity: 1; transform: none; }
 
 @media (max-width: 480px) {
     .services-grid { grid-template-columns: 1fr; }
-    .hero-visual { height: 230px; }
-    .hero-tile { width: 184px; height: 184px; border-radius: 44px; }
-    .hero-tile .mark { font-size: 110px; }
     
