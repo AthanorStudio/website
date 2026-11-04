@@ -553,7 +553,9 @@
             const r = await fetch('https://formsubmit.co/ajax/' + DESTINATAIRE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(Object.assign({}, champs, { contrat: texte, _honey: form._honey.value, _subject: sujet, _replyto: champs.email, _template: 'table' }))
+                body: JSON.stringify(Object.assign({}, champs, { contrat: texte, _honey: form._honey.value, _subject: sujet, _replyto: champs.email, _template: 'table' })),
+                // ⚠️ Borné : FormSubmit en panne met vingt secondes à échouer.
+                signal: window.AbortSignal && AbortSignal.timeout ? AbortSignal.timeout(15000) : undefined
             });
             const j = await r.json().catch(() => ({}));
             // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
@@ -623,17 +625,15 @@
                 if (pdf && window.DataTransfer) {
                     try { new DataTransfer().items.add(new File([pdf], fichier)); avecPdf = true; } catch (e) {}
                 }
-                // ⚠️ L'e-mail peut échouer (FormSubmit tombé le 4 nov. 2026, erreur 522) :
-                // la signature compte alors si le dashboard l'a reçue, PDF compris.
-                let parEmail = true;
-                try {
-                    if (avecPdf) await envoyerAvecPdf(champs, sujet, pdf, fichier);
-                    else await envoyerSansPdf(champs, sujet, texte);
-                } catch (e) { parEmail = false; }
-                // Le dashboard reçoit la signature (« Signature à vérifier ») et range le
-                // PDF dans le Drive. Seulement APRÈS l'e-mail : la signature n'existe pour
-                // nous qu'une fois reçue — par e-mail, ou à défaut par le dashboard.
-                // ⚠️ Attendu avant le message de remerciement : parti en arrière-plan,
+                // L'e-mail (FormSubmit) et le dashboard partent EN MÊME TEMPS : la signature
+                // compte dès que l'un des deux l'a. Le dashboard reçoit la signature
+                // (« Signature à vérifier ») et range le PDF dans le Drive.
+                // ⚠️ Le 4 nov. 2026, FormSubmit est tombé (522) : attendu d'abord, il faisait
+                // patienter jusqu'à 30 s avant que le dashboard soit seulement appelé, et une
+                // page refermée entre-temps perdait la signature. Si le dashboard l'a, on
+                // n'attend plus l'e-mail : il finit (ou échoue) en arrière-plan.
+                const versEmail = (avecPdf ? envoyerAvecPdf(champs, sujet, pdf, fichier) : envoyerSansPdf(champs, sujet, texte)).then(() => true, () => false);
+                // ⚠️ Le dashboard est attendu avant le message de remerciement : parti en arrière-plan,
                 // l'envoi mourait avec la page, refermée aussitôt (navigateur
                 // d'Instagram), et la fiche n'arrivait jamais (21 oct. 2026). `keepalive`
                 // refuse tout corps de plus de 64 Ko : le repli part donc sans le PDF,
@@ -651,8 +651,11 @@
                     const r = await Promise.race([poster(JSON.stringify(Object.assign({}, sansPdf, { pdf: base64 })), false), new Promise((_, ko) => setTimeout(() => ko(new Error('délai')), 15000))]);
                     recu = r.ok;
                 } catch (e) {}
-                if (!recu && !parEmail) throw new Error('aucun envoi');
-                if (!recu) poster(JSON.stringify(sansPdf), true).catch(() => {});
+                if (!recu) {
+                    // Dashboard injoignable : l'e-mail devient la seule trace, on l'attend.
+                    if (!(await versEmail)) throw new Error('aucun envoi');
+                    poster(JSON.stringify(sansPdf), true).catch(() => {});
+                }
                 const lien = document.getElementById('telecharger');
                 if (pdf) { lien.href = URL.createObjectURL(pdf); lien.download = fichier; } else lien.hidden = true;
                 document.getElementById('bloc').classList.add('signe');
