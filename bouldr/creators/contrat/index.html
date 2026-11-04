@@ -623,11 +623,16 @@
                 if (pdf && window.DataTransfer) {
                     try { new DataTransfer().items.add(new File([pdf], fichier)); avecPdf = true; } catch (e) {}
                 }
-                if (avecPdf) await envoyerAvecPdf(champs, sujet, pdf, fichier);
-                else await envoyerSansPdf(champs, sujet, texte);
+                // ⚠️ L'e-mail peut échouer (FormSubmit tombé le 4 nov. 2026, erreur 522) :
+                // la signature compte alors si le dashboard l'a reçue, PDF compris.
+                let parEmail = true;
+                try {
+                    if (avecPdf) await envoyerAvecPdf(champs, sujet, pdf, fichier);
+                    else await envoyerSansPdf(champs, sujet, texte);
+                } catch (e) { parEmail = false; }
                 // Le dashboard reçoit la signature (« Signature à vérifier ») et range le
                 // PDF dans le Drive. Seulement APRÈS l'e-mail : la signature n'existe pour
-                // nous qu'une fois reçue.
+                // nous qu'une fois reçue — par e-mail, ou à défaut par le dashboard.
                 // ⚠️ Attendu avant le message de remerciement : parti en arrière-plan,
                 // l'envoi mourait avec la page, refermée aussitôt (navigateur
                 // d'Instagram), et la fiche n'arrivait jamais (21 oct. 2026). `keepalive`
@@ -646,6 +651,7 @@
                     const r = await Promise.race([poster(JSON.stringify(Object.assign({}, sansPdf, { pdf: base64 })), false), new Promise((_, ko) => setTimeout(() => ko(new Error('délai')), 15000))]);
                     recu = r.ok;
                 } catch (e) {}
+                if (!recu && !parEmail) throw new Error('aucun envoi');
                 if (!recu) poster(JSON.stringify(sansPdf), true).catch(() => {});
                 const lien = document.getElementById('telecharger');
                 if (pdf) { lien.href = URL.createObjectURL(pdf); lien.download = fichier; } else lien.hidden = true;

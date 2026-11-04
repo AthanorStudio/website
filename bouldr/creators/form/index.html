@@ -268,26 +268,34 @@
                 _replyto: form.email.value.trim(),
                 _template: 'table'
             };
-            // Copie vers le dashboard (onglet Créateurs), sans l'attendre : la
-            // candidature y arrive en fiche. ⚠️ Un échec ici ne doit RIEN bloquer,
-            // l'e-mail de FormSubmit reste la trace.
+            // Copie vers le dashboard (onglet Créateurs) : la candidature y arrive
+            // en fiche. Partie AVANT FormSubmit, attendue seulement s'il échoue.
+            // ⚠️ Le 4 nov. 2026, FormSubmit est tombé (erreur 522 sur tout le
+            // domaine) et chaque candidature finissait en « L'envoi n'est pas
+            // passé » alors que le dashboard l'avait reçue : il suffit désormais
+            // que l'un des deux l'ait.
+            const versDashboard = fetch(location.hostname === 'localhost' ? 'http://localhost:3123/api/candidature' : 'https://climbr-dashboard.vercel.app/api/candidature', {
+                method: 'POST', keepalive: true,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.assign({ type: 'candidature', langue: langue, comptes_liste: comptes() }, donnees))
+            }).then(r => r.ok, () => false);
             try {
-                fetch(location.hostname === 'localhost' ? 'http://localhost:3123/api/candidature' : 'https://climbr-dashboard.vercel.app/api/candidature', {
-                    method: 'POST', keepalive: true,
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.assign({ type: 'candidature', langue: langue, comptes_liste: comptes() }, donnees))
-                }).catch(() => {});
-            } catch (e) {}
-            try {
-                const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(donnees)
-                });
-                const j = await r.json().catch(() => ({}));
-                // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
-                // qui dit si le message est parti (il vaut la chaîne "true").
-                if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || r.status);
+                let parti = false;
+                try {
+                    // ⚠️ Borné : FormSubmit en panne met vingt secondes à échouer.
+                    const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify(donnees),
+                        signal: window.AbortSignal && AbortSignal.timeout ? AbortSignal.timeout(15000) : undefined
+                    });
+                    const j = await r.json().catch(() => ({}));
+                    // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
+                    // qui dit si le message est parti (il vaut la chaîne "true").
+                    parti = r.ok && String(j.success) === 'true';
+                } catch (e) {}
+                if (!parti) parti = await Promise.race([versDashboard, new Promise(ok => setTimeout(() => ok(false), 15000))]);
+                if (!parti) throw new Error('aucun envoi');
                 // Le contrat, ouvert juste après, reprend ce qui vient d'être saisi.
                 // ⚠️ `sessionStorage` : ces données ne restent que dans cet onglet,
                 // le temps d'aller au contrat, jamais sur le téléphone.
