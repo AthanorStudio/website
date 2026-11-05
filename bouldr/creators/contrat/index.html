@@ -170,7 +170,18 @@
                     <p>Chaque vidéo validée reste en ligne sur le compte du Créateur pendant au moins 1 an.</p>
                 </div></div>
 
-                <div class="article"><span>3</span><div>
+                <!-- ⚠️ Deux variantes de l'article 3, selon `?offre=` : le script retire
+                     l'autre avant tout calcul d'empreinte. Ne JAMAIS modifier la variante
+                     `vues` : les contrats déjà signés ne correspondraient plus. -->
+                <div class="article" data-offre="fixe"><span>3</span><div>
+                    <h3>Rémunération</h3>
+                    <p>Le Créateur perçoit <strong>5 € par vidéo validée et publiée</strong>, plus <strong>1 € pour 1 000 vues organiques</strong> sur chacune. Les vues issues d'une diffusion sponsorisée ne sont pas comptées. La rémunération est plafonnée à <strong>1 000 € par vidéo</strong>, part fixe comprise. Les vues d'une vidéo sont comptées jusqu'à la veille de sa sponsorisation, dans la limite de <strong>60 jours</strong> après sa publication.</p>
+                    <p>Athanor Studio ne sponsorise une vidéo (article 6) qu'une fois sa diffusion organique essoufflée : en général au bout d'une quinzaine de jours, plus tard si ses vues organiques continuent de monter. Le compteur de la plateforme additionne alors les vues organiques et les vues sponsorisées ; seules les vues organiques sont rémunérées. Avant de la lancer, Athanor Studio prévient le Créateur par écrit et lui indique le nombre de vues relevé à cette date.</p>
+                    <p>Chaque mois, Athanor Studio relève les vidéos validées et les vues de chacune, et communique le relevé au Créateur. Le Créateur dispose de 30 jours pour le vérifier et faire part de ses remarques ; passé ce délai, le relevé est considéré comme validé. Athanor Studio paie par virement bancaire sous 15 jours, sur facture lorsque le Créateur dispose d'un statut d'entreprise. Le Créateur déclare lui-même les sommes perçues et s'acquitte des impôts et cotisations qui s'y rapportent.</p>
+                    <p>Le Créateur bénéficie aussi d'un accès gratuit à toute l'application (Bouldr Pro) pendant la collaboration.</p>
+                </div></div>
+
+                <div class="article" data-offre="vues"><span>3</span><div>
                     <h3>Rémunération</h3>
                     <p>Le Créateur perçoit <strong>1 € pour 1 000 vues organiques</strong> sur chaque vidéo validée et publiée. Les vues issues d'une diffusion sponsorisée ne sont pas comptées. La rémunération est plafonnée à <strong>1 000 € par vidéo</strong>. Les vues d'une vidéo sont comptées jusqu'à la veille de sa sponsorisation, dans la limite de <strong>60 jours</strong> après sa publication.</p>
                     <p>Athanor Studio ne sponsorise une vidéo (article 6) qu'une fois sa diffusion organique essoufflée : en général au bout d'une quinzaine de jours, plus tard si ses vues organiques continuent de monter. Le compteur de la plateforme additionne alors les vues organiques et les vues sponsorisées ; seules les vues organiques sont rémunérées. Avant de la lancer, Athanor Studio prévient le Créateur par écrit et lui indique le nombre de vues relevé à cette date.</p>
@@ -246,7 +257,15 @@
                     <p>Each approved video stays online on the Creator's account for at least one year.</p>
                 </div></div>
 
-                <div class="article"><span>3</span><div>
+                <div class="article" data-offre="fixe"><span>3</span><div>
+                    <h3>Pay</h3>
+                    <p>The Creator earns <strong>$5 per approved and posted video</strong>, plus <strong>$1 per 1,000 organic views</strong> on each one. Views from sponsored distribution are not counted. Pay is capped at <strong>$1,000 per video</strong>, fixed part included. A video's views are counted up to the day before its sponsorship starts, within <strong>60 days</strong> of it being posted.</p>
+                    <p>Athanor Studio only sponsors a video (article 6) once its organic reach has slowed down: usually after about fifteen days, later if its organic views keep growing. The platform's counter then adds organic and sponsored views together; only organic views are paid. Before launching it, Athanor Studio notifies the Creator in writing and tells them the view count recorded on that date.</p>
+                    <p>Each month, Athanor Studio records the approved videos and the views of each one, and sends the statement to the Creator. The Creator has 30 days to check it and share any comments; after that, the statement is considered approved. Athanor Studio pays by bank transfer within 15 days, against an invoice when the Creator has a business status. The Creator declares the sums received and pays the related taxes and social contributions themselves.</p>
+                    <p>The Creator also gets free access to the full app (Bouldr Pro) during the collaboration.</p>
+                </div></div>
+
+                <div class="article" data-offre="vues"><span>3</span><div>
                     <h3>Pay</h3>
                     <p>The Creator earns <strong>$1 per 1,000 organic views</strong> on each approved and posted video. Views from sponsored distribution are not counted. Pay is capped at <strong>$1,000 per video</strong>. A video's views are counted up to the day before its sponsorship starts, within <strong>60 days</strong> of it being posted.</p>
                     <p>Athanor Studio only sponsors a video (article 6) once its organic reach has slowed down: usually after about fifteen days, later if its organic views keep growing. The platform's counter then adds organic and sponsored views together; only organic views are paid. Before launching it, Athanor Studio notifies the Creator in writing and tells them the view count recorded on that date.</p>
@@ -330,6 +349,24 @@
     <script>
         // ⚠️ À changer à chaque modification du texte (FR ou EN).
         const CONTRAT_VERSION = '2026-11-02';
+
+        // ── L'offre ────────────────────────────────────────────────
+        // `?offre=fixe` : 5 € par vidéo + 1 € / 1 000 vues (test lancé le 5 nov.
+        // 2026). Sans paramètre, ou avec une valeur inconnue : l'offre aux vues.
+        // La variante d'article 3 qui ne s'applique pas est RETIRÉE du DOM, avant
+        // tout calcul : l'empreinte porte sur le seul texte lu.
+        // En régénération, c'est l'offre enregistrée avec la signature qui compte
+        // (`vues` pour les signatures d'avant le test).
+        let REGEN = null;
+        if (location.hash.startsWith('#regenerer=')) {
+            try {
+                const b64 = location.hash.slice('#regenerer='.length).replace(/-/g, '+').replace(/_/g, '/');
+                REGEN = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0))));
+            } catch (e) { REGEN = 'illisible'; }
+        }
+        let offre = REGEN && REGEN !== 'illisible' ? REGEN.offre : new URLSearchParams(location.search).get('offre');
+        if (offre !== 'fixe') offre = 'vues';
+        document.querySelectorAll('[data-offre]').forEach(el => { if (el.dataset.offre !== offre) el.remove(); });
 
         // ── La langue ──────────────────────────────────────────────
         // Même clé que le reste de /bouldr (`climbr-lang`).
@@ -593,6 +630,7 @@
                 majeur: 'oui',
                 lu_et_approuve: 'oui',
                 version_du_contrat: CONTRAT_VERSION,
+                offre: offre,
                 langue_du_contrat: langue,
                 empreinte_sha256: hash,
                 signe_le: signeLe.toISOString() + ' (' + fuseau + ')'
@@ -619,7 +657,7 @@
                     [en ? 'SHA-256 of the text' : 'Empreinte SHA-256', hash]
                 ]);
             } catch (err) { pdf = null; }
-            const sujet = 'Contrat créateur signé : ' + nom + ' (version ' + CONTRAT_VERSION + ')';
+            const sujet = 'Contrat créateur signé : ' + nom + ' (version ' + CONTRAT_VERSION + ', offre ' + offre + ')';
             try {
                 let avecPdf = false;
                 if (pdf && window.DataTransfer) {
@@ -638,7 +676,7 @@
                 // d'Instagram), et la fiche n'arrivait jamais (21 oct. 2026). `keepalive`
                 // refuse tout corps de plus de 64 Ko : le repli part donc sans le PDF,
                 // qui reste dans l'e-mail. Un renvoi identique ne compte pas en double.
-                const sansPdf = { type: 'signature', langue: langue, prenom: champs.prenom, nom: champs.nom, email: champs.email, adresse: champs.adresse, comptes: champs.comptes, siret: champs.siret, version: CONTRAT_VERSION, empreinte: hash, _honey: form._honey.value };
+                const sansPdf = { type: 'signature', langue: langue, prenom: champs.prenom, nom: champs.nom, email: champs.email, adresse: champs.adresse, comptes: champs.comptes, siret: champs.siret, version: CONTRAT_VERSION, offre: offre, empreinte: hash, _honey: form._honey.value };
                 const poster = (corps, keepalive) => fetch(location.hostname === 'localhost' ? 'http://localhost:3123/api/candidature' : 'https://climbr-dashboard.vercel.app/api/candidature', {
                     method: 'POST', keepalive: keepalive,
                     headers: { 'Content-Type': 'application/json' },
@@ -674,8 +712,7 @@
         // encore l'empreinte enregistrée : sinon le contrat a changé depuis, et
         // ce texte n'est plus celui que la personne a accepté.
         (async () => {
-            if (!location.hash.startsWith('#regenerer=')) return;
-            const brut = location.hash.slice('#regenerer='.length);
+            if (!REGEN) return;
             // L'adresse et l'e-mail ne restent pas dans l'historique.
             history.replaceState(null, '', location.pathname + location.search);
             document.getElementById('bloc').classList.add('regenere');
@@ -683,11 +720,9 @@
             const bloc = document.getElementById('regen'), texteBloc = document.getElementById('regen-texte'), lien = document.getElementById('regen-pdf');
             bloc.hidden = false;
             const refus = t => { texteBloc.textContent = t; texteBloc.classList.add('erreur'); };
-            let s;
-            try {
-                const b64 = brut.replace(/-/g, '+').replace(/_/g, '/');
-                s = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0))));
-            } catch (e) { return refus('Le lien de régénération est illisible : rouvre-le depuis la fiche du dashboard.'); }
+            // Déchiffré tout en haut du script : il dit quelle variante de l'article 3 garder.
+            if (REGEN === 'illisible') return refus('Le lien de régénération est illisible : rouvre-le depuis la fiche du dashboard.');
+            const s = REGEN;
             if (!s.empreinte || s.empreinte === 'indisponible') return refus("Cette signature n'a pas d'empreinte : rien ne prouve quel texte a été signé, le PDF n'est pas refait.");
             for (const k of ['prenom', 'nom', 'email', 'adresse', 'comptes', 'siret']) form[k].value = s[k] || '';
             nommerCreateur();

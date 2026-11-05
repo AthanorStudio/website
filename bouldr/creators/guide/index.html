@@ -202,7 +202,7 @@
                 <section id="fr-paiement">
                     <h2>Le paiement</h2>
                     <div class="paie">
-                        <div class="chiffre"><span>1&nbsp;€ pour 1&nbsp;000 vues organiques, sur chaque vidéo validée.</span></div>
+                        <div class="chiffre"><span data-offre="vues">1&nbsp;€ pour 1&nbsp;000 vues organiques, sur chaque vidéo validée.</span><span data-offre="fixe">5&nbsp;€ par vidéo validée, plus 1&nbsp;€ pour 1&nbsp;000 vues organiques (jusqu'à 1&nbsp;000&nbsp;€ par vidéo).</span></div>
                         <dl>
                             <div><dt>Quelles vues</dt><dd>Les vues organiques, celles que ta vidéo fait toute seule. Elles sont comptées jusqu'à 60 jours après la publication.</dd></div>
                             <div><dt>Et la pub&nbsp;?</dt><dd>Une fois qu'une vidéo ne fait presque plus de vues, en général au bout d'une quinzaine de jours, on peut la sponsoriser. Le compteur mélange alors vues organiques et vues payées&nbsp;: on arrête donc de compter la veille, et on te prévient avant, avec le nombre de vues retenu.</dd></div>
@@ -287,7 +287,7 @@
                 <section id="en-paiement">
                     <h2>Getting paid</h2>
                     <div class="paie">
-                        <div class="chiffre"><span>$1 per 1,000 organic views, on every approved video.</span></div>
+                        <div class="chiffre"><span data-offre="vues">$1 per 1,000 organic views, on every approved video.</span><span data-offre="fixe">$5 per approved video, plus $1 per 1,000 organic views (up to $1,000 per video).</span></div>
                         <dl>
                             <div><dt>Which views</dt><dd>Organic views, the ones your video gets on its own. They're counted for up to 60 days after posting.</dd></div>
                             <div><dt>What about ads?</dt><dd>Once a video gets almost no views anymore, usually after about fifteen days, we may sponsor it. The counter then mixes organic and paid views, so we stop counting the day before, and we tell you beforehand, with the view count we keep.</dd></div>
@@ -321,6 +321,11 @@
         const FR = {};
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
         const TITRES = { fr: 'Bouldr — Le guide du créateur', en: 'Bouldr — The creator guide' };
+        // `?offre=fixe` : la phrase du paiement de l'offre test (5 € par vidéo +
+        // 1 € / 1 000 vues), comme dans le contrat. Sans paramètre : l'offre aux vues.
+        const offre = new URLSearchParams(location.search).get('offre') === 'fixe' ? 'fixe' : 'vues';
+        document.querySelectorAll('[data-offre]').forEach(el => { if (el.dataset.offre !== offre) el.remove(); });
+
         let langue = new URLSearchParams(location.search).get('lang');
         if (langue !== 'fr' && langue !== 'en') { try { langue = localStorage.getItem('climbr-lang'); } catch (e) {} }
         if (langue !== 'fr' && langue !== 'en') langue = (navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en';
@@ -331,7 +336,7 @@
             document.getElementById('guide-fr').hidden = langue !== 'fr';
             document.getElementById('guide-en').hidden = langue !== 'en';
             document.querySelectorAll('[data-t]').forEach(el => { if (d[el.dataset.t] !== undefined) el.innerHTML = d[el.dataset.t]; });
-            document.querySelector('.retour').href = '../?lang=' + langue;
+            document.querySelector('.retour').href = '../?lang=' + langue + (offre === 'fixe' ? '&offre=fixe' : '');
             document.querySelector('.lang-toggle-label').textContent = langue === 'fr' ? 'EN' : 'FR';
             document.querySelector('.lang-toggle').setAttribute('aria-label', langue === 'fr' ? 'Switch to English' : 'Passer en français');
             try { localStorage.setItem('climbr-lang', langue); } catch (e) {}

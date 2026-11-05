@@ -309,6 +309,29 @@
         const FR = {};
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
 
+        // ── L'offre ────────────────────────────────────────────────
+        // `?offre=fixe` : l'offre test du 5 nov. 2026, 5 € par vidéo validée en
+        // plus de 1 € / 1 000 vues (plafond 1 000 € par vidéo, fixe compris).
+        // Le lien à envoyer aux créateurs du test : /bouldr/creators/?offre=fixe.
+        // Le paramètre suit jusqu'à la candidature puis au contrat, qui a sa
+        // propre variante de l'article 3. Sans paramètre : l'offre aux vues.
+        const offre = new URLSearchParams(location.search).get('offre') === 'fixe' ? 'fixe' : 'vues';
+        const FIXE = offre === 'fixe' ? 5 : 0;
+        if (offre === 'fixe') {
+            Object.assign(FR, {
+                'hero.sous': 'Tu grimpes en salle ? Filme-toi en train d\'utiliser Bouldr pendant ta séance et touche <strong>5&nbsp;€ par vidéo + 1&nbsp;€ pour 1&nbsp;000 vues</strong>.',
+                'remu.sous': 'Un fixe par vidéo, et le reste à la performance',
+                'remu.prix': '5&nbsp;€ / vidéo<br>+ 1&nbsp;€ / 1&nbsp;000 vues',
+                'remu.exemple': 'Exemple : une vidéo à 300&nbsp;000 vues = 305&nbsp;€'
+            });
+            Object.assign(EN, {
+                'hero.sous': 'You climb indoors? Film yourself using Bouldr during your session and earn <strong>$5 per video + $1 per 1,000 views</strong>.',
+                'remu.sous': 'A fixed fee per video, the rest on performance',
+                'remu.prix': '$5 / video<br>+ $1 / 1,000 views',
+                'remu.exemple': 'Example: a video with 300,000 views = $305'
+            });
+        }
+
         // `?lang=en` (ou `fr`) dans le lien passe avant tout : un lien envoyé à un
         // créateur anglophone s'ouvre en anglais, quelle que soit la langue de
         // son téléphone. Le choix est ensuite gardé comme un clic sur EN/FR.
@@ -324,7 +347,7 @@
             document.querySelector('.lang-toggle-label').textContent = langue === 'fr' ? 'EN' : 'FR';
             document.querySelector('.lang-toggle').setAttribute('aria-label', MESSAGES[langue].aria);
             simuler();
-            document.querySelectorAll('a[href^="form/"]').forEach(l => { l.setAttribute('href', 'form/?lang=' + langue); });
+            document.querySelectorAll('a[href^="form/"]').forEach(l => { l.setAttribute('href', 'form/?lang=' + langue + (offre === 'fixe' ? '&offre=fixe' : '')); });
             try { localStorage.setItem('climbr-lang', langue); } catch (e) {}
             // L'adresse suit la langue affichée : copiée telle quelle, elle rouvre la même version.
             try { const u = new URL(location.href); u.searchParams.set('lang', langue); history.replaceState(null, '', u); } catch (e) {}
@@ -339,7 +362,7 @@
             const brut = Math.pow(10, 3 + 3 * curseur.value / 100);
             const ordre = Math.pow(10, Math.floor(Math.log10(brut)) - 1);
             const vues = Math.round(brut / ordre) * ordre;
-            const gain = vues / 1000;
+            const gain = Math.min(1000, FIXE + vues / 1000); // plafond par vidéo, fixe compris
             const locale = langue === 'en' ? 'en-US' : 'fr-FR';
             document.getElementById('vues-texte').textContent = vues.toLocaleString(locale);
             document.getElementById('gain').textContent = langue === 'en' ? '$' + gain.toLocaleString(locale) : gain.toLocaleString(locale) + ' €';

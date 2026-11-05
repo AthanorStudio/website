@@ -222,6 +222,9 @@
         // FormSubmit relaie vers climbr@ (activé le 4 oct. 2026).
         const form = document.getElementById('form');
         const etat = document.getElementById('etat');
+        // `?offre=fixe` (5 € par vidéo + 1 € / 1 000 vues) suit le lien de la page
+        // programme jusqu'au contrat ; sans paramètre, l'offre aux vues.
+        const offre = new URLSearchParams(location.search).get('offre') === 'fixe' ? 'fixe' : 'vues';
         const comptes = () => [...liste.querySelectorAll('.compte')]
             .map(l => ({ reseau: l.querySelector('select').value, pseudo: l.querySelector('input').value.trim().replace(/^@+/, '') }))
             .filter(c => c.pseudo);
@@ -262,9 +265,10 @@
                 comptes: liste_comptes,
                 salle: form.salle.value.trim(),
                 langue_de_la_page: langue,
+                offre: offre,
                 consentement: 'oui',
                 _honey: form._honey.value,
-                _subject: 'Créateur Bouldr : ' + form.prenom.value.trim() + ' ' + form.nom.value.trim(),
+                _subject: 'Créateur Bouldr : ' + form.prenom.value.trim() + ' ' + form.nom.value.trim() + (offre === 'fixe' ? ' (offre fixe)' : ''),
                 _replyto: form.email.value.trim(),
                 _template: 'table'
             };
@@ -301,7 +305,7 @@
                 // le temps d'aller au contrat, jamais sur le téléphone.
                 try { sessionStorage.setItem('climbr-candidature', JSON.stringify({ prenom: donnees.prenom, nom: donnees.nom, email: donnees.email, comptes: comptes().map(c => '@' + c.pseudo + ' (' + c.reseau + ')').join(', ') })); } catch (e) {}
                 // La candidature partie, on ouvre le contrat, dans la même langue.
-                location.assign('../contrat/?lang=' + langue);
+                location.assign('../contrat/?lang=' + langue + (offre === 'fixe' ? '&offre=fixe' : ''));
             } catch (err) {
                 etat.textContent = m.erreur; etat.classList.add('erreur');
                 bouton.disabled = false;
