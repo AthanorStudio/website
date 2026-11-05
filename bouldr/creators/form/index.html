@@ -66,8 +66,17 @@
         /* ⚠️ Le pot de miel : FormSubmit jette tout message où il est rempli.
            Pas display:none, que certains robots savent sauter. */
         .miel { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-        .envoyer { padding: 1rem 1.4rem; font-size: 1rem; width: 100%; }
-        .envoyer[disabled] { opacity: 0.6; cursor: wait; transform: none; }
+        .envoyer { padding: 1rem 1.4rem; font-size: 1rem; width: 100%; gap: 0.6rem; transition: background var(--transition); }
+        /* Pendant l'envoi (variante A, choisie le 5 nov. 2026) : le bouton reste
+           orange, un rond tourne, le texte dit ce qui se passe. Le bouton pâli
+           d'avant, avec « Envoi… » en petit, se lisait comme un bug. */
+        .envoyer[disabled] { cursor: wait; transform: none; }
+        .envoyer.fini { background: #3F7A4A; }
+        .envoyer .rond { width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 2px solid rgba(255, 253, 250, 0.35); border-top-color: var(--on-accent, #FFFDFA); animation: tourne 0.8s linear infinite; flex: none; }
+        .etat.doux { animation: apparait 0.4s ease both; }
+        @keyframes tourne { to { transform: rotate(360deg); } }
+        @keyframes apparait { from { opacity: 0; } to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { .envoyer .rond { animation-duration: 2s; } .etat.doux { animation: none; } }
         .etat { font-size: var(--fs-small); color: var(--ink-soft); min-height: 1.2em; text-align: center; }
         .etat.erreur { color: var(--accent-dark); }
 
@@ -166,8 +175,8 @@
         };
         const EN_PH = { 'ph.prenom': 'Your first name', 'ph.nom': 'Your last name', 'ph.email': 'you@example.com', 'ph.numero': '7700 900123', 'ph.salle': 'The Castle' };
         const MSG = {
-            fr: { manque: 'Il manque des réponses : elles sont entourées.', envoi: 'Envoi…', erreur: 'L\'envoi n\'est pas passé. Réessaie, ou écris-nous à contact@athanor-studio.io.', titre: 'Bouldr — Postuler au programme créateurs', aria: 'Switch to English', pseudo: 'pseudo' },
-            en: { manque: 'Some answers are missing: they\'re highlighted.', envoi: 'Sending…', erreur: 'Sending failed. Try again, or email us at contact@athanor-studio.io.', titre: 'Bouldr — Apply to the creator program', aria: 'Passer en français', pseudo: 'handle' }
+            fr: { manque: 'Il manque des réponses : elles sont entourées.', attente: 'Envoi de ta candidature…', rassure: 'Encore un instant, ne ferme pas la page.', fini: 'Candidature envoyée', erreur: 'L\'envoi n\'est pas passé. Réessaie, ou écris-nous à contact@athanor-studio.io.', titre: 'Bouldr — Postuler au programme créateurs', aria: 'Switch to English', pseudo: 'pseudo' },
+            en: { manque: 'Some answers are missing: they\'re highlighted.', attente: 'Sending your application…', rassure: 'Just a moment, please don\'t close this page.', fini: 'Application sent', erreur: 'Sending failed. Try again, or email us at contact@athanor-studio.io.', titre: 'Bouldr — Apply to the creator program', aria: 'Passer en français', pseudo: 'handle' }
         };
         const FR = {}, FR_PH = {};
         document.querySelectorAll('[data-t]').forEach(el => { FR[el.dataset.t] = el.innerHTML; });
@@ -222,6 +231,30 @@
         // FormSubmit relaie vers climbr@ (activé le 4 oct. 2026).
         const form = document.getElementById('form');
         const etat = document.getElementById('etat');
+
+        // ── Le bouton pendant l'envoi (variante A, 5 nov. 2026) ─────
+        // Rond qui tourne et texte de l'action ; au bout de 4 s, une phrase
+        // rassure sous le bouton ; en cas de succès, une coche verte 0,6 s.
+        function attente(bouton, m) {
+            const origine = bouton.innerHTML;
+            bouton.disabled = true; bouton.classList.remove('fini');
+            bouton.innerHTML = '<span class="rond" aria-hidden="true"></span><span>' + m.attente + '</span>';
+            etat.className = 'etat'; etat.textContent = '';
+            const minuteur = setTimeout(() => { etat.className = 'etat doux'; etat.textContent = m.rassure; }, 4000);
+            return {
+                reussi: () => new Promise(ok => {
+                    clearTimeout(minuteur); etat.className = 'etat'; etat.textContent = '';
+                    bouton.classList.add('fini');
+                    bouton.innerHTML = '<span aria-hidden="true">✓</span><span>' + m.fini + '</span>';
+                    setTimeout(ok, 600);
+                }),
+                echoue: () => {
+                    clearTimeout(minuteur);
+                    bouton.disabled = false; bouton.innerHTML = origine;
+                    etat.className = 'etat erreur'; etat.textContent = m.erreur;
+                }
+            };
+        }
         // `?offre=fixe` (5 € par vidéo + 1 € / 1 000 vues) suit le lien de la page
         // programme jusqu'au contrat ; sans paramètre, l'offre aux vues.
         const offre = new URLSearchParams(location.search).get('offre') === 'fixe' ? 'fixe' : 'vues';
@@ -254,7 +287,7 @@
                 return;
             }
             const bouton = form.querySelector('.envoyer');
-            bouton.disabled = true; etat.textContent = m.envoi;
+            const envoi = attente(bouton, m);
             const liste_comptes = comptes().map(c => c.reseau + ' @' + c.pseudo).join(', ');
             const indicatif = form.indicatif.value.trim().replace(/^(?!\+)/, '+');
             const donnees = {
@@ -283,32 +316,39 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(Object.assign({ type: 'candidature', langue: langue, comptes_liste: comptes() }, donnees))
             }).then(r => r.ok, () => false);
+            // L'e-mail part EN MÊME TEMPS que le dashboard, et la page continue dès
+            // que l'UN des deux a la candidature (5 nov. 2026). Avant, FormSubmit
+            // était attendu d'abord : pendant sa panne, le créateur patientait 15 s.
+            // ⚠️ `keepalive` : la requête survit au passage à la page du contrat.
+            // ⚠️ Borné : FormSubmit en panne met vingt secondes à échouer.
+            const versEmail = fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
+                method: 'POST', keepalive: true,
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(donnees),
+                signal: window.AbortSignal && AbortSignal.timeout ? AbortSignal.timeout(15000) : undefined
+            }).then(async r => {
+                const j = await r.json().catch(() => ({}));
+                // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
+                // qui dit si le message est parti (il vaut la chaîne "true").
+                return r.ok && String(j.success) === 'true';
+            }, () => false);
+            // Vrai au premier envoi réussi ; faux si les deux échouent, ou après 15 s.
+            const premierSucces = (envois, delai) => new Promise(ok => {
+                let restants = envois.length;
+                const t = setTimeout(() => ok(false), delai);
+                envois.forEach(p => p.then(v => { if (v) { clearTimeout(t); ok(true); } else if (--restants === 0) { clearTimeout(t); ok(false); } }));
+            });
             try {
-                let parti = false;
-                try {
-                    // ⚠️ Borné : FormSubmit en panne met vingt secondes à échouer.
-                    const r = await fetch('https://formsubmit.co/ajax/climbr@athanor-studio.io', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(donnees),
-                        signal: window.AbortSignal && AbortSignal.timeout ? AbortSignal.timeout(15000) : undefined
-                    });
-                    const j = await r.json().catch(() => ({}));
-                    // ⚠️ FormSubmit répond 200 même quand il refuse : c'est `success`
-                    // qui dit si le message est parti (il vaut la chaîne "true").
-                    parti = r.ok && String(j.success) === 'true';
-                } catch (e) {}
-                if (!parti) parti = await Promise.race([versDashboard, new Promise(ok => setTimeout(() => ok(false), 15000))]);
-                if (!parti) throw new Error('aucun envoi');
+                if (!(await premierSucces([versDashboard, versEmail], 15000))) throw new Error('aucun envoi');
                 // Le contrat, ouvert juste après, reprend ce qui vient d'être saisi.
                 // ⚠️ `sessionStorage` : ces données ne restent que dans cet onglet,
                 // le temps d'aller au contrat, jamais sur le téléphone.
                 try { sessionStorage.setItem('climbr-candidature', JSON.stringify({ prenom: donnees.prenom, nom: donnees.nom, email: donnees.email, comptes: comptes().map(c => '@' + c.pseudo + ' (' + c.reseau + ')').join(', ') })); } catch (e) {}
-                // La candidature partie, on ouvre le contrat, dans la même langue.
+                // La candidature partie, la coche, puis le contrat, dans la même langue.
+                await envoi.reussi();
                 location.assign('../contrat/?lang=' + langue + (offre === 'fixe' ? '&offre=fixe' : ''));
             } catch (err) {
-                etat.textContent = m.erreur; etat.classList.add('erreur');
-                bouton.disabled = false;
+                envoi.echoue();
             }
         });
 
