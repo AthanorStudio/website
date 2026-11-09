@@ -112,6 +112,8 @@ Refonte du 12 octobre 2026 : **le site reprend les composants de la page Climbr*
 - **Clash List** — Quiz Game, "Challenge your friends in 45-second word duels."
   - Pas encore lancée. Carte affiche un badge `.status-badge` "Coming Soon" à la place des `app-metrics` + `app-links`. Quand l'app sortira, remplacer le `<span class="status-badge">` par les blocs métriques + store comme Healthy Guru.
 
+- **Carnet vocal** (9 novembre 2026) — app Android de transcription vocale en test interne Google Play (`com.athanorstudio.carnetvocal`, dépôt local `~/Documents/GitHub/voice`). Pas de page dédiée : seulement la section `#carnet-vocal` de `privacy.html`, qui est l'adresse de confidentialité donnée à la Play Console. Elle nomme Scaleway (transcription, France) : à garder exacte si l'app change de fournisseur ou ajoute un outil de statistiques.
+
 ## Contact
 - Fondateur : Guillaume — contact@athanor-studio.io (studio), climbr@athanor-studio.io (Climbr)
 
